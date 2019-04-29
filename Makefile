@@ -24,13 +24,21 @@ help :
 	@echo "  make stop: docker-compose down"
 	@echo "  make copy2AWSLightsail: copy to AWSLightsail Server"
 
-copy : copy2UbuntuPhy copy2AWSLightsail
+copy : copy2UbuntuPhy
 
 
 copy2UbuntuPhy : 
 	@echo "ssh to remote server: Ubuntu Physical Server"
 	@echo "coping to $(PHY_BASE_DIR)/$(SITE): "
 	rsync -avR -e "ssh -i $(ID_KEY)" $(SRC_FILE) $(SRC_DIR) hubert@$(PHY_SERVER):$(PHY_BASE_DIR)/$(SITE)
+	@echo "done......"
+	@echo
+	@echo
+
+copy2AWSLightsail : 
+	@echo "ssh to remote server: AWSLightsail Server"
+	@echo "coping to $(AWS_BASE_DIR)/$(SITE): "
+	rsync -avR -e "ssh -i $(ID_KEY)" $(SRC_FILE) $(SRC_DIR) ubuntu@$(AWS_SERVER):$(AWS_BASE_DIR)/$(SITE)
 	@echo "done......"
 	@echo
 	@echo
