@@ -1,10 +1,33 @@
 {
-  "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
+  "L0-DC": {
+    "Overview": ["L0-DC/L0-DC"]
   },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+  "L1-Platform": {
+    "Overview": ["L1-Platform/L1-Platform"]
+  },
+  "L1-Vertical": {
+    "Overview": ["L1-Vertical/L1-Vertical"]
+  },
+  "L2-CS": {
+    "Overview": ["L2-CS/L2-CS"],
+    "Computer Science": ["L2-CS/Computation/Computation"],
+    "Data Science": ["L2-CS/DataScience/DataScience", "L2-CS/MongoDB/MongoDB"],
+    "FullStack": [
+      "L2-CS/Nodejs/Nodejs",
+      "L2-CS/JavaScript/JavaScript",
+      "L2-CS/MongoDB/MongoDB",
+      "L2-CS/JSON/JSON"
+    ],
+    "DevOps": ["L2-CS/Docker/Docker"],
+    "Misc": [
+      "L2-CS/Markdown/Markdown",
+      "L2-CS/reStructuredText/reStructuredText"
+    ]
+  },
+  "L2-Math": {
+    "Overview": ["L2-Math/L2-Math"]
+  },
+  "L2-Methodology": {
+    "Overview": ["L2-Methodology/L2-Methodology"]
   }
 }

@@ -3,35 +3,90 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A website for testing",
+    "tagline": "A website for Knowledge Base",
     "docs": {
-      "doc1": {
-        "title": "Latin-ish",
-        "sidebar_label": "Example Page"
+      "L0-DC/L0-DC": {
+        "title": "Data Center Infrastructure",
+        "sidebar_label": "Data Center"
       },
-      "doc2": {
-        "title": "document number 2"
+      "L1-Platform/L1-Platform": {
+        "title": "Platform Technologies",
+        "sidebar_label": "Platform"
       },
-      "doc3": {
-        "title": "This is document number 3"
+      "L1-Vertical/L1-Vertical": {
+        "title": "Vertical Industries",
+        "sidebar_label": "Vertical"
       },
-      "doc4": {
-        "title": "Other Document"
+      "L2-CS/Computation/Computation": {
+        "title": "Computation Science",
+        "sidebar_label": "Computation"
       },
-      "doc5": {
-        "title": "Fifth Document"
+      "L2-CS/DataScience/DataScience": {
+        "title": "DataScience",
+        "sidebar_label": "DataScience"
+      },
+      "L2-CS/Docker/Docker": {
+        "title": "Docker",
+        "sidebar_label": "Docker"
+      },
+      "L2-CS/JavaScript/JavaScript": {
+        "title": "JavaScript",
+        "sidebar_label": "JavaScript"
+      },
+      "L2-CS/JSON/JSON": {
+        "title": "JSON",
+        "sidebar_label": "JSON"
+      },
+      "L2-CS/L2-CS": {
+        "title": "Computer Science and Engineering",
+        "sidebar_label": "Overview"
+      },
+      "L2-CS/Markdown/Markdown": {
+        "title": "Markdown",
+        "sidebar_label": "Markdown"
+      },
+      "L2-CS/Markdown/xxxx": {
+        "title": "xxxxx",
+        "sidebar_label": "xxxx"
+      },
+      "L2-CS/MongoDB/MongoDB": {
+        "title": "MongoDB",
+        "sidebar_label": "MongoDB"
+      },
+      "L2-CS/Nodejs/Nodejs": {
+        "title": "Nodejs",
+        "sidebar_label": "Nodejs"
+      },
+      "L2-CS/reStructuredText/reStructuredText": {
+        "title": "reStructuredText",
+        "sidebar_label": "reStructuredText"
+      },
+      "L2-Math/L2-Math": {
+        "title": "Mathematics",
+        "sidebar_label": "Math"
+      },
+      "L2-Methodology/L2-Methodology": {
+        "title": "Methodology",
+        "sidebar_label": "Methodology"
       }
     },
     "links": {
-      "Docs": "Docs",
-      "API": "API",
-      "Help": "Help",
-      "Blog": "Blog"
+      "Data Center": "Data Center",
+      "Platform": "Platform",
+      "Vertical": "Vertical",
+      "Computer Science": "Computer Science",
+      "Mathematics": "Mathematics",
+      "Methodology": "Methodology",
+      "Blog": "Blog",
+      "Help": "Help"
     },
     "categories": {
-      "Docusaurus": "Docusaurus",
-      "First Category": "First Category",
-      "Second Category": "Second Category"
+      "Overview": "Overview",
+      "Computer Science": "Computer Science",
+      "Data Science": "Data Science",
+      "FullStack": "FullStack",
+      "DevOps": "DevOps",
+      "Misc": "Misc"
     }
   },
   "pages-strings": {
