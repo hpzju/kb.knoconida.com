@@ -1,7 +1,7 @@
 ---
 id: tpl-topic
-title: [TOPIC] Memo
-sidebar_label: topic memo template
+title: TOPIC Memo Template
+sidebar_label: topic memo
 ---
 
 ## Backround
