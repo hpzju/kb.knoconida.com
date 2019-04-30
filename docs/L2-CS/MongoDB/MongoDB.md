@@ -89,7 +89,7 @@ sidebar_label: MongoDB
 
 ### Install and Initialize
 
-#### Install on Win/Linux:
+#### Install on Win/Linux
 
 - Please refer to [MongoDB Documentation Site](https://docs.mongodb.com/manual/administration/install-community/)
 
