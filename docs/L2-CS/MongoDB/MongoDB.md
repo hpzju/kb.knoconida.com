@@ -59,6 +59,7 @@ sidebar_label: MongoDB
 - Values
 - Documents
 - Collections
+- Databases
 
 #### System Model
 
@@ -86,20 +87,34 @@ sidebar_label: MongoDB
 #### CRUD
 
 - Create
+  - [db.collection.insert()](https://docs.mongodb.com/manual/reference/method/db.collection.insert/)
+  - `db.users.insert([{"userame": "jone2"},{userame: "jane"}])`
+  - [db.collection.save()](https://docs.mongodb.com/manual/reference/method/db.collection.save/)
 - Read
 - Update
-  - findAndModify()
+  - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
 - Delete
+  - `use DATABASE`
+  - `db.dropDatabase()`
+  - `db.COLLECTION.drop()`
+  - [db.collection.remove()](https://docs.mongodb.com/manual/reference/method/db.collection.remove/)
+    - `db.COLLECTION.remove({})`
+  - [db.collecction.deleteOne()](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/)
+  - [db.collecction.deleteMany()](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/)
 
 #### Query
 
 - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
   - `db.postalCodes.find({}, {_id:0, city:1, state:1, pincode:1}).skip(90). limit(10)`
   - `db.postalCodes.find({state:'Gujarat'},{_id:0, city:1, state:1, pincode:1}).sort({city:1}).limit(10)`
+- operator
+  - $and, $or
+    - { \$and: [{ "username": "smith" }, { "email": "smith@yahoo.com" }]}
+  - $lt, $gt, $lte, $gte, \$ne
 
 #### Aggregate and pipeline
 
-#### Indexing
+#### [Indexing](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/)
 
 - Show Index
   - `db.sparseTest.getIndexes()`
@@ -262,9 +277,15 @@ sidebar_label: MongoDB
   - `show dbs`
   - `db.stats(1024)`
   - `db.serverStatus()`
+  - `use DATABASE`
+  - `db`
 - collection
-  - `use DATABASE; show collections`
+  - `use DATABASE`
+  - `show collections`
   - `db.postalCodes.stats(1024)`
+- execution
+  - [cursor.explain()](https://docs.mongodb.com/manual/reference/method/cursor.explain/index.html)
+  - [db.runCommand()](https://docs.mongodb.com/manual/reference/method/db.runCommand/#db.runCommand)
 
 #### renaming collection
 
