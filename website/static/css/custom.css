@@ -14,3 +14,22 @@
 
 @media only screen and (min-width: 1500px) {
 }
+/* Home Page Wrapper */
+.homeContainer {
+  background: #f0ffff;
+}
+/* Main Wrapper */
+.docMainWrapper {
+  background: #f0ffff;
+}
+
+/* footer CSS config */
+#footer {
+  padding-bottom: 15px;
+}
+.nav-footer .sitemap {
+  margin-bottom: 2em;
+}
+.nav-footer .sitemap .nav-home {
+  padding: 5px;
+}

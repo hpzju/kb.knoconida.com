@@ -50,8 +50,12 @@
         "sidebar_label": "xxxx"
       },
       "L2-CS/MongoDB/MongoDB": {
-        "title": "MongoDB",
+        "title": "MongoDB a document database with the scalability and flexibility",
         "sidebar_label": "MongoDB"
+      },
+      "L2-CS/MySQL/MySQL": {
+        "title": "MySQL a relation database system",
+        "sidebar_label": "MySQL"
       },
       "L2-CS/Nodejs/Nodejs": {
         "title": "Nodejs",
