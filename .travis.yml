@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t huberthao/kb:lst . 
-  - docker container run --name kb -d
+  - docker build -t kb:lst . 
+  - docker container run --name kbsite  kb -d
   - echo "$DH_PASSWD" | docker login -u "$DH_USER" --password-stdin
   - docker push "$DH_USER"/kb:lst
