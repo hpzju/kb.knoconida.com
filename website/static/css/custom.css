@@ -23,6 +23,13 @@
   background: #f0ffff;
 }
 
+.navigationSlider .slidingNav {
+  background: #563d7c;
+}
+.navigationSlider .slidingNav ul {
+  background: #563d7c;
+}
+
 /* footer CSS config */
 #footer {
   padding-bottom: 15px;
