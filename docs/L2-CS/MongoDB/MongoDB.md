@@ -89,6 +89,43 @@ sidebar_label: MongoDB
 
 ### Install and Initialize
 
+#### Install on Win/Linux:
+
+- Please refer to [MongoDB Documentation Site](https://docs.mongodb.com/manual/administration/install-community/)
+
+#### [docker](https://hub.docker.com/_/mongo?tab=description)
+
+- `docker image pull mongo`
+- `docker container run --name myMongoDB -p 27017:27017 -v mongodb_data:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret -d mongo`
+- `docker exec -it myMongoDB bash`
+
+#### docker-compose
+
+- `sudo docker-compose up -d`
+- `sudo docker-compose down`
+- docker-compose.yml
+  
+  ```yaml
+  # Use root/example as user/password credentials
+  version: '3.5'
+
+  services:
+    mongo:
+      image: mongo
+      container_name: myMongoDB
+      restart: always
+      ports:
+        - 27017:27017
+      volumes:
+        - mongodb_data:/data/db
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+
+  volumes:
+    mongodb_data:
+  ```
+
 ### Drivers
 
 - Pymongo
@@ -163,7 +200,7 @@ sidebar_label: MongoDB
 #### OS Shell CMD
 
 - login
-  - `mongo -u admin -p admin admin`
+  - `mongo --host HOST -u admin -p admin --authenticationDatabase admin DATABASE`
 
 - status
   - `mongostat`
