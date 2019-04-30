@@ -61,3 +61,8 @@ stop:
 	docker-compose down
 	@echo "done......."
 	@echo
+
+test:
+	@echo "Travis Test: "
+	@echo "ok......."
+	@echo
