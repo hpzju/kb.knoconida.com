@@ -14,11 +14,14 @@ sidebar_label: CS&SE
 
 - [MongoDB](MongoDB/MongoDB.md)
 
+- [MySQL](MySQL/MySQL.md)
+
 ### FullStack
 
 - [Nodejs](Nodejs/Nodejs.md)
 - [JavaScript](JavaScript/JavaScript.md)
 - [MongoDB](MongoDB/MongoDB.md)
+- [MySQL](MySQL/MySQL.md)
 - [JSON](JSON/JSON.md)
 
 ### DevOps

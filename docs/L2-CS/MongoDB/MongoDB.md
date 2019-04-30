@@ -1,10 +1,8 @@
 ---
 id: MongoDB
-title: MongoDB
+title: MongoDB a document database with the scalability and flexibility
 sidebar_label: MongoDB
 ---
-
-# MongoDB: a document database with the scalability and flexibility
 
 ## Overview
 
@@ -37,13 +35,19 @@ sidebar_label: MongoDB
 
 #### CRUD
 
+- Create
+- Read
+- Update
+  - findAndModify()
+- Delete
+
 #### Query
 
 - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
   - `db.postalCodes.find({}, {_id:0, city:1, state:1, pincode:1}).skip(90). limit(10)`
   - `db.postalCodes.find({state:'Gujarat'},{_id:0, city:1, state:1, pincode:1}).sort({city:1}).limit(10)`
 
-#### Aggregate and pipeline:
+#### Aggregate and pipeline
 
 #### Indexing
 
@@ -62,9 +66,20 @@ sidebar_label: MongoDB
 
 #### Sharding
 
+- `use test`
+- `sh.enableSharding('test')`
+- `sh.status()`
+
 #### Replication
 
 #### Clustering
+
+- `rs.status()`
+- `rs.stepDown()`
+
+#### GridFS
+
+- TODO
 
 #### Business Continuity
 
@@ -147,15 +162,22 @@ sidebar_label: MongoDB
 
 #### OS Shell CMD
 
-- `mongostat`
-- `mongotop 10`
+- login
+  - `mongo -u admin -p admin admin`
+
+- status
+  - `mongostat`
+  - `mongotop 10`
 
 #### Show Info
 
-- `show dbs`
-- `db.stats(1024)`
-- `use DATABASE; show collections`
-- `db.postalCodes.stats(1024)`
+- db
+  - `show dbs`
+  - `db.stats(1024)`
+  - `db.serverStatus()`
+- collection
+  - `use DATABASE; show collections`
+  - `db.postalCodes.stats(1024)`
 
 #### renaming collection
 
@@ -163,11 +185,23 @@ sidebar_label: MongoDB
 - `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
 - `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
 
-#### renaming collection
+#### logging
 
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
--
+- `db.getProfilingLevel()`
+- `db.setProfilingLevel(1, 50)`
+- `db.system.profile.find().pretty()`
 
 ### Security
 
+#### [user admin](https://docs.mongodb.com/manual/reference/method/db.createUser/)
+
+- `use admin`
+- `db.createUser({ user:'admin', pwd:'admin', customData:{desc:'The admin user for admin db'}, roles:['readWrite', 'dbAdmin', 'clusterAdmin']})`
+- `use test`
+- `db.createUser({ user:'read_user', pwd:'read_user', customData:{desc:'The read only user for test database'}, roles:['read']})`
+- `db.createUser({ user:'write_user', pwd:'write_user', customData:{desc:'The read write user for test database'}, roles:['readWrite']})`
+- `db.auth('read_user', 'read_user')`
+- `db.logout()`
+- `db.auth({user:'write_user', pwd:'write_user'})`
+  
 ---

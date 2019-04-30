@@ -5,7 +5,7 @@ SRC_DIR = docs website
 
 SITE=kb.knoconida.com
 
-PHY_BASE_DIR=/home/hubert/Codes/Websites
+PHY_BASE_DIR=/home/hubert/Codes/
 AWS_BASE_DIR=/home/ubuntu/Codes/Websites
 WEB_ROOT=/var/www/html/
 

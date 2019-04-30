@@ -14,6 +14,8 @@
 
 ## Build
 
-- `npm build
-`
+- `npm build`
+  
 ## Deploy
+
+- `make run`
