@@ -17,17 +17,67 @@ sidebar_label: MongoDB
 
 ### Features
 
-- JSON-friendly database
+- Document data model
+  - Denomalization
+  - Aggregation
 - Schema-less design
-- Document based store
+- Ad hoc Query
+  - Key-Value database lack of this
+- [Indexing](#indexing)
+  - B-Tree based algorithm
+  - Primary Key is system built-in
+  - Secondary keys can support business cases query
+- [Sharding](#sharding)
+- [Replication](#replication)
+  - replica sets accross mulitple servers
+  - 1 Primary + 1 or more Secondary
+- Speed and Durability
+  - user configurable writeconcern
+  - fire-and-forget mode
+  - atomic mode
+- Scalling
+  - scale-out using sharding
+- JSON-friendly database
 
 ### Applicable Scenarios
+
+- Web Application
+- Agile DevOps
+- Analytics and Logging
+- Caching with Query
+- Variable Schema
 
 ---
 
 ## Architecture
 
 ### Building Blocks
+
+#### Data Model
+
+- Feilds
+- Values
+- Documents
+- Collections
+
+#### System Model
+
+- Core Server
+  - mongod
+    - standalone
+    - replica set
+  - mongos
+    - sharding/replica router
+- Java Shell
+  - mongo
+- [Database Drivers](#drivers)
+  - Python, Javascript, Java, C, C++...
+- System Tools
+  - mongodump/mongorestore
+  - bsondump
+  - mongoexport/mongoimport
+  - mongostat/mongotop
+  - mongofiles
 
 ### Structures
 
@@ -88,6 +138,42 @@ sidebar_label: MongoDB
 ## Best Practice
 
 ### Install and Initialize
+
+#### Install on Win/Linux
+
+- Please refer to [MongoDB Documentation Site](https://docs.mongodb.com/manual/administration/install-community/)
+
+#### [docker](https://hub.docker.com/_/mongo?tab=description)
+
+- `docker image pull mongo`
+- `docker container run --name myMongoDB -p 27017:27017 -v mongodb_data:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret -d mongo`
+- `docker exec -it myMongoDB bash`
+
+#### docker-compose
+
+- `sudo docker-compose up -d`
+- `sudo docker-compose down`
+- docker-compose.yml
+
+  ```yaml
+  # Use root/example as user/password credentials
+  version: "3.5"
+
+  services:
+    mongo:
+      image: mongo
+      container_name: myMongoDB
+      restart: always
+      ports:
+        - 27017:27017
+      volumes:
+        - mongodb_data:/data/db
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+
+  volumes: mongodb_data:
+  ```
 
 ### Drivers
 
@@ -163,7 +249,8 @@ sidebar_label: MongoDB
 #### OS Shell CMD
 
 - login
-  - `mongo -u admin -p admin admin`
+
+  - `mongo --host HOST -u admin -p admin --authenticationDatabase admin DATABASE`
 
 - status
   - `mongostat`
@@ -203,5 +290,5 @@ sidebar_label: MongoDB
 - `db.auth('read_user', 'read_user')`
 - `db.logout()`
 - `db.auth({user:'write_user', pwd:'write_user'})`
-  
+
 ---

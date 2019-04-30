@@ -4,6 +4,27 @@ title: Methodology
 sidebar_label: Methodology
 ---
 
-## Table of L2-Methodology
+## Overview
 
-- [L2-Methodology](L2-Methodology.md)
+  Society, Business, Science and Technology are very important concept to understand the organization of intelligence individual.
+  Methodology focus on Business, Organizing Technical, Management Practices.
+
+---
+
+## Business
+
+- TODO
+  
+---
+
+## Management
+
+- TODO
+  
+---
+
+## Process
+
+- TODO
+  
+---

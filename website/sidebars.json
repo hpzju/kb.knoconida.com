@@ -29,6 +29,25 @@
     "Overview": ["L2-Math/L2-Math"]
   },
   "L2-Methodology": {
-    "Overview": ["L2-Methodology/L2-Methodology"]
+    "Overview": ["L2-Methodology/L2-Methodology"],
+    "Business": ["L2-Methodology/BusinessModel/BusinessModel"],
+    "Management": ["L2-Methodology/PMP/PMP"],
+    "Miscellaneous": [
+      "L2-Methodology/Misc/tpl-dummy",
+      "Templates",
+      {
+        "type": "subcategory",
+        "label": "templates",
+        "ids": [
+          "L2-Methodology/Misc/tpl-topic",
+          "L2-Methodology/Misc/tpl-dummy1"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "My Next Subcategory",
+        "ids": ["L2-Methodology/Misc/tpl-dummy2"]
+      }
+    ]
   }
 }
