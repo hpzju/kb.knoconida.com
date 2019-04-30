@@ -29,6 +29,9 @@
     "Overview": ["L2-Math/L2-Math"]
   },
   "L2-Methodology": {
-    "Overview": ["L2-Methodology/L2-Methodology"]
+    "Overview": ["L2-Methodology/L2-Methodology"],
+    "Business": ["L2-Methodology/BusinessModel/BusinessModel"],
+    "Management": ["L2-Methodology/PMP/PMP"],
+    "Miscellaneous": ["L2-Methodology/Misc/tpl-topic"]
   }
 }
