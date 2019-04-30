@@ -18,6 +18,7 @@ sidebar_label: Markdown
 
 - Some text with [a local link][1]
 - and [another local link][2]
+- [Section link](#emphasize)
 
 ---
 
