@@ -216,6 +216,12 @@ sidebar_label: MongoDB
 
 #### Replication
 
+- Concepts
+  - replica set
+- Setup
+- Manage
+  - rs.status()
+  
 #### Clustering
 
 - `rs.status()`
@@ -231,8 +237,16 @@ sidebar_label: MongoDB
 
 #### Text Searching
 
+- TODO
+  
+### WiredTiger and Plugable Storage
+
+- TODO
+  
 #### Business Continuity
 
+- TODO
+  
 ---
 
 ## Best Practice
