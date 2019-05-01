@@ -6,10 +6,11 @@ sidebar_label: MongoDB
 
 ## Overview
 
-### Online Resources
+### Learning Resources
 
 - [MongoDB Website](https://www.mongodb.com)
 - [MongoDB Documentation](https://docs.mongodb.com/)
+- [MongoDB in Action](https://www.google.com)
 
 ---
 
@@ -60,6 +61,7 @@ sidebar_label: MongoDB
 - Documents
 - Collections
 - Databases
+  - namespace and physical group of collections and their indexes
 
 #### System Model
 
@@ -87,11 +89,15 @@ sidebar_label: MongoDB
 #### CRUD
 
 - Create
+  - [db.createCollection(name, options)](https://docs.mongodb.com/manual/reference/method/db.createCollection/index.html)
+    - capped collection
+    - TTL collection
   - [db.collection.insert()](https://docs.mongodb.com/manual/reference/method/db.collection.insert/)
   - `db.users.insert([{"userame": "jone2"},{userame: "jane"}])`
   - [db.collection.save()](https://docs.mongodb.com/manual/reference/method/db.collection.save/)
 - Read
 - Update
+  - [db.collection.renameCollections()](https://docs.mongodb.com/manual/reference/method/db.collection.renameCollection/)
   - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
 - Delete
   - `use DATABASE`
@@ -104,14 +110,43 @@ sidebar_label: MongoDB
 
 #### Query
 
+- [db.collection.findOne()](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/index.html)
 - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
   - `db.postalCodes.find({}, {_id:0, city:1, state:1, pincode:1}).skip(90). limit(10)`
   - `db.postalCodes.find({state:'Gujarat'},{_id:0, city:1, state:1, pincode:1}).sort({city:1}).limit(10)`
-- operator
-  - $and, $or
-    - { \$and: [{ "username": "smith" }, { "email": "smith@yahoo.com" }]}
-  - $lt, $gt, $lte, $gte, \$ne
-
+- logical operator
+  - $and, $or, $xor, $not
+    - `{ $and: [ { <expression1> }, { <expression2> } , ... , { <expressionN> } ] }`
+    - `{ field: { $not: { <operator-expression> } } }`
+- comparison operator
+  - $lt, $gt, $lte, $gte, \$ne, $in, $nin
+    - `{field: {$gt: value} }`
+    - `{ field: { $in: [<value1>, <value2>, ... <valueN> ] } }`
+- element operator
+  - $exist,
+    - `{ field: { $exists: <boolean> } }`
+  - $type
+    - `{ field: { $type: <BSON type> } }`
+    - [BSON Types](https://docs.mongodb.com/manual/reference/operator/query/type/#document-type-available-types)
+- evaluation operator
+  - $regex
+    - `{ <field>: { $regex: /pattern/, $options: '<options>' } }`
+    - `{ <field>: { $regex: 'pattern', $options: '<options>' } }`
+    - `{ <field>: { $regex: /pattern/<options> } }`
+  - $expr
+  - $jsonSchema
+  - $mod
+  - $text
+  - $where
+- array operator
+  - $all
+  - $size
+  - $elemMatch
+- bitwise operator
+  - bitsAllClear, bitsAllSet, bitsAnyClear, bitsAnySet
+- geospatial
+- sort, skip, limit
+  
 #### Aggregate and pipeline
 
 #### [Indexing](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/)
