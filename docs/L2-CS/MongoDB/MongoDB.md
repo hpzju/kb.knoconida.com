@@ -99,6 +99,9 @@ sidebar_label: MongoDB
 - Update
   - [db.collection.renameCollections()](https://docs.mongodb.com/manual/reference/method/db.collection.renameCollection/)
   - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
+    - update operator
+      - [Link](https://docs.mongodb.com/manual/reference/operator/update/#id1)
+
 - Delete
   - `use DATABASE`
   - `db.dropDatabase()`
@@ -114,6 +117,15 @@ sidebar_label: MongoDB
 - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
   - `db.postalCodes.find({}, {_id:0, city:1, state:1, pincode:1}).skip(90). limit(10)`
   - `db.postalCodes.find({state:'Gujarat'},{_id:0, city:1, state:1, pincode:1}).sort({city:1}).limit(10)`
+- projections
+  - inclusive or exclusive
+    - '_id' can be mixed
+  - $slice
+    - `db.products.find({}, {'reviews': {$slice: -5}})`
+- sort, skip, limit
+- dot(.) for subdocument/array field
+  - `db.products.find({'details.manufacturer.id': 42848323})`
+  - `db.products.find({'tags.0': "soil"})`
 - logical operator
   - $and, $or, $xor, $not
     - `{ $and: [ { <expression1> }, { <expression2> } , ... , { <expressionN> } ] }`
@@ -145,24 +157,56 @@ sidebar_label: MongoDB
 - bitwise operator
   - bitsAllClear, bitsAllSet, bitsAnyClear, bitsAnySet
 - geospatial
-- sort, skip, limit
-  
-#### Aggregate and pipeline
 
-#### [Indexing](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/)
+#### Aggregation pipeline
 
-- Show Index
-  - `db.sparseTest.getIndexes()`
-- Foregroud Indexing
-  - `db.indexTest.createIndex({value:1})`
-- Backgroud Indexing
-  - `db.indexTest.createIndex({value:1}, {background:true})`
-- Sparse Indexing
-  - `db.sparseTest.createIndex({y:1}, {unique:1, sparse:1})`
-- hind() forced full scan
-  - `db.sparseTest.find({y:{$ne:2}}, {_id:0}). hint({y:1}).limit(15)`
-- TTL Indexing
-  - `db.ttlTest.createIndex({createDate:1}, {expireAfterSeconds:300})`
+- [db.collection.aggregate()](https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate)
+  - `db.collection.aggregate(pipeline, options)`
+- pipeline stages
+  -$addField, $bucket, $bucketAuto, $collStats, $count, $facet, $geoNear, $graphLookup, $group, $indexStats, $limit, $listSessions, $lookup, $match, $out, $project, $redact, $ replaceRoot, $sample, $skip, $sort, $sourtByCount, $unwind
+  - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline/)
+- pipeline operators
+  - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation/)
+
+#### Indexing
+
+- [Indexing Concepts](https://docs.mongodb.com/manual/indexes/index.html)
+  - single-key indexes
+  - compund-key indexes
+  - unique indexes
+  - sparse indexes
+  - multikey indexes
+  - hashed indexes
+  - geospacial indexes
+
+- Indexing principle and practice
+  - single-key indexing
+    - exact match
+    - sorting
+    - range queries
+  - compund-key indexes
+    - exact matches
+    - range matches
+    - covering indexes
+  - hint()
+
+- [Index functions](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/)
+  - Show Index
+    - `db.sparseTest.getIndexes()`
+  - Foregroud Indexing
+    - `db.indexTest.createIndex({value:1})`
+  - Backgroud Indexing
+    - `db.indexTest.createIndex({value:1}, {background:true})`
+  - Sparse Indexing
+    - `db.sparseTest.createIndex({y:1}, {unique:1, sparse:1})`
+  - hind() forced full scan
+    - `db.sparseTest.find({y:{$ne:2}}, {_id:0}).hint({y:1}).limit(15)`
+  - TTL Indexing
+    - `db.ttlTest.createIndex({createDate:1}, {expireAfterSeconds:300})`
+  - Defragmentation
+    - `db.indexTest.reIndex()`
+  - Drop Index
+    - `db.indexTest.dropIndex("INDEXNAME")`
 
 #### Sharding
 
@@ -180,6 +224,12 @@ sidebar_label: MongoDB
 #### GridFS
 
 - TODO
+  
+#### Atomicity, Concurrency, and Transaction
+
+- [TODO](https://docs.mongodb.com/manual/core/write-operations-atomicity/index.html)
+
+#### Text Searching
 
 #### Business Continuity
 
@@ -320,6 +370,7 @@ sidebar_label: MongoDB
   - `db.postalCodes.stats(1024)`
 - execution
   - [cursor.explain()](https://docs.mongodb.com/manual/reference/method/cursor.explain/index.html)
+    - `db.producnts.find({"name": "cases"}).explain("executionStats")`
   - [db.runCommand()](https://docs.mongodb.com/manual/reference/method/db.runCommand/#db.runCommand)
 
 #### renaming collection
