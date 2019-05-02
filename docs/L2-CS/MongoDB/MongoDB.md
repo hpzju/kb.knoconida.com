@@ -95,12 +95,16 @@ sidebar_label: MongoDB
   - `db.users.insert([{"userame": "jone2"},{userame: "jane"}])`
   - [db.collection.save()](https://docs.mongodb.com/manual/reference/method/db.collection.save/)
 - Read
+  - [db.collection.findOne()](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/)
+  - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
 - Update
 
   - [db.collection.renameCollections()](https://docs.mongodb.com/manual/reference/method/db.collection.renameCollection/)
   - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
     - update operator
       - [Link](https://docs.mongodb.com/manual/reference/operator/update/#id1)
+    - upsert
+      - insert new document if not exist during update operate
 
 - Delete
   - `use DATABASE`
@@ -139,7 +143,7 @@ sidebar_label: MongoDB
     - `{ field: { $exists: <boolean> } }`
   - \$type
     - `{ field: { $type: <BSON type> } }`
-    - [BSON Types](https://docs.mongodb.com/manual/reference/operator/query/type/#document-type-available-types)
+    - [BSON Types](https://docs.mongodb.com/manual/reference/bson-types/)
 - evaluation operator
   - \$regex
     - `{ <field>: { $regex: /pattern/, $options: '<options>' } }`
