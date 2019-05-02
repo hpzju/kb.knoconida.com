@@ -10,6 +10,7 @@ sidebar_label: JavaScript
 
 ### Online Resources
 
+- [ECMA-262](https://github.com/tc39/ecma262)
 - [W3School JavaScript Tutorial](https://www.w3schools.com/js/)
 - [JavaScript Resources](https://www.javascript.com/resources)
 

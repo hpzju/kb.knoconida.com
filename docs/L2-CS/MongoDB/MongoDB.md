@@ -30,6 +30,7 @@ sidebar_label: MongoDB
   - Primary Key is system built-in
   - Secondary keys can support business cases query
 - [Sharding](#sharding)
+  - scale-out
 - [Replication](#replication)
   - replica sets accross mulitple servers
   - 1 Primary + 1 or more Secondary
@@ -40,6 +41,7 @@ sidebar_label: MongoDB
 - Scalling
   - scale-out using sharding
 - JSON-friendly database
+- file stroage with GridFS
 
 ### Applicable Scenarios
 
@@ -53,9 +55,7 @@ sidebar_label: MongoDB
 
 ## Architecture
 
-### Building Blocks
-
-#### Data Model
+### Data Model
 
 - Feilds
 - Values
@@ -64,7 +64,7 @@ sidebar_label: MongoDB
 - Databases
   - namespace and physical group of collections and their indexes
 
-#### System Model
+### System Model
 
 - Core Server
   - mongod
@@ -85,9 +85,7 @@ sidebar_label: MongoDB
 
 ### Structures
 
-### Domain Tech
-
-#### CRUD
+### CRUD
 
 - Create
   - [db.createCollection(name, options)](https://docs.mongodb.com/manual/reference/method/db.createCollection/index.html)
@@ -97,12 +95,16 @@ sidebar_label: MongoDB
   - `db.users.insert([{"userame": "jone2"},{userame: "jane"}])`
   - [db.collection.save()](https://docs.mongodb.com/manual/reference/method/db.collection.save/)
 - Read
+  - [db.collection.findOne()](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/)
+  - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
 - Update
 
   - [db.collection.renameCollections()](https://docs.mongodb.com/manual/reference/method/db.collection.renameCollection/)
   - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
     - update operator
       - [Link](https://docs.mongodb.com/manual/reference/operator/update/#id1)
+    - upsert
+      - insert new document if not exist during update operate
 
 - Delete
   - `use DATABASE`
@@ -113,7 +115,7 @@ sidebar_label: MongoDB
   - [db.collecction.deleteOne()](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/)
   - [db.collecction.deleteMany()](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/)
 
-#### Query
+### Query
 
 - [db.collection.findOne()](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/index.html)
 - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
@@ -141,7 +143,7 @@ sidebar_label: MongoDB
     - `{ field: { $exists: <boolean> } }`
   - \$type
     - `{ field: { $type: <BSON type> } }`
-    - [BSON Types](https://docs.mongodb.com/manual/reference/operator/query/type/#document-type-available-types)
+    - [BSON Types](https://docs.mongodb.com/manual/reference/bson-types/)
 - evaluation operator
   - \$regex
     - `{ <field>: { $regex: /pattern/, $options: '<options>' } }`
@@ -160,7 +162,7 @@ sidebar_label: MongoDB
   - bitsAllClear, bitsAllSet, bitsAnyClear, bitsAnySet
 - geospatial
 
-#### Aggregation pipeline
+### Aggregation pipeline
 
 - [db.collection.aggregate()](https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate)
   - `db.collection.aggregate(pipeline, options)`
@@ -169,7 +171,7 @@ sidebar_label: MongoDB
 - pipeline operators
   - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation/)
 
-#### Indexing
+### Indexing
 
 - [Indexing Concepts](https://docs.mongodb.com/manual/indexes/index.html)
 
@@ -211,7 +213,7 @@ sidebar_label: MongoDB
   - Drop Index
     - `db.indexTest.dropIndex("INDEXNAME")`
 
-#### Sharding and Cluster
+### Sharding and Cluster
 
 - Architecture
   - ![Alt](/img/MongoDB-Sharding-01.png "mongodb architecture")
@@ -221,7 +223,7 @@ sidebar_label: MongoDB
   - `sh.enableSharding('test')`
   - `sh.status()`
 
-#### Replication and Cluster [TODO]
+### Replication and Cluster [TODO]
 
 - Concepts
   - replica set
@@ -231,40 +233,127 @@ sidebar_label: MongoDB
   - rs.status()
   - `rs.stepDown()`
 
-#### GridFS [TODO]
+### GridFS [TODO]
 
-#### Atomicity, Concurrency, and Transaction
+### Atomicity, Concurrency, and Transaction
 
 - [TODO](https://docs.mongodb.com/manual/core/write-operations-atomicity/index.html)
 
-#### Text Searching [TODO]
+### Text Searching [TODO]
 
-#### Stroage Engine
+### Stroage Engine
 
 - [Link](https://docs.mongodb.com/manual/core/storage-engines/)
 - MMAPv1 Engine
 - In-Memory Engind
 - WiredTiger Plugable Storage [TODO]
 
-#### Business Continuity [TODO]
+### Business Continuity [TODO]
+
+---
+
+## Management
+
+### OS Shell CMD
+
+- login
+
+  - `mongo --host HOST -u admin -p admin --authenticationDatabase admin DATABASE`
+  - `use admin; db.auto({user: USER, pwd: PASSWD})`
+
+- logout
+
+  - `db.logout()`
+
+- status
+
+  - `mongostat`
+  - `mongotop 10`
+
+- renaming collection
+
+  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
+  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
+  - `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
+
+### Backup
+
+- bsondump
+  - `bsondump user.bson`
+  - `bsondump --type=debug user.bson`
+- mongodump/mongorestore
+  - `mongodump -o DIR`
+  - `mongorestore DIR`
+  - `mongodump -h HOST -p PORT -u USER -p PASSWD -o DIR`
+  - `mongorestore -h HOST -p PORT -u USER -p PASSWD DIR`
+- data-file based backup
+
+  - ```bash
+    use admin
+    db.fsyncLock()
+    # copy MongoDB's data files
+    db.fsyncUnlock()
+    ```
+
+### Monitoring and Diagonose
+
+- db
+  - `show dbs`
+  - `db.stats(1024)`
+  - `db.serverStatus()`
+  - `db.currentOp()`
+  - `db.runCommand({top:1})`
+  - `use DATABASE`
+  - `db`
+- collection
+  - `use DATABASE`
+  - `show collections`
+  - `db.postalCodes.stats(1024)`
+- execution
+
+  - [cursor.explain()](https://docs.mongodb.com/manual/reference/method/cursor.explain/index.html)
+    - `db.producnts.find({"name": "cases"}).explain("executionStats")`
+  - [db.runCommand()](https://docs.mongodb.com/manual/reference/method/db.runCommand/#db.runCommand)
+
+- logging
+
+  - ```Javascript
+    use admin
+    db.runCommand({ logrotate: 1 })
+    ```
+
+  - `db.getProfilingLevel()`
+  - `db.setProfilingLevel(1, 50)`
+  - `db.system.profile.find().pretty()`
+
+### [User Admin](https://docs.mongodb.com/manual/reference/method/db.createUser/)
+
+- `use admin`
+- `db.createUser({ user:'admin', pwd:'admin', customData:{desc:'The admin user for admin db'}, roles:['readWrite', 'dbAdmin', 'clusterAdmin']})`
+- `use test`
+- `db.createUser({ user:'read_user', pwd:'read_user', customData:{desc:'The read only user for test database'}, roles:['read']})`
+- `db.createUser({ user:'write_user', pwd:'write_user', customData:{desc:'The read write user for test database'}, roles:['readWrite']})`
+- `db.auth('read_user', 'read_user')`
+- `db.logout()`
+- `db.auth({user:'write_user', pwd:'write_user'})`
+- `db.dropUser("read_user")`
+- `db.dropUser("write_user")`
 
 ---
 
 ## Best Practice
 
-### Install and Initialize
-
-#### Install on Win/Linux
+### Install on Win/Linux
 
 - Please refer to [MongoDB Documentation Site](https://docs.mongodb.com/manual/administration/install-community/)
 
-#### [docker](https://hub.docker.com/_/mongo?tab=description)
+### [Install with docker](https://hub.docker.com/_/mongo?tab=description)
 
 - `docker image pull mongo`
 - `docker container run --name myMongoDB -p 27017:27017 -v mongodb_data:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret -d mongo`
 - `docker exec -it myMongoDB bash`
 
-#### docker-compose
+### Install with docker-compose
 
 - `sudo docker-compose up -d`
 - `sudo docker-compose down`
@@ -358,93 +447,3 @@ sidebar_label: MongoDB
     console.log("******Closed successfully to server");
   })();
   ```
-
-### Management
-
-#### OS Shell CMD
-
-- login
-
-  - `mongo --host HOST -u admin -p admin --authenticationDatabase admin DATABASE`
-  - `use admin; db.auto({user: USER, pwd: PASSWD})`
-
-- logout
-
-  - `db.logout()`
-
-- status
-
-  - `mongostat`
-  - `mongotop 10`
-
-- renaming collection
-
-  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
-  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
-  - `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
-
-#### Backup
-
-- bsondump
-  - `bsondump user.bson`
-  - `bsondump --type=debug user.bson`
-- mongodump/mongorestore
-  - `mongodump -o DIR`
-  - `mongorestore DIR`
-  - `mongodump -h HOST -p PORT -u USER -p PASSWD -o DIR`
-  - `mongorestore -h HOST -p PORT -u USER -p PASSWD DIR`
-- data-file based backup
-
-  - ```bash
-    use admin
-    db.fsyncLock()
-    # copy MongoDB's data files
-    db.fsyncUnlock()
-    ```
-
-#### Monitoring and Diagonose
-
-- db
-  - `show dbs`
-  - `db.stats(1024)`
-  - `db.serverStatus()`
-  - `db.currentOp()`
-  - `db.runCommand({top:1})`
-  - `use DATABASE`
-  - `db`
-- collection
-  - `use DATABASE`
-  - `show collections`
-  - `db.postalCodes.stats(1024)`
-- execution
-
-  - [cursor.explain()](https://docs.mongodb.com/manual/reference/method/cursor.explain/index.html)
-    - `db.producnts.find({"name": "cases"}).explain("executionStats")`
-  - [db.runCommand()](https://docs.mongodb.com/manual/reference/method/db.runCommand/#db.runCommand)
-
-- logging
-
-  - ```Javascript
-    use admin
-    db.runCommand({ logrotate: 1 })
-    ```
-  - `db.getProfilingLevel()`
-  - `db.setProfilingLevel(1, 50)`
-  - `db.system.profile.find().pretty()`
-
-### Security
-
-#### [user admin](https://docs.mongodb.com/manual/reference/method/db.createUser/)
-
-- `use admin`
-- `db.createUser({ user:'admin', pwd:'admin', customData:{desc:'The admin user for admin db'}, roles:['readWrite', 'dbAdmin', 'clusterAdmin']})`
-- `use test`
-- `db.createUser({ user:'read_user', pwd:'read_user', customData:{desc:'The read only user for test database'}, roles:['read']})`
-- `db.createUser({ user:'write_user', pwd:'write_user', customData:{desc:'The read write user for test database'}, roles:['readWrite']})`
-- `db.auth('read_user', 'read_user')`
-- `db.logout()`
-- `db.auth({user:'write_user', pwd:'write_user'})`
-- `db.dropUser("read_user")`
-- `db.dropUser("write_user")`
-
----

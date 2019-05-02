@@ -40,3 +40,8 @@
 .nav-footer .sitemap .nav-home {
   padding: 5px;
 }
+
+/*back to top backgroud set*/
+#back-to-top {
+  background: #563d7c;
+}
