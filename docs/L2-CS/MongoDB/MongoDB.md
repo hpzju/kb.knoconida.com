@@ -6,10 +6,12 @@ sidebar_label: MongoDB
 
 ## Overview
 
-### Online Resources
+### Learning Resources
 
 - [MongoDB Website](https://www.mongodb.com)
 - [MongoDB Documentation](https://docs.mongodb.com/)
+- [MongoDB in Action](https://www.google.com)
+- [MongoDB the definitive guide](https://www.google.com)
 
 ---
 
@@ -59,6 +61,8 @@ sidebar_label: MongoDB
 - Values
 - Documents
 - Collections
+- Databases
+  - namespace and physical group of collections and their indexes
 
 #### System Model
 
@@ -86,52 +90,163 @@ sidebar_label: MongoDB
 #### CRUD
 
 - Create
+  - [db.createCollection(name, options)](https://docs.mongodb.com/manual/reference/method/db.createCollection/index.html)
+    - capped collection
+    - TTL collection
+  - [db.collection.insert()](https://docs.mongodb.com/manual/reference/method/db.collection.insert/)
+  - `db.users.insert([{"userame": "jone2"},{userame: "jane"}])`
+  - [db.collection.save()](https://docs.mongodb.com/manual/reference/method/db.collection.save/)
 - Read
 - Update
-  - findAndModify()
+
+  - [db.collection.renameCollections()](https://docs.mongodb.com/manual/reference/method/db.collection.renameCollection/)
+  - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
+    - update operator
+      - [Link](https://docs.mongodb.com/manual/reference/operator/update/#id1)
+
 - Delete
+  - `use DATABASE`
+  - `db.dropDatabase()`
+  - `db.COLLECTION.drop()`
+  - [db.collection.remove()](https://docs.mongodb.com/manual/reference/method/db.collection.remove/)
+    - `db.COLLECTION.remove({})`
+  - [db.collecction.deleteOne()](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/)
+  - [db.collecction.deleteMany()](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/)
 
 #### Query
 
+- [db.collection.findOne()](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/index.html)
 - [db.collection.find()](https://docs.mongodb.com/manual/reference/method/db.collection.find/)
   - `db.postalCodes.find({}, {_id:0, city:1, state:1, pincode:1}).skip(90). limit(10)`
   - `db.postalCodes.find({state:'Gujarat'},{_id:0, city:1, state:1, pincode:1}).sort({city:1}).limit(10)`
+- projections
+  - inclusive or exclusive
+    - '\_id' can be mixed
+  - \$slice
+    - `db.products.find({}, {'reviews': {$slice: -5}})`
+- sort, skip, limit
+- dot(.) for subdocument/array field
+  - `db.products.find({'details.manufacturer.id': 42848323})`
+  - `db.products.find({'tags.0': "soil"})`
+- logical operator
+  - $and, $or, $xor, $not
+    - `{ $and: [ { <expression1> }, { <expression2> } , ... , { <expressionN> } ] }`
+    - `{ field: { $not: { <operator-expression> } } }`
+- comparison operator
+  - $lt, $gt, $lte, $gte, \$ne, $in, $nin
+    - `{field: {$gt: value} }`
+    - `{ field: { $in: [<value1>, <value2>, ... <valueN> ] } }`
+- element operator
+  - \$exist,
+    - `{ field: { $exists: <boolean> } }`
+  - \$type
+    - `{ field: { $type: <BSON type> } }`
+    - [BSON Types](https://docs.mongodb.com/manual/reference/operator/query/type/#document-type-available-types)
+- evaluation operator
+  - \$regex
+    - `{ <field>: { $regex: /pattern/, $options: '<options>' } }`
+    - `{ <field>: { $regex: 'pattern', $options: '<options>' } }`
+    - `{ <field>: { $regex: /pattern/<options> } }`
+  - \$expr
+  - \$jsonSchema
+  - \$mod
+  - \$text
+  - \$where
+- array operator
+  - \$all
+  - \$size
+  - \$elemMatch
+- bitwise operator
+  - bitsAllClear, bitsAllSet, bitsAnyClear, bitsAnySet
+- geospatial
 
-#### Aggregate and pipeline
+#### Aggregation pipeline
+
+- [db.collection.aggregate()](https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate)
+  - `db.collection.aggregate(pipeline, options)`
+- pipeline stages -$addField, $bucket, $bucketAuto, $collStats, $count, $facet, $geoNear, $graphLookup, $group, $indexStats, $limit, $listSessions, $lookup, $match, $out, $project, $redact, $ replaceRoot, $sample, $skip, $sort, $sourtByCount, \$unwind
+  - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline/)
+- pipeline operators
+  - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation/)
 
 #### Indexing
 
-- Show Index
-  - `db.sparseTest.getIndexes()`
-- Foregroud Indexing
-  - `db.indexTest.createIndex({value:1})`
-- Backgroud Indexing
-  - `db.indexTest.createIndex({value:1}, {background:true})`
-- Sparse Indexing
-  - `db.sparseTest.createIndex({y:1}, {unique:1, sparse:1})`
-- hind() forced full scan
-  - `db.sparseTest.find({y:{$ne:2}}, {_id:0}). hint({y:1}).limit(15)`
-- TTL Indexing
-  - `db.ttlTest.createIndex({createDate:1}, {expireAfterSeconds:300})`
+- [Indexing Concepts](https://docs.mongodb.com/manual/indexes/index.html)
 
-#### Sharding
+  - single-key indexes
+  - compund-key indexes
+  - unique indexes
+  - sparse indexes
+  - multikey indexes
+  - hashed indexes
+  - geospacial indexes
 
-- `use test`
-- `sh.enableSharding('test')`
-- `sh.status()`
+- Indexing principle and practice
 
-#### Replication
+  - single-key indexing
+    - exact match
+    - sorting
+    - range queries
+  - compund-key indexes
+    - exact matches
+    - range matches
+    - covering indexes
+  - hint()
 
-#### Clustering
+- [Index functions](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/)
+  - Show Index
+    - `db.sparseTest.getIndexes()`
+  - Foregroud Indexing
+    - `db.indexTest.createIndex({value:1})`
+  - Backgroud Indexing
+    - `db.indexTest.createIndex({value:1}, {background:true})`
+  - Sparse Indexing
+    - `db.sparseTest.createIndex({y:1}, {unique:1, sparse:1})`
+  - hind() forced full scan
+    - `db.sparseTest.find({y:{$ne:2}}, {_id:0}).hint({y:1}).limit(15)`
+  - TTL Indexing
+    - `db.ttlTest.createIndex({createDate:1}, {expireAfterSeconds:300})`
+  - Defragmentation
+    - `db.indexTest.reIndex()`
+  - Drop Index
+    - `db.indexTest.dropIndex("INDEXNAME")`
 
-- `rs.status()`
-- `rs.stepDown()`
+#### Sharding and Cluster
 
-#### GridFS
+- Architecture
+  - ![Alt](/img/MongoDB-Sharding-01.png "mongodb architecture")
+  - ![Alt](/img/MongoDB-Sharding-02.png "mongodb granularity of sharding")
+- Config [TODO]
+  - `use test`
+  - `sh.enableSharding('test')`
+  - `sh.status()`
 
-- TODO
+#### Replication and Cluster [TODO]
 
-#### Business Continuity
+- Concepts
+  - replica set
+- Setup
+- Manage
+
+  - rs.status()
+  - `rs.stepDown()`
+
+#### GridFS [TODO]
+
+#### Atomicity, Concurrency, and Transaction
+
+- [TODO](https://docs.mongodb.com/manual/core/write-operations-atomicity/index.html)
+
+#### Text Searching [TODO]
+
+#### Stroage Engine
+
+- [Link](https://docs.mongodb.com/manual/core/storage-engines/)
+- MMAPv1 Engine
+- In-Memory Engind
+- WiredTiger Plugable Storage [TODO]
+
+#### Business Continuity [TODO]
 
 ---
 
@@ -251,32 +366,71 @@ sidebar_label: MongoDB
 - login
 
   - `mongo --host HOST -u admin -p admin --authenticationDatabase admin DATABASE`
+  - `use admin; db.auto({user: USER, pwd: PASSWD})`
+
+- logout
+
+  - `db.logout()`
 
 - status
+
   - `mongostat`
   - `mongotop 10`
 
-#### Show Info
+- renaming collection
+
+  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
+  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
+  - `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
+
+#### Backup
+
+- bsondump
+  - `bsondump user.bson`
+  - `bsondump --type=debug user.bson`
+- mongodump/mongorestore
+  - `mongodump -o DIR`
+  - `mongorestore DIR`
+  - `mongodump -h HOST -p PORT -u USER -p PASSWD -o DIR`
+  - `mongorestore -h HOST -p PORT -u USER -p PASSWD DIR`
+- data-file based backup
+
+  - ```bash
+    use admin
+    db.fsyncLock()
+    # copy MongoDB's data files
+    db.fsyncUnlock()
+    ```
+
+#### Monitoring and Diagonose
 
 - db
   - `show dbs`
   - `db.stats(1024)`
   - `db.serverStatus()`
+  - `db.currentOp()`
+  - `db.runCommand({top:1})`
+  - `use DATABASE`
+  - `db`
 - collection
-  - `use DATABASE; show collections`
+  - `use DATABASE`
+  - `show collections`
   - `db.postalCodes.stats(1024)`
+- execution
 
-#### renaming collection
+  - [cursor.explain()](https://docs.mongodb.com/manual/reference/method/cursor.explain/index.html)
+    - `db.producnts.find({"name": "cases"}).explain("executionStats")`
+  - [db.runCommand()](https://docs.mongodb.com/manual/reference/method/db.runCommand/#db.runCommand)
 
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
-- `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
+- logging
 
-#### logging
-
-- `db.getProfilingLevel()`
-- `db.setProfilingLevel(1, 50)`
-- `db.system.profile.find().pretty()`
+  - ```Javascript
+    use admin
+    db.runCommand({ logrotate: 1 })
+    ```
+  - `db.getProfilingLevel()`
+  - `db.setProfilingLevel(1, 50)`
+  - `db.system.profile.find().pretty()`
 
 ### Security
 
@@ -290,5 +444,7 @@ sidebar_label: MongoDB
 - `db.auth('read_user', 'read_user')`
 - `db.logout()`
 - `db.auth({user:'write_user', pwd:'write_user'})`
+- `db.dropUser("read_user")`
+- `db.dropUser("write_user")`
 
 ---

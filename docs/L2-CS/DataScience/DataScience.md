@@ -46,6 +46,12 @@ sidebar_label: DataScience
 
 ## Best Practices
 
+### Schema Design Principle
+
+- understand your DBMS features and limitations
+- understand your APP and DATA patterns
+- Balance these two facets during data modeling desicion-making process
+  
 ---
 
 [1]: , "empirical evidence, scientific theory, computational science, data science"
