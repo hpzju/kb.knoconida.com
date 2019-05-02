@@ -9,6 +9,7 @@ sidebar_label: Python
 ### Learning Resources
 
 - [Python Website](https://www.python.org/)
+- [link to Anaconda](/docs/L2-CS/Python/Anaconda)
 
 ---
 
