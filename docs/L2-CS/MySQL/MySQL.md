@@ -68,6 +68,15 @@ sidebar_label: MySQL
 - =, !=, >, >=, <, <=
 - AND, OR, NOT
 - BETWEEN, NOT BETWEEN
+  - `value BETWEEN low_bound AND high_bound`
+- IN, NOT IN
+  - `value IN ( VALUE_SET )`
+- LIKE, NOT LIKE
+  - %: any sequence of chars
+  - \_: any one char
+  - `str_val like "%PATTERN%"`
+  - case sensitive
+  - `LOWER(<key>) LIKE LOWER('%<searchpattern>%')`
 
 #### col_order_expresss
 
