@@ -8,8 +8,7 @@ sidebar_label: MySQL
 
 ### Online Resources
 
-- [MySQL Website](https://www.mongodb.com)
-- [MySQL Documentation](https://docs.mongodb.com/)
+- [MySQL Documentation](https://dev.mysql.com/doc/refman/8.0/en/)
 
 ---
 
@@ -31,96 +30,74 @@ sidebar_label: MySQL
 
 ### Structures
 
-### Domain Tech
+### CRUD
 
-#### CRUD
+#### Create
 
-- Create
-- Read
-- Update
-  - findAndModify()
-- Delete
+- `CREATE DATABASE mydatabase;`
 
-#### Query
+#### Read
 
-#### Aggregate and pipeline
+#### Update
 
-#### Indexing
+#### Delete
 
-- Show Index
-  - `db.sparseTest.getIndexes()`
+- `DROP DATABASE mydatabase;`
 
-#### Sharding
+### Query
 
-- `use test`
-- `sh.enableSharding('test')`
-- `sh.status()`
+#### [SELECT](https://dev.mysql.com/doc/refman/8.0/en/select.html)
 
-#### Replication
+- ```SQL
+  SELECT      col_express, col2_express...
+  FROM        table_name
+  WHERE       condition_express
+  ORDER BY    col_order_express, col2_order_express
+  LIMIT       lines_num;
+  ```
 
-#### Clustering
+#### col_express
 
-- `rs.status()`
-- `rs.stepDown()`
+- wildcard \* for all column.
+- `COUNT(*)` for count matched rows.
+- `DISTINCT( col1 )` for count unique matched rows.
+- `COUNT(DISTINCT col1)`
 
-#### GridFS
+#### condition_express
 
-- TODO
+- =, !=, >, >=, <, <=
+- AND, OR, NOT
+- BETWEEN, NOT BETWEEN
 
-#### Business Continuity
+#### col_order_expresss
+
+- `col ASC/DESC`
+- ASC is default
+
+### Join
+
+### Indexing
+
+### Replication
+
+### Clustering
+
+### Business Continuity
 
 ---
 
 ## Best Practice
 
-### Install and Initialize
+### Install and Config
 
 ### Drivers
 
-### Management
+### User Admin
 
-#### OS Shell CMD
+### Backup and Restore
 
-- login
-  - `mongo -u admin -p admin admin`
+#### Restore Schema
 
-- status
-  - `mongostat`
-  - `mongotop 10`
+### Mornitoring
 
-#### Show Info
-
-- db
-  - `show dbs`
-  - `db.stats(1024)`
-  - `db.serverStatus()`
-- collection
-  - `use DATABASE; show collections`
-  - `db.postalCodes.stats(1024)`
-
-#### renaming collection
-
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
-- `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
-
-#### logging
-
-- `db.getProfilingLevel()`
-- `db.setProfilingLevel(1, 50)`
-- `db.system.profile.find().pretty()`
-
-### Security
-
-#### [user admin](https://docs.mongodb.com/manual/reference/method/db.createUser/)
-
-- `use admin`
-- `db.createUser({ user:'admin', pwd:'admin', customData:{desc:'The admin user for admin db'}, roles:['readWrite', 'dbAdmin', 'clusterAdmin']})`
-- `use test`
-- `db.createUser({ user:'read_user', pwd:'read_user', customData:{desc:'The read only user for test database'}, roles:['read']})`
-- `db.createUser({ user:'write_user', pwd:'write_user', customData:{desc:'The read write user for test database'}, roles:['readWrite']})`
-- `db.auth('read_user', 'read_user')`
-- `db.logout()`
-- `db.auth({user:'write_user', pwd:'write_user'})`
-  
 ---
