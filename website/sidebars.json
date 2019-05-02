@@ -13,10 +13,13 @@
     "Computer Science": ["L2-CS/Computation/Computation"],
     "Data Science": ["L2-CS/DataScience/DataScience"],
     "FullStack": [
-      "L2-CS/JavaScript/JavaScript",
+      "L2-CS/Bootstrap/Bootstrap",
       "L2-CS/Nodejs/Nodejs",
+      "L2-CS/Django/Django",
       "L2-CS/MongoDB/MongoDB",
-      "L2-CS/MySQL/MySQL"
+      "L2-CS/MySQL/MySQL",
+      "L2-CS/JavaScript/JavaScript",
+      "L2-CS/Python/Python"
     ],
     "DevOps": ["L2-CS/Docker/Docker"],
     "Misc": [

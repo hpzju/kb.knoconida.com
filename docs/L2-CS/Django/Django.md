@@ -1,15 +1,14 @@
 ---
-id: Nodejs
-title: Nodejs an asynchronous event driven JavaScript runtime, designed to build scalable network applications
-sidebar_label: Nodejs
+id: Django
+title: Django a python server side web framework.
+sidebar_label: Django
 ---
 
 ## Overview
 
 ### Online Resources
 
-- [Node.js Documentation](https://nodejs.org/en/docs/guides/)
-- [W3School Node.js Tutorial](https://www.w3schools.com/nodejs/)
+- [Django Website](https://www.djangoproject.com/)
 
 ---
 

@@ -30,6 +30,7 @@ sidebar_label: MongoDB
   - Primary Key is system built-in
   - Secondary keys can support business cases query
 - [Sharding](#sharding)
+  - scale-out
 - [Replication](#replication)
   - replica sets accross mulitple servers
   - 1 Primary + 1 or more Secondary
@@ -40,6 +41,7 @@ sidebar_label: MongoDB
 - Scalling
   - scale-out using sharding
 - JSON-friendly database
+- file stroage with GridFS
 
 ### Applicable Scenarios
 
