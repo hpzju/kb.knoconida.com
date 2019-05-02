@@ -11,6 +11,7 @@ sidebar_label: MongoDB
 - [MongoDB Website](https://www.mongodb.com)
 - [MongoDB Documentation](https://docs.mongodb.com/)
 - [MongoDB in Action](https://www.google.com)
+- [MongoDB the definitive guide](https://www.google.com)
 
 ---
 
@@ -97,6 +98,7 @@ sidebar_label: MongoDB
   - [db.collection.save()](https://docs.mongodb.com/manual/reference/method/db.collection.save/)
 - Read
 - Update
+
   - [db.collection.renameCollections()](https://docs.mongodb.com/manual/reference/method/db.collection.renameCollection/)
   - [db.collection.update()](https://docs.mongodb.com/manual/reference/method/db.collection.update/)
     - update operator
@@ -119,8 +121,8 @@ sidebar_label: MongoDB
   - `db.postalCodes.find({state:'Gujarat'},{_id:0, city:1, state:1, pincode:1}).sort({city:1}).limit(10)`
 - projections
   - inclusive or exclusive
-    - '_id' can be mixed
-  - $slice
+    - '\_id' can be mixed
+  - \$slice
     - `db.products.find({}, {'reviews': {$slice: -5}})`
 - sort, skip, limit
 - dot(.) for subdocument/array field
@@ -135,25 +137,25 @@ sidebar_label: MongoDB
     - `{field: {$gt: value} }`
     - `{ field: { $in: [<value1>, <value2>, ... <valueN> ] } }`
 - element operator
-  - $exist,
+  - \$exist,
     - `{ field: { $exists: <boolean> } }`
-  - $type
+  - \$type
     - `{ field: { $type: <BSON type> } }`
     - [BSON Types](https://docs.mongodb.com/manual/reference/operator/query/type/#document-type-available-types)
 - evaluation operator
-  - $regex
+  - \$regex
     - `{ <field>: { $regex: /pattern/, $options: '<options>' } }`
     - `{ <field>: { $regex: 'pattern', $options: '<options>' } }`
     - `{ <field>: { $regex: /pattern/<options> } }`
-  - $expr
-  - $jsonSchema
-  - $mod
-  - $text
-  - $where
+  - \$expr
+  - \$jsonSchema
+  - \$mod
+  - \$text
+  - \$where
 - array operator
-  - $all
-  - $size
-  - $elemMatch
+  - \$all
+  - \$size
+  - \$elemMatch
 - bitwise operator
   - bitsAllClear, bitsAllSet, bitsAnyClear, bitsAnySet
 - geospatial
@@ -162,8 +164,7 @@ sidebar_label: MongoDB
 
 - [db.collection.aggregate()](https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate)
   - `db.collection.aggregate(pipeline, options)`
-- pipeline stages
-  -$addField, $bucket, $bucketAuto, $collStats, $count, $facet, $geoNear, $graphLookup, $group, $indexStats, $limit, $listSessions, $lookup, $match, $out, $project, $redact, $ replaceRoot, $sample, $skip, $sort, $sourtByCount, $unwind
+- pipeline stages -$addField, $bucket, $bucketAuto, $collStats, $count, $facet, $geoNear, $graphLookup, $group, $indexStats, $limit, $listSessions, $lookup, $match, $out, $project, $redact, $ replaceRoot, $sample, $skip, $sort, $sourtByCount, \$unwind
   - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline/)
 - pipeline operators
   - [Link](https://docs.mongodb.com/manual/reference/operator/aggregation/)
@@ -171,6 +172,7 @@ sidebar_label: MongoDB
 #### Indexing
 
 - [Indexing Concepts](https://docs.mongodb.com/manual/indexes/index.html)
+
   - single-key indexes
   - compund-key indexes
   - unique indexes
@@ -180,6 +182,7 @@ sidebar_label: MongoDB
   - geospacial indexes
 
 - Indexing principle and practice
+
   - single-key indexing
     - exact match
     - sorting
@@ -208,45 +211,43 @@ sidebar_label: MongoDB
   - Drop Index
     - `db.indexTest.dropIndex("INDEXNAME")`
 
-#### Sharding
+#### Sharding and Cluster
 
-- `use test`
-- `sh.enableSharding('test')`
-- `sh.status()`
+- Architecture
+  - ![Alt](/img/MongoDB-Sharding-01.png "mongodb architecture")
+  - ![Alt](/img/MongoDB-Sharding-02.png "mongodb granularity of sharding")
+- Config [TODO]
+  - `use test`
+  - `sh.enableSharding('test')`
+  - `sh.status()`
 
-#### Replication
+#### Replication and Cluster [TODO]
 
 - Concepts
   - replica set
 - Setup
 - Manage
+
   - rs.status()
-  
-#### Clustering
+  - `rs.stepDown()`
 
-- `rs.status()`
-- `rs.stepDown()`
+#### GridFS [TODO]
 
-#### GridFS
-
-- TODO
-  
 #### Atomicity, Concurrency, and Transaction
 
 - [TODO](https://docs.mongodb.com/manual/core/write-operations-atomicity/index.html)
 
-#### Text Searching
+#### Text Searching [TODO]
 
-- TODO
-  
-### WiredTiger and Plugable Storage
+#### Stroage Engine
 
-- TODO
-  
-#### Business Continuity
+- [Link](https://docs.mongodb.com/manual/core/storage-engines/)
+- MMAPv1 Engine
+- In-Memory Engind
+- WiredTiger Plugable Storage [TODO]
 
-- TODO
-  
+#### Business Continuity [TODO]
+
 ---
 
 ## Best Practice
@@ -365,17 +366,50 @@ sidebar_label: MongoDB
 - login
 
   - `mongo --host HOST -u admin -p admin --authenticationDatabase admin DATABASE`
+  - `use admin; db.auto({user: USER, pwd: PASSWD})`
+
+- logout
+
+  - `db.logout()`
 
 - status
+
   - `mongostat`
   - `mongotop 10`
 
-#### Show Info
+- renaming collection
+
+  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
+  - `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
+  - `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
+
+#### Backup
+
+- bsondump
+  - `bsondump user.bson`
+  - `bsondump --type=debug user.bson`
+- mongodump/mongorestore
+  - `mongodump -o DIR`
+  - `mongorestore DIR`
+  - `mongodump -h HOST -p PORT -u USER -p PASSWD -o DIR`
+  - `mongorestore -h HOST -p PORT -u USER -p PASSWD DIR`
+- data-file based backup
+
+  - ```bash
+    use admin
+    db.fsyncLock()
+    # copy MongoDB's data files
+    db.fsyncUnlock()
+    ```
+
+#### Monitoring and Diagonose
 
 - db
   - `show dbs`
   - `db.stats(1024)`
   - `db.serverStatus()`
+  - `db.currentOp()`
+  - `db.runCommand({top:1})`
   - `use DATABASE`
   - `db`
 - collection
@@ -383,21 +417,20 @@ sidebar_label: MongoDB
   - `show collections`
   - `db.postalCodes.stats(1024)`
 - execution
+
   - [cursor.explain()](https://docs.mongodb.com/manual/reference/method/cursor.explain/index.html)
     - `db.producnts.find({"name": "cases"}).explain("executionStats")`
   - [db.runCommand()](https://docs.mongodb.com/manual/reference/method/db.runCommand/#db.runCommand)
 
-#### renaming collection
+- logging
 
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
-- `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
-
-#### logging
-
-- `db.getProfilingLevel()`
-- `db.setProfilingLevel(1, 50)`
-- `db.system.profile.find().pretty()`
+  - ```Javascript
+    use admin
+    db.runCommand({ logrotate: 1 })
+    ```
+  - `db.getProfilingLevel()`
+  - `db.setProfilingLevel(1, 50)`
+  - `db.system.profile.find().pretty()`
 
 ### Security
 
@@ -411,5 +444,7 @@ sidebar_label: MongoDB
 - `db.auth('read_user', 'read_user')`
 - `db.logout()`
 - `db.auth({user:'write_user', pwd:'write_user'})`
+- `db.dropUser("read_user")`
+- `db.dropUser("write_user")`
 
 ---
