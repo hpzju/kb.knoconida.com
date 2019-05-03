@@ -101,10 +101,9 @@ sidebar_label: MySQL
   ```
 
 - INNER JOIN
-  - $A\cap B$
+  - $$A\cap B$$
 - OUTER JOIN
-  - A \[Union] B
-  - ,\text{Null}A\cup B
+  - \(A\cup B\)
 - SELF_JOIN
 
 ### Indexing
