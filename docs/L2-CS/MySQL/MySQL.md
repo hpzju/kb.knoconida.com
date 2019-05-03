@@ -129,6 +129,41 @@ sidebar_label: MySQL
 
 ### Drivers
 
+#### [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/)
+
+- `pip install mysql-connector-python`
+
+- python driver template
+
+  ```python
+  import mysql.connector
+  from mysql.connector import Error
+  try:
+    connection = mysql.connector.connect(host='localhost',
+                                         database='world',
+                                         user='user',
+                                         password='password@MYSQL')
+    if connection.is_connected():
+        db_Info = connection.get_server_info()
+        print("Connected to MySQL database... MySQL Server version on ", db_Info)
+
+        cursor = connection.cursor()
+        cursor.execute("select database();")
+        record = cursor.fetchone()
+        print("Your connected to - ", record)
+
+  except Error as e:
+    print("Error while connecting to MySQL: ", e)
+
+  finally:
+    # closing database connection.
+    if(connection.is_connected()):
+        cursor.close()
+        connection.close()
+        print("MySQL connection is closed")
+
+  ```
+
 ### User Admin
 
 ### Backup and Restore
@@ -138,3 +173,7 @@ sidebar_label: MySQL
 ### Mornitoring
 
 ---
+
+```
+
+```
