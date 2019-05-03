@@ -44,26 +44,31 @@ sidebar_label: MySQL
 
 - `DROP DATABASE mydatabase;`
 
-### Query
+### SELECT Query
 
 #### [SELECT](https://dev.mysql.com/doc/refman/8.0/en/select.html)
 
 - ```SQL
   SELECT      col_express, col2_express...
-  FROM        table_name
-  WHERE       condition_express
-  ORDER BY    col_order_express, col2_order_express
-  LIMIT       lines_num;
+    FROM        table_name
+    WHERE       condition_express
+    GROUP BY    {col_name | expr | position}
+    HAVING      having_express
+    ORDER BY    col_order_express, col2_order_express
+    LIMIT       lines_num;
   ```
 
-#### col_express
+##### col_express
 
 - wildcard \* for all column.
-- `COUNT(*)` for count matched rows.
+- AS
+  - `SELECT col_express AS alias ...`
 - `DISTINCT( col1 )` for count unique matched rows.
-- `COUNT(DISTINCT col1)`
+- aggregation
+  - COUNT(), AVG(), MAX(), MIN()
+  - `COUNT(DISTINCT col1)`
 
-#### condition_express
+##### condition_express
 
 - =, !=, >, >=, <, <=
 - AND, OR, NOT
@@ -78,12 +83,28 @@ sidebar_label: MySQL
   - case sensitive
   - `LOWER(<key>) LIKE LOWER('%<searchpattern>%')`
 
-#### col_order_expresss
+##### having_express
+
+- see [link](#conditionexpress)
+
+##### col_order_expresss
 
 - `col ASC/DESC`
 - ASC is default
 
-### Join
+#### [Join](https://dev.mysql.com/doc/refman/8.0/en/join.html)
+
+- ```SQL
+  SELECT t1.name, t2.salary
+    FROM employee AS t1
+    INNER JOIN info AS t2 ON t1.name = t2.name;
+  ```
+
+- INNER JOIN
+  - A \[Intersection] B
+- OUTER JOIN
+  - A \[Union] B
+- SELF_JOIN
 
 ### Indexing
 
