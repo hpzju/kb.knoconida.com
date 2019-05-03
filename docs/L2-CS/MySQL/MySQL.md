@@ -82,6 +82,7 @@ sidebar_label: MySQL
   - `str_val like "%PATTERN%"`
   - case sensitive
   - `LOWER(<key>) LIKE LOWER('%<searchpattern>%')`
+- (SELECT_SUBQUERY)
 
 ##### having_express
 
@@ -100,11 +101,17 @@ sidebar_label: MySQL
     INNER JOIN info AS t2 ON t1.name = t2.name;
   ```
 
-- INNER JOIN
-  - $$A\cap B$$
-- OUTER JOIN
-  - \(A\cup B\)
-- SELF_JOIN
+- INNER JOIN, FULL OUTER JOIN, LEFT OUT JOIN, RIGHT OUT JOIN
+  - Diagram of JOINS: ![Alt](/img/MySQL-Join-01.jpg "JOIN diagram")
+- Self-Join
+
+#### [UNION](https://dev.mysql.com/doc/refman/8.0/en/union.html)
+
+- ```SQL
+  SELECT ...
+  UNION [ALL | DISTINCT] SELECT ...
+  [UNION [ALL | DISTINCT] SELECT ...]
+  ```
 
 ### Indexing
 
