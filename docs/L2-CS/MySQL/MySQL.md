@@ -8,8 +8,7 @@ sidebar_label: MySQL
 
 ### Online Resources
 
-- [MySQL Website](https://www.mongodb.com)
-- [MySQL Documentation](https://docs.mongodb.com/)
+- [MySQL Documentation](https://dev.mysql.com/doc/refman/8.0/en/)
 
 ---
 
@@ -31,96 +30,156 @@ sidebar_label: MySQL
 
 ### Structures
 
-### Domain Tech
+### CRUD
 
-#### CRUD
+#### Create
 
-- Create
-- Read
-- Update
-  - findAndModify()
-- Delete
+- `CREATE DATABASE mydatabase;`
 
-#### Query
+#### Read
 
-#### Aggregate and pipeline
+#### Update
 
-#### Indexing
+#### Delete
 
-- Show Index
-  - `db.sparseTest.getIndexes()`
+- `DROP DATABASE mydatabase;`
 
-#### Sharding
+### SELECT Query
 
-- `use test`
-- `sh.enableSharding('test')`
-- `sh.status()`
+#### [SELECT](https://dev.mysql.com/doc/refman/8.0/en/select.html)
 
-#### Replication
+- ```SQL
+  SELECT      col_express, col2_express...
+    FROM        table_name
+    WHERE       condition_express
+    GROUP BY    {col_name | expr | position}
+    HAVING      having_express
+    ORDER BY    col_order_express, col2_order_express
+    LIMIT       lines_num;
+  ```
 
-#### Clustering
+##### col_express
 
-- `rs.status()`
-- `rs.stepDown()`
+- wildcard \* for all column.
+- AS
+  - `SELECT col_express AS alias ...`
+- `DISTINCT( col1 )` for count unique matched rows.
+- aggregation
+  - COUNT(), AVG(), MAX(), MIN()
+  - `COUNT(DISTINCT col1)`
 
-#### GridFS
+##### condition_express
 
-- TODO
+- =, !=, >, >=, <, <=
+- AND, OR, NOT
+- BETWEEN, NOT BETWEEN
+  - `value BETWEEN low_bound AND high_bound`
+- IN, NOT IN
+  - `value IN ( VALUE_SET )`
+- LIKE, NOT LIKE
+  - %: any sequence of chars
+  - \_: any one char
+  - `str_val like "%PATTERN%"`
+  - case sensitive
+  - `LOWER(<key>) LIKE LOWER('%<searchpattern>%')`
+- (SELECT_SUBQUERY)
 
-#### Business Continuity
+##### having_express
+
+- see [link](#conditionexpress)
+
+##### col_order_expresss
+
+- `col ASC/DESC`
+- ASC is default
+
+#### [Join](https://dev.mysql.com/doc/refman/8.0/en/join.html)
+
+- ```SQL
+  SELECT t1.name, t2.salary
+    FROM employee AS t1
+    INNER JOIN info AS t2 ON t1.name = t2.name;
+  ```
+
+- INNER JOIN, FULL OUTER JOIN, LEFT OUT JOIN, RIGHT OUT JOIN
+  - Diagram of JOINS: ![Alt](/img/MySQL-Join-01.jpg "JOIN diagram")
+- Self-Join
+
+#### [UNION](https://dev.mysql.com/doc/refman/8.0/en/union.html)
+
+- ```SQL
+  SELECT ...
+  UNION [ALL | DISTINCT] SELECT ...
+  [UNION [ALL | DISTINCT] SELECT ...]
+  ```
+
+### Indexing
+
+### Replication
+
+### Clustering
+
+### Business Continuity
 
 ---
 
 ## Best Practice
 
-### Install and Initialize
+### Install and Config
 
 ### Drivers
 
-### Management
+#### [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/)
 
-#### OS Shell CMD
+- `pip install mysql-connector-python`
 
-- login
-  - `mongo -u admin -p admin admin`
+- python driver template
 
-- status
-  - `mongostat`
-  - `mongotop 10`
+  ```python
+  import mysql.connector
+  from mysql.connector import Error
 
-#### Show Info
+  config = {
+      'user': 'hubert',
+      'password': 'hubert@MYSQL',
+      'host': '127.0.0.1',
+      'database': 'world',
+      'raise_on_warnings': True
+  }
 
-- db
-  - `show dbs`
-  - `db.stats(1024)`
-  - `db.serverStatus()`
-- collection
-  - `use DATABASE; show collections`
-  - `db.postalCodes.stats(1024)`
+  try:
+      connection = mysql.connector.connect(**config)
 
-#### renaming collection
+      if connection.is_connected():
+          db_Info = connection.get_server_info()
+          print("Connected to MySQL database... MySQL Server version on ", db_Info)
 
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection')`
-- `db.sloppyNamedCollection.renameCollection('neatNamedCollection', true)`
-- `db.runCommand({ renameCollection: "test.sloppyNamedCollection ", to: " newDatabase.neatNamedCollection", dropTarget: true })`
+          cursor = connection.cursor()
+          cursor.execute("select database();")
+          record = cursor.fetchone()
+          print("Your connected to - ", record)
 
-#### logging
+  except Error as e:
+      print("Error while connecting to MySQL: ", e)
 
-- `db.getProfilingLevel()`
-- `db.setProfilingLevel(1, 50)`
-- `db.system.profile.find().pretty()`
+  finally:
+      # closing database connection.
+      if(connection.is_connected()):
+          cursor.close()
+          connection.close()
+          print("MySQL connection is closed")
+  ```
 
-### Security
+### User Admin
 
-#### [user admin](https://docs.mongodb.com/manual/reference/method/db.createUser/)
+### Backup and Restore
 
-- `use admin`
-- `db.createUser({ user:'admin', pwd:'admin', customData:{desc:'The admin user for admin db'}, roles:['readWrite', 'dbAdmin', 'clusterAdmin']})`
-- `use test`
-- `db.createUser({ user:'read_user', pwd:'read_user', customData:{desc:'The read only user for test database'}, roles:['read']})`
-- `db.createUser({ user:'write_user', pwd:'write_user', customData:{desc:'The read write user for test database'}, roles:['readWrite']})`
-- `db.auth('read_user', 'read_user')`
-- `db.logout()`
-- `db.auth({user:'write_user', pwd:'write_user'})`
-  
+#### Restore Schema
+
+### Mornitoring
+
 ---
+
+```
+
+```
