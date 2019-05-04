@@ -23,7 +23,7 @@ sidebar_label: Setup SSL Certificate with Nginx
 
 ## Procedure
 
-### Step 1 – Creating the SSL Certificate
+### Step 1 – Creating SSL Certificate
 
 #### 1.1 Self-signed SSL Certificate
 
@@ -35,7 +35,7 @@ sidebar_label: Setup SSL Certificate with Nginx
 
 #### 1.2 Free CA issued SSL Certificate
 
-- goto [sslforfree website](https://www.sslforfree.com/), obtain publick key and private key.
+- go to [sslforfree website](https://www.sslforfree.com/), obtain publick key and private key.
   - follow this [video on Youtube](https://www.youtube.com/watch?v=wmb0sSzFix0) step by step
   - Notice: this step requires to verify Domain Name Owner, you need have full access to you domain name records to finish it.
   - Notice: the certificate has 3 month validation period, you need re-issue new certificate every 3 month.

@@ -179,7 +179,3 @@ sidebar_label: MySQL
 ### Mornitoring
 
 ---
-
-```
-
-```
