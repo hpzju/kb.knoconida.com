@@ -27,6 +27,9 @@
       "L2-CS/Markdown/Markdown",
       "L2-CS/reStructuredText/reStructuredText"
     ]
+    "Fast Howto": [
+      "L2-CS/FastHowto/JSON",
+    ]
   },
   "L2-Math": {
     "Overview": ["L2-Math/L2-Math"]

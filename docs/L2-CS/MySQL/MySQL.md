@@ -140,8 +140,8 @@ sidebar_label: MySQL
   from mysql.connector import Error
 
   config = {
-      'user': 'hubert',
-      'password': 'hubert@MYSQL',
+      'user': 'user',
+      'password': 'password@MYSQL',
       'host': '127.0.0.1',
       'database': 'world',
       'raise_on_warnings': True
