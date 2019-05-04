@@ -26,10 +26,8 @@
       "L2-CS/JSON/JSON",
       "L2-CS/Markdown/Markdown",
       "L2-CS/reStructuredText/reStructuredText"
-    ]
-    "Fast Howto": [
-      "L2-CS/FastHowto/JSON",
-    ]
+    ],
+    "Fast Howto": ["L2-CS/FastHowto/Howto-SSLCertificate"]
   },
   "L2-Math": {
     "Overview": ["L2-Math/L2-Math"]
