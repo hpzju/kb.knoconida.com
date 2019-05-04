@@ -22,8 +22,8 @@ const users = [
 
 const siteConfig = {
   title: "Knoconida", // Title for your website.
-  tagline: "A website for Knowledge Base",
-  url: "www.knoconida.com", // Your website URL
+  tagline: "Knowlege Cognitive Information Data ...",
+  url: "knoconida.com", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',

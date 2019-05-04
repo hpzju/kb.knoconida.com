@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A website for Knowledge Base",
+    "tagline": "Knowlege Cognitive Information Data ...",
     "docs": {
       "L0-DC/L0-DC": {
         "title": "Data Center Infrastructure",
@@ -36,6 +36,18 @@
       "L2-CS/Docker/Docker": {
         "title": "Docker",
         "sidebar_label": "Docker"
+      },
+      "L2-CS/FastHowto/Howto-AWSCLI4Lightsail": {
+        "title": "Howto Install, Config and Run AWS CLI for Lightsail Management",
+        "sidebar_label": "AWS CLI for Lightsail Mgmt"
+      },
+      "L2-CS/FastHowto/Howto-SSLCertificate": {
+        "title": "Howto Setup SSL Certificate with Nginx for Websites",
+        "sidebar_label": "Setup SSL Certificate with Nginx"
+      },
+      "L2-CS/FastHowto/tpl-FastHowto": {
+        "title": "Fast Howto Tutorial Template",
+        "sidebar_label": "tpl FastHowto"
       },
       "L2-CS/JavaScript/JavaScript": {
         "title": "JavaScript",
@@ -131,6 +143,7 @@
       "FullStack": "FullStack",
       "DevOps": "DevOps",
       "Misc": "Misc",
+      "Fast Howto": "Fast Howto",
       "Business": "Business",
       "Management": "Management",
       "Miscellaneous": "Miscellaneous"
