@@ -16,9 +16,18 @@ sidebar_label: MySQL
 
 ### Features
 
-- JSON-friendly database
-- Schema-less design
-- Document based store
+- [Normalized Design](https://en.wikipedia.org/wiki/Database_normalization)
+  - 1NF:
+    - single value for each Field(Column, Attribute)
+      - vilation of 1NF: put mobile phone and home phone into phone field
+  - 2NF:
+    - 1NF compliance
+    - **every non-prime attribute** of the relation is dependent on **the whole of every candidate key**.
+  - 3NF:
+    - 2NF compliance
+    - no non-prime attribute depends on other non-prime attributes. All the non-prime attributes must depend on the primary key only
+- Schema-based design
+- Row-based store
 
 ### Applicable Scenarios
 
@@ -26,7 +35,9 @@ sidebar_label: MySQL
 
 ## Architecture
 
-### Building Blocks
+### Data Model
+
+### System Model
 
 ### Structures
 
@@ -122,6 +133,8 @@ sidebar_label: MySQL
 ### Business Continuity
 
 ---
+
+## Management
 
 ## Best Practice
 

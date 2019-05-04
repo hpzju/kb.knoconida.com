@@ -23,9 +23,9 @@ sidebar_label: Setup SSL Certificate with Nginx
 
 ## Procedure
 
-### Step 1 – Creating SSL Certificate
+### Step 1 – Creating SSL certificate
 
-#### 1.1 Self-signed SSL Certificate
+#### 1.1 Self-signed SSL certificate
 
 - login to your web server shell
 - generate public key and private key
@@ -33,7 +33,7 @@ sidebar_label: Setup SSL Certificate with Nginx
 - strengthen Forward Secracy
   - `sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096`
 
-#### 1.2 Free CA issued SSL Certificate
+#### 1.2 Free CA issued SSL certificate
 
 - go to [sslforfree website](https://www.sslforfree.com/), obtain publick key and private key.
   - follow this [video on Youtube](https://www.youtube.com/watch?v=wmb0sSzFix0) step by step
@@ -49,7 +49,7 @@ sidebar_label: Setup SSL Certificate with Nginx
   - `/etc/ssl/private/nginx-selfsigned.key`
   - Notice: private key must change to `chmod 600` if neccessary, the best way to avoid this is to generate self-signed public and private keys, then copy the text content of free CA issued keys into self-signed keys accordingly.
 
-### Step 2 - Configuring Nginx to Use SSL
+### Step 2 - Configuring Nginx to use SSL
 
 #### 2.1 Create Nginx config snippets for certificate
 
