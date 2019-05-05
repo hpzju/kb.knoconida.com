@@ -9,13 +9,17 @@
         "title": "Data Center Infrastructure",
         "sidebar_label": "Data Center"
       },
+      "L1-Platform/AWS/AWS": {
+        "title": "AWS Introduction and Deep Dive",
+        "sidebar_label": "AWS"
+      },
       "L1-Platform/L1-Platform": {
         "title": "Platform Technologies",
-        "sidebar_label": "Platform"
+        "sidebar_label": "Platform Technologies"
       },
       "L1-Vertical/L1-Vertical": {
         "title": "Vertical Industries",
-        "sidebar_label": "Vertical"
+        "sidebar_label": "Vertical Industries"
       },
       "L2-CS/Bootstrap/Bootstrap": {
         "title": "Bootstrap a responsive front-end web framework",
@@ -138,6 +142,7 @@
     },
     "categories": {
       "Overview": "Overview",
+      "Cloud": "Cloud",
       "Computer Science": "Computer Science",
       "Data Science": "Data Science",
       "FullStack": "FullStack",

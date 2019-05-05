@@ -1,9 +1,9 @@
 ---
 id: L1-Vertical
 title: Vertical Industries
-sidebar_label: Vertical
+sidebar_label: Vertical Industries
 ---
 
-## Table of L1-Vertical
+## TODO: Category
 
-- [L1-Vertical](L1-Vertical.md)
+- [Vertical Industries](L1-Vertical)

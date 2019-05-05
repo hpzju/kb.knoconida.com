@@ -1,9 +1,9 @@
 ---
 id: L1-Platform
 title: Platform Technologies
-sidebar_label: Platform
+sidebar_label: Platform Technologies
 ---
 
-## Table of L1-Platform
+## Cloud
 
-- [L1-Platform](L1-Platform.md)
+- [AWS](AWS/AWS)

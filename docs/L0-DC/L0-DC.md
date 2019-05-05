@@ -4,6 +4,7 @@ title: Data Center Infrastructure
 sidebar_label: Data Center
 ---
 
-## Table of L0-DC
+## TODO: Category
 
-- [L0-DC](L0-DC.md)
+- [Data Center](L0-DC/L0-DC)
+

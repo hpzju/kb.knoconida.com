@@ -4,31 +4,34 @@ title: Computer Science and Engineering
 sidebar_label: CS&SE
 ---
 
-### Computer Science
+## Computer Science
 
-- TODO
+- [Computation](Computation/Computation)
 
-### Data Science
+## Data Science
 
-- [DataScience](DataScience/DataScience.md)
+- [DataScience](DataScience/DataScience)
+  
+## FullStack
 
-- [MongoDB](MongoDB/MongoDB.md)
+- [Bootstrap](Bootstrap/Bootstrap)
+- [Node.js](Nodejs/Nodejs)
+- [Django](Django/Django)
+- [MongoDB](MongoDB/MongoDB)
+- [MySQL](MySQL/MySQL)
+- [JavaScript](JavaScript/JavaScript)
+- [Python](Python/Python)
 
-- [MySQL](MySQL/MySQL.md)
+## DevOps
 
-### FullStack
+- [Docker](Docker/Docker)
 
-- [Nodejs](Nodejs/Nodejs.md)
-- [JavaScript](JavaScript/JavaScript.md)
-- [MongoDB](MongoDB/MongoDB.md)
-- [MySQL](MySQL/MySQL.md)
-- [JSON](JSON/JSON.md)
+## Miscellaneous
 
-### DevOps
+- [JSON](JSON/JSON)
+- [Markdown](Markdown/Markdown)
 
-- TODO
+## Fast Howto
 
-### Misc
-
-- [Markdown](Markdown/Markdown.md)
-- [reStructureText](reStructuredText/reStructuredText.md)
+- [Howto Install, Config and Run AWS CLI for Lightsail Management](FastHowto/Howto-AWSCLI4Lightsail)
+- [Howto Setup SSL Certificate with Nginx for Websites](FastHowto/Howto-SSLCertificate)
