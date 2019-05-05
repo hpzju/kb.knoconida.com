@@ -3,11 +3,11 @@ language: node_js
 services:
   - docker
 
-before_install:
-  - docker build -t  "$DH_USER"/kb . 
-  - docker container run --name kbsite  -d  "$DH_USER"/kb
-  - echo "$DH_PASSWD" | docker login -u "$DH_USER" --password-stdin
-  - docker push "$DH_USER"/kb:latest
+# before_install:
+#   - docker build -t  "$DH_USER"/kb . 
+#   - docker container run --name kbsite  -d  "$DH_USER"/kb
+#   - echo "$DH_PASSWD" | docker login -u "$DH_USER" --password-stdin
+#   - docker push "$DH_USER"/kb:latest
 
 deploy:
   - provider: script
