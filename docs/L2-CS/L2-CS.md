@@ -4,31 +4,34 @@ title: Computer Science and Engineering
 sidebar_label: CS&SE
 ---
 
-### Computer Science
+## Computer Science
 
-- TODO
+- [Computation](L2-CS/Computation/Computation)
 
-### Data Science
+## Data Science
 
-- [DataScience](DataScience/DataScience.md)
+- [DataScience](L2-CS/DataScience/DataScience)
+  
+## FullStack
 
-- [MongoDB](MongoDB/MongoDB.md)
+- [Bootstrap](L2-CS/Bootstrap/Bootstrap)
+- [Node.js](L2-CS/Nodejs/Nodejs)
+- [Django](L2-CS/Django/Django)
+- [MongoDB](L2-CS/MongoDB/MongoDB)
+- [MySQL](L2-CS/MySQL/MySQL)
+- [JavaScript](L2-CS/JavaScript/JavaScript)
+- [Python](L2-CS/Python/Python)
 
-- [MySQL](MySQL/MySQL.md)
+## DevOps
 
-### FullStack
+- [Docker](L2-CS/Docker/Docker)
 
-- [Nodejs](Nodejs/Nodejs.md)
-- [JavaScript](JavaScript/JavaScript.md)
-- [MongoDB](MongoDB/MongoDB.md)
-- [MySQL](MySQL/MySQL.md)
-- [JSON](JSON/JSON.md)
+## Miscellaneous
 
-### DevOps
+- [JSON](L2-CS/JSON/JSON)
+- [Markdown](L2-CS/Markdown/Markdown)
 
-- TODO
+## Fast Howto
 
-### Misc
-
-- [Markdown](Markdown/Markdown.md)
-- [reStructureText](reStructuredText/reStructuredText.md)
+- [Howto Install, Config and Run AWS CLI for Lightsail Management](L2-CS/FastHowto/Howto-AWSCLI4Lightsail)
+- [Howto Setup SSL Certificate with Nginx for Websites](L2-CS/FastHowto/Howto-SSLCertificate)

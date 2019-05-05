@@ -4,27 +4,16 @@ title: Methodology
 sidebar_label: Methodology
 ---
 
-## Overview
-
-  Society, Business, Science and Technology are very important concept to understand the organization of intelligence individual.
-  Methodology focus on Business, Organizing Technical, Management Practices.
-
----
-
 ## Business
 
-- TODO
-  
----
+- [BusinessModel](L2-Methodology/BusinessModel/BusinessModel)
 
 ## Management
 
-- TODO
-  
----
+- [PMP](L2-Methodology/PMP/PMP"),
 
-## Process
+## Miscellaneous
 
-- TODO
-  
----
+### Templates
+
+- [Topic Memo](L2-Methodology/Misc/tpl-topic)

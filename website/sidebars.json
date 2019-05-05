@@ -3,7 +3,8 @@
     "Overview": ["L0-DC/L0-DC"]
   },
   "L1-Platform": {
-    "Overview": ["L1-Platform/L1-Platform"]
+    "Overview": ["L1-Platform/L1-Platform"],
+    "Cloud": ["L1-Platform/AWS/AWS"]
   },
   "L1-Vertical": {
     "Overview": ["L1-Vertical/L1-Vertical"]
@@ -22,11 +23,7 @@
       "L2-CS/Python/Python"
     ],
     "DevOps": ["L2-CS/Docker/Docker"],
-    "Misc": [
-      "L2-CS/JSON/JSON",
-      "L2-CS/Markdown/Markdown",
-      "L2-CS/reStructuredText/reStructuredText"
-    ],
+    "Misc": ["L2-CS/JSON/JSON", "L2-CS/Markdown/Markdown"],
     "Fast Howto": [
       "L2-CS/FastHowto/Howto-SSLCertificate",
       "L2-CS/FastHowto/Howto-AWSCLI4Lightsail"
@@ -41,7 +38,6 @@
     "Management": ["L2-Methodology/PMP/PMP"],
     "Miscellaneous": [
       "L2-Methodology/Misc/tpl-dummy",
-      "Templates",
       {
         "type": "subcategory",
         "label": "templates",
