@@ -66,3 +66,24 @@ test:
 	@echo "Travis Test: "
 	@echo "ok......."
 	@echo
+
+restartUbuntuPhy:
+	@echo "ssh to Ubuntu Physical Server and restart service: "
+	@echo "ssh in..........................................."
+	echo "cd Codes/; make restartKB" | ssh -i  "/c/LinuxShare/HandsOn/keys/ssh_github.pem"  hubert@192.168.1.101
+	@echo "ssh out..........................................."
+	@echo "ok......."
+
+deployAWSLightsail:
+	@echo "ssh to AWS Lightsail server and deploy service: "
+	@echo "ssh in..........................................."
+	echo "cd kb.knoconida.com/; make remove; make up" | ssh -i  "/c/LinuxShare/HandsOn/keys/ssh_github.pem"  ubuntu@35.164.223.56
+	@echo "ssh out..........................................."
+	@echo "ok......."
+
+travisDeployAWSLightsail:
+	@echo "ssh to AWS Lightsail server and deploy service: "
+	@echo "ssh in..........................................."
+	echo "cd kb.knoconida.com/; ls; " | ssh  ubuntu@35.164.223.56
+	@echo "ssh out..........................................."
+	@echo "ok......."
