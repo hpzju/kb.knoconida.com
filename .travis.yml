@@ -1,8 +1,5 @@
 language: node_js
 
-addons:
-  ssh_known_hosts: $AWS_HOST
-
 services:
   - docker
 

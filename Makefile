@@ -14,6 +14,7 @@ AWS_SERVER=35.164.223.56
 
 ID_KEY = /c/LinuxShare/HandsOn/keys/ssh_github.pem
 
+PUB_KEY = ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAvBk/yvT6tfQj0KxwzmQaTxCbfD0r/oM55pyX+E0OW5ihQk/Uj4AjHtBA2IugbVAENGAX+Y4l/if2cerAtSNHV4wCHo1nQDZDftKeSnxVS4SeS5+ziG/oblaoj0AvCVdf+xiRcHgCUqvHXTyNoamimOOG0n9qZjpXOj289EsyYFz87kdcAo1wnlOEqBYX1Bs17rp+ZOIWweBgVHB1f1HHb3VPCnm+1jX74AG8TzLecj7KzxgNWUcmQ1YHsLbNj6S7lIEkliYQoUyxOvcLTC3xMh2UtBqZ4A46rgSA1r/lflq/ZUD2NJtH9a5odG8rDgnMhTmzzfkmh1YwtFdf5aW1c0fygs6kMZrq3djjSqUT77fQYftQNHBNgUvcWVLXqCVXRgfta61PabGGwK7NOJe4ucQNuf0c9imbq2iYIbxTRppMNQ5lrm/ZxBEjgSDW69CRAcKd8YQWBlj0I2VUcTDEfaWF0UF5Oe1tTD+oIpOM0ld7SP6xULb1neH/EQtdq35F8mlkOJv7GpzaUVn3fdvpbKdOfNaNbXhgGvaPWJWyfUNyuWH38oc9SuVvotvyBFk5/atVnWiK70UX28IPjxkIvvSBlGTukXCQ5WeLwvtANowl7fsYL3zds/sIWdY7wNdunlG+t6L/Kk4W7ze6lM+H48NhQDRD4UInCIo4VOLDYTU=
 
 help : 
 	@echo "help commands:"
@@ -82,8 +83,10 @@ deployAWSLightsail:
 	@echo "ok......."
 
 travisDeployAWSLightsail:
+	@echo "add known host to travis:"
+	echo  $(PUB_KEY) >> ~/.ssh/known_hosts
 	@echo "ssh to AWS Lightsail server and deploy service: "
 	@echo "ssh in..........................................."
-	echo "cd kb.knoconida.com/; ls; " | ssh  ubuntu@35.164.223.56
+	echo "cd kb.knoconida.com/; ls; " | ssh  ubuntu@$(AWS_SERVER)
 	@echo "ssh out..........................................."
 	@echo "ok......."
