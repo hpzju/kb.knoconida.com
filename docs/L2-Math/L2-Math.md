@@ -6,4 +6,4 @@ sidebar_label: Math
 
 ## TODO: Category
 
-- [Mathematics](L2-Math.)
+- [Mathematics](L2-Math)
