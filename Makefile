@@ -84,7 +84,9 @@ deployAWSLightsail:
 
 travisDeployAWSLightsail:
 	@echo "add known host to travis:"
-	echo  $(PUB_KEY) >> ~/.ssh/known_hosts
+	sudo echo  $(PUB_KEY) >> ~/.ssh/known_hosts
+	ls ~/.ssh/*
+	cat ~/.ssh/known_hosts
 	@echo "ssh to AWS Lightsail server and deploy service: "
 	@echo "ssh in..........................................."
 	echo "cd kb.knoconida.com/; ls; " | ssh  ubuntu@$(AWS_SERVER)
