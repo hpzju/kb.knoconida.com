@@ -78,7 +78,7 @@ restartUbuntuPhy:
 deployAWSLightsail:
 	@echo "ssh to AWS Lightsail server and deploy service: "
 	@echo "ssh in..........................................."
-	echo "cd kb.knoconida.com/; make remove; make up" | ssh -i  "/c/LinuxShare/HandsOn/keys/ssh_github.pem"  ubuntu@35.164.223.56
+	echo "cd kb.knoconida.com/; make remove; make up" | ssh -i  "/c/LinuxShare/HandsOn/keys/ssh_github.pem"  ubuntu@$(AWS_SERVER)
 	@echo "ssh out..........................................."
 	@echo "ok......."
 
