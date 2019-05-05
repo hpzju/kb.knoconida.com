@@ -6,4 +6,4 @@ sidebar_label: Vertical Industries
 
 ## TODO: Category
 
-- [Vertical Industries](L1-Vertical/L1-Vertical)
+- [Vertical Industries](L1-Vertical)

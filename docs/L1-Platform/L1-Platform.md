@@ -6,4 +6,4 @@ sidebar_label: Platform Technologies
 
 ## Cloud
 
-- [AWS](L1-Platform/AWS/AWS)
+- [AWS](AWS/AWS)

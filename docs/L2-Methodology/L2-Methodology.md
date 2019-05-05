@@ -6,14 +6,14 @@ sidebar_label: Methodology
 
 ## Business
 
-- [BusinessModel](L2-Methodology/BusinessModel/BusinessModel)
+- [BusinessModel](BusinessModel/BusinessModel)
 
 ## Management
 
-- [PMP](L2-Methodology/PMP/PMP"),
+- [PMP](PMP/PMP")
 
 ## Miscellaneous
 
 ### Templates
 
-- [Topic Memo](L2-Methodology/Misc/tpl-topic)
+- [Topic Memo](Misc/tpl-topic)
