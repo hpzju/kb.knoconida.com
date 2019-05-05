@@ -10,7 +10,7 @@ sidebar_label: Methodology
 
 ## Management
 
-- [PMP](PMP/PMP")
+- [PMP](PMP/PMP)
 
 ## Miscellaneous
 

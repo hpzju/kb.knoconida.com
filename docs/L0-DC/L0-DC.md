@@ -6,5 +6,4 @@ sidebar_label: Data Center
 
 ## TODO: Category
 
-- [Data Center](L0-DC/L0-DC)
-
+- [Data Center](L0-DC)
