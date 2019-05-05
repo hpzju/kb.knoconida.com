@@ -1,6 +1,7 @@
 language: node_js
 
-ssh_known_hosts: "$AWS_HOST"
+addons:
+  ssh_known_hosts: $AWS_HOST
 
 services:
   - docker
