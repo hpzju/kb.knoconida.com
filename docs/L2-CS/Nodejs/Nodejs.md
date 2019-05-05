@@ -10,6 +10,7 @@ sidebar_label: Nodejs
 
 - [Node.js Documentation](https://nodejs.org/en/docs/guides/)
 - [W3School Node.js Tutorial](https://www.w3schools.com/nodejs/)
+- [Juriy Bura Youtube Channel](https://www.youtube.com/channel/UCSq8iEW2JkpQj7mBU3zYtEA)
 
 ---
 

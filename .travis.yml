@@ -8,3 +8,9 @@ before_install:
   - docker container run --name kbsite  -d  "$DH_USER"/kb
   - echo "$DH_PASSWD" | docker login -u "$DH_USER" --password-stdin
   - docker push "$DH_USER"/kb:latest
+
+deploy:
+  - provider: script
+    script: make travisDeployAWSLightsail
+    on:
+      branch: master
