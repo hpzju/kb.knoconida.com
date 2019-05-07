@@ -24,21 +24,36 @@ sidebar_label: Nodejs
 
 ### Applicable Scenarios
 
-- suited for applications where each incoming request requires very few CPU cycles
-- suited for real-time web applications, such as chat rooms, collaboration tools, online games
-  -suited for "Long polling" scenarios
+- suited for applications where each incoming request requires very few CPU cycles.
+- suited for real-time web applications, such as chat rooms, collaboration tools, online games.
+  -suited for "Long polling" scenarios.
+- IO intensive.
 
 ---
 
 ## Architecture
 
-### Building Blocks
+<!-- ### Building Blocks -->
+
+### Packaging
+
+#### Module Namespace
+
+- Module warpping function:
+  - `(function( exports, require, module, __filename, __dirname) {})`
+
+- [TODO]module.exports
 
 #### npm: Node Package Manager
 
-> `npm install PACKAGE`
+- `npm init`
+- `npm install PACKAGE`
+- package.json
+  - `PackageName`: Major.Minor.Patch
+  - `"~PackageName"`: Major.Minor.x
+  - `"^PackageName"`: Major.x.x
 
-### Structures
+<!-- ### Structures -->
 
 #### Reference Model
 
@@ -47,8 +62,23 @@ sidebar_label: Nodejs
 - Event View
   > ![Alt](/img/Nodejs-Architecture-02.png "Nodejs Architecture")
 
-### Domain Tech
+<!-- ### Domain Tech -->
 
+### Modules
+
+- events
+- readline
+- os
+- fs
+- path
+- zlib
+- http
+- 
+
+### Packages
+
+- express
+  
 ---
 
 ## Best Practice
