@@ -16,9 +16,8 @@ sidebar_label: React
 
 ## Install and Config
 
-### Install Node.js
+### Install by Node.js
 
-- [download and install Node.js](https://nodejs.org/en/)
 - `npm install -g create-react-app`
 - `npm uninstall -g create-react-ap`
 
