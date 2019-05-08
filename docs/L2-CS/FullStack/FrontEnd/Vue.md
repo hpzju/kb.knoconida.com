@@ -24,9 +24,15 @@ sidebar_label: Vue
 - by npm:
   - `npm install -g vue`
   - `npm uninstall -g create-react-ap`
+  - `npm update -g vue`
 - Vue CLI
   - `npm install -g @vue/cli`
   - `vue --version`
+  - `npm update -g @vue/cli`
+- Vue Plugins
+  - `npm add vue-router`
+  - `vue ui`
+    - Open a Web GUI to manage Plugin and tasks
 
 ### Config Vue App
 
@@ -72,27 +78,48 @@ sidebar_label: Vue
     <script>
       new Vue({
         el: "#hello-world-app",
-        data() {
-          return {
-            msg: "Hello Vue!"
-          };
+        data: {
+          msg: "Hello Vue!"
         }
       });
     </script>
   </body>
 </html>
-
 ```
 
 ---
 
 ## Architecture
 
-### Building Blocks
+<!-- ### Building Blocks -->
 
-### Structure
+### [Vue Instance](https://vuejs.org/v2/guide/instance.html)
 
-#### .vue
+- Lifecycle Diagram  
+    ![Alt](https://vuejs.org/images/lifecycle.png, "Vue Instance Lifecycle Diagram")
+- [APIs](https://vuejs.org/v2/api/#Options-Data)
+
+### Directives
+
+### Methords
+
+### Data Binding
+
+### Events
+
+### Filters
+
+### Properties
+
+### Components
+
+<!-- ### Structure -->
+
+## MVVM Pattern
+
+### Project Structure
+
+### .vue file Structure
 
 - `<template> </template>`
   - Components wrapped with cutomized HTML element style
@@ -139,7 +166,17 @@ sidebar_label: Vue
 
 ---
 
+
+
 ## Utilities
+
+### DevOps Tools
+
+#### vue-cli
+
+#### vue-router
+
+#### Testing
 
 ### External Packages
 

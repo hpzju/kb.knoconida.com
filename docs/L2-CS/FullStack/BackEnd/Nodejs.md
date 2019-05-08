@@ -52,6 +52,7 @@ sidebar_label: Nodejs
   - `PackageName`: Major.Minor.Patch
   - `"~PackageName"`: Major.Minor.x
   - `"^PackageName"`: Major.x.x
+- `npm cache clean --force`
 
 <!-- ### Structures -->
 
