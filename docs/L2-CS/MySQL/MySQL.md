@@ -37,6 +37,13 @@ sidebar_label: MySQL
 
 ### Data Model
 
+#### Building Blocks
+
+- Database/Schema
+- Table
+- Row/Record
+- Column/Field
+
 ### System Model
 
 ### Structures

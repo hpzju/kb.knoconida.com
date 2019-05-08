@@ -15,6 +15,7 @@
     "Data Science": ["L2-CS/DataScience/DataScience"],
     "FullStack": [
       "L2-CS/Bootstrap/Bootstrap",
+      "L2-CS/React/React",
       "L2-CS/Nodejs/Nodejs",
       "L2-CS/Django/Django",
       "L2-CS/MongoDB/MongoDB",

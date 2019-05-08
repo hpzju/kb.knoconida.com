@@ -1,6 +1,6 @@
 ---
 id: Bootstrap
-title: Bootstrap a responsive front-end web framework
+title: Bootstrap a responsive front-end HTML5/CSS framework
 sidebar_label: Bootstrap
 ---
 
