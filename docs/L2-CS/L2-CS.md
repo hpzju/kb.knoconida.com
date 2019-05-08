@@ -14,22 +14,35 @@ sidebar_label: CS&SE
   
 ## FullStack
 
-- [Bootstrap](Bootstrap/Bootstrap)
-- [Node.js](Nodejs/Nodejs)
-- [Django](Django/Django)
-- [MongoDB](MongoDB/MongoDB)
-- [MySQL](MySQL/MySQL)
-- [JavaScript](JavaScript/JavaScript)
-- [Python](Python/Python)
+### Front End
+
+- "FullStack/FrontEnd/React"
+- "FullStack/FrontEnd/Vue"
+- "FullStack/FrontEnd/HTML5CSS"
+- "FullStack/FrontEnd/Bootstrap"
+
+### Back End
+
+- "FullStack/BackEnd/Nodejs"
+- "FullStack/BackEnd/Django"
+
+### Data End
+
+- "FullStack/DataEnd/MongoDB"
+- "FullStack/DataEnd/MySQL"
+
+### [JavaScript](FullStack/JavaScript/JavaScript)
+
+### [Python](FullStack/Python/Python)
 
 ## DevOps
 
-- [Docker](Docker/Docker)
+- [Docker](DevOps/Docker)
 
 ## Miscellaneous
 
-- [JSON](JSON/JSON)
-- [Markdown](Markdown/Markdown)
+- [JSON](Misc/JSON)
+- [Markdown](Misc/Markdown)
 
 ## Fast Howto
 

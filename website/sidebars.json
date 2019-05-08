@@ -14,17 +14,37 @@
     "Computer Science": ["L2-CS/Computation/Computation"],
     "Data Science": ["L2-CS/DataScience/DataScience"],
     "FullStack": [
-      "L2-CS/Bootstrap/Bootstrap",
-      "L2-CS/React/React",
-      "L2-CS/Nodejs/Nodejs",
-      "L2-CS/Django/Django",
-      "L2-CS/MongoDB/MongoDB",
-      "L2-CS/MySQL/MySQL",
+      {
+        "type": "subcategory",
+        "label": "Front End",
+        "ids": [
+          "L2-CS/FullStack/FrontEnd/HTML5CSS",
+          "L2-CS/FullStack/FrontEnd/Bootstrap",
+          "L2-CS/FullStack/FrontEnd/React",
+          "L2-CS/FullStack/FrontEnd/Vue"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Back End",
+        "ids": [
+          "L2-CS/FullStack/BackEnd/Nodejs",
+          "L2-CS/FullStack/BackEnd/Django"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Data End",
+        "ids": [
+          "L2-CS/FullStack/DataEnd/MongoDB",
+          "L2-CS/FullStack/DataEnd/MySQL"
+        ]
+      },
       "L2-CS/JavaScript/JavaScript",
       "L2-CS/Python/Python"
     ],
     "DevOps": ["L2-CS/Docker/Docker"],
-    "Misc": ["L2-CS/JSON/JSON", "L2-CS/Markdown/Markdown"],
+    "Misc": ["L2-CS/Misc/JSON", "L2-CS/Misc/Markdown"],
     "Fast Howto": [
       "L2-CS/FastHowto/Howto-SSLCertificate",
       "L2-CS/FastHowto/Howto-AWSCLI4Lightsail"
