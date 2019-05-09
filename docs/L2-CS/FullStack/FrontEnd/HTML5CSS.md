@@ -154,6 +154,12 @@ No Introduction
 
 ## CSS Deepdive
 
+### CSS Reboot
+
+- clear all css settings
+- provide a baseline to normalize css file
+- [refs](https://meyerweb.com/eric/tools/css/reset/)
+
 ### Selectors and Precedence
 
 #### Selectors
