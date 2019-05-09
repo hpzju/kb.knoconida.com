@@ -16,25 +16,29 @@ No Introduction
 
 #### Basic Elements
 
-- `<html>, <meta>, <base>, <title>, <body>`
+- `<html>, <meta>, <base>, <title>,<head>, <body>`
 - `<!-- .html comments -->`
 - refs:
   - [base](https://www.w3schools.com/tags/tag_base.asp)
 
 #### Inline Elements
 
--`<span>, <b>, <i>, <em>, <strong>, <small>, <mark>, <del>, <ins>, <sub>, <sup>`
+- `<span>, <b>, <i>, <em>, <strong>, <small>, <mark>, <del>, <ins>, <sub>, <sup>`
+- `<a>`
 
 #### Block Elements
 
 - `<h1>, <h2>, <h3>, <h4>, <h5>, <h6>,`
 - `<p>, <br>, <hr>`
-- `<pre>`
+- `<pre>, <code>`
+- `<button>`
+  - **display: inline-block**
 
 #### Multimedia Elements
 
 - `<img>`
   - `<img src="IMAGE_PATH_OR_URL" alt="SHOW_IMG_INFO" width="W" height="H"/>`
+- `<svg>`
 - `<audio>`
 - `<video>`
 
@@ -83,7 +87,7 @@ No Introduction
 
 ## HTML Layout
 
-### Layout Attributes
+### Layout CSS Properties
 
 - Box Model
   - margin
@@ -105,11 +109,32 @@ No Introduction
   - overflow: auto, hidden, inherit, scroll, visible
   - clear: both, left, right, inherit, none
 - Display
-  - backgroud: COLOR
-  - display: inline, block, none
+  - [backgroud](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
+  - [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none
+  - color: #FFFFFF | rgb(0,0,0,0.5)
   - float: left, right inherit, none
   - overflow: auto, hidden, inherit, scroll, visible
   - clear: both, left, right, inherit, none
+- Transition
+  - transition: property duration timing-function delay|initial|inherit;
+  - transition-property
+    - none|all|property|initial|inherit;
+  - transition-duration
+  - transition-timing-function
+    - linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit
+  - transition-delay
+- Animation
+  - animation: animationname duration timing-function delay iteration-count direction fill-mode play-state
+  - animation-name
+  - animation-duration
+  - animation-timing-function
+  - animation-delay
+  - animation-iteration-count
+  - animation-direction
+  - animation-fill-mode
+  - animation-play-state
+  - @keyframes
+    - @keyframes animationname {keyframes-selector {css-styles;}}
 
 ### HTML Visual Layout
 
@@ -154,7 +179,7 @@ No Introduction
 
 ## CSS Deepdive
 
-### CSS Reboot
+### CSS Reset
 
 - clear all css settings
 - provide a baseline to normalize css file
@@ -177,6 +202,9 @@ No Introduction
     - `div + p`
   - ~ : all ul are preceded by p
     - `p ~ ul`
+- Colon Selectors
+  - :hover
+    - `#button1:hover`
 - [see more](https://www.w3schools.com/cssref/css_selectors.asp)
 
 #### Rules
