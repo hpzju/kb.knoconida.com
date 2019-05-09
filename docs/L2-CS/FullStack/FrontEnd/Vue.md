@@ -4,17 +4,6 @@ title: Vue.js a Javascript front-end Web Framework
 sidebar_label: Vue
 ---
 
-## Overview
-
-### Learning Resources
-
-- [Vue.js Website](https://vuejs.org/)
-- [Vue JS Crash Course - 2019](https://www.youtube.com/watch?v=Wy9q22isx3U)
-- [Vuex Crash Course | State Management](https://www.youtube.com/watch?v=5lVQgZzLMHc)
-- [Learn Vue.js - Full Course for Beginners - 2019](https://www.youtube.com/watch?v=4deVCNJq3qc)
-
----
-
 ## Install and Config
 
 ### [Install](https://vuejs.org/v2/guide/installation.html)
@@ -164,7 +153,7 @@ var vm = new Vue({
 
 ### Properties
 
-### Components
+### Components Extend
 
 <!-- ### Structure -->
 
@@ -288,6 +277,13 @@ var vm = new Vue({
 
 ---
 
-## Misc[TODO]
+## Misc
+
+### Learning Resources
+
+- [Vue.js Website](https://vuejs.org/)
+- [Vue JS Crash Course - 2019](https://www.youtube.com/watch?v=Wy9q22isx3U)
+- [Vuex Crash Course | State Management](https://www.youtube.com/watch?v=5lVQgZzLMHc)
+- [Learn Vue.js - Full Course for Beginners - 2019](https://www.youtube.com/watch?v=4deVCNJq3qc)
 
 ---

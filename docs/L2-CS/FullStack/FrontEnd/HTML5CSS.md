@@ -6,12 +6,7 @@ sidebar_label: HTML5 and CSS
 
 ## Overview
 
-### Learning Resources
-
-- [HTML5 Tutorial](https://www.w3schools.com/html/default.asp)
-- [Learn HTML5 and CSS3 From Scratch - Full Course](https://www.youtube.com/watch?v=mU6anWqZJcc)
-- [Learn HTML5 & CSS3 From Scratch - Make Responsive Websites](https://www.youtube.com/watch?v=hefT68D-zTA)
-- [HTML5 & CSS3 tutorial: From Beginner to Expert](https://www.youtube.com/watch?v=3MH8P2eFnnk)
+No Introduction
 
 ---
 
@@ -86,6 +81,13 @@ sidebar_label: HTML5 and CSS
 
 ### HTML Layout
 
+#### Spacing
+
+- px
+- em
+  - 1em ~~ 16px
+- rem
+
 ### HTML Semantic Layout
 
 #### Semantic Directives and Structure
@@ -122,6 +124,8 @@ sidebar_label: HTML5 and CSS
 </main>
 <footer></footer>
 ```
+
+---
 
 ## CSS Deepdive
 
@@ -160,14 +164,37 @@ sidebar_label: HTML5 and CSS
 
 ---
 
-## Component[TODO]
+## HTML Component
+
+### Typography
+
+- [Google Fonts](https://fonts.google.com/)
+- Attributes
+  - color
+  - font-family
+  - font-size
+  - font-style
+  - font-weight
+  - line-height
+  - text-decoration
+  - text-transform
+    - uppercase
+    - lowercase
+    - capitalize
 
 ---
 
-## Utilities[TODO]
+## Misc
 
----
+### Frameworks
 
-## Misc[TODO]
+- [Bootstrap4](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+
+### Learning Resources
+
+- [HTML5 Tutorial](https://www.w3schools.com/html/default.asp)
+- [Learn HTML5 and CSS3 From Scratch - Full Course](https://www.youtube.com/watch?v=mU6anWqZJcc)
+- [Learn HTML5 & CSS3 From Scratch - Make Responsive Websites](https://www.youtube.com/watch?v=hefT68D-zTA)
+- [HTML5 & CSS3 tutorial: From Beginner to Expert](https://www.youtube.com/watch?v=3MH8P2eFnnk)
 
 ---
