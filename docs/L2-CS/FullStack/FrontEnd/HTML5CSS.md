@@ -84,6 +84,45 @@ sidebar_label: HTML5 and CSS
   </header>
   ```
 
+### HTML Layout
+
+### HTML Semantic Layout
+
+#### Semantic Directives and Structure
+
+```html
+<header>
+  <!-- Header Layout -->
+  <nav></nav>
+  <!-- Header Layout -->
+</header>
+<main>
+  <section>
+    <!-- section Layout -->
+    <article>
+      <!-- article Layout -->
+      <h1>headline</h1>
+      <div>
+        <aside>aside left</aside>
+        <div>
+          <p>P1</p>
+          <p>P2</p>
+          <p>P3</p>
+        </div>
+        <aside>aside right</aside>
+      </div>
+      <!-- article Layout -->
+    </article>
+    <!-- section Layout -->
+  </section>
+  <!-- more section Layout -->
+  <!-- more section Layout -->
+  <!-- more section Layout -->
+  <!-- more section Layout -->
+</main>
+<footer></footer>
+```
+
 ## CSS Deepdive
 
 ### Selectors and Precedence
