@@ -8,8 +8,9 @@ sidebar_label: HTML5 and CSS
 
 ### Learning Resources
 
-- [Bootstrap Website](https://getbootstrap.com/)
-- [Bootstrap Documentation](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+- [Learn HTML5 and CSS3 From Scratch - Full Course](https://www.youtube.com/watch?v=mU6anWqZJcc)
+- [Learn HTML5 & CSS3 From Scratch - Make Responsive Websites](https://www.youtube.com/watch?v=hefT68D-zTA)
+- [HTML5 & CSS3 tutorial: From Beginner to Expert](https://www.youtube.com/watch?v=3MH8P2eFnnk)
 
 ---
 

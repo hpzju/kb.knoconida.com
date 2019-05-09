@@ -1,17 +1,29 @@
 ---
 id: JSON
-title: JSON
+title: JSON JavaScript Object Notation, a data exchange file format
 sidebar_label: JSON
 ---
 
-# JSON: JavaScript Object Notation Introduction
+## Stringify and Objectify
 
-## Online Resources
-
-- [Introducing JSON](https://www.json.org/)
-- [W3C School JSON Intro](https://www.w3schools.com/js/js_json_intro.asp)
-
+- personJsonString = JSON.stringify(person)
+- person = JSON.parse(personJsonString)
+  
 ---
+
+## Operater
+
+- OBJ.key
+- OBJ["key"]
+- ARR[0]
+- ARR[1].key
+- delete OBJ.key
+- delete ARR[INDEX]
+- ARR.length
+
+ ---
+
+## Introduction
 
 **JSON** (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate. It is based on a subset of the [JavaScript Programming Language](http://javascript.crockford.com/), [Standard ECMA-262 3rd Edition - December 1999](http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf). JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. These properties make JSON an ideal data-interchange language.
 
@@ -45,3 +57,12 @@ A _number_ is very much like a C or Java number, except that the octal and hexad
 > ![Alt](https://www.json.org/number.gif, "number")
 
 Whitespace can be inserted between any pair of tokens. Excepting a few encoding details, that completely describes the language.
+
+## Online Resources
+
+- [Introducing JSON](https://www.json.org/)
+- [W3C School JSON Intro](https://www.w3schools.com/js/js_json_intro.asp)
+- [JSON Crash Course](https://www.youtube.com/watch?v=wI1CWzNtE-M)
+- [JMESPath: JSON Query Library](http://jmespath.org/)
+  
+---
