@@ -11,14 +11,14 @@ sidebar_label: React
 - [React Website](https://reactjs.org/)
 - [React JS Crash Course - 2019](https://www.youtube.com/watch?v=sBws8MSXN7A)
 - [Learn React.js - Full Course for Beginners - Tutorial 2019](https://www.youtube.com/watch?v=DLX62G4lc44)
+- [React Project - Beach Resort](https://www.youtube.com/watch?v=ScDWrogElmo)
 
 ---
 
 ## Install and Config
 
-### Install Node.js
+### Install by Node.js
 
-- [download and install Node.js](https://nodejs.org/en/)
 - `npm install -g create-react-app`
 - `npm uninstall -g create-react-ap`
 

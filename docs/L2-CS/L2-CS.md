@@ -11,25 +11,25 @@ sidebar_label: CS&SE
 ## Data Science
 
 - [DataScience](DataScience/DataScience)
-  
+
 ## FullStack
 
 ### Front End
 
-- "FullStack/FrontEnd/React"
-- "FullStack/FrontEnd/Vue"
-- "FullStack/FrontEnd/HTML5CSS"
-- "FullStack/FrontEnd/Bootstrap"
+- [HTML5 and CSS](FullStack/FrontEnd/HTML5CSS)
+- [Bootstrap](FullStack/FrontEnd/Bootstrap)
+- [Vue](FullStack/FrontEnd/Vue)
+- [React](FullStack/FrontEnd/React)
 
 ### Back End
 
-- "FullStack/BackEnd/Nodejs"
-- "FullStack/BackEnd/Django"
+- [Nodejs](FullStack/BackEnd/Nodejs)
+- [Django](FullStack/BackEnd/Django)
 
 ### Data End
 
-- "FullStack/DataEnd/MongoDB"
-- "FullStack/DataEnd/MySQL"
+- [MongoDB](FullStack/DataEnd/MongoDB)
+- [MySQL](FullStack/DataEnd/MySQL)
 
 ### [JavaScript](FullStack/JavaScript/JavaScript)
 
