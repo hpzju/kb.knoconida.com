@@ -79,14 +79,39 @@ No Introduction
   </header>
   ```
 
-### HTML Layout
+---
 
-#### Spacing
+## HTML Layout
 
-- px
-- em
-  - 1em ~~ 16px
-- rem
+### Layout Attributes
+
+- Box Model
+  - margin
+  - border:
+  - padding:
+  - content:
+- Spacing
+  - max-width: from samll auto warpping to large max-width fixed
+  - min-width: from large auto warpping to small min-width fixed
+  - px
+  - em
+    - 1em ~~ 16px for lg screen
+  - rem
+- Placement
+  - text-align: justify, left, center, right
+  - position: static|absolute|fixed|relative|sticky|initial|inherit;
+    - top, bottom, left, right:
+  - float: left, right inherit, none
+  - overflow: auto, hidden, inherit, scroll, visible
+  - clear: both, left, right, inherit, none
+- Display
+  - backgroud: COLOR
+  - display: inline, block, none
+  - float: left, right inherit, none
+  - overflow: auto, hidden, inherit, scroll, visible
+  - clear: both, left, right, inherit, none
+
+### HTML Visual Layout
 
 ### HTML Semantic Layout
 
