@@ -31,9 +31,9 @@ sidebar_label: CS&SE
 - [MongoDB](FullStack/DataEnd/MongoDB)
 - [MySQL](FullStack/DataEnd/MySQL)
 
-### [JavaScript](FullStack/JavaScript/JavaScript)
+#### [JavaScript](FullStack/JavaScript/JavaScript)
 
-### [Python](FullStack/Python/Python)
+#### [Python](FullStack/Python/Python)
 
 ## DevOps
 
