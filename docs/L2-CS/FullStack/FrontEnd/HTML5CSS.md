@@ -110,11 +110,12 @@ No Introduction
   - clear: both, left, right, inherit, none
 - Display
   - [backgroud](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
-  - [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none
+  - [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none, flex
   - color: #FFFFFF | rgb(0,0,0,0.5)
   - float: left, right inherit, none
   - overflow: auto, hidden, inherit, scroll, visible
   - clear: both, left, right, inherit, none
+- [Flexbox](#flexbox)
 - Transition
   - transition: property duration timing-function delay|initial|inherit;
   - transition-property
@@ -185,6 +186,19 @@ No Introduction
 - provide a baseline to normalize css file
 - [refs](https://meyerweb.com/eric/tools/css/reset/)
 
+### SCSS
+
+- `\$parameter = VALUE`
+- `backgroud: \$parameter;`
+- `@import 'PATH_SCSS'`
+- `@extend SELECTOR`
+- `@mixin NAME { }`
+- `@include NAME();`
+- space selector:
+  - `h1 { button { $btnColor; } }`
+- `&:hover`
+- &::after
+
 ### Selectors and Precedence
 
 #### Selectors
@@ -225,8 +239,25 @@ No Introduction
 
 ## HTML Component
 
-### Typography
+### Flexbox
 
+#### CSS Properties
+
+- display: flex
+- flex-direction: row, column
+- flex-basis: 20%
+- align-items: flex-start, flex-end, center, stretch
+- justify-content
+- flex-warp: warp
+- @media(min-width: 786px)
+
+### Text and Typography
+
+- Special Charactors
+  - `&lt;` : <
+  - `&gt;` : >
+  - `&amp` : &
+  - `&copy`: ©
 - [Google Fonts](https://fonts.google.com/)
 - Attributes
   - color
@@ -245,6 +276,10 @@ No Introduction
 
 ## Misc
 
+### Tools
+
+- [Emmet](https://emmet.io/)
+
 ### Frameworks
 
 - [Bootstrap4](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
@@ -252,8 +287,13 @@ No Introduction
 ### Learning Resources
 
 - [HTML5 Tutorial](https://www.w3schools.com/html/default.asp)
+- [HTML and CSS Tutorial for beginners 0 - Full Video](https://www.youtube.com/watch?v=aYSgpR5VGPM)
 - [Learn HTML5 and CSS3 From Scratch - Full Course](https://www.youtube.com/watch?v=mU6anWqZJcc)
 - [Learn HTML5 & CSS3 From Scratch - Make Responsive Websites](https://www.youtube.com/watch?v=hefT68D-zTA)
-- [HTML5 & CSS3 tutorial: From Beginner to Expert](https://www.youtube.com/watch?v=3MH8P2eFnnk)
+
+### Standards
+
+- [ALL STANDARDS AND DRAFTS about HTML](https://www.w3.org/TR/?tag=html)
+- [HTML5: W3C Recommendation TR](https://www.w3.org/TR/html/)
 
 ---
