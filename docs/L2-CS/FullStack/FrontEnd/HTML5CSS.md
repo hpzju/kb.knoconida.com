@@ -282,11 +282,17 @@ No Introduction
 - Height:
   - vh
 
-#### Box Model
+#### [Box Model](https://www.w3schools.com/css/css_boxmodel.asp)
 
 - margin
-- border:
+  - top, right, bottom, left
+  - x
+  - y
+- [border:](https://www.w3schools.com/css/css_border.asp)
 - padding:
+  - top, right, bottom, left
+  - x
+  - y
 - content:
 
 #### Placement
