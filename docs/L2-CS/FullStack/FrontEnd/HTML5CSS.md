@@ -264,9 +264,7 @@ No Introduction
   - blue, green, red...
 - backgroud-color
 
-#### Layout
-
-##### Mesurement
+#### Mesurement
 
 - px
 - em
@@ -277,21 +275,21 @@ No Introduction
 - vh
 - %
 
-##### Sizing
+#### Sizing
 
 - width:
   - vw
 - Height:
   - vh
 
-##### Box Model
+#### Box Model
 
 - margin
 - border:
 - padding:
 - content:
 
-##### Placement
+#### Placement
 
 - text-align: justify, left, center, right
 - position: static|absolute|fixed|relative|sticky|initial|inherit;
@@ -300,7 +298,7 @@ No Introduction
 - overflow: auto, hidden, inherit, scroll, visible
 - clear: both, left, right, inherit, none
 
-##### Transition
+#### Transition
 
 - transition: property duration timing-function delay|initial|inherit;
 - transition-property
@@ -310,7 +308,7 @@ No Introduction
   - linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit
 - transition-delay
 
-##### Animation
+#### Animation
 
 - animation: animationname duration timing-function delay iteration-count direction fill-mode play-state
 - animation-name
@@ -324,7 +322,7 @@ No Introduction
 - @keyframes
   - @keyframes animationname {keyframes-selector {css-styles;}}
 
-##### Flexbox
+#### Flexbox
 
 - display: flex
 - flex-direction: row, column
@@ -334,7 +332,7 @@ No Introduction
 - flex-warp: warp
 - @media(min-width: 786px)
 
-##### Grid
+#### Grid
 
 - grid
 
