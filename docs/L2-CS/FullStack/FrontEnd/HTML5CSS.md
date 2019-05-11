@@ -168,7 +168,7 @@ No Introduction
     - `div + p`
   - ~ : all ul are preceded by p
     - `p ~ ul`
-- Colon Selectors
+- Psudo Element Selectors
   - :hover
     - `#button1:hover`
 - [see more](https://www.w3schools.com/cssref/css_selectors.asp)
@@ -188,6 +188,18 @@ No Introduction
 - Elements and pseudo-elements
 
 ---
+
+### Psudo Element
+
+- :root
+- :active
+- :visited
+- :hover
+- :link
+- ::after
+  - content: ''
+- ::before
+  - content: ''
 
 ### [CSS @media Query](https://www.w3schools.com/cssref/css3_pr_mediaquery.asp)
 
@@ -319,6 +331,16 @@ No Introduction
 - float: left, right inherit, none
 - overflow: auto, hidden, inherit, scroll, visible
 - clear: both, left, right, inherit, none
+- z-index:
+  - n, -n
+  - position: static will disable z-index
+
+#### Transform
+
+- transform
+  - translateX()
+  - translateY()
+  - translateZ()
 
 #### Transition
 
