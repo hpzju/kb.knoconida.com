@@ -1,6 +1,6 @@
 ---
 id: HTML5CSS
-title: HTML5 and CSS shapes the WWW
+title: HTML5 and CSS Shape the WWW
 sidebar_label: HTML5 and CSS
 ---
 
@@ -87,61 +87,13 @@ No Introduction
 
 ## HTML Layout
 
-### Layout CSS Properties
-
-- Box Model
-  - margin
-  - border:
-  - padding:
-  - content:
-- Spacing
-  - max-width: from samll auto warpping to large max-width fixed
-  - min-width: from large auto warpping to small min-width fixed
-  - px
-  - em
-    - 1em ~~ 16px for lg screen
-  - rem
-- Placement
-  - text-align: justify, left, center, right
-  - position: static|absolute|fixed|relative|sticky|initial|inherit;
-    - top, bottom, left, right:
-  - float: left, right inherit, none
-  - overflow: auto, hidden, inherit, scroll, visible
-  - clear: both, left, right, inherit, none
-- Display
-  - [backgroud](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
-  - [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none, flex
-  - color: #FFFFFF | rgb(0,0,0,0.5)
-  - float: left, right inherit, none
-  - overflow: auto, hidden, inherit, scroll, visible
-  - clear: both, left, right, inherit, none
-- [Flexbox](#flexbox)
-- Transition
-  - transition: property duration timing-function delay|initial|inherit;
-  - transition-property
-    - none|all|property|initial|inherit;
-  - transition-duration
-  - transition-timing-function
-    - linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit
-  - transition-delay
-- Animation
-  - animation: animationname duration timing-function delay iteration-count direction fill-mode play-state
-  - animation-name
-  - animation-duration
-  - animation-timing-function
-  - animation-delay
-  - animation-iteration-count
-  - animation-direction
-  - animation-fill-mode
-  - animation-play-state
-  - @keyframes
-    - @keyframes animationname {keyframes-selector {css-styles;}}
-
 ### HTML Visual Layout
 
-### HTML Semantic Layout
+- [Box Model](#box-model)
+- [Flexbox](#flexbox)
+- [Grid System](#grid)
 
-#### Semantic Directives and Structure
+### HTML Semantic Layout
 
 ```html
 <header>
@@ -228,7 +180,7 @@ No Introduction
 - rules that appear later in the code override earlier rules if both have the same specificity.
 - A css rule with **!important** always takes precedence.
 
-### CSS Selectors and Specificity Hierarchy
+#### Selectors and Specificity Hierarchy
 
 - Inline styles
 - IDs
@@ -237,11 +189,142 @@ No Introduction
 
 ---
 
-## HTML Component
+### [CSS @media Query](https://www.w3schools.com/cssref/css3_pr_mediaquery.asp)
 
-### Flexbox
+- Syntax
+  - `@media not|only mediatype and (mediafeature and|or|not mediafeature) { CSS-Code; }`
+- [Bootstrap 4 Example](https://getbootstrap.com/docs/4.3/layout/overview/)
 
-#### CSS Properties
+  ```css
+    //------------- scss version -------------
+    @include media-breakpoint-only(xs) {
+      ...;
+    }
+    @include media-breakpoint-only(sm) {
+      ...;
+    }
+    @include media-breakpoint-only(md) {
+      ...;
+    }
+    @include media-breakpoint-only(lg) {
+      ...;
+    }
+    @include media-breakpoint-only(xl) {
+      ...;
+    }
+    //------------- range version -------------
+    // Extra small devices (portrait phones, less than 576px)
+    @media (max-width: 575.98px) {
+      ...;
+    }
+
+    // Small devices (landscape phones, 576px and up)
+    @media (min-width: 576px) and (max-width: 767.98px) {
+      ...;
+    }
+
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) and (max-width: 991.98px) {
+      ...;
+    }
+
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+      ...;
+    }
+
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+      ...;
+    }`
+  ```
+
+### CSS Functions
+
+- calc
+  - +, -, \*, /
+
+### Basic CSS Properties Categories
+
+#### Display
+
+- [backgroud](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
+- [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none, flex
+- color: #FFFFFF | rgb(0,0,0,0.5)
+- float: left, right inherit, none
+- overflow: auto, hidden, inherit, scroll, visible
+- clear: both, left, right, inherit, none
+
+#### Color
+
+- color:
+  - #FFFFFF
+  - rgb(255,255,255)
+  - rgba(255,255,255,1.0)
+  - blue, green, red...
+- backgroud-color
+
+#### Layout
+
+##### Mesurement
+
+- px
+- em
+  - base value inherited from root value
+  - default 16px
+- rem
+- vw
+- vh
+- %
+
+##### Sizing
+
+- width:
+  - vw
+- Height:
+  - vh
+
+##### Box Model
+
+- margin
+- border:
+- padding:
+- content:
+
+##### Placement
+
+- text-align: justify, left, center, right
+- position: static|absolute|fixed|relative|sticky|initial|inherit;
+  - top, bottom, left, right:
+- float: left, right inherit, none
+- overflow: auto, hidden, inherit, scroll, visible
+- clear: both, left, right, inherit, none
+
+##### Transition
+
+- transition: property duration timing-function delay|initial|inherit;
+- transition-property
+  - none|all|property|initial|inherit;
+- transition-duration
+- transition-timing-function
+  - linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit
+- transition-delay
+
+##### Animation
+
+- animation: animationname duration timing-function delay iteration-count direction fill-mode play-state
+- animation-name
+- animation-duration
+- animation-timing-function
+- animation-delay
+- animation-iteration-count
+- animation-direction
+- animation-fill-mode
+- animation-play-state
+- @keyframes
+  - @keyframes animationname {keyframes-selector {css-styles;}}
+
+##### Flexbox
 
 - display: flex
 - flex-direction: row, column
@@ -251,6 +334,34 @@ No Introduction
 - flex-warp: warp
 - @media(min-width: 786px)
 
+##### Grid
+
+- grid
+
+## HTML Component
+
+### [Form](https://www.w3schools.com/html/html_forms.asp)
+
+- form properties
+  - action
+  - method
+  - target
+- form elements
+  - label
+  - input
+    - [type](https://www.w3schools.com/html/html_form_input_types.asp)
+      - text
+      - button
+      - radio
+      - checkbox
+      - submit
+    - name
+    - value
+  - select
+    - option
+
+### [Table](https://www.w3schools.com/html/html_tables.asp)
+
 ### Text and Typography
 
 - Special Charactors
@@ -259,6 +370,8 @@ No Introduction
   - `&amp` : &
   - `&copy`: ©
 - [Google Fonts](https://fonts.google.com/)
+  - import
+  - link
 - Attributes
   - color
   - font-family
@@ -266,6 +379,8 @@ No Introduction
   - font-style
   - font-weight
   - line-height
+  - letter-spacing
+  - word-spacing
   - text-decoration
   - text-transform
     - uppercase
