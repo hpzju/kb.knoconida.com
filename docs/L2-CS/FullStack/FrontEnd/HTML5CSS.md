@@ -249,6 +249,7 @@ No Introduction
 #### Display
 
 - [backgroud](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
+  - line-gradient
 - [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none, flex
 - color: #FFFFFF | rgb(0,0,0,0.5)
 - float: left, right inherit, none
@@ -285,14 +286,25 @@ No Introduction
 #### [Box Model](https://www.w3schools.com/css/css_boxmodel.asp)
 
 - margin
-  - top, right, bottom, left
-  - x
-  - y
+  - margin:
+  - margin-top, margin-right, margin-bottom, margin-left
+  - margin-x
+  - margin-y
 - [border:](https://www.w3schools.com/css/css_border.asp)
+  - border:
+  - border-top, border-right, border-bottom, border-left
+  - border-style
+  - border-color
+  - border-width
+  - border-radius
 - padding:
-  - top, right, bottom, left
-  - x
-  - y
+  - padding:
+  - padding-top, padding-right, padding-bottom, padding-left
+  - padding-x
+  - padding-y
+- outline
+  - outline-offset
+  - outline-color
 - content:
 
 #### Placement
