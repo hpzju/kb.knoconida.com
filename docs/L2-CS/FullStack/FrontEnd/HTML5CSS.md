@@ -89,7 +89,7 @@ No Introduction
 
 ### HTML Visual Layout
 
-- [Box Model](#box-model)
+- [Box Model](#box-modelhttpswwww3schoolscomcsscssboxmodelasp)
 - [Flexbox](#flexbox)
 - [Grid System](#grid)
 
@@ -341,6 +341,13 @@ No Introduction
   - translateX()
   - translateY()
   - translateZ()
+  - rotate(), rotateZ()
+  - rotate3D()
+  - rotateX()
+  - rotateY()
+  - skew(), skewX()
+  - skewY()
+  - skewZ()
 
 #### Transition
 
@@ -444,7 +451,6 @@ No Introduction
 ### Learning Resources
 
 - [HTML5 Tutorial](https://www.w3schools.com/html/default.asp)
-- [HTML and CSS Tutorial for beginners 0 - Full Video](https://www.youtube.com/watch?v=aYSgpR5VGPM)
 - [Learn HTML5 and CSS3 From Scratch - Full Course](https://www.youtube.com/watch?v=mU6anWqZJcc)
 - [Learn HTML5 & CSS3 From Scratch - Make Responsive Websites](https://www.youtube.com/watch?v=hefT68D-zTA)
 
