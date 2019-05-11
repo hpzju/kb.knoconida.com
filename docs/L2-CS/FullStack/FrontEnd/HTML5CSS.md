@@ -141,7 +141,7 @@ No Introduction
 ### SCSS
 
 - `\$parameter = VALUE`
-- `backgroud: \$parameter;`
+- `background: \$parameter;`
 - `@import 'PATH_SCSS'`
 - `@extend SELECTOR`
 - `@mixin NAME { }`
@@ -248,7 +248,11 @@ No Introduction
 
 #### Display
 
-- [backgroud](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
+- [background](https://www.w3schools.com/cssref/css3_pr_background.asp): bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit
+  - background-size
+  - background-repeat
+  - background-position
+  - background-attachment
   - line-gradient
 - [display](https://www.w3schools.com/cssref/pr_class_display.asp): inline, block, none, flex
 - color: #FFFFFF | rgb(0,0,0,0.5)
@@ -263,7 +267,7 @@ No Introduction
   - rgb(255,255,255)
   - rgba(255,255,255,1.0)
   - blue, green, red...
-- backgroud-color
+- background-color
 
 #### Mesurement
 
