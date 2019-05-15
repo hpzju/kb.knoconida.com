@@ -43,7 +43,7 @@
       "L2-CS/JavaScript/JavaScript",
       "L2-CS/Python/Python"
     ],
-    "DevOps": ["L2-CS/Docker/Docker"],
+    "DevOps": ["L2-CS/DevOps/Docker", "L2-CS/DevOps/Ubuntu"],
     "Misc": ["L2-CS/Misc/JSON", "L2-CS/Misc/Markdown"],
     "Fast Howto": [
       "L2-CS/FastHowto/Howto-SSLCertificate",

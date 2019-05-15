@@ -1,6 +1,6 @@
 ---
 id: Nodejs
-title: Nodejs an asynchronous event driven JavaScript runtime, designed to build scalable network applications
+title: Nodejs an asynchronous event driven JavaScript runtime for server side, designed to build scalable network applications
 sidebar_label: Nodejs
 ---
 
@@ -16,6 +16,8 @@ sidebar_label: Nodejs
 - non-blocking asynchronous processing
 - event-driven
 - Real-time web application with Socket.io
+- fast
+- concurrent
 
 ### Applicable Scenarios
 
@@ -88,8 +90,11 @@ sidebar_label: Nodejs
 
 ### Packages
 
-- express
-- socket.io
+- [express](https://expressjs.com/)
+- [socket.io](https://socket.io/)
+- [winston](https://github.com/winstonjs/winston)
+- [nconf](https://www.npmjs.com/package/nconf)
+- [pm2](https://pm2.io/doc/en/runtime/guide/installation/)
 
 ---
 
@@ -97,17 +102,24 @@ sidebar_label: Nodejs
 
 ### Linux install and upgrade
 
-```bash
-sudo apt install nodejs npm
-node -v
-npm -v
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n latest | x.x.x
-sudo n
-node -v
-npm -v
-```
+- [install](https://github.com/nodesource/distributions/blob/master/README.md)
+  
+  ```bash
+  sudo apt install nodejs npm
+  node -v
+  npm -v
+  sudo npm cache clean -f
+  ```
+
+- upgrade
+  
+  ```bash
+  sudo npm install -g n
+  sudo n latest | x.x.x
+  sudo n
+  node -v
+  npm -v
+  ```
 
 ### Linux/Windows Initialize
 
