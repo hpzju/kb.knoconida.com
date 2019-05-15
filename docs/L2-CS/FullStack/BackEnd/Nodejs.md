@@ -1,15 +1,10 @@
 ---
 id: Nodejs
-title: Nodejs an asynchronous event driven JavaScript runtime, designed to build scalable network applications
+title: Nodejs an asynchronous event driven JavaScript runtime for server side, designed to build scalable network applications
 sidebar_label: Nodejs
 ---
 
 ## Overview
-
-### Online Resources
-
-- [Node.js Documentation](https://nodejs.org/en/docs/guides/)
-- [W3School Node.js Tutorial](https://www.w3schools.com/nodejs/)
 
 ---
 
@@ -21,6 +16,8 @@ sidebar_label: Nodejs
 - non-blocking asynchronous processing
 - event-driven
 - Real-time web application with Socket.io
+- fast
+- concurrent
 
 ### Applicable Scenarios
 
@@ -33,30 +30,9 @@ sidebar_label: Nodejs
 
 ## Architecture
 
-<!-- ### Building Blocks -->
-
-### Packaging
-
-#### Module Namespace
-
-- Module warpping function:
-  - `(function( exports, require, module, __filename, __dirname) {})`
-
-- [TODO]module.exports
-
-#### npm: Node Package Manager
-
-- `npm init`
-- `npm install PACKAGE`
-- package.json
-  - `PackageName`: Major.Minor.Patch
-  - `"~PackageName"`: Major.Minor.x
-  - `"^PackageName"`: Major.x.x
-- `npm cache clean --force`
-
 <!-- ### Structures -->
 
-#### Reference Model
+### Reference Model
 
 - System View
   > ![Alt](/img/Nodejs-Architecture-01.png "Nodejs Architecture")
@@ -67,6 +43,42 @@ sidebar_label: Nodejs
 
 ### Modules
 
+#### Module Namespace
+
+- Module warpping function:
+  - `(function( exports, require, module, __filename, __dirname) {})`
+
+- module.exports
+  - `module.exports = MODUEL_NAME`
+- Module Path
+  - module file/folder
+    - `MODULE = require('./PATH_TO_MODULE')`
+  - node-modules dir/nested
+    - `MoDULE = require('MODULE_NAME')`
+
+#### npm: [Node Package Manager](https://docs.npmjs.com/)
+
+- `npm init`
+- `npm install PACKAGE`
+- `npm install --production PACKAGE`
+- `npm install --save PACKAGE`
+- `npm install -g PACKAGE`
+- package.json
+  - `PackageName`: Major.Minor.Patch
+  - `"~PackageName"`: Major.Minor.x
+  - `"^PackageName"`: Major.x.x
+- `npm cache clean --force`
+- `npm ls`
+- `npm view PACKAGE`
+- `npm search PACKAGE`
+- `npm update`
+- `npm uninstall PACKAGE`
+- `npm adduser`
+- `npm publish`
+- `npm audit fix --force`
+  
+#### Module Lists
+
 - events
 - readline
 - os
@@ -74,32 +86,42 @@ sidebar_label: Nodejs
 - path
 - zlib
 - http
+- zlib
 
 ### Packages
 
-- express
-  
+- [express](https://expressjs.com/)
+- [socket.io](https://socket.io/)
+- [winston](https://github.com/winstonjs/winston)
+- [nconf](https://www.npmjs.com/package/nconf)
+- [pm2](https://pm2.io/doc/en/runtime/guide/installation/)
+
 ---
 
 ## Best Practice
 
-### Install and Initialize
+### Linux install and upgrade
 
-#### Linux install and upgrade
+- [install](https://github.com/nodesource/distributions/blob/master/README.md)
+  
+  ```bash
+  sudo apt install nodejs npm
+  node -v
+  npm -v
+  sudo npm cache clean -f
+  ```
 
-```bash
-sudo apt install nodejs npm
-node -v
-npm -v
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n latest | x.x.x
-sudo ln -sf /usr/local/n/[VERSION]/node/<version>/bin/node /usr/bin/node
-node -v
-npm -v
-```
+- upgrade
+  
+  ```bash
+  sudo npm install -g n
+  sudo n latest | x.x.x
+  sudo n
+  node -v
+  npm -v
+  ```
 
-#### Linux/Windows Initialize
+### Linux/Windows Initialize
 
 - DevOps Env
 
@@ -166,8 +188,107 @@ npm -v
   })();
   ```
 
+### Dockerizing Nodejs Apps
+
+- Dockerfile
+
+```Dockerfile
+FROM node:12-slim
+
+# Create app directory
+WORKDIR /app/MYAPP/src
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+CMD [ "npm", "start" ]
+```
+
+- docker-compose.yml
+  
+```yaml
+version: "3"
+
+services:
+  MYAPP:
+    build: .
+    container_name: MYAPP
+    ports:
+      - 8080:8080
+      - 35729:35729
+    volumes:
+      - .:/app/MYAPP/src
+    working_dir: /app/MYAPP/src
+    restart: always
+```
+
+- makefile
+  
+```makefile
+.PHONY : help
+
+APP = MYAPP
+
+help :
+  @echo "help commands:"
+  @echo "  make start: docker-compose up"
+  @echo "  make stop: docker-compose stop"
+  @echo "  make restart: docker-compose restart"
+  @echo "  make down: docker-compose down"
+  @echo "  make remove: docker-compose down"
+
+
+start :
+  @echo "create and run $(APP)"
+  sudo docker-compose up -d
+  @echo "done......"
+  @echo
+
+stop :
+  @echo "stop $(APP)"
+  sudo docker-compose stop
+  @echo "done......"
+  @echo
+
+restart :
+  @echo "restart $(APP)"
+  sudo docker-compose restart
+  @echo "done......"
+  @echo
+
+down :
+  @echo "stop and remove $(APP)"
+  sudo docker-compose down
+  @echo "done......"
+  @echo
+
+remove :
+  @echo "remvoe $(APP)"
+  sudo docker-compose down
+  sudo docker image rm $(APP)
+  @echo "done....."
+  @echo
+```
+
 ### Management
 
 ### Security
 
 ---
+
+## Misc
+
+### Online Resources
+
+- [Node.js Documentation](https://nodejs.org/en/docs/guides/)
+- [W3School Node.js Tutorial](https://www.w3schools.com/nodejs/)

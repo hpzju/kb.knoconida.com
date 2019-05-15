@@ -23,7 +23,7 @@ sidebar_label: Vue
   - `vue ui`
     - Open a Web GUI to manage Plugin and tasks
 
-### Crreate and Config Vue App
+### Create and Config Vue App
 
 - `vue create MYAPP`
   - CLI to create project
