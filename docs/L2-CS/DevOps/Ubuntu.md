@@ -6,11 +6,15 @@ sidebar_label: Ubuntu
 
 ## Ubuntu Admin
 
-### Install, Update, Upgrade
+### Install, Remove, Update, Upgrade
 
-#### Upgrade
-
--`sudo do-release-upgrade -d`
+- Commands
+  - `sudo apt update`
+  - `sudo apt upgrade -y`
+  - `sudo do-release-upgrade -d`
+  - `sudo apt autoremove -y`
+- Config Files
+  - `/etc/apt/sources.list`
 
 ### User and Privilege
 
