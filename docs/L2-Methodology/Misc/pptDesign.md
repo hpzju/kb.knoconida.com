@@ -48,12 +48,9 @@ sidebar_label: PPT Design
 
 ## Design Principles
 
-### Theme
-
-- Specific
-
 ### Simple
 
+- focus on theme
 - organize contents
 - deliver key message
 
@@ -74,12 +71,13 @@ sidebar_label: PPT Design
   - Premisses
   - Conclusion
 
-### Content
+### Content-centric
 
 - Structure
   - Begin, Middle, End
 - Relationship
   - apposition
+  - affinity
   - prograssive
   - comparison
   - crossing

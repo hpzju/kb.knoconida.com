@@ -8,12 +8,6 @@ sidebar_label: JavaScript
 
 ## Overview
 
-### Online Resources
-
-- [ECMA-262](https://github.com/tc39/ecma262)
-- [W3School JavaScript Tutorial](https://www.w3schools.com/js/)
-- [JavaScript Resources](https://www.javascript.com/resources)
-
 ---
 
 ## Application
@@ -22,35 +16,64 @@ sidebar_label: JavaScript
 
 ### Applicable Scenarios
 
+- Web Apps
+
 ---
 
-## Architecture
+## Javascript Language Basic
 
-### Building Blocks
+<!-- ### Building Blocks -->
+
+### Types
 
 - Number
 - String
+- Symbol
 - Boolean
 - Object
 - Null
 - Undefined
 - Symbol
 
-### Structures
+<!-- ### Structures -->
 
-#### Expression
-
-#### Statement
-
-#### Operator
+### Operator
 
 - conditional
   - ==
   - ===
 
-#### Context Control
+### Function
 
-#### Flow Control
+#### Built-in Functions
+
+- Info
+
+  ```javascript
+  alert("Hello World!");
+  ```
+
+### Object
+
+#### Built-in Objects
+
+- document
+
+  ```javascript
+  document.body.innerHTML;
+  ```
+
+- console
+
+### Expression
+
+### Statement
+
+### Context Control with Block
+
+### Flow Control
+
+#### Condition Expression
 
 - if-else if-else
 
@@ -78,6 +101,8 @@ sidebar_label: JavaScript
       console.log("none");
   }
   ```
+
+#### Loop Expression
 
 - for
 
@@ -113,12 +138,66 @@ sidebar_label: JavaScript
 
 ---
 
+## Javascript HTML DOM
+
+---
+
+## Javascript Browser BOM
+
+---
+
+## AJAX and JSON
+
+---
+
 ## Best Practice
 
 ### Install and Initialize
+
+#### Inline Script
+
+- HelloWorld.html
+
+```html
+...
+<body>
+  ...
+  <script>
+    // JAVASCRIPT HERE
+  </script>
+</body>
+...
+```
+
+#### External Script
+
+- HelloWorld.html
+
+```html
+...
+<body>
+  ...
+  <script src="PATH_TO_JAVASCRIPT"></script>
+  ...
+</body>
+...
+```
 
 ### Management
 
 ### Security
 
 ---
+
+## Misc
+
+### Standards
+
+- [ECMA-262](https://github.com/tc39/ecma262)
+- [ECMA-404 The JSON Data Interchange Syntax](https://ecma-international.org/publications/standards/Ecma-404.htm)
+- [ECMA-402](https://ecma-international.org/publications/standards/Ecma-402.htm)
+
+### Online Resources
+
+- [W3School JavaScript Tutorial](https://www.w3schools.com/js/)
+- [JavaScript Resources](https://www.javascript.com/resources)
