@@ -14,7 +14,7 @@ sidebar_label: JavaScript
 
 ---
 
-## Javascript Language Basic
+## JavaScript Language Basic
 
 <!-- ### Building Blocks -->
 
@@ -132,11 +132,11 @@ sidebar_label: JavaScript
 
 ---
 
-## Javascript HTML DOM
+## JavaScript HTML DOM
 
 ---
 
-## Javascript Browser BOM
+## JavaScript Browser BOM
 
 ---
 
@@ -185,7 +185,7 @@ sidebar_label: JavaScript
 
 ## Misc
 
-### Standards
+### JavaScript Standards
 
 - ECMA: European Computer Manufacturers Association
 - [ECMA-262](https://github.com/tc39/ecma262)
