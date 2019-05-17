@@ -44,11 +44,19 @@ sidebar_label: Nodejs
 
 ### Project Structrue
 
-- `public`
+- `config`
+- `controllers`
+- `migrations`
+- `models`
 - `node_modules`
+- `public`
+  - `images`
+  - `javascripts`
+  - `stylesheets`
+- `routes`
+- `views`
 - `package.json`
-  - scripts
-    - npm run ENTRY
+- `app.js`
 
 ### [Global Objects](https://nodejs.org/dist/latest-v12.x/docs/api/globals.html)
 
@@ -299,10 +307,6 @@ remove :
   @echo
 ```
 
-### Management
-
-### Security
-
 ---
 
 ## Misc
@@ -314,3 +318,11 @@ remove :
 - [Node.js Crash Course](https://www.youtube.com/watch?v=fBNz5xF-Kx4)
 - [Express JS Crash Course](https://www.youtube.com/watch?v=L72fhGm1tfE)
 - [Node JS Tutorial for Beginners](https://www.youtube.com/watch?v=w-7RQ46RgxU&list=PL4cUxeGkcC9gcy9lrvMJ75z9maRw4byYp)
+
+### Express
+
+#### Routing
+
+#### Templating
+
+#### Middleware
