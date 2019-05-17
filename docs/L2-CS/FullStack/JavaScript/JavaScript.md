@@ -4,13 +4,7 @@ title: JavaScript
 sidebar_label: JavaScript
 ---
 
-# JavaScript: A Programming Language
-
 ## Overview
-
----
-
-## Application
 
 ### Features
 
