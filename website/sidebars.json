@@ -58,7 +58,7 @@
     "Business": ["L2-Methodology/BusinessModel/BusinessModel"],
     "Management": ["L2-Methodology/PMP/PMP"],
     "Miscellaneous": [
-      "L2-Methodology/Misc/tpl-dummy",
+      "L2-Methodology/Misc/pptDesign",
       {
         "type": "subcategory",
         "label": "templates",
