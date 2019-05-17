@@ -1,6 +1,6 @@
 ---
 id: pptDesign
-title:  PPT Design Principles and Practices
+title: PPT Design Principles and Practices
 sidebar_label: PPT Design
 ---
 
@@ -26,7 +26,7 @@ sidebar_label: PPT Design
     - Summarize Recommendations
     - Synthesize in light of problem/purpose
 - Delivery
-  
+
 ### Process
 
 - Prepare
@@ -41,34 +41,74 @@ sidebar_label: PPT Design
 
 ## Design Principles
 
-- Theme
-- Simple
-- Logical
-  - 2W1H:
-    - What, Why, How
-  - 5W2H:
-    - What, Why, Who, When, Where, How, How much
-  - MECE:
-    - Mutually Exclusive, Collectively Exaustive
-  - SWOT:
-    - Strength, Weakness, Opportunity, Threat
-  - Diagramize
-  - Relation
-    - apposition
-    - 
-- Content
-- Visual
-  - Consistancy
+### Theme
+
+### Simple
+
+### Logical
+
+- 2W1H:
+  - What, Why, How
+- 5W2H:
+  - What, Why, Who, When, Where, How, How much
+- MECE:
+  - Mutually Exclusive, Collectively Exaustive
+- SWOT:
+  - Strength, Weakness, Opportunity, Threat
+- PEST:
+  - Policy, Environment, Sociaty, Technology
+- Argument
+
+  - Premisses
+  - Conclusion
+
+### Content
+
+- Structure
+  - Begin, Middle, End
+- Relationship
+  - apposition
+  - prograssive
+  - comparison
+  - crossing
+  - trending
+  - water-fall
+  - tree
+  - networking
+  - flow
+  - circling
+  - looping
+  - matrix/table
+  - milestone
+  - puzzle
+
+### Visual
+
+- VISUAL: Visual, Interest, Simple, Use, Accurate, Long
+- Consistancy
   - Font
     - Title: 32, 28, 24, 20,
     - Text: 18, 16, 12
     - List: 16, 16, 14, 14
   - Color
-  - VISUAL: Visual, Interest, Simple, Use, Accurate, Long
-- Attractive
-  - Stories
-  - Eamples
-  - Metaphor
+- Emphasize
+  - Contrast
+- Diagramize
+  - barchart
+  - piechart
+  - histogram
+  - line-plot
+  - scatter-plot
+- Relationize
+- Categorize
+- Iconize
+  - abstraction
+
+### Attractive
+
+- Stories
+- Examples
+- Metaphor
 
 ## Practices
 
