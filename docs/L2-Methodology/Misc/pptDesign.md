@@ -81,6 +81,11 @@ sidebar_label: PPT Design
   - matrix/table
   - milestone
   - puzzle
+- Layout
+  - center-edge symmetry
+  - left-right symmetry
+  - up-down symmetry
+  - corner-corner symmetry
 
 ### Visual
 
@@ -125,3 +130,11 @@ sidebar_label: PPT Design
 - [Slide Model](https://slidemodel.com/free-powerpoint-templates/)
 - [ypppt](http://www.ypppt.com/)
 - [Officeplus](http://www.officeplus.cn/Template/Home.shtml)
+- [PresentationLoad](https://www.presentationload.com/)
+
+### Pics and Icons
+
+- [Pixabay](https://pixabay.com/)
+- [Iconfont](https://icofont.com/)
+- [Iconfont.cn](https://www.iconfont.cn/)
+- [FontAwesome](https://fontawesome.com/)
