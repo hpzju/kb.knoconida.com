@@ -134,6 +134,16 @@ sidebar_label: JavaScript
 
 ## JavaScript HTML DOM
 
+### document Object
+
+- properties
+
+  ```javascript
+  document.body.innerHTML;
+  ```
+
+- methods
+
 ---
 
 ## JavaScript Browser BOM
