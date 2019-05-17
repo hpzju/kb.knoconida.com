@@ -1,6 +1,6 @@
 ---
 id: JavaScript
-title: JavaScript
+title: JavaScript, A Web Oriented Programming Language
 sidebar_label: JavaScript
 ---
 
@@ -187,6 +187,7 @@ sidebar_label: JavaScript
 
 ### Standards
 
+- ECMA: European Computer Manufacturers Association
 - [ECMA-262](https://github.com/tc39/ecma262)
 - [ECMA-404 The JSON Data Interchange Syntax](https://ecma-international.org/publications/standards/Ecma-404.htm)
 - [ECMA-402](https://ecma-international.org/publications/standards/Ecma-402.htm)
