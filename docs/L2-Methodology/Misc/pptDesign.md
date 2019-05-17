@@ -4,7 +4,7 @@ title: PPT Design Principles and Practices
 sidebar_label: PPT Design
 ---
 
-## Overview
+## PPT Overview
 
 ### Pillars
 
@@ -39,11 +39,23 @@ sidebar_label: PPT Design
   - Visualize
   - Logical Structured
 
+### Scenarios
+
+- For Presentation
+- For Informative Reading
+
+---
+
 ## Design Principles
 
 ### Theme
 
+- Specific
+
 ### Simple
+
+- organize contents
+- deliver key message
 
 ### Logical
 
@@ -115,7 +127,7 @@ sidebar_label: PPT Design
 - Examples
 - Metaphor
 
-## Practices
+---
 
 ## Mics
 
