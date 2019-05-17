@@ -12,7 +12,7 @@ WEB_ROOT=/var/www/html/
 PHY_SERVER=192.168.1.101
 AWS_SERVER=35.164.223.56
 
-ID_KEY = /c/LinuxShare/HandsOn/keys/ssh_github.pem
+ID_KEY = ~/.ssh/ssh_github.pem
 
 help : 
 	@echo "help commands:"
@@ -69,14 +69,14 @@ test:
 restartUbuntuPhy:
 	@echo "ssh to Ubuntu Physical Server and restart service: "
 	@echo "ssh in..........................................."
-	echo "cd Codes/; make restartKB" | ssh -i  "/c/LinuxShare/HandsOn/keys/ssh_github.pem"  hubert@192.168.1.101
+	echo "cd Codes/; make restartKB" | ssh -i  $(ID_KEY)  hubert@192.168.1.101
 	@echo "ssh out..........................................."
 	@echo "ok......."
 
 deployAWSLightsail:
 	@echo "ssh to AWS Lightsail server and deploy service: "
 	@echo "ssh in..........................................."
-	echo "cd kb.knoconida.com/; make remove; make up" | ssh -i  "/c/LinuxShare/HandsOn/keys/ssh_github.pem"  ubuntu@$(AWS_SERVER)
+	echo "cd kb.knoconida.com/; make remove; make up" | ssh -i  $(ID_KEY)  ubuntu@$(AWS_SERVER)
 	@echo "ssh out..........................................."
 	@echo "ok......."
 

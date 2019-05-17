@@ -24,7 +24,10 @@ sidebar_label: Nodejs
 - suited for applications where each incoming request requires very few CPU cycles.
 - suited for real-time web applications, such as chat rooms, collaboration tools, online games.
   -suited for "Long polling" scenarios.
+- RESTful API and Microservices
+- CRUD Apps
 - IO intensive.
+- not for CPU intensive
 
 ---
 
@@ -39,24 +42,58 @@ sidebar_label: Nodejs
 - Event View
   > ![Alt](/img/Nodejs-Architecture-02.png "Nodejs Architecture")
 
-<!-- ### Domain Tech -->
+### Project Structrue
 
-### Modules
+- `config`
+- `controllers`
+- `migrations`
+- `models`
+- `node_modules`
+- `public`
+  - `images`
+  - `javascripts`
+  - `stylesheets`
+- `routes`
+- `views`
+- `package.json`
+- `app.js`
 
-#### Module Namespace
+### [Global Objects](https://nodejs.org/dist/latest-v12.x/docs/api/globals.html)
+
+- console
+- \_\_dirname
+- \_\_filename
+- require()
+
+<!-- ### Modules -->
+
+### Module and Namespacing
 
 - Module warpping function:
   - `(function( exports, require, module, __filename, __dirname) {})`
-
-- module.exports
+- Module exports
   - `module.exports = MODUEL_NAME`
-- Module Path
-  - module file/folder
+- Module require
+  - module in project other file/folder
     - `MODULE = require('./PATH_TO_MODULE')`
-  - node-modules dir/nested
-    - `MoDULE = require('MODULE_NAME')`
+  - module in `node-modules` dir/nested
+    - `MODULE = require('MODULE_NAME')`
 
-#### npm: [Node Package Manager](https://docs.npmjs.com/)
+### [Module Lists](https://nodejs.org/docs/latest/api/documentation.html)
+
+- events
+- readline
+- os
+- fs
+- path
+- zlib
+- http
+- zlib
+- url
+- logger
+- util
+
+### npm: [Node Package Manager](https://docs.npmjs.com/)
 
 - `npm init`
 - `npm install PACKAGE`
@@ -76,25 +113,15 @@ sidebar_label: Nodejs
 - `npm adduser`
 - `npm publish`
 - `npm audit fix --force`
-  
-#### Module Lists
 
-- events
-- readline
-- os
-- fs
-- path
-- zlib
-- http
-- zlib
-
-### Packages
+### Package Lists
 
 - [express](https://expressjs.com/)
 - [socket.io](https://socket.io/)
 - [winston](https://github.com/winstonjs/winston)
 - [nconf](https://www.npmjs.com/package/nconf)
 - [pm2](https://pm2.io/doc/en/runtime/guide/installation/)
+- [nodemon](https://github.com/remy/nodemon#nodemon)
 
 ---
 
@@ -103,7 +130,7 @@ sidebar_label: Nodejs
 ### Linux install and upgrade
 
 - [install](https://github.com/nodesource/distributions/blob/master/README.md)
-  
+
   ```bash
   sudo apt install nodejs npm
   node -v
@@ -112,7 +139,7 @@ sidebar_label: Nodejs
   ```
 
 - upgrade
-  
+
   ```bash
   sudo npm install -g n
   sudo n latest | x.x.x
@@ -215,7 +242,7 @@ CMD [ "npm", "start" ]
 ```
 
 - docker-compose.yml
-  
+
 ```yaml
 version: "3"
 
@@ -233,7 +260,7 @@ services:
 ```
 
 - makefile
-  
+
 ```makefile
 .PHONY : help
 
@@ -280,10 +307,6 @@ remove :
   @echo
 ```
 
-### Management
-
-### Security
-
 ---
 
 ## Misc
@@ -292,3 +315,14 @@ remove :
 
 - [Node.js Documentation](https://nodejs.org/en/docs/guides/)
 - [W3School Node.js Tutorial](https://www.w3schools.com/nodejs/)
+- [Node.js Crash Course](https://www.youtube.com/watch?v=fBNz5xF-Kx4)
+- [Express JS Crash Course](https://www.youtube.com/watch?v=L72fhGm1tfE)
+- [Node JS Tutorial for Beginners](https://www.youtube.com/watch?v=w-7RQ46RgxU&list=PL4cUxeGkcC9gcy9lrvMJ75z9maRw4byYp)
+
+### Express
+
+#### Routing
+
+#### Templating
+
+#### Middleware
