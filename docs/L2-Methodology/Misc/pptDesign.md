@@ -67,7 +67,6 @@ sidebar_label: PPT Design
 - PEST:
   - Policy, Environment, Sociaty, Technology
 - Argument
-
   - Premisses
   - Conclusion
 
@@ -91,11 +90,6 @@ sidebar_label: PPT Design
   - matrix/table
   - milestone
   - puzzle
-- Layout
-  - center-edge symmetry
-  - left-right symmetry
-  - up-down symmetry
-  - corner-corner symmetry
 
 ### Visual
 
@@ -118,6 +112,11 @@ sidebar_label: PPT Design
 - Categorize
 - Iconize
   - abstraction
+- Layout
+  - center-edge symmetry
+  - left-right symmetry
+  - up-down symmetry
+  - corner-corner symmetry
 
 ### Attractive
 
