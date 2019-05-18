@@ -132,9 +132,13 @@ sidebar_label: JavaScript
 
 ---
 
-## JavaScript HTML DOM
+## [JavaScript HTML DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
-### document Object
+### DOM Tree
+
+- DOM tree: ![Alt](/img/JS-DOM-Tree.png "DOM Tree")
+
+### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
 
 - properties
 
@@ -144,9 +148,20 @@ sidebar_label: JavaScript
 
 - methods
 
----
+### [window](https://www.w3schools.com/js/js_window.asp)
 
-## JavaScript Browser BOM
+- properties
+
+  ```javascript
+  windows.console;
+  ```
+
+- methods
+
+  ```javascript
+  alert("message");
+  console.log("message");
+  ```
 
 ---
 
@@ -204,5 +219,6 @@ sidebar_label: JavaScript
 
 ### Online Resources
 
+- [Mozilla Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [W3School JavaScript Tutorial](https://www.w3schools.com/js/)
 - [JavaScript Resources](https://www.javascript.com/resources)
