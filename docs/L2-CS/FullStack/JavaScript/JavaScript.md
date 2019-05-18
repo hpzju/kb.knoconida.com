@@ -294,6 +294,7 @@ sidebar_label: JavaScript
 
   - shallow copy
   - deep copy
+  - chaining array methods
 
   ```javascript
   //Constructor
@@ -350,9 +351,6 @@ sidebar_label: JavaScript
   var iterator = arr.values();
   iterator.next().value; // elem
 
-  // ranger
-  var range = Array.from(new Array(100).keys());
-
   //finder
   var elem = arr.find(callback[, thisArg]);//undefined if not found
   var index = arr.findIndex(callback(element[, index[, array]])[, thisArg]);//-1 if not found
@@ -397,7 +395,42 @@ sidebar_label: JavaScript
   //reducer
   var value = arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue]);
   var value = arr.reduceRight(callback(accumulator, currentValue[, index[, array]])[, initialValue])
+
+  // functor patterns:
+  // ranger
+  const range = n => Array.from(new Array(n).keys());
+  const rangeRandom = (n, max_val) => {
+  return Array.from(new Array(n).keys()).map(val =>
+    Math.ceil(Math.random() * max_val)
+  );
+  };
+  var arr10 = range(10);
+  var arr8 = rangeRandom(8, 100);
+
+  //max/min number array
+  const maxElement = arr =>
+    arr.reduceRight((acc, cur) => (acc = Math.max(acc, cur)), arr[0]);
+
+  const minElement = arr =>
+    arr.reduceRight((acc, cur) => (acc = Math.min(acc, cur)), arr[0]);
   ```
+
+- [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+  - bs
+  - d
+
+```javascript
+//constructor
+
+//properties
+
+//String Operation: indexing
+
+//String Operation: slicing and dicing
+
+// String Operation: transforming
+```
 
 ---
 
