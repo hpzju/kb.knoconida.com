@@ -8,34 +8,146 @@ sidebar_label: JavaScript
 
 ### Features
 
+---
+
 ### Applicable Scenarios
 
 - Web Apps
 
 ---
 
+---
+
 ## JavaScript Language Basic
+
+---
 
 <!-- ### Building Blocks -->
 
 ### Types
 
-- Number
-- String
-- Symbol
+- [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+  - number literal
+    - int
+    - float
+    - negative
+    - NaN
+  - properties:
+  - methods
+    - `num.toString(radix)`
+      - radix ranges [2, 36]
+    - `num.toExponential()`
+    - `num.toFixed()`
+    - `num.toPrecision()`
+  - global built-in
+    - `parseInt(string, radix)`
+    - `parseFloat(string)`
+    - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+- [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+  - string literal
+
+    - single quote: `'string'`
+    - double quote: `"string"`
+    - escaping char: `'string\'s length'`
+    - Template literals
+
+      ```javascript
+      `hello world!` ...
+      `helllo world` ...
+      `hello ${myVal} world` ...
+      ```
+
+    - Long literal
+
+      ```javascript
+      let longString =
+        "This is a very long string which needs " +
+        "to wrap across multiple lines because " +
+        "otherwise my code is unreadable.";
+      let longString =
+        "This is a very long string which needs \
+      to wrap across multiple lines because \
+      otherwise my code is unreadable.";
+      ```
+
+  - properties:
+    - `"string".length`
+  - methods
+    - `''.toLowerCase()`
+    - `''.toUpperCase()`
+  - global built-in
+    - `parseInt(string, radix)`
+    - `parseFloat(string)`
+
 - Boolean
-- Object
+  - true
+  - false
+    - falsy values
+      - null
+      - undefined
+      - '', ""
+      - 0
+      - NaN
 - Null
 - Undefined
 - Symbol
+- Object
 
 <!-- ### Structures -->
 
+---
+
 ### Operator
 
-- conditional
-  - ==
-  - ===
+- operator precedence
+
+  - [ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+
+- assignment operators
+
+  - `=`
+  - `+=, -=, *=, /=, %=, **=`
+  - `>>=, <<=, >>>=`
+    - `>>>=` Unsigned right shift assignment
+  - `&=, ^=, |=,`
+    - `^=` bitwise xor
+
+- arithmetic operators
+
+  - `+, -, *, /, %, **,`
+  - `operand++, ++operand, operand--, --operand`
+    - If used postfix (for example, x--), then it returns the value before decrementing.
+    - If used prefix (for example, --x), then it returns the value after decrementing.
+  - `+operand, -operand`
+
+- string concatenate
+
+  - `+`
+
+- equality test
+
+  - `operand1 == operand2`
+    - `2 == '2' is true`
+    - `false == 'false' is false`
+    - `2 === '2' is false`
+  - `operand1 === operand2`
+
+- comparison
+
+  - `>, >=, <, <=, !=`
+
+- logical
+
+  - `&&, ||, !`
+    - no xor in JS, xor pattern: `(x && !y || !x && y)`
+
+- [typeof identify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
+  - `typeof operand`
+    - `typeof null` returns "object"
+    - typeof always returns a string
+
+---
 
 ### Function
 
@@ -47,28 +159,108 @@ sidebar_label: JavaScript
   alert("Hello World!");
   ```
 
+---
+
 ### Object
 
 #### Built-in Objects
 
-- document
+- [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
   ```javascript
-  document.body.innerHTML;
+  const date = new Data();
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  var days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
   ```
 
-- console
+- [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+  ```javascript
+  Math.ceil();
+  Math.floor();
+  Math.round();
+  Math.min();
+  Math.max();
+  Math.random() // [0,1)
+  ...
+  ```
+
+---
+
+<!-- ### Architectures -->
 
 ### Expression
 
+#### Conditon Test
+
+- `==`
+- `===`
+  - undefined variables return false
+- `>, >=, <, <=, !=`
+
+#### Logical Operation
+
+- `&&, ||, !`
+  - xor pattern: `(x && !y || !x && y)`
+
+#### String Concatenation
+
+- `"String " + myVal + " Another String."`
+
+---
+
 ### Statement
+
+#### Declare Variables
+
+- const
+- var
+- let
+
+#### Assignment
+
+- `=`
+
+#### Comment
+
+- line comment
+  - `// LINE`
+- block comment
+  - `/* BLOCK */`
+
+---
 
 ### Context Control with Block
 
+---
+
 ### Flow Control
 
-#### Condition Expression
+#### Conditional Statement
 
+- if
+- if-else
 - if-else if-else
 
   ```javascript
@@ -81,7 +273,10 @@ sidebar_label: JavaScript
   }
   ```
 
+- switch-case-break-default
+- switch-case-break
 - switch-case
+- swotch-case-default
 
   ```javascript
   switch (x) {
@@ -96,7 +291,7 @@ sidebar_label: JavaScript
   }
   ```
 
-#### Loop Expression
+#### Loop Statement
 
 - for
 
@@ -124,11 +319,19 @@ sidebar_label: JavaScript
   }
   ```
 
+---
+
 ### Design Patterns
+
+---
 
 ### Builtin Libs
 
+---
+
 ### External Libs
+
+---
 
 ---
 
@@ -137,6 +340,8 @@ sidebar_label: JavaScript
 ### DOM Tree
 
 - DOM tree: ![Alt](/img/JS-DOM-Tree.png "DOM Tree")
+
+---
 
 ### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
 
@@ -148,7 +353,9 @@ sidebar_label: JavaScript
 
 - methods
 
-### [window](https://www.w3schools.com/js/js_window.asp)
+---
+
+### [window](https://developer.mozilla.org/en-US/docs/Web/API/window)
 
 - properties
 
@@ -160,12 +367,17 @@ sidebar_label: JavaScript
 
   ```javascript
   alert("message");
+  var message = prompt("Input your message: ");
   console.log("message");
   ```
 
 ---
 
+---
+
 ## AJAX and JSON
+
+---
 
 ---
 
@@ -202,9 +414,9 @@ sidebar_label: JavaScript
 ...
 ```
 
-### Management
+---
 
-### Security
+---
 
 ---
 
@@ -217,8 +429,14 @@ sidebar_label: JavaScript
 - [ECMA-404 The JSON Data Interchange Syntax](https://ecma-international.org/publications/standards/Ecma-404.htm)
 - [ECMA-402](https://ecma-international.org/publications/standards/Ecma-402.htm)
 
+---
+
 ### Online Resources
 
 - [Mozilla Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [W3School JavaScript Tutorial](https://www.w3schools.com/js/)
 - [JavaScript Resources](https://www.javascript.com/resources)
+
+---
+
+---
