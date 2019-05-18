@@ -105,7 +105,7 @@ sidebar_label: JavaScript
 
 ---
 
-### Operator
+### Operators
 
 - operator precedence
 
@@ -202,7 +202,7 @@ sidebar_label: JavaScript
 
 ---
 
-### Function
+### Functions
 
 #### Built-in Functions
 
@@ -214,7 +214,7 @@ sidebar_label: JavaScript
 
 ---
 
-### Object
+### Objects
 
 #### Built-in Objects
 
@@ -271,10 +271,6 @@ sidebar_label: JavaScript
   arr.push();
   arr.pop();
   ```
-
-...
-
-````
 
 ---
 
@@ -341,7 +337,7 @@ if (a === "other value") {
 } else {
   do_something;
 }
-````
+```
 
 - switch-case-break-default
 - switch-case-break
@@ -392,14 +388,6 @@ if (a === "other value") {
 ---
 
 ### Design Patterns
-
----
-
-### Builtin Libs
-
----
-
-### External Libs
 
 ---
 
