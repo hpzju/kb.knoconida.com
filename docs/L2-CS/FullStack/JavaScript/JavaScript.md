@@ -317,6 +317,7 @@ sidebar_label: JavaScript
 
   // array operation: shallow-copy
   var new_array = old_array.concat([value1[, value2[, ...[, valueN]]]]);
+  var new_array = arr.reverse();
 
   // array operation: in-place
   arr.copyWithin(target[, start[, end]]);
@@ -348,6 +349,9 @@ sidebar_label: JavaScript
 
   var iterator = arr.values();
   iterator.next().value; // elem
+
+  // ranger
+  var range = Array.from(new Array(100).keys());
 
   //finder
   var elem = arr.find(callback[, thisArg]);//undefined if not found
@@ -389,6 +393,10 @@ sidebar_label: JavaScript
   arr.forEach(function callback(currentValue [, index [, array]]) {
     //your iterator
   }[, thisArg]); // return undefined
+
+  //reducer
+  var value = arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue]);
+  var value = arr.reduceRight(callback(accumulator, currentValue[, index[, array]])[, initialValue])
   ```
 
 ---
