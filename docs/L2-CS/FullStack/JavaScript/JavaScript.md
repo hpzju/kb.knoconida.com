@@ -261,15 +261,59 @@ sidebar_label: JavaScript
 
 - [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
+  - shallow copy
+  - deep copy
+
   ```javascript
+  //Constructor
   var fruits = ["Apple", "Banana", "Peach", "Durian"];
+  var fruits = new Array("Apple", "Banana", "Peach", "Durian";
+  var fruits = new Array(4);
+
+  //properties
+  arr.length;
+
+  // constructor like
+  Array.from(arrayLike[, mapFn[, thisArg]]);
+  Array.of(element0[, element1[, ...[, elementN]]]);
+
+  // array type testing
+  Array.isArray(arr);
+
+  // Misc
+  arr.toString();
+  arr.indexOf();
+
+  // array operation: shallow-copy
+  var new_array = old_array.concat([value1[, value2[, ...[, valueN]]]]);
+
+  // array operation: in-place
+  arr.copyWithin(target[, start[, end]]);
+  arr.fill(value[, start[, end]])
+  arr.push(item);
+  arr.unshift(item); //push to head of arr
+  var popedItem = arr.pop();
+  var firstItem = arr.shift();
+
+  // array operation: slicing and dicing
+
+  // array operation: inidexing
   var first = fruits[0];
   var last = fruits[fruits.length - 1];
   var some = fruits["2"];
-  arr.length;
-  arr.toString();
-  arr.push();
-  arr.pop();
+  arr.indexOf(searchElement[, fromIndex]);
+
+  //functors like
+  //iterator
+  var iterator = arr.entries();
+  //finder
+  var index = arr.find(callback[, thisArg])
+  // tester
+  var bool = arr.every(callback[, thisArg])
+  //filter
+  var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
+  //flatter
+  var newArray = arr.flat(depth);
   ```
 
 ---
