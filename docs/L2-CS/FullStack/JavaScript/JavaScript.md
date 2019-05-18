@@ -26,73 +26,80 @@ sidebar_label: JavaScript
 
 ### Types
 
-- [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
-  - number literal
-    - int
-    - float
-    - negative
+#### [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+
+- number literal
+  - int
+  - float
+  - negative
+  - NaN
+- properties:
+- methods
+  - `num.toString(radix)`
+    - radix ranges [2, 36]
+  - `num.toExponential()`
+  - `num.toFixed()`
+  - `num.toPrecision()`
+- global built-in
+  - `parseInt(string, radix)`
+  - `parseFloat(string)`
+  - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+#### [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+- string literal
+
+  - single quote: `'string'`
+  - double quote: `"string"`
+  - escaping char: `'string\'s length'`
+  - Template literals
+
+    ```javascript
+    `hello world!` ...
+    `helllo world` ...
+    `hello ${myVal} world` ...
+    ```
+
+  - Long literal
+
+    ```javascript
+    let longString =
+      "This is a very long string which needs " +
+      "to wrap across multiple lines because " +
+      "otherwise my code is unreadable.";
+    let longString =
+      "This is a very long string which needs \
+    to wrap across multiple lines because \
+    otherwise my code is unreadable.";
+    ```
+
+- properties:
+  - `"string".length`
+- methods
+  - `''.toLowerCase()`
+  - `''.toUpperCase()`
+- global built-in
+  - `parseInt(string, radix)`
+  - `parseFloat(string)`
+
+#### Boolean
+
+- true
+- false
+  - falsy values
+    - null
+    - undefined
+    - '', ""
+    - 0
     - NaN
-  - properties:
-  - methods
-    - `num.toString(radix)`
-      - radix ranges [2, 36]
-    - `num.toExponential()`
-    - `num.toFixed()`
-    - `num.toPrecision()`
-  - global built-in
-    - `parseInt(string, radix)`
-    - `parseFloat(string)`
-    - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
-- [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 
-  - string literal
+#### Null
 
-    - single quote: `'string'`
-    - double quote: `"string"`
-    - escaping char: `'string\'s length'`
-    - Template literals
+#### Undefined
 
-      ```javascript
-      `hello world!` ...
-      `helllo world` ...
-      `hello ${myVal} world` ...
-      ```
+#### Symbol
 
-    - Long literal
-
-      ```javascript
-      let longString =
-        "This is a very long string which needs " +
-        "to wrap across multiple lines because " +
-        "otherwise my code is unreadable.";
-      let longString =
-        "This is a very long string which needs \
-      to wrap across multiple lines because \
-      otherwise my code is unreadable.";
-      ```
-
-  - properties:
-    - `"string".length`
-  - methods
-    - `''.toLowerCase()`
-    - `''.toUpperCase()`
-  - global built-in
-    - `parseInt(string, radix)`
-    - `parseFloat(string)`
-
-- Boolean
-  - true
-  - false
-    - falsy values
-      - null
-      - undefined
-      - '', ""
-      - 0
-      - NaN
-- Null
-- Undefined
-- Symbol
-- Object
+#### Object
 
 <!-- ### Structures -->
 
@@ -121,31 +128,77 @@ sidebar_label: JavaScript
     - If used prefix (for example, --x), then it returns the value after decrementing.
   - `+operand, -operand`
 
-- string concatenate
+- string operators
 
   - `+`
 
-- equality test
+- equality operators
 
   - `operand1 == operand2`
     - `2 == '2' is true`
     - `false == 'false' is false`
     - `2 === '2' is false`
   - `operand1 === operand2`
+  - `!=, !==`
 
-- comparison
+- comparison operators
 
-  - `>, >=, <, <=, !=`
+  - `>, >=, <, <=`
 
-- logical
+- conditional operator
+
+  - `... ? ... : ...`
+
+- logical operators
 
   - `&&, ||, !`
     - no xor in JS, xor pattern: `(x && !y || !x && y)`
 
-- [typeof identify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof)
+- bitwise operators
+
+  - `&, |, ^, ~`
+  - `>>, >>>, <<`
+
+- grouping operator
+
+  - `( )`
+
+- member access operator
+
+  -`obj.member`
+
+- indexing access operator
+
+  - `obj[...]`
+
+- new operator
+
+  - `new Obj( ... )`
+  - `new Obj`
+
+- function operator
+
+  - `... ( .. )`
+
+- arrow function operator
+
+  - `(param1, param2, …, paramN) => { statements }`
+  - `(param1, param2, …, paramN) => expression`
+
+- typeof operator
   - `typeof operand`
     - `typeof null` returns "object"
     - typeof always returns a string
+- void operator
+- delete operator
+- await operator
+- in operator
+- instanceof operator
+- yeild operator
+  - `yeild ...`
+  - `yeild* ...`
+- comma/sequence operator
+  - `... , ...`
 
 ---
 
@@ -206,6 +259,23 @@ sidebar_label: JavaScript
   ...
   ```
 
+- [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
+  ```javascript
+  var fruits = ["Apple", "Banana", "Peach", "Durian"];
+  var first = fruits[0];
+  var last = fruits[fruits.length - 1];
+  var some = fruits["2"];
+  arr.length;
+  arr.toString();
+  arr.push();
+  arr.pop();
+  ```
+
+...
+
+````
+
 ---
 
 <!-- ### Architectures -->
@@ -216,13 +286,13 @@ sidebar_label: JavaScript
 
 - `==`
 - `===`
-  - undefined variables return false
+- undefined variables return false
 - `>, >=, <, <=, !=`
 
 #### Logical Operation
 
 - `&&, ||, !`
-  - xor pattern: `(x && !y || !x && y)`
+- xor pattern: `(x && !y || !x && y)`
 
 #### String Concatenation
 
@@ -245,9 +315,9 @@ sidebar_label: JavaScript
 #### Comment
 
 - line comment
-  - `// LINE`
+- `// LINE`
 - block comment
-  - `/* BLOCK */`
+- `/* BLOCK */`
 
 ---
 
@@ -263,15 +333,15 @@ sidebar_label: JavaScript
 - if-else
 - if-else if-else
 
-  ```javascript
-  if (a === "other value") {
-    do_something;
-  } else if (a === "another value") {
-    do_something;
-  } else {
-    do_something;
-  }
-  ```
+```javascript
+if (a === "other value") {
+  do_something;
+} else if (a === "another value") {
+  do_something;
+} else {
+  do_something;
+}
+````
 
 - switch-case-break-default
 - switch-case-break
