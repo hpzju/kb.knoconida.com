@@ -128,7 +128,7 @@ sidebar_label: JavaScript
     - If used prefix (for example, --x), then it returns the value after decrementing.
   - `+operand, -operand`
 
-- string operators
+- string concatenate operator
 
   - `+`
 
@@ -147,7 +147,7 @@ sidebar_label: JavaScript
 
 - conditional operator
 
-  - `... ? ... : ...`
+  - `.. ? .. : ..`
 
 - logical operators
 
@@ -169,21 +169,50 @@ sidebar_label: JavaScript
 
 - indexing access operator
 
-  - `obj[...]`
+  - `obj[..]`
 
 - new operator
 
-  - `new Obj( ... )`
+  - `new Obj( .. )`
   - `new Obj`
 
 - function operator
 
-  - `... ( .. )`
+  - `.. ( .. )`
+
+- rest operator
+
+  ```javascript
+  function sum(...numbers) {
+    return numbers.reduce((accumulator, current) => {
+      return (accumulator += current);
+    });
+  }
+  ```
 
 - arrow function operator
 
   - `(param1, param2, …, paramN) => { statements }`
   - `(param1, param2, …, paramN) => expression`
+
+- Array/Object spread operator
+
+  ```javascript
+  const adrian = {
+    fullName: "Adrian Oprea",
+    occupation: "Software developer",
+    age: 31,
+    website: "https://oprea.rocks"
+  };
+  const bill = {
+    ...adrian,
+    fullName: "Bill Gates",
+    website: "https://microsoft.com"
+  };
+  const numbers1 = [1, 2, 3, 4, 5];
+  const numbers2 = [...numbers1, 1, 2, 6, 7, 8];
+  // this will be [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
+  ```
 
 - typeof operator
   - `typeof operand`
@@ -195,14 +224,16 @@ sidebar_label: JavaScript
 - in operator
 - instanceof operator
 - yeild operator
-  - `yeild ...`
-  - `yeild* ...`
+  - `yeild ..`
+  - `yeild* ..`
 - comma/sequence operator
-  - `... , ...`
+  - `.. , ..`
 
 ---
 
 ### Functions
+
+- arguments object is a local variable available within all non-arrow functions
 
 #### Built-in Functions
 
@@ -280,9 +311,9 @@ sidebar_label: JavaScript
   // array type testing
   Array.isArray(arr);
 
-  // Misc
-  arr.toString();
-  arr.indexOf();
+  // stringify
+  var str = arr.toString();
+  var str = arr.join([separator]);//null, undefined elements treated as empty string
 
   // array operation: shallow-copy
   var new_array = old_array.concat([value1[, value2[, ...[, valueN]]]]);
@@ -290,30 +321,74 @@ sidebar_label: JavaScript
   // array operation: in-place
   arr.copyWithin(target[, start[, end]]);
   arr.fill(value[, start[, end]])
-  arr.push(item);
-  arr.unshift(item); //push to head of arr
-  var popedItem = arr.pop();
+  var popedItem = arr.pop(); // undeinfed if arr is empty.
+  arr.push(element1[, ...[, elementN]]);
   var firstItem = arr.shift();
+  arr.unshift(element1[, ...[, elementN]]); //push to head of arr
 
   // array operation: slicing and dicing
+  var new_array = arr.slice([begin[, end]]); // [begin, end), shallow-copy
+  var arrDeletedItems = arr.splice(start[, deleteCount[, insertItem1[, insertItem2[, ...]]]]);
 
   // array operation: inidexing
   var first = fruits[0];
   var last = fruits[fruits.length - 1];
   var some = fruits["2"];
-  arr.indexOf(searchElement[, fromIndex]);
+  var index = arr.indexOf(searchElement[, fromIndex]); // -1 if not found
+  var index = arr.lastIndexOf(searchElement[, fromIndex]); // -1 if not found
+  var bool = arr.includes(valueToFind[, fromIndex]);
 
-  //functors like
+  //functor-like
   //iterator
   var iterator = arr.entries();
+  iterator.next().value; // [index, elem]
+
+  var iterator = arr.keys();
+  iterator.next().value; // index
+
+  var iterator = arr.values();
+  iterator.next().value; // elem
+
   //finder
-  var index = arr.find(callback[, thisArg])
+  var elem = arr.find(callback[, thisArg]);//undefined if not found
+  var index = arr.findIndex(callback(element[, index[, array]])[, thisArg]);//-1 if not found
+
+  //sorter
+  arr.sort([compareFunction]); // sorted in-place
+
   // tester
-  var bool = arr.every(callback[, thisArg])
+  var bool = arr.every(callback(element[, index[, array]])[, thisArg]);
+  var bool = arr.some(callback(element[, index[, array]])[, thisArg]);
+
   //filter
-  var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
+  var newArray = arr.filter(callback(element[, index[, array]])[, thisArg]);
+
   //flatter
-  var newArray = arr.flat(depth);
+  var newArray = arr.flat(depth);//default depth = 1
+    //recursive flatten deep
+      function flatten(array) {
+        var flattend = [];
+        !(function flat(array) {
+          array.forEach(function(el) {
+            if (Array.isArray(el)) flat(el);
+            else flattend.push(el);
+          });
+        })(array);
+        return flattend;
+      }
+    //map first, then flat at depth=1
+    var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
+      // return element for new_array
+    }[, thisArg])
+
+  //mapper
+  var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+    // Return element for new_array
+  }[, thisArg])
+
+  arr.forEach(function callback(currentValue [, index [, array]]) {
+    //your iterator
+  }[, thisArg]); // return undefined
   ```
 
 ---
@@ -408,6 +483,17 @@ if (a === "other value") {
   ```javascript
   for (let i = 0; i < 100; i += 1) {
     do_something;
+  }
+  ```
+
+- for-of
+
+  ```javascript
+  let iterable = Array(100).keys();
+
+  for (let value of iterable) {
+    value += 1;
+    console.log(value);
   }
   ```
 
