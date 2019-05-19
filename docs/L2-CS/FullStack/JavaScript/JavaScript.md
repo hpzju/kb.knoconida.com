@@ -107,6 +107,10 @@ sidebar_label: JavaScript
 
 ### Operators
 
+- operator associativity
+  - left-to-right
+  - right-to-left
+    - `x = y = z = 10;`
 - operator precedence
 
   - [ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
@@ -128,12 +132,18 @@ sidebar_label: JavaScript
     - If used prefix (for example, --x), then it returns the value after decrementing.
   - `+operand, -operand`
 
-- string concatenate operator
+- string operators
 
   - `+`
 
+  - ```javascript
+    `string ${value} template literal`;
+    ```
+
 - equality operators
 
+  - primitive types compare by value
+  - object types compare by memeory slot
   - `operand1 == operand2`
     - `2 == '2' is true`
     - `false == 'false' is false`
@@ -183,8 +193,8 @@ sidebar_label: JavaScript
 - rest operator
 
   ```javascript
-  function sum(...numbers) {
-    return numbers.reduce((accumulator, current) => {
+  function sum(...args) {
+    return args.reduce((accumulator, current) => {
       return (accumulator += current);
     });
   }
@@ -215,9 +225,17 @@ sidebar_label: JavaScript
   ```
 
 - typeof operator
+
   - `typeof operand`
     - `typeof null` returns "object"
     - typeof always returns a string
+      - "undefined"
+      - "string"
+      - "number"
+      - "boolean"
+      - "function"
+      - "object"
+
 - void operator
 - delete operator
 - await operator
@@ -413,24 +431,73 @@ sidebar_label: JavaScript
 
   const minElement = arr =>
     arr.reduceRight((acc, cur) => (acc = Math.min(acc, cur)), arr[0]);
+  //concateArr
+  const concateArr = (...args) => Array.from(args).flat();
+  //typeof all args
+  const typeofAll = (...args) => Array.from(args).map(elem => typeof elem);
   ```
 
-- [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+- [Object]
+
+  - JSON like, but different
+    - JSON key-value pairs: `"property": value`
+    - JS key-value pairs: `property: value`
+    - JSON value validation: String, Number, Object, Array, Boolean, Null
+    - JS value validation: function, computational properties and JSON allowed.
+    - JSON.parse() will reject computed property names and an error will be thrown.
+
+  ```javascript
+  //constructor
+  var obj = new Object([value])
+  // Object literal
+  var object1 = {a: 'foo', b: 42, c: {}};
+
+  // Shorthand property names (ES2015)
+  var a = 'foo', b = 42, c = {};
+  var o = {a, b, c};
+
+  // Shorthand method names (ES2015)
+  var o = {
+    property(parameters) {}
+  };
+
+  // Computed property names (ES2015)
+  var prop = 'foo';
+  var o = {
+    [prop]: 'hey',
+    ['b' + 'ar']: 'there'
+  };
+
+  var obj = { [ nameValuePair1[, nameValuePair2[, ...nameValuePairN] ] ] };
+
+  //properties
+  Object.prototype
+
+  //Object Operation: indexing
+  //Object Operation: walking through
+  for (key in obj){
+    console.log(key+": "+obj[key]);
+  };
+  ```
+
+* [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 
   - bs
   - d
 
-```javascript
-//constructor
+  ```javascript
+  //constructor
 
-//properties
+  //string literal
+  `template literal ${value} not working well with Object value`;
+  //properties
 
-//String Operation: indexing
+  //String Operation: indexing
 
-//String Operation: slicing and dicing
+  //String Operation: slicing and dicing
 
-// String Operation: transforming
-```
+  // String Operation: transforming
+  ```
 
 ---
 
