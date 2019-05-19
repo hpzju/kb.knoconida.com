@@ -631,7 +631,7 @@ if (a === "other value") {
 
 ---
 
-## [JavaScript HTML DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+## [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
 ### DOM Tree
 
