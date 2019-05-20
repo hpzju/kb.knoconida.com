@@ -544,7 +544,22 @@ sidebar_label: JavaScript
 
 ---
 
-### Context Control with Block
+### Context Control
+
+- Terms:
+  - lexical scoping (static scoping)
+  - global scope
+  - local scope
+  - name shadowing
+- var, const
+- let
+- block: {}
+  - if, else if, else statement
+  - switch statement
+  - for statement
+  - do statement
+  - while statement -
+- module: import, exports
 
 ---
 
