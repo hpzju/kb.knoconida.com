@@ -55,7 +55,9 @@ runphy :
 	@echo "ssh out..........................................."
 	@echo "ok......."
 
-runaws:
+deployPhy: copy2phy runphy
+
+deployAWS:
 	@echo "ssh to AWS Lightsail server and deploy service: "
 	@echo "ssh in..........................................."
 	echo "cd kb.knoconida.com/; make remove; make up" | ssh -i  $(ID_KEY)  ubuntu@$(AWS_SERVER)

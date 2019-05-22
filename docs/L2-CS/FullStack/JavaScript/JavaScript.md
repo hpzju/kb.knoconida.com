@@ -85,6 +85,8 @@ sidebar_label: JavaScript
 #### Boolean
 
 - true
+  - []
+  - {}
 - false
   - falsy values
     - null
@@ -92,6 +94,8 @@ sidebar_label: JavaScript
     - '', ""
     - 0
     - NaN
+    - [][0]
+    - {}.props
 
 #### Null
 
@@ -480,7 +484,7 @@ sidebar_label: JavaScript
   };
   ```
 
-* [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+- [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 
   - bs
   - d
@@ -543,6 +547,10 @@ sidebar_label: JavaScript
 - `/* BLOCK */`
 
 ---
+
+#### Function Statement
+
+- `const funName = (...parameters) => { ...codes }`
 
 ### Context Control
 
