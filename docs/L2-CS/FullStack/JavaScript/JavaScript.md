@@ -648,7 +648,33 @@ if (a === "other value") {
 
 ---
 
-### Design Patterns
+---
+
+## Design Patterns
+
+---
+
+### Promise, Async, Await, and Sync
+
+```javascript
+async function sequence() {
+  await Promise.all([promise1(), promise2()]);
+  return "done!";
+}
+
+const makeRequest = () =>
+  getJSON().then(data => {
+    console.log(data);
+    return "done";
+  });
+
+const makeRequest = async () => {
+  console.log(await getJSON());
+  return "done";
+};
+
+makeRequest();
+```
 
 ---
 
