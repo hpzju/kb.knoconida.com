@@ -8,11 +8,33 @@ sidebar_label: JavaScript
 
 ### Features
 
+- lightweight interpreted scripting language
+- dynamic type language
+- prototype-based OOP
+- Web Oriented, client-side prone
+
 ---
 
 ### Applicable Scenarios
 
-- Web Apps
+- Web Apps: server/client side
+
+---
+
+### JavaScript engine(V8)
+
+- Implements just-in-time compilation ECMAScript
+- Implements WebAssembly
+- Supported by Linux with x64, IA-32, ARM, or MIPS
+- written in C++
+- used by chrome, Node.js
+- Proccessing:
+  - compile
+  - execute
+  - memory allocation
+  - garbage collects
+- Javascript engine pipeline:
+  - ![Alt]("/imge/JS-V8-engine-pipeline.svg" "engine pipeline")
 
 ---
 
@@ -23,6 +45,11 @@ sidebar_label: JavaScript
 ---
 
 <!-- ### Building Blocks -->
+
+### Namespacing
+
+- variable
+- scoping
 
 ### Types
 
@@ -507,16 +534,21 @@ sidebar_label: JavaScript
 
 <!-- ### Architectures -->
 
+#### Class
+
+#### Function
+
 ### Expression
 
-#### Conditon Test
+#### Conditional Expression
 
 - `==`
 - `===`
 - undefined variables return false
 - `>, >=, <, <=, !=`
+- ternary expression
 
-#### Logical Operation
+#### Logical Expression
 
 - `&&, ||, !`
 - xor pattern: `(x && !y || !x && y)`
@@ -650,10 +682,6 @@ if (a === "other value") {
 
 ---
 
-## Design Patterns
-
----
-
 ### Promise, Async, Await, and Sync
 
 ```javascript
@@ -726,11 +754,17 @@ makeRequest();
 
 ---
 
+## Design Patterns
+
+---
+
+---
+
 ## Best Practice
 
 ### Install and Initialize
 
-#### Inline Script
+#### Internal Script
 
 - HelloWorld.html
 
@@ -749,15 +783,48 @@ makeRequest();
 
 - HelloWorld.html
 
-```html
-...
-<body>
+  ```html
   ...
-  <script src="PATH_TO_JAVASCRIPT"></script>
+  <body>
+    ...
+    <script src="src/helloWorld.js"></script>
+    ...
+  </body>
   ...
-</body>
-...
-```
+  ```
+
+- helloWorld.js
+
+  ```javascript
+  ...
+  console.log("hello world!")
+  ...
+  ```
+
+---
+
+### Script Loading
+
+- scripts reffering DOM elements should be loaded after HTML elements parsed by browser.
+  - internal scripting:
+    - `document.addEventListener("DOMContentLoaded", function() { ... });`
+  - external scripting:
+    - `<script src="script.js" async></script>`
+  - put script element right at the bottom of the body (e.g. just before the `</body>` tag)
+- defer vs async diractive
+
+  - `defer` loads script by order
+  - `async` cannot granty orders
+
+    ```javascript
+    //async diractive
+    <script async src="js/vendor/jquery.js" />
+    <script async src="js/script2.js"></script>
+
+    //defer diractive
+    <script defer src="js/vendor/jquery.js" />
+    <script defer src="js/script2.js"></script>
+    ```
 
 ---
 
