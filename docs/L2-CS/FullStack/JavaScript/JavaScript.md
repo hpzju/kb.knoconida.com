@@ -62,14 +62,44 @@ sidebar_label: JavaScript
 
 <!-- ### Building Blocks -->
 
-### Namespacing
+### Variable and Scope
 
-- variable
-- scoping
+- Variable Identifier:
+
+  - `/(Starter)(Repeater)*/`:
+    - Starter
+      - `/[$_A-Za-z]/`
+    - Repeater
+      - `/(starter)|\d/`
+      - `/[$_A-Za-z0-9]/`
+
+- Reserved Words:
+
+  - `await, break, case, catch, class, const, continue, debugger, default, delete, do, else, export, extends, finally, for, function, if, import, in, instance of, new, return, super, switch, this, throw, try, typeof, var, void, while, with, yield`
+  - `let, static`
+  - `enum, implements, package, protected, interface, private, public`
+
+- Namespace Scope:
+
+  - Global Scope
+    - variables declared outside any function, block, or module scope have global scope.
+  - Block Scope
+    - variable is defined inside a block `{}` using the let or const keywords
+  - Function Scope
+    - variables declared inside a function
+  - Hoisting
+    - no matter where functions/variables are declared, they are moved to the top of their scope regardless of weather they were globally scoped or locally.
+  - Scope Chain
+    - used to resolve variables,from inner to outer.
+  - Closures
+    - A closure can also access the variables of its outer function even after the function has returned. This allows the returned function to maintain access to all the resources of the outer function.
+  - Ref: [Understanding Scope in JavaScript](https://scotch.io/tutorials/understanding-scope-in-javascript)
+
+---
 
 ### Types
 
-#### [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+#### Number
 
 - number literal
   - int
@@ -88,7 +118,7 @@ sidebar_label: JavaScript
   - `parseFloat(string)`
   - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
 
-#### [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+#### String
 
 - string literal
 
