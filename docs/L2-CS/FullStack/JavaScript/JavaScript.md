@@ -41,6 +41,9 @@ sidebar_label: JavaScript
 - V8 engine pipeline:
   ![Alt](/img/JS-V8-engine-pipeline.svg "engine pipeline")
 - V8 Ref: [V8 Website](https://v8.dev/)
+  - hidden classes optimization
+  - number tagged values
+  - array, dense with fast elements linear store, sparse with dictionary element hash store
 - other engines
   - Firefox has SpiderMonkey
   - Safari has JavaScriptCore (also called Nitro)
