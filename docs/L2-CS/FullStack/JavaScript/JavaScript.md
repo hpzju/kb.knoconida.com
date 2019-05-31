@@ -28,13 +28,29 @@ sidebar_label: JavaScript
 - Supported by Linux with x64, IA-32, ARM, or MIPS
 - written in C++
 - used by chrome, Node.js
+- single threaded execution engine
 - Proccessing:
   - compile
   - execute
+  - Handling call stack
+  - Handling event loop
   - memory allocation
   - garbage collects
-- Javascript engine pipeline:
+- V8 engine Components:
+  ![Alt](/img/JS-V8-engine-components.svg "engine components")
+- V8 engine pipeline:
   ![Alt](/img/JS-V8-engine-pipeline.svg "engine pipeline")
+- other engines
+  - Firefox has SpiderMonkey
+  - Safari has JavaScriptCore (also called Nitro)
+  - Edge has Chakra
+
+---
+
+### JavaScript Runtime
+
+- Node.js
+- Browsers, Chrome, Firefox, Edge...
 
 ---
 
