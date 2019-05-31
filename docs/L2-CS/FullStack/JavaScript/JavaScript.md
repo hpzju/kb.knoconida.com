@@ -99,6 +99,8 @@ sidebar_label: JavaScript
     - variables declared inside a function
   - Hoisting
     - no matter where functions/variables are declared, they are moved to the top of their scope regardless of weather they were globally scoped or locally.
+  - Name Shadowing
+    - local scope varaible shadows upper scope chain name
   - Scope Chain
     - used to resolve variables,from inner to outer.
   - Closures
@@ -114,30 +116,24 @@ sidebar_label: JavaScript
     - variables can be re-declared and updated
     - variables can be used before declare by hoisting mechanism.
 
+- block: `{ ... }`
+
+  - if, else if, else statement
+  - switch statement
+  - for statement
+  - do statement
+  - while statement
+
 ---
 
-### Types
+### Primitive Types
 
-#### Number
+- Primitive Types
+  - string, number, bigint, boolean, null, undefined, symbol
+- Primitive wrapper objects
+  - String, Number,Boolean, BigInt, Symbol
 
-- number literal
-  - int
-  - float
-  - negative
-  - NaN
-- properties:
-- methods
-  - `num.toString(radix)`
-    - radix ranges [2, 36]
-  - `num.toExponential()`
-  - `num.toFixed()`
-  - `num.toPrecision()`
-- global built-in
-  - `parseInt(string, radix)`
-  - `parseFloat(string)`
-  - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
-
-#### String
+#### string and String Wrapper Object
 
 - string literal
 
@@ -174,7 +170,26 @@ sidebar_label: JavaScript
   - `parseInt(string, radix)`
   - `parseFloat(string)`
 
-#### Boolean
+#### number and Number Wrapper Object
+
+- number literal
+  - int
+  - float
+  - negative
+  - NaN
+- properties:
+- methods
+  - `num.toString(radix)`
+    - radix ranges [2, 36]
+  - `num.toExponential()`
+  - `num.toFixed()`
+  - `num.toPrecision()`
+- global built-in
+  - `parseInt(string, radix)`
+  - `parseFloat(string)`
+  - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+#### boolean and Boolean Wrapper Object
 
 - true
   - []
@@ -189,13 +204,9 @@ sidebar_label: JavaScript
     - [][0]
     - {}.props
 
-#### Null
+#### BigInt Wrapper Object
 
-#### Undefined
-
-#### Symbol
-
-#### Object
+#### Symbol Wrapper Object
 
 <!-- ### Structures -->
 
@@ -342,20 +353,6 @@ sidebar_label: JavaScript
   - `yeild* ..`
 - comma/sequence operator
   - `.. , ..`
-
----
-
-### Functions
-
-- arguments object is a local variable available within all non-arrow functions
-
-#### Built-in Functions
-
-- Info
-
-  ```javascript
-  alert("Hello World!");
-  ```
 
 ---
 
@@ -603,6 +600,22 @@ sidebar_label: JavaScript
 
 #### Function
 
+---
+
+### Functions
+
+- arguments object is a local variable available within all non-arrow functions
+
+#### Built-in Functions
+
+- Info
+
+  ```javascript
+  alert("Hello World!");
+  ```
+
+---
+
 ### Expression
 
 #### Conditional Expression
@@ -649,21 +662,8 @@ sidebar_label: JavaScript
 
 - `const funName = (...parameters) => { ...codes }`
 
-### Context Control
+### Mudule
 
-- Terms:
-  - lexical scoping (static scoping)
-  - global scope
-  - local scope
-  - name shadowing
-- var, const
-- let
-- block: {}
-  - if, else if, else statement
-  - switch statement
-  - for statement
-  - do statement
-  - while statement -
 - module: import, exports
 
 ---

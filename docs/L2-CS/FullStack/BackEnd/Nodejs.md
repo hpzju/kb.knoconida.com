@@ -103,6 +103,15 @@ sidebar_label: Nodejs
 - `npm install -S PACKAGE`
 - `npm install --save PACKAGE`
 - `npm install --production PACKAGE`
+- `npm cache clean --force`
+- `npm ls`
+- `npm view PACKAGE`
+- `npm search PACKAGE`
+- `npm update`
+- `npm uninstall PACKAGE`
+- `npm adduser`
+- `npm publish`
+- `npm audit fix --force`
 
 - package.json
   - semantic version
@@ -122,16 +131,6 @@ sidebar_label: Nodejs
     - `npm install npm-run-all`
     - `"all": "npm-run-all --parallel SCRIPT_LIST"`
     - `"all": "npm-run-all --serial SCRIPT_LIST"`
-
-* `npm cache clean --force`
-* `npm ls`
-* `npm view PACKAGE`
-* `npm search PACKAGE`
-* `npm update`
-* `npm uninstall PACKAGE`
-* `npm adduser`
-* `npm publish`
-* `npm audit fix --force`
 
 ### Package Lists
 
