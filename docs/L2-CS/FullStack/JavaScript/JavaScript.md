@@ -26,9 +26,9 @@ sidebar_label: JavaScript
 - Implements just-in-time compilation ECMAScript
 - Implements WebAssembly
 - Supported by Linux with x64, IA-32, ARM, or MIPS
-- written in C++
-- used by chrome, Node.js
-- single threaded execution engine
+- Written in C++
+- Used by chrome, Node.js
+- Single threaded execution engine
 - Proccessing:
   - compile
   - execute
@@ -37,9 +37,10 @@ sidebar_label: JavaScript
   - memory allocation
   - garbage collects
 - V8 engine Components:
-  ![Alt](/img/JS-V8-engine-components.svg "engine components")
+  ![Alt](/img/JS-V8-engine-components.png "engine components")
 - V8 engine pipeline:
   ![Alt](/img/JS-V8-engine-pipeline.svg "engine pipeline")
+- V8 Ref: [V8 Website](https://v8.dev/)
 - other engines
   - Firefox has SpiderMonkey
   - Safari has JavaScriptCore (also called Nitro)
@@ -51,6 +52,8 @@ sidebar_label: JavaScript
 
 - Node.js
 - Browsers, Chrome, Firefox, Edge...
+  - Diagram
+    ![Alt](/img/JS-runtime.png, "JavaScript Runtime")
 
 ---
 
@@ -75,7 +78,7 @@ sidebar_label: JavaScript
 
 - Reserved Words:
 
-  - `await, break, case, catch, class, const, continue, debugger, default, delete, do, else, export, extends, finally, for, function, if, import, in, instance of, new, return, super, switch, this, throw, try, typeof, var, void, while, with, yield`
+  - `await, break, case, catch, class, const, continue, debugger, default, delete, do, else, export, extends, finally, for, function, if, import, in, instanceof, new, return, super, switch, this, throw, try, typeof, var, void, while, with, yield`
   - `let, static`
   - `enum, implements, package, protected, interface, private, public`
 
