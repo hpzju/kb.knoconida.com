@@ -34,7 +34,7 @@ sidebar_label: JavaScript
   - memory allocation
   - garbage collects
 - Javascript engine pipeline:
-  - ![Alt]("/imge/JS-V8-engine-pipeline.svg" "engine pipeline")
+  ![Alt](/img/JS-V8-engine-pipeline.svg "engine pipeline")
 
 ---
 
