@@ -40,11 +40,16 @@ sidebar_label: JavaScript
   ![Alt](/img/JS-V8-engine-components.png "engine components")
 - V8 engine pipeline:
   ![Alt](/img/JS-V8-engine-pipeline.svg "engine pipeline")
-- V8 Ref: [V8 Website](https://v8.dev/)
+- V8 Optimization: [V8 Website](https://v8.dev/)
   - hidden classes optimization
-  - number tagged values
+  - number, 31-bit interger using tagged values
+  - array, double numbers using unboxing
   - array, dense with fast elements linear store, sparse with dictionary element hash store
-- other engines
+  - monomorphic is better than polymorphic
+  - optimizing compiler using type feedback
+  - IC: inline cacheing
+  - minimize try-catch block
+- Other Engines
   - Firefox has SpiderMonkey
   - Safari has JavaScriptCore (also called Nitro)
   - Edge has Chakra
@@ -55,8 +60,7 @@ sidebar_label: JavaScript
 
 - Node.js
 - Browsers, Chrome, Firefox, Edge...
-  - Diagram
-    ![Alt](/img/JS-runtime.png, "JavaScript Runtime")
+  ![Alt](/img/JS-runtime.png, "JavaScript Runtime")
 
 ---
 
@@ -100,6 +104,15 @@ sidebar_label: JavaScript
   - Closures
     - A closure can also access the variables of its outer function even after the function has returned. This allows the returned function to maintain access to all the resources of the outer function.
   - Ref: [Understanding Scope in JavaScript](https://scotch.io/tutorials/understanding-scope-in-javascript)
+
+- let, const, var
+
+  - `const` means that the identifier can’t be reassigned.
+  - `let` used only in the block it’s defined in
+  - `var`
+    - declarations are globally scoped or function scoped,
+    - variables can be re-declared and updated
+    - variables can be used before declare by hoisting mechanism.
 
 ---
 
