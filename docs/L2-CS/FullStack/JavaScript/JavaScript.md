@@ -59,8 +59,9 @@ sidebar_label: JavaScript
 ### JavaScript Runtime
 
 - Node.js
-- Browsers, Chrome, Firefox, Edge...
-  ![Alt](/img/JS-runtime.png, "JavaScript Runtime")
+- Browsers, Chrome, Firefox, Edge
+- Runtime Diagram:
+  ![Alt](/img/JS-runtime.png "JavaScript Runtime")
 
 ---
 
