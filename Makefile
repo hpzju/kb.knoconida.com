@@ -73,6 +73,6 @@ test:
 travisDeployAWSLightsail:
 	@echo "ssh to AWS Lightsail server and deploy service: "
 	@echo "ssh in..........................................."
-	echo "cd kb.knoconida.com/; make remove; make up; " | ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no  ubuntu@$(AWS_SERVER)
+	echo "cd kb.knoconida.com/; make remove; make up; " | ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=quiet ubuntu@$(AWS_SERVER)
 	@echo "ssh out..........................................."
 	@echo "ok......."
