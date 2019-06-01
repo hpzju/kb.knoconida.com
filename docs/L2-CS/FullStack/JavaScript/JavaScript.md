@@ -206,7 +206,6 @@ sidebar_label: JavaScript
 
     ```javascript
     `hello world!` ...
-    `helllo world` ...
     `hello ${myVal} world` ...
     ```
 
@@ -382,87 +381,155 @@ sidebar_label: JavaScript
 ### Operators
 
 - operator associativity
+
   - left-to-right
   - right-to-left
     - `x = y = z = 10;`
+
 - operator precedence
 
   - [ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
 
-- assignment operators
+- grouping operator
 
-  - `=`
-  - `+=, -=, *=, /=, %=, **=`
-  - `>>=, <<=, >>>=`
-    - `>>>=` Unsigned right shift assignment
-  - `&=, ^=, |=,`
-    - `^=` bitwise xor
+  - `( )`
+
+- new operator
+
+  - `new ObjConstructro( ... )`
+  - `new Obj` is equal to `new Obj()` when no parameters passed.
+  - new operator process
+    ![Alt](/img/JS-operator-new.png "new operator process")
+
+- member access operator
+
+  - `obj.property_name`
+
+- computed member access operator
+
+  - `obj[computed_property]`
+  - `obj["property_name"]`
+
+- function call operator
+
+  - `func( ... )`
+  - `( arg => { body_statements; } )( args ) // IIFE`
+
+- increment/decrement operator
+
+  - `operand++, ++operand, operand--, --operand`
+  - If used postfix (for example, x--), then it returns the value before decrementing.
+  - If used prefix (for example, --x), then it returns the value after decrementing.
+
+- typeof operator
+
+  - `typeof operand`
+    - `typeof null // "object"`
+  - `typeof( operand )`
+  - typeof always returns a string
+    - `"undefined", "string", "number", "boolean", "function", "object"`
+
+- void operator
+
+  - `void expression`
+  - `void( expression )`
+  - The `void` operator returns `undefined` after expression evaluation, used merely to obtain the `undefined` primitive value.
+
+- delete operator
+
+  - `delete obj.property`
+  - `delete obj['property']`
+  - delete operator removes a property from an object
+
+- await operator
+
+  - `[rv] = await expression;`
+    - `var x = await resolveAfter2Seconds(10);`
+  - `await` returns the fulfilled value of the promise, or the value itself if it's not a Promise.
+  - `await` can only be used inside an async function.
 
 - arithmetic operators
 
-  - `+, -, *, /, %, **,`
-  - `operand++, ++operand, operand--, --operand`
-    - If used postfix (for example, x--), then it returns the value before decrementing.
-    - If used prefix (for example, --x), then it returns the value after decrementing.
+  - `+, -, *, /, %, **`
   - `+operand, -operand`
 
-- string operators
+- string concatenate operators
 
   - `+`
 
-  - ```javascript
-    `string ${value} template literal`;
-    ```
+- bitwise operators
 
-- equality operators
-
-  - primitive types compare by value
-  - object types compare by memeory slot
-  - `operand1 == operand2`
-    - `2 == '2' is true`
-    - `false == 'false' is false`
-    - `2 === '2' is false`
-  - `operand1 === operand2`
-  - `!=, !==`
+  - `&, |, ^, ~`
+    - bitwise AND, OR, XOR, NOT
+  - `>>, >>>, <<`
+    - bitwise SHIFT_RIGHT_SIGN_FILL, SHIFT_RIGHT_0_FILL, SHIFT_LEFT
 
 - comparison operators
 
   - `>, >=, <, <=`
 
-- conditional operator
+- equality operators
 
-  - `.. ? .. : ..`
+  - `operand1 == operand2`
+    - `2 == '2' is true`
+    - `false == 'false' is false`
+  - `operand1 === operand2`
+    - `2 === '2' is false`
+  - `!=, !==`
+  - primitive types compare by value
+  - object types compare by memeory slot
+
+- in operator
+
+  - `'property' in Obj`
+  - `in` operator returns true if the specified property is in the specified object or its prototype chain.
+
+- instanceof operator
+
+  - `obj instanceof ObjConstructor`
+  - `instanceof` operator tests whether the prototype property of a ObjConstructor appears anywhere in the prototype chain of an obj.
 
 - logical operators
 
   - `&&, ||, !`
     - no xor in JS, xor pattern: `(x && !y || !x && y)`
 
-- bitwise operators
+- conditional ternary operator
 
-  - `&, |, ^, ~`
-  - `>>, >>>, <<`
+  - `condition ? exprIfTrue : exprIfFalse`
 
-- grouping operator
+- assignment operators
 
-  - `( )`
+  - `=`
+  - `+=, -=, *=, /=, %=, **=`
+  - `>>=, <<=, >>>=`
+  - `>>>=`
+    - SHIFT_RIGHT_0_FILL assignment
+  - `&=, ^=, |=,`
+    - `^=` bitwise xor
 
-- member access operator
+- destructuring assignment operator
 
-  -`obj.member`
+  - `[a, b] = [10, 20]`
+  - `[a, b, ...rest] = [10, 20, 30, 40, 50]`
+  - `({ a, b } = { a: 10, b: 20 });`
+  - `({a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40});`
 
-- indexing access operator
+- yeild operator
 
-  - `obj[..]`
+  - `[rv] = yield [expression];`
+    - `yield` keyword is used to pause and resume a generator function `(function*)`
+    - `let iterator = Generator(args); iterator.next().value`
+  - `yield* [[expression]];`
+    - `yield*` expression is used to delegate to another generator or iterable object.
 
-- new operator
+- comma/sequence operator
 
-  - `new Obj( .. )`
-  - `new Obj`
+  - `expr1, ..., exprn`
 
-- function operator
+- array indexing operator(computed member access operator)
 
-  - `.. ( .. )`
+  - `arr[index]`
 
 - rest operator
 
@@ -473,11 +540,6 @@ sidebar_label: JavaScript
     });
   }
   ```
-
-- arrow function operator
-
-  - `(param1, param2, …, paramN) => { statements }`
-  - `(param1, param2, …, paramN) => expression`
 
 - Array/Object spread operator
 
@@ -498,28 +560,10 @@ sidebar_label: JavaScript
   // this will be [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
   ```
 
-- typeof operator
+- arrow function operator
 
-  - `typeof operand`
-    - `typeof null` returns "object"
-    - typeof always returns a string
-      - "undefined"
-      - "string"
-      - "number"
-      - "boolean"
-      - "function"
-      - "object"
-
-- void operator
-- delete operator
-- await operator
-- in operator
-- instanceof operator
-- yeild operator
-  - `yeild ..`
-  - `yeild* ..`
-- comma/sequence operator
-  - `.. , ..`
+  - `(param1, param2, …, paramN) => { statements }`
+  - `(param1, param2, …, paramN) => expression`
 
 ---
 
