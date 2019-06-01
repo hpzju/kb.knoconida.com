@@ -567,7 +567,7 @@ sidebar_label: JavaScript
 
 ---
 
-### Objects
+### Object and Built-in Objects
 
 #### Object Type
 
@@ -697,141 +697,195 @@ sidebar_label: JavaScript
 
     - iterable argument is expected to be an object that implements an @@iterator method, that returns an iterator object, that produces a two element array-like object.
 
-#### Built-in Objects
+#### Built-in Object: Date
 
-- [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+- Date Object
+
+  - `moment` module recommanded.
 
   ```javascript
-  const date = new Data();
-  var months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-  var days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
+  //constructor
+  new Date();
+  new Date(value);
+  new Date(dateString);
+  new Date(year, monthIndex [, day [, hours [, minutes [, seconds [, milliseconds]]]]]);
+
+  //examples
+  var today = new Date();
+  var birthday = new Date('December 17, 1995 03:24:00');
+  var birthday = new Date('1995-12-17T03:24:00');
+  var birthday = new Date(1995, 11, 17);
+  var birthday = new Date(1995, 11, 17, 3, 24, 0);
+
+  //raw timing pattern
+  var start = Date.now();
+  doSomethingForALongTime();
+  var end = Date.now();
+  var elapsed = end - start; // elapsed time in milliseconds
   ```
 
-- [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+- [Date MDN Ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+
+#### Built-in Object: Math
+
+- Math Object
+
+  - not a function constructor
+  - no instance can be created from Math.
 
   ```javascript
+  //properties
+  Math.E; //Euler's constant and the base of natural logarithms, approximately 2.718.
+  Math.LN2; //Natural logarithm of 2, approximately 0.693.
+  Math.LN10; //Natural logarithm of 10, approximately 2.303.
+  Math.LOG2E; //Base 2 logarithm of E, approximately 1.443.
+  Math.LOG10E; //Base 10 logarithm of E, approximately 0.434.
+  Math.PI; //Ratio of the circumference of a circle to its diameter, approximately 3.14159.
+  Math.SQRT1_2; //Square root of 1/2; equivalently, 1 over the square root of 2, approximately 0.707.
+  Math.SQRT2; //Square root of 2, approximately 1.414.
+
+  //methods - basic arithmatic
+  Math.abs(x);
+  Math.sign(x);
+  Math.max([x[, y[, …]]]);
+  Math.min([x[, y[, …]]]);
+  Math.sqrt(x);
+  Math.hypot([x[, y[, …]]]); //Returns the square root of the sum of squares of its arguments.
+  Math.cbrt(x); //Returns the cube root of a number.
+  Math.clz32(x); //Returns the number of leading zeroes of a 32-bit integer.
+
   Math.ceil();
-  Math.floor();
-  Math.round();
-  Math.min();
-  Math.max();
-  Math.random() // [0,1)
-  ...
+  Math.floor(x);
+  Math.fround(x);// returns the nearest 32-bit single precision float representation
+  Math.round(x);
+  Math.trunc(x);
+
+  Math.log(x);
+  Math.log1p(x); //Returns the natural logarithm (loge, also ln) of 1 + x for a number x.
+  Math.log10(x); //Returns the base 10 logarithm of a number.
+  Math.log2(x); //Returns the base 2 logarithm of a number.
+
+  Math.imul(x, y); //Returns the result of a 32-bit integer multiplication.
+  Math.pow(x, y);
+  Math.exp(x);
+  Math.expm1(x); //Returns exp(x) -1.
+
+  //methods - trigonometric
+  Math.acos(x);
+  Math.acosh(x);
+  Math.cos(x);
+  Math.cosh(x);
+  Math.asin(x);
+  Math.asinh(x);
+  Math.sin(x);
+  Math.sinh(x);
+  Math.atan(x);
+  Math.atanh(x);
+  Math.atan2(y, x);
+  Math.tan(x);
+  Math.tanh(x);
+
+  //methods - random
+  Math.random(); //Returns a pseudo-random number [0, 1).
   ```
 
-- [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [Math MDN Ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+#### Built-in Object: Array
+
+- Array Object
 
   - shallow copy
   - deep copy
   - chaining array methods
 
-  ```javascript
-  //Constructor
-  var fruits = ["Apple", "Banana", "Peach", "Durian"];
-  var fruits = new Array("Apple", "Banana", "Peach", "Durian";
-  var fruits = new Array(4);
+```javascript
+//Constructor
+var arr = [];
+var fruits = ["Apple", "Banana", "Peach", "Durian"];
+var fruits = new Array("Apple", "Banana", "Peach", "Durian");
+var fruits = new Array(4);
 
-  //properties
-  arr.length;
+//properties
+arr.length;
 
-  // constructor like
-  Array.from(arrayLike[, mapFn[, thisArg]]);
-  Array.of(element0[, element1[, ...[, elementN]]]);
+// constructor like
+Array.from(arrayLike[, mapFn[, thisArg]]);
+Array.of(element0[, element1[, ...[, elementN]]]);
 
-  // array type testing
-  Array.isArray(arr);
+// array type testing
+Array.isArray(arr);
 
-  // stringify
-  var str = arr.toString();
-  var str = arr.join([separator]);//null, undefined elements treated as empty string
+// stringify
+var str = arr.toString();
+var str = arr.join([separator]);//null, undefined elements treated as empty string
 
-  // array operation: shallow-copy
-  var new_array = old_array.concat([value1[, value2[, ...[, valueN]]]]);
-  var new_array = arr.reverse();
+// array operation: shallow-copy
+var new_array = old_array.concat([value1[, value2[, ...[, valueN]]]]);
+var new_array = arr.reverse();
 
-  // array operation: in-place
-  arr.copyWithin(target[, start[, end]]);
-  arr.fill(value[, start[, end]])
-  var popedItem = arr.pop(); // undeinfed if arr is empty.
-  arr.push(element1[, ...[, elementN]]);
-  var firstItem = arr.shift();
-  arr.unshift(element1[, ...[, elementN]]); //push to head of arr
+// array operation: in-place
+arr.copyWithin(target[, start[, end]]);
+arr.fill(value[, start[, end]])
+var popedItem = arr.pop(); // undeinfed if arr is empty.
+arr.push(element1[, ...[, elementN]]);
+var firstItem = arr.shift();
+arr.unshift(element1[, ...[, elementN]]); //push to head of arr
 
-  // array operation: slicing and dicing
-  var new_array = arr.slice([begin[, end]]); // [begin, end), shallow-copy
-  var arrDeletedItems = arr.splice(start[, deleteCount[, insertItem1[, insertItem2[, ...]]]]);
+// array operation: slicing and dicing
+var new_array = arr.slice([begin[, end]]); // [begin, end), shallow-copy
+var arrDeletedItems = arr.splice(start[, deleteCount[, insertItem1[, insertItem2[, ...]]]]);
 
-  // array operation: inidexing
-  var first = fruits[0];
-  var last = fruits[fruits.length - 1];
-  var some = fruits["2"];
-  var index = arr.indexOf(searchElement[, fromIndex]); // -1 if not found
-  var index = arr.lastIndexOf(searchElement[, fromIndex]); // -1 if not found
-  var bool = arr.includes(valueToFind[, fromIndex]);
+// array access operation: inidexing
+var first = fruits[0];
+var last = fruits[fruits.length - 1];
+var some = fruits["2"];
+var index = arr.indexOf(searchElement[, fromIndex]); // -1 if not found
+var index = arr.lastIndexOf(searchElement[, fromIndex]); // -1 if not found
+var bool = arr.includes(valueToFind[, fromIndex]);
 
-  //functor-like
-  //iterator
-  var iterator = arr.entries();
-  iterator.next().value; // [index, elem]
+//functor-like
+//iterator
+var iterator = arr.entries();
+iterator.next().value; // [index, elem]
 
-  var iterator = arr.keys();
-  iterator.next().value; // index
+var iterator = arr.keys();
+iterator.next().value; // index
 
-  var iterator = arr.values();
-  iterator.next().value; // elem
+var iterator = arr.values();
+iterator.next().value; // elem
 
-  //finder
-  var elem = arr.find(callback[, thisArg]);//undefined if not found
-  var index = arr.findIndex(callback(element[, index[, array]])[, thisArg]);//-1 if not found
+//finder
+var elem = arr.find(callback(element[, index[, array]])[, thisArg]);//undefined if not found
+var index = arr.findIndex(callback(element[, index[, array]])[, thisArg]);//-1 if not found
 
-  //sorter
-  arr.sort([compareFunction]); // sorted in-place
+//sorter
+arr.sort([compareFunction]); // sorted in-place
 
-  // tester
-  var bool = arr.every(callback(element[, index[, array]])[, thisArg]);
-  var bool = arr.some(callback(element[, index[, array]])[, thisArg]);
+// tester
+var bool = arr.every(callback(element[, index[, array]])[, thisArg]);
+var bool = arr.some(callback(element[, index[, array]])[, thisArg]);
 
-  //filter
-  var newArray = arr.filter(callback(element[, index[, array]])[, thisArg]);
+//filter
+var newArray = arr.filter(callback(element[, index[, array]])[, thisArg]);
 
-  //flatter
-  var newArray = arr.flat(depth);//default depth = 1
-    //recursive flatten deep
-      function flatten(array) {
-        var flattend = [];
-        !(function flat(array) {
-          array.forEach(function(el) {
-            if (Array.isArray(el)) flat(el);
-            else flattend.push(el);
-          });
-        })(array);
-        return flattend;
-      }
-    //map first, then flat at depth=1
-    var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
-      // return element for new_array
-    }[, thisArg])
+//flatter
+var newArray = arr.flat(depth);//default depth = 1
+  //recursive flatten deep
+    function flatten(array) {
+      var flattend = [];
+      (function flat(array) {
+        array.forEach( el => {
+          if (Array.isArray(el)) flat(el);
+          else flattend.push(el);
+        });
+      })(array);
+      return flattend;
+    }
+  //map first, then flat at depth=1
+  var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
+    // return element for new_array
+  }[, thisArg])
 
   //mapper
   var new_array = arr.map(function callback(currentValue[, index[, array]]) {
@@ -867,81 +921,51 @@ sidebar_label: JavaScript
   const concateArr = (...args) => Array.from(args).flat();
   //typeof all args
   const typeofAll = (...args) => Array.from(args).map(elem => typeof elem);
-  ```
+```
 
-- [Object]
-
-  - JSON like, but different
-    - JSON key-value pairs: `"property": value`
-    - JS key-value pairs: `property: value`
-    - JSON value validation: String, Number, Object, Array, Boolean, Null
-    - JS value validation: function, computational properties and JSON allowed.
-    - JSON.parse() will reject computed property names and an error will be thrown.
-
-  ```javascript
-  //constructor
-  var obj = new Object([value])
-  // Object literal
-  var object1 = {a: 'foo', b: 42, c: {}};
-
-  // Shorthand property names (ES2015)
-  var a = 'foo', b = 42, c = {};
-  var o = {a, b, c};
-
-  // Shorthand method names (ES2015)
-  var o = {
-    property(parameters) {}
-  };
-
-  // Computed property names (ES2015)
-  var prop = 'foo';
-  var o = {
-    [prop]: 'hey',
-    ['b' + 'ar']: 'there'
-  };
-
-  var obj = { [ nameValuePair1[, nameValuePair2[, ...nameValuePairN] ] ] };
-
-  //properties
-  Object.prototype
-
-  //Object Operation: indexing
-  //Object Operation: walking through
-  for (key in obj){
-    console.log(key+": "+obj[key]);
-  };
-  ```
-
-- [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
-
-  - bs
-  - d
-
-  ```javascript
-  //constructor
-
-  //string literal
-  `template literal ${value} not working well with Object value`;
-  //properties
-
-  //String Operation: indexing
-
-  //String Operation: slicing and dicing
-
-  // String Operation: transforming
-  ```
+- [Array MDN Ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
 ---
 
 <!-- ### Architectures -->
 
-#### Class
+#### Built-in Object: JSON
 
-#### Function
+#### Built-in Object: RegExp
+
+#### Built-in Object: Map
+
+#### Built-in Object: Set
+
+#### Built-in Object: Promise
+
+#### Built-in Object: Error
+
+#### Built-in Object: Generator
+
+#### Built-in Object: GeneratorFunction
+
+#### Built-in Object: Reflex
+
+#### Built-in Object: Proxy
+
+#### Built-in Object: WebAssembly
+
+#### Built-in Object: Misc
+
+- ArrayBuffer
+
+  - `new ArrayBuffer(length)`
+
+- DataView
+
+  - `new DataView(buffer [, byteOffset [, byteLength]])`
+
+- Intl
 
 ---
 
-### Functions
+### function and Function warpper object
 
 - arguments object is a local variable available within all non-arrow functions
 
@@ -952,6 +976,10 @@ sidebar_label: JavaScript
   ```javascript
   alert("Hello World!");
   ```
+
+---
+
+### Class
 
 ---
 
