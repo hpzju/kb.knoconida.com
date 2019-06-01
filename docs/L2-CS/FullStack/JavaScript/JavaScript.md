@@ -541,7 +541,7 @@ sidebar_label: JavaScript
   }
   ```
 
-- Array/Object spread operator
+- spread operator
 
   ```javascript
   const adrian = {
