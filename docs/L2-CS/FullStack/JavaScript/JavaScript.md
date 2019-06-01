@@ -242,7 +242,7 @@ sidebar_label: JavaScript
   - `newStr = str.toLocaleUpperCase([locale, locale, ...])`
 
   - `charCode = str.charCodeAt(index)`
-  - `codePoint = str.charCodePoint(index)`
+  - `codePoint = str.codePointAt(index)`
   - `str.normalize([form])`
 
   - `newStr = str.concat(string2[, string3, ..., stringN])`
@@ -568,6 +568,134 @@ sidebar_label: JavaScript
 ---
 
 ### Objects
+
+#### Object Type
+
+- Object literal
+
+  - `let obj = { [ nameValuePair1[, nameValuePair2[, ...nameValuePairN] ] ] }`
+  - `let obj = new Object([value])`
+
+- Object properties
+
+  - `Object​.prototype`
+
+- Object methods
+
+  - `retrunObj = Object.assign(target, ...sources)`
+
+    - copy the values of all enumerable own properties from one or more source objects to a target object. It will return the target object.
+    - Properties in the target object will be overwritten by properties in the sources if they have the same key.
+    - shallow copy
+    - deep copy pattern
+
+      ```javascript
+      obj1 = { a: 0, b: { c: 0 } };
+      let obj3 = JSON.parse(JSON.stringify(obj1));
+      ```
+
+  - `obj = Object.create(proto, [propertiesObject])`
+
+    - creates a new object, using an existing object as the prototype of the newly created object.
+
+  - `obj = Object.defineProperties(obj, props)`
+
+    - defines new or modifies existing properties directly on an object, returning the object
+
+  - `obj = Object.defineProperty(obj, prop, descriptor)`
+
+    - defines a new property directly on an object, or modifies an existing property on an object, and returns the object.
+    - descriptor
+      - `let descriptor = { enumerable: false, configurable: false, writable: false, value: 'static'}`
+
+  - `descriptor = Object.getOwnPropertyDescriptor(obj, prop)`
+
+    - descriptor is an object with some of the following attributes
+      - `value, writable, get, set, configurable, enumerable`
+
+  - `descriptorsObj = Object.getOwnPropertyDescriptors(obj)`
+
+  - `propsStringArr = Object.getOwnPropertyNames(obj)`
+
+  - `symbolPropsArr = Object.getOwnPropertySymbols(obj)`
+
+  - `bool = obj.hasOwnProperty(prop)`
+
+  - `bool = obj.propertyIsEnumerable(prop)`
+
+  - `string = obj.toLocaleString()`
+
+  - `string = obj.toString()`
+
+  - `primitiveValue = object.valueOf()`
+
+  - `protoObj = Object.getPrototypeOf(obj)`
+
+  - `newObj = Object.setPrototypeOf(obj, prototype)`
+
+  - `bool = prototypeObj.isPrototypeOf(object)`
+
+  - `bool = Object.is(value1, value2);`
+
+  - `bool = Object.isExtensible()`
+
+  - `unextendObj = Object.preventExtensions(obj)`
+
+  - `sealObj = Object.seal(obj)`
+
+  - `bool = Object.isSealed(obj)`
+
+  - `bool = Object.isFrozen(obj)`
+
+  - `frozenObj = Object.freeze(obj)`
+
+    - Nothing can be added to or removed from the properties set of a frozen object
+    - shallow freeze
+    - deep freeze pattern
+
+      ```javascript
+      function deepFreeze(object) {
+        // Retrieve the property names defined on object
+        var propNames = Object.getOwnPropertyNames(object);
+
+        // Freeze properties before freezing self
+
+        for (let name of propNames) {
+          let value = object[name];
+
+          object[name] =
+            value && typeof value === "object" ? deepFreeze(value) : value;
+        }
+
+        return Object.freeze(object);
+      }
+      ```
+
+  - `propsStringArr = Object.keys(obj)`
+
+  - `propsValueArr = Object.values(obj)`
+
+  - `let keyValueArray = Object.entries(obj)`
+
+    ```javascript
+    // iterate through key-value gracefully
+    const obj = { a: 5, b: 7, c: 9 };
+    for (const [key, value] of Object.entries(obj)) {
+      console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+    }
+
+    // Or, using array extras
+    Object.entries(obj).forEach(([key, value]) => {
+      console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+    });
+
+    //Converting to a Map
+    const map = new Map(Object.entries(obj));
+    ```
+
+  - `obj = Object.fromEntries(iterable);`
+
+    - iterable argument is expected to be an object that implements an @@iterator method, that returns an iterator object, that produces a two element array-like object.
 
 #### Built-in Objects
 
