@@ -21,25 +21,25 @@
         "title": "Vertical Industries",
         "sidebar_label": "Vertical Industries"
       },
-      "L2-CS/Bootstrap/Bootstrap": {
-        "title": "Bootstrap a responsive front-end web framework",
-        "sidebar_label": "Bootstrap"
-      },
       "L2-CS/Computation/Computation": {
         "title": "Computation Science",
         "sidebar_label": "Computation"
+      },
+      "L2-CS/DataScience/Anaconda": {
+        "title": "Anaconda a Python Data Science Package and DevOps platform.",
+        "sidebar_label": "Anaconda"
       },
       "L2-CS/DataScience/DataScience": {
         "title": "DataScience",
         "sidebar_label": "DataScience"
       },
-      "L2-CS/Django/Django": {
-        "title": "Django a python server side web framework.",
-        "sidebar_label": "Django"
-      },
-      "L2-CS/Docker/Docker": {
-        "title": "Docker",
+      "L2-CS/DevOps/Docker": {
+        "title": "Docker is a lightweight virtulization technology, drives Cloud-Native DevOps paradigm shifting.",
         "sidebar_label": "Docker"
+      },
+      "L2-CS/DevOps/Ubuntu": {
+        "title": "Ubuntu Linux Distro, a widely used desktop/server environment linux platform.",
+        "sidebar_label": "Ubuntu"
       },
       "L2-CS/FastHowto/Howto-AWSCLI4Lightsail": {
         "title": "Howto Install, Config and Run AWS CLI for Lightsail Management",
@@ -53,49 +53,65 @@
         "title": "Fast Howto Tutorial Template",
         "sidebar_label": "tpl FastHowto"
       },
-      "L2-CS/JavaScript/JavaScript": {
-        "title": "JavaScript",
+      "L2-CS/FullStack/BackEnd/Django": {
+        "title": "Django a python server side web framework.",
+        "sidebar_label": "Django"
+      },
+      "L2-CS/FullStack/BackEnd/Nodejs": {
+        "title": "Nodejs an asynchronous event driven JavaScript runtime for server side, designed to build scalable network applications",
+        "sidebar_label": "Nodejs"
+      },
+      "L2-CS/FullStack/DataEnd/MongoDB": {
+        "title": "MongoDB a document database with the scalability and flexibility",
+        "sidebar_label": "MongoDB"
+      },
+      "L2-CS/FullStack/DataEnd/MySQL": {
+        "title": "MySQL a relation database system",
+        "sidebar_label": "MySQL"
+      },
+      "L2-CS/FullStack/FrontEnd/Bootstrap": {
+        "title": "Bootstrap a responsive front-end HTML5/CSS framework",
+        "sidebar_label": "Bootstrap"
+      },
+      "L2-CS/FullStack/FrontEnd/HTML5CSS": {
+        "title": "HTML5 and CSS Shape the WWW",
+        "sidebar_label": "HTML5 and CSS"
+      },
+      "L2-CS/FullStack/FrontEnd/React": {
+        "title": "React a Javascript front-end Web Library",
+        "sidebar_label": "React"
+      },
+      "L2-CS/FullStack/FrontEnd/Vue": {
+        "title": "Vue.js a Javascript front-end Web Framework",
+        "sidebar_label": "Vue"
+      },
+      "L2-CS/FullStack/JavaScript/JavaScript": {
+        "title": "JavaScript, A Web Oriented Programming Language",
         "sidebar_label": "JavaScript"
       },
-      "L2-CS/JSON/JSON": {
-        "title": "JSON",
-        "sidebar_label": "JSON"
+      "L2-CS/FullStack/Python/Python": {
+        "title": "Python a programming language.",
+        "sidebar_label": "Python"
       },
       "L2-CS/L2-CS": {
         "title": "Computer Science and Engineering",
         "sidebar_label": "CS&SE"
       },
-      "L2-CS/Markdown/Markdown": {
+      "L2-CS/Misc/JSON": {
+        "title": "JSON JavaScript Object Notation, a data exchange file format",
+        "sidebar_label": "JSON"
+      },
+      "L2-CS/Misc/Markdown": {
         "title": "Markdown",
         "sidebar_label": "Markdown"
       },
-      "L2-CS/Markdown/xxxx": {
-        "title": "xxxxx",
-        "sidebar_label": "xxxx"
-      },
-      "L2-CS/MongoDB/MongoDB": {
-        "title": "MongoDB a document database with the scalability and flexibility",
-        "sidebar_label": "MongoDB"
-      },
-      "L2-CS/MySQL/MySQL": {
-        "title": "MySQL a relation database system",
-        "sidebar_label": "MySQL"
-      },
-      "L2-CS/Nodejs/Nodejs": {
-        "title": "Nodejs an asynchronous event driven JavaScript runtime, designed to build scalable network applications",
-        "sidebar_label": "Nodejs"
-      },
-      "L2-CS/Python/Anaconda": {
-        "title": "Anaconda a Python Data Science Package and DevOps platform.",
-        "sidebar_label": "Anaconda"
-      },
-      "L2-CS/Python/Python": {
-        "title": "Python a programming language.",
-        "sidebar_label": "Python"
-      },
-      "L2-CS/reStructuredText/reStructuredText": {
+      "L2-CS/Misc/reStructuredText": {
         "title": "reStructuredText",
         "sidebar_label": "reStructuredText"
+      },
+      "L2-CS/Misc/xxxx": {
+        "title": "xxxxx",
+        "sidebar_label": "xxxx"
       },
       "L2-Math/L2-Math": {
         "title": "Mathematics",
@@ -109,9 +125,9 @@
         "title": "Methodology",
         "sidebar_label": "Methodology"
       },
-      "L2-Methodology/Misc/tpl-dummy": {
-        "title": "Dummy template",
-        "sidebar_label": "dummy"
+      "L2-Methodology/Misc/pptDesign": {
+        "title": "PPT Design Principles and Practices",
+        "sidebar_label": "PPT Design"
       },
       "L2-Methodology/Misc/tpl-dummy1": {
         "title": "Dummy1 template",
