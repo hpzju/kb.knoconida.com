@@ -117,13 +117,61 @@ sidebar_label: JavaScript
     - variables can be re-declared and updated
     - variables can be used before declare by hoisting mechanism.
 
-- block: `{ ... }`
+- Block: `{ ... }`
 
   - if, else if, else statement
   - switch statement
   - for statement
   - do statement
   - while statement
+
+- Variable Lifecycle
+
+  - TDZ: temporary dead zone
+
+  - Phases
+
+    - Declaration
+    - Initialization
+    - Assignment
+
+  - `var` lifecycle
+
+    - compilation
+      - declaration
+      - initialization
+    - execution
+      - assginment
+
+  - `undecalared` lifecycle
+
+    - compilation
+    - execution
+      - declaration
+      - initialization
+      - assginment
+
+  - `let` lifecycle
+
+    - compilation
+      - declaration
+    - execution
+      - initialization
+      - assginment
+
+  - `const` lifecycle
+
+    - compilation
+      - declaration
+    - execution
+      - initialization, Assginment
+
+  - `function` lifecycle
+    - compilation
+      - declaration
+      - initialization
+      - assginment
+    - execution
 
 ---
 
