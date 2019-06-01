@@ -133,15 +133,76 @@ sidebar_label: JavaScript
   - string, number, bigint, boolean, null, undefined, symbol
 - Primitive wrapper objects
   - String, Number,Boolean, BigInt, Symbol
+- typeof operator
 
-#### string and String Wrapper Object
+  ```javascript
+  // Numbers
+  typeof 37 === "number";
+  typeof 3.14 === "number";
+  typeof 42 === "number";
+  typeof Math.LN2 === "number";
+  typeof Infinity === "number";
+  typeof NaN === "number"; // Despite being "Not-A-Number"
+  typeof Number("1") === "number"; // Number tries to parse things into numbers
+  typeof 42n === "bigint";
+
+  // Strings
+  typeof "" === "string";
+  typeof "bla" === "string";
+  typeof `template literal` === "string";
+  typeof "1" === "string"; // note that a number within a string is still typeof string
+  typeof typeof 1 === "string"; // typeof always returns a string
+  typeof String(1) === "string"; // String converts anything into a string, safer than toString
+
+  // Booleans
+  typeof true === "boolean";
+  typeof false === "boolean";
+  typeof Boolean(1) === "boolean"; // Boolean() will convert values based on if they're truthy or falsy
+  typeof !!1 === "boolean"; // two calls of the ! (logical NOT) operator are equivalent to Boolean()
+
+  // Symbols
+  typeof Symbol() === "symbol";
+  typeof Symbol("foo") === "symbol";
+  typeof Symbol.iterator === "symbol";
+
+  // Undefined
+  typeof undefined === "undefined";
+  typeof declaredButUndefinedVariable === "undefined";
+  typeof undeclaredVariable === "undefined";
+
+  //Null
+  typeof null === "object";
+
+  // Objects
+  typeof { a: 1 } === "object";
+
+  // use Array.isArray or Object.prototype.toString.call
+  // to differentiate regular objects from arrays
+  typeof [1, 2, 4] === "object";
+
+  typeof new Date() === "object";
+  typeof /regex/ === "object"; // See Regular expressions section for historical results
+
+  // The following are confusing, dangerous, and wasteful. Avoid them.
+  typeof new Boolean(true) === "object";
+  typeof new Number(1) === "object";
+  typeof new String("abc") === "object";
+  typeof new Function() === "function";
+
+  // Functions
+  typeof function() {} === "function";
+  typeof class C {} === "function";
+  typeof Math.sin === "function";
+  ```
+
+#### string type and String Wrapper Object
 
 - string literal
 
   - single quote: `'string'`
   - double quote: `"string"`
   - escaping char: `'string\'s length'`
-  - Template literals
+  - string template literals
 
     ```javascript
     `hello world!` ...
@@ -162,14 +223,64 @@ sidebar_label: JavaScript
     otherwise my code is unreadable.";
     ```
 
-- properties:
-  - `"string".length`
-- methods
-  - `''.toLowerCase()`
-  - `''.toUpperCase()`
-- global built-in
-  - `parseInt(string, radix)`
-  - `parseFloat(string)`
+- Properties:
+  - `str.length`
+  - `String.prototype`
+    - `str.__proto__`
+- Static methods
+  - `String.fromCharCode(189, 43, 190, 61)`
+  - `String.fromCodePoint(9731, 9733, 9842, 0x2F804)`
+- String manipulation methods
+
+  - `character = str.charAt(index)`
+  - `newStr = str.toLowerCase()`
+  - `newStr = str.toLocaleLowerCase([locale, locale, ...])`
+  - `newStr = str.toUpperCase()`
+  - `newStr = str.toLocaleUpperCase([locale, locale, ...])`
+
+  - `charCode = str.charCodeAt(index)`
+  - `codePoint = str.charCodePoint(index)`
+  - `str.normalize([form])`
+
+  - `newStr = str.concat(string2[, string3, ..., stringN])`
+
+    - `+, += operator is prefered.`
+
+  - `bool = str.endsWith(searchString[, searchBackwardPos])`
+  - `bool = str.startsWith(searchString[, searchForwardPos])`
+  - `bool = str.includes(searchString[, searchForwardPos])`
+  - `index = str.indexOf(searchString[, searchForwardPos]) //-1 returns if not found`
+  - `index = str.lastIndexOf(searchString[, searchBackwardPos]) //-1 returns if not found`
+    - `'abab'.lastIndexOf('ab', 2)` will return 2 and not 0, as fromIndex limits only the beginning of the match.
+  - `compare = str.localeCompare(compareString[, locales[, options]])`
+  - `matchArr = str.match(regexp)`
+  - `matchIterator = str.matchAll(regexp)`
+  - `index = str.search(regexp)`
+
+  - `newStr = str.slice(beginIndex[, endIndex])`
+  - `strArr = str.split([separator[, limit]])`
+  - `newStr = str.substring(indexStart[, indexEnd])`
+
+  - `newStr = str.padEnd(targetLength [, padString])`
+  - `newStr = str.padStart(targetLength [, padString])`
+  - `newStr = str.repeat(count);`
+  - `newStr = str.replace(regexp|substr, newSubstr|function)`
+  - `newStr = str.trim()`
+  - `newStr = str.trimEnd()`
+  - `newStr = str.trimStart()`
+
+  - `str = StringObj.toString()`
+  - `str = StringObj.valueOf()`
+
+  - `strIterator = str[Symbol.iterator]()`
+  - `for (char of str) { ... }`
+
+- Global built-in
+  - `int = parseInt(string, radix)`
+  - `float = parseFloat(string)`
+  - `value = eval(string)`
+  - `encodeURI(uriString), encodeURIComponent(uriString)`
+  - `decodeURI(encodedURI), decodeURIComponent(encodedURI)`
 
 #### number and Number Wrapper Object
 
@@ -188,6 +299,8 @@ sidebar_label: JavaScript
 - global built-in
   - `parseInt(string, radix)`
   - `parseFloat(string)`
+  - `isFinite()`
+  - `isNaN`
   - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
 
 #### boolean and Boolean Wrapper Object
