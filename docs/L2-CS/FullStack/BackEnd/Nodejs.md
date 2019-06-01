@@ -96,14 +96,13 @@ sidebar_label: Nodejs
 ### npm: [Node Package Manager](https://docs.npmjs.com/)
 
 - `npm init`
-- `npm install PACKAGE`
-- `npm install --production PACKAGE`
-- `npm install --save PACKAGE`
 - `npm install -g PACKAGE`
-- package.json
-  - `PackageName`: Major.Minor.Patch
-  - `"~PackageName"`: Major.Minor.x
-  - `"^PackageName"`: Major.x.x
+- `npm install -g PACKAGE@VERSION`
+- `npm install -D PACKAGE`
+- `npm install --save-dev PACKAGE`
+- `npm install -S PACKAGE`
+- `npm install --save PACKAGE`
+- `npm install --production PACKAGE`
 - `npm cache clean --force`
 - `npm ls`
 - `npm view PACKAGE`
@@ -113,6 +112,25 @@ sidebar_label: Nodejs
 - `npm adduser`
 - `npm publish`
 - `npm audit fix --force`
+
+- package.json
+  - semantic version
+    - `PackageName`: Major.Minor.Patch
+    - `">PackageName"`: higher than Major.Minor.Patch
+    - `"~PackageName"`: Major.Minor.x
+    - `"^PackageName"`: Major.x.x
+  - npm scripts
+    - `npm prestart`
+    - `npm start`
+    - `npm poststart`
+    - `npm stop`
+    - `npm restart`
+    - `npm test`
+    - `npm run CUSTOME_SCRIPTS`
+  - npm run all
+    - `npm install npm-run-all`
+    - `"all": "npm-run-all --parallel SCRIPT_LIST"`
+    - `"all": "npm-run-all --serial SCRIPT_LIST"`
 
 ### Package Lists
 
