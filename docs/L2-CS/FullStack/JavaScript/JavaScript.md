@@ -224,12 +224,16 @@ sidebar_label: JavaScript
     ```
 
 - Properties:
+
   - `str.length`
   - `String.prototype`
     - `str.__proto__`
+
 - Static methods
+
   - `String.fromCharCode(189, 43, 190, 61)`
   - `String.fromCodePoint(9731, 9733, 9842, 0x2F804)`
+
 - String manipulation methods
 
   - `character = str.charAt(index)`
@@ -285,42 +289,91 @@ sidebar_label: JavaScript
 #### number and Number Wrapper Object
 
 - number literal
-  - int
-  - float
-  - negative
-  - NaN
-- properties:
-- methods
-  - `num.toString(radix)`
-    - radix ranges [2, 36]
-  - `num.toExponential()`
-  - `num.toFixed()`
-  - `num.toPrecision()`
-- global built-in
-  - `parseInt(string, radix)`
+
+  - int: `let i = 5`
+  - float: `let f = 5.0`
+  - negative: `let n = -4`
+  - NaN: `NaN`
+  - Infinity: `Infinity`
+
+- Properties:
+
+  - `Number​.EPSILON`
+  - `Number​.MAX_SAFE_INTEGER`
+    - 2^53-1
+  - `Number​.MAX_VALUE`
+  - `Number​.MIN_SAFE_INTEGER`
+    - -(2^53-1)
+  - `Number​.MIN_VALUE`
+  - `Number​.NEGATIVE_INFINITY`
+  - `Number​.NaN`
+  - `Number​.POSITIVE_INFINITY`
+  - `Number​.prototype`
+    - `num.__proto__`
+
+- Static methods
+
+  - `bool = Number​.isFinite( val )`
+  - `bool = Number​.isNaN( val )`
+  - `num = Number​.parse​Float( string )`
+  - `num = Number.parseInt(string,[ radix])`
+  - `bool = Number​.isInteger( val )`
+    - `Number.isInteger(Number.MAX_VALUE+4); //true`
+    - `Number.isInteger(99999999999999999999999); // true`
+    - `Number.isInteger(5.0); // true`
+    - `Number.isInteger(5.000000000000001); // false`
+    - `Number.isInteger(5.0000000000000001); // true`
+  - `bool = Number​.isSafe​Integer( val )`
+
+- Number manipulation methods
+
+  - `str = num.toExponential([fractionDigits])`
+  - `str = num.toFixed([fractionDigits])`
+  - `str = num.toPrecision([precision])`
+  - `str = num.toString([radix])`
+
+    - `radix ranges [2, 36]`
+
+  - `num = numObj.valueOf()`
+
+- Global built-in
+
+  - `parseInt(string,[ radix])`
   - `parseFloat(string)`
   - `isFinite()`
   - `isNaN`
-  - [math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+#### bitint and BigInt Wrapper Object
+
+- bitint literal
+
+  - `let bn = 223n`
 
 #### boolean and Boolean Wrapper Object
 
-- true
-  - []
-  - {}
-- false
-  - falsy values
-    - null
-    - undefined
-    - '', ""
-    - 0
-    - NaN
-    - [][0]
-    - {}.props
+- boolean literal
 
-#### BigInt Wrapper Object
+  - `let b = true`
+  - `let b = false`
+
+- Truthy object
+
+  - `[], {}, new Function()`
+
+- Falsey values
+  - `null, undefined, '', "", 0, NaN, [][0], {}.props`
 
 #### Symbol Wrapper Object
+
+- symbol literal
+
+  - `let sym = Symbol([description string])`
+  - `let sym = Symbol()`
+  - `let sym = Symbol("a symbal")`
+
+- Usage
+  - a symbol value is created by invoking the function `Symbol()`, which dynamically produces an anonymous, unique value
+  - A symbol value may be used as an identifier for object properties; this is the data type's only purpose.
 
 <!-- ### Structures -->
 
