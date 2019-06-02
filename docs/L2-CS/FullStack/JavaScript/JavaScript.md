@@ -303,19 +303,21 @@ sidebar_label: JavaScript
   - `index = str.indexOf(searchString[, searchForwardPos]) //-1 returns if not found`
   - `index = str.lastIndexOf(searchString[, searchBackwardPos]) //-1 returns if not found`
     - `'abab'.lastIndexOf('ab', 2)` will return 2 and not 0, as fromIndex limits only the beginning of the match.
-  - `compare = str.localeCompare(compareString[, locales[, options]])`
+  - `bool = str.localeCompare(compareString[, locales[, options]])`
+
   - `matchArr = str.match(regexp)`
   - `matchIterator = str.matchAll(regexp)`
   - `index = str.search(regexp)`
+  - `newStr = str.replace(regexp|substr, newSubstr|function)`
 
+  - `strArr = str.split([separator[, limit]]) //separator can be a RegExp`
   - `newStr = str.slice(beginIndex[, endIndex])`
-  - `strArr = str.split([separator[, limit]])`
   - `newStr = str.substring(indexStart[, indexEnd])`
 
   - `newStr = str.padEnd(targetLength [, padString])`
   - `newStr = str.padStart(targetLength [, padString])`
   - `newStr = str.repeat(count);`
-  - `newStr = str.replace(regexp|substr, newSubstr|function)`
+
   - `newStr = str.trim()`
   - `newStr = str.trimEnd()`
   - `newStr = str.trimStart()`
@@ -979,7 +981,210 @@ var newArray = arr.flat(depth);//default depth = 1
 
 #### Built-in Object: JSON
 
+- `JSONstring = JSON.stringify(value[, replacer[, space]])`
+
+  ```javascript
+  JSON.stringify({
+    x: 5,
+    y: 6,
+    toJSON() {
+      return this.x + this.y;
+    }
+  });
+
+  let foo = {
+    foundation: "Mozilla",
+    model: "box",
+    week: 45,
+    transport: "car",
+    month: 7
+  };
+
+  //replacer as function
+  function replacer(key, value) {
+    // Filtering out properties
+    if (typeof value === "string") {
+      return undefined;
+    }
+    return value;
+  }
+  JSON.stringify(foo, replacer); // '{"week":45,"month":7}'
+
+  //replacer as array
+  JSON.stringify(foo, ["week", "month"]); // '{"week":45,"month":7}', only keep "week" and "month" propertie
+
+  //space for indentation
+  JSON.stringify({ uno: 1, dos: 2 }, null, "\t");
+  // returns the string:
+  // '{
+  //     "uno": 1,
+  //     "dos": 2
+  // }'
+
+  //obj toJSON() method
+  //If object defined toJSON() method, it will be called to  customizes JSON stringification behavior.
+  //JSON.stringify() calls toJSON with one parameter:
+  var obj = {
+    data: "data",
+    toJSON(key) {
+      if (key) return `Now I am a nested object under key '${key}'`;
+      else return this;
+    }
+  };
+
+  // pass empty string "" to toJSON() for directly called on obj
+  JSON.stringify(obj);
+  // '{"data":"data"}'
+
+  //pass property name of obj for obj is a property value
+  JSON.stringify({ obj });
+  // '{"obj":"Now I am a nested object under key 'obj'"}'
+
+  //pass index number's string of obj for obj in an array
+  JSON.stringify([obj]);
+  // '["Now I am a nested object under key '0'"]'
+  ```
+
+- `obj = JSON.parse(text[, reviver])`
+
+  ```javascript
+  //reviver
+  JSON.parse(
+    '{"p": 5}',
+    (key, value) =>
+      typeof value === "number"
+        ? value * 2 // return value * 2 for numbers
+        : value // return everything else unchanged
+  );
+
+  // { p: 10 }
+
+  //reviver called from inner to outer for nested obj.
+  //property name, the property value will passed as arguments.
+  //If the reviver function returns undefined, the property is deleted
+  //If the reviver retruns, property is redefined to be the return value.
+  ```
+
 #### Built-in Object: RegExp
+
+- Introduction
+
+  - text manipulating
+  - String Object: match(), matchAll(), replace(), search(), split()
+  - greedy match
+
+- RegExp literal
+
+  - `var re = /ab+c/;`
+  - `var re = /pattern/flags;`
+
+- RegExp constructor and new operator
+
+  - `var re = new RegExp('ab+c');`
+  - `var re = new RegExp(pattern[, flags]);`
+  - `var re = RegExp(pattern[, flags]);`
+
+- RegExp properties
+
+  - `regExpObj.lastIndex`
+  - `regExpObj.source`
+  - `regExpObj.flages`
+  - `regExpObj.global; //'g' flag`
+  - `regExpObj.ignoreCase; //'i' flag`
+  - `regExpObj.multiline; //'m' flag`
+    - if set, `^` and `$` match the start and end of the whole string.
+    - if not set, `^` and `$` match the start and end of each line.
+  - `regExpObj.sticky; //'y' flag`
+  - `regExpObj.unicode; //'u' flag`
+  - `regExpObj.dotAll; // 's' flag`
+    - if set, `.` matches newline character(`\n`) as well.
+    - if not set, `.` will not match newline character.
+
+- RegExp methods
+
+  - `matchArrLike = regexObj.exec(str)`
+  - `bool = regexObj.test(str)`
+
+- Patterns
+
+  ```javascript
+  let re = /abc/;
+
+  // Simple pattern
+  re = /abc/; //matching "abc"
+
+  // Escaping
+  // special chars:  \ / [ ] { } ( ) ? + * | . ^ $
+  re = /ab\*c/; //matching "ab*c"
+  re = new RegExp("a\\*bc"); //matching "ab*c", escaping twice
+  re = /\/example\/[a-z]+/; //matching "/example/(LOWERCASESTRING)"
+
+  //Meta characters
+  // .        a single character, exclude newlines if 's' flag is not set.
+  // \0       a null char
+  // \t       a tab char
+  // \n       a newline char
+  // \uXXXX   a unicode char
+
+  // Char Classes
+  // \s       a whitespace, such as tab, space, newline, unicode spaces..
+  // \S       a non-whitespace character
+  // \d       a digit, like [0-9]
+  // \D       a non-digit, like [^0-9]
+  // \w       a world character, like [a-zA-Z0-9_]
+  // \W       a non-world character, like [^a-zA-Z0-9_]
+
+  // Bracket and Ranges
+  // [...]    Any one character between the brackets.
+  // [^...]   Any one character not between the brackets.
+  // [0-9]    one digit char
+  // [a-z]    one lowercase char
+  // [A-Z]    one uppercase char
+  // [a-Z]    one char case-insensitive
+  // [^]      matches any non-empty char
+  let re = /[^]/g;
+  re.exec("!@\t\b\ndf\0");
+
+  // Quantifier
+  // p+       p repeated 1 or more
+  // p*       p repeated 0 or more
+  // .*       matches any sequence of char, except newline if flag 's' is not set.
+  // p?       p repeated atmost 1
+  // p{N}     p repeated N
+  // p{L,U}   p repeated between [L,U]
+  // p{L,}    p repeated at least L
+
+  // Grouping
+  // (p)      p grouped by "()"
+  // (p)+     quantifier can be apllied to grouping pattern, retrun value arry will record group values.
+  // (p)*
+  // (p)?
+  // (p){N}
+  // (p){L, U}
+  // (p){L, }
+  // named group
+  const re = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+
+  // Boundaries
+  // p$       end with p
+  // ^p       begin with p
+  // \b       a word boundary
+  // \B       not a word boundary
+
+  //regexObj.exec(str) returns matchedArrLike
+  var re = /quick\s(brown).+?(jumps)/gi;
+  var result = re.exec("The Quick Brown Fox Jumps Over The Lazy Dog");
+  console.log(result);
+  // ["Quick Brown Fox Jumps", "Brown", "Jumps", index: 4, input: "The Quick Brown Fox Jumps Over The Lazy Dog", groups: undefined]
+  // 0: "Quick Brown Fox Jumps"
+  // 1: "Brown"
+  // 2: "Jumps"
+  // groups: undefined
+  // index: 4
+  // input: "The Quick Brown Fox Jumps Over The Lazy Dog"
+  // length: 3
+  // **proto**: Array(0)
+  ```
 
 #### Built-in Object: Map
 
@@ -1003,11 +1208,11 @@ var newArray = arr.flat(depth);//default depth = 1
 
 - ArrayBuffer
 
-  - `new ArrayBuffer(length)`
+- `new ArrayBuffer(length)`
 
 - DataView
 
-  - `new DataView(buffer [, byteOffset [, byteLength]])`
+- `new DataView(buffer [, byteOffset [, byteLength]])`
 
 - Intl
 
@@ -1021,9 +1226,9 @@ var newArray = arr.flat(depth);//default depth = 1
 
 - Info
 
-  ```javascript
-  alert("Hello World!");
-  ```
+```javascript
+alert("Hello World!");
+```
 
 ---
 
