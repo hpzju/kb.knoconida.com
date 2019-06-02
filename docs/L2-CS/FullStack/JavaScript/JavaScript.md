@@ -93,10 +93,12 @@ sidebar_label: JavaScript
 - Namespace Scope:
 
   - Global Scope
+    - `'use strict';` at begining to put JS in strict mode.
     - variables declared outside any function, block, or module scope have global scope.
   - Block Scope
     - variable is defined inside a block `{}` using the let or const keywords
   - Function Scope
+    - `'use strict';` at start of function body to put function statements in strict mode
     - variables declared inside a function
   - Hoisting
     - no matter where functions/variables are declared, they are moved to the top of their scope regardless of weather they were globally scoped or locally.
@@ -562,7 +564,13 @@ sidebar_label: JavaScript
 
   - `[a, b] = [10, 20]`
   - `[a, b, ...rest] = [10, 20, 30, 40, 50]`
+  - `[a=5, b=7] = [1]; // array destructure with default value`
+  - `[a, b] = [b, a];`
+  - `[a, , b] = [1, 2, 3]`
+
   - `({ a, b } = { a: 10, b: 20 });`
+  - `({a: foo, b: bar} = { a: 10, b: 20 }); //foo = 10, bar = 20`
+  - `({a: aa = 10, b: bb = 5} = {a: 3}); //aa = 3, bb = 5`
   - `({a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40});`
 
 - yeild operator
@@ -1471,11 +1479,11 @@ var newArray = arr.flat(depth);//default depth = 1
 
 - ArrayBuffer
 
-- `new ArrayBuffer(length)`
+  - `new ArrayBuffer(length)`
 
 - DataView
 
-- `new DataView(buffer [, byteOffset [, byteLength]])`
+  - `new DataView(buffer [, byteOffset [, byteLength]])`
 
 - Intl
 
@@ -1486,85 +1494,101 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ### Functions
 
-#### Function Type
+#### Function Basics
 
-- Introduction
+- function is a "subprogram" that can be called by code external (or internal in the case of recursion) to the function.
+- function is first-class objects in JavaScript.
+- function scope, variables can not access outside function body.
+- nested function closure, inner function can use the arguments and variables of the outer function, even outer function returned.
 
-  - `EvalError`
-    - an instance representing an error that occurs regarding the global function `eval()`
-  - `InternalError`
-    - internal error in the JavaScript engine is thrown. E.g. "too much recursion"
-  - `RangeError`
-    - a numeric variable or parameter is outside of its valid range
-  - `ReferenceError`
-    - de-referencing an invalid reference
-  - `SyntaxError`
-    - syntax error that occurs while parsing code in `eval()`
-  - `TypeError`
-    - variable or parameter is not of a valid type
-  - `URIError`
-    - `encodeURI()` or `decodeURI()` are passed invalid parameters.
+#### Function Definition
 
-- Error constructor and new operator
+- function declaration
+- function expression
+  - anonymous
+  - named(function scope only)
+- arrow function expression
+  - arrow function does not have its own `this`
+- Function constructor
+- function scope
+- nested function closure
+- default args
+- rest args
+- tagged function, aka tagged templates literal
+- IIFE
 
-  - `error = new Error([message[, fileName[, lineNumber]]])`
-  - `const x = Error('I was created using a function call!');`
-  - `const y = new Error('I was constructed via the "new" keyword!');`
+  ```javascript
+  //function declaration
+  function square(number) {
+    return number * number;
+  }
 
-- Properties
+  //function expression, anonymous
+  const square = function(number) {
+    return number * number;
+  };
 
-  - `err.message`
-  - `err.name`
+  //function expression, named
+  const factorial = function fac(n) {
+    return n < 2 ? 1 : n * fac(n - 1);
+  };
+
+  //arrow function expression
+  const square = number => number * number;
+
+  //Function constructor
+  const squre = new Function("number", "return number * number");
+
+  //nested function and closure
+  function outside(x) {
+    function inside(y) {
+      return x + y;
+    }
+    return inside;
+  }
+  fn_inside = outside(3); // returns a function
+  result = fn_inside(5); // returns 8
+  result1 = outside(3)(5); // returns 8
+
+  // default args
+  function multiply(a, b = 1) {
+    return a * b;
+  }
+  multiply(5); // 5
+
+  // rest args
+  function multiply(multiplier, ...theArgs) {
+    return theArgs.map(x => multiplier * x);
+  }
+  let arr = multiply(2, 1, 2, 3);
+  console.log(arr); // [2, 4, 6]
+
+  //tagged function
+  const myTag = (textArr, ...placeHolders) =>
+    textArr.reduce(
+      (acc, elem, index) =>
+        acc + elem + (placeHolders[index] ? placeHolders[index] : ""),
+      ""
+    );
+  [name, age] = ["tagged function", 32];
+  console.log(myTag`name is ${name}, age is ${age}.`);
+
+  //IIFE
+  (msg => console.log(msg))("IIFE called");
+  ```
+
+#### Function Usage
 
 - Pattern
 
   ```javascript
-  //hello Error
-  try {
-    foo.bar();
-  } catch (e) {
-    if (e instanceof EvalError) {
-      console.log(e.name + ": " + e.message);
-    } else if (e instanceof RangeError) {
-      console.log(e.name + ": " + e.message);
-    }
-    // ... etc
-  }
-
-  //customize Error
-  class CustomError extends Error {
-    constructor(foo = "bar", ...args) {
-      super(...args);
-
-      // Maintains proper stack trace for where our error was thrown (only available on V8)
-      if (Error.captureStackTrace) {
-        Error.captureStackTrace(this, CustomError);
-      }
-
-      this.name = "CustomError";
-      // Custom debugging information
-      this.foo = foo;
-      this.date = new Date();
-    }
-  }
-
-  try {
-    throw new CustomError("baz", "bazMessage");
-  } catch (e) {
-    console.log(e.name); //CustomError
-    console.log(e.foo); //baz
-    console.log(e.message); //bazMessage
-    console.log(e.stack); //stacktrace
-  }
+  //
   ```
 
 #### Built-in Functions
 
-- Info
-
-```javascript
-alert("Hello World!");
-```
+- eval()
+- uneval()
 
 ---
 
