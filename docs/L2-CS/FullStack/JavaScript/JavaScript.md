@@ -282,6 +282,8 @@ sidebar_label: JavaScript
 
   - `String.fromCharCode(189, 43, 190, 61)`
   - `String.fromCodePoint(9731, 9733, 9842, 0x2F804)`
+  - `` String.raw`templateString`; ``
+  - `String.raw() method is a tag function of template literals`
 
 - Methods
 
