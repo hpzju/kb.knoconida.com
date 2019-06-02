@@ -617,7 +617,7 @@ sidebar_label: JavaScript
 
 ---
 
-### Object and Built-in Objects
+### Objects
 
 #### Object Type
 
@@ -1188,9 +1188,178 @@ var newArray = arr.flat(depth);//default depth = 1
 
 #### Built-in Object: Map
 
+- Introduction
+
+  - Map object holds key-value pairs and remembers the original insertion order of the keys.
+  - Any value in JS can be used as Map keys or values.
+
+- Map constructor and new operator
+
+  - `let myMap = new Map();`
+  - `let map = new Map([iterable])`
+    - iterable object's elements should be key-value pairs
+
+- Properties
+
+  - `myMap.size`
+
+- Methods
+
+  - `myMap.clear();`
+  - `bool = myMap.delete(key); //false if key not exists`
+
+  - `bool = myMap.has(key);`
+  - `value = myMap.get(key); // undefined if key not exists`
+  - `newMap = myMap.set(key, value);`
+
+  - `mapIterator = myMap.entries() // [key, value] in iterator`
+  - `mapKeyIterator = myMap.keys()`
+  - `mapValueIterator = myMap.values()`
+
+  - `myMap.forEach(callback(value[, key[, map]])[, thisArg])`
+
+- Pattern
+
+  ```javascript
+  let myMap = new Map();
+  myMap.set(0, "zero");
+  myMap.set(1, "one");
+
+  for ([key, value] of myMap) {
+    console.log(key + " = " + value);
+  }
+
+  for (key of myMap.keys()) {
+    console.log(key);
+  }
+
+  for (value of myMap.values()) {
+    console.log(value);
+  }
+
+  for ([key, value] of myMap.entries()) {
+    console.log(key + " = " + value);
+  }
+  ```
+
 #### Built-in Object: Set
 
+- Introduction
+
+  - Set object stores unique values of any type, whether primitive values or object references.
+
+- Set constructor and new operator
+
+  - `let mySet = new Set();`
+  - `let mySet = new Set([iterable]);`
+
+- Properties
+
+  - `mySet.size`
+
+- Methods
+
+  - `mySet.clear();`
+  - `bool = mySet.delete(value); //false if value not exists`
+
+  - `bool = mySet.has(value);`
+
+  - `newSet = mySet.add(value);`
+
+  - `setIterator = mySet.entries() // [value, value] in iterator`
+  - `setValueIterator = mySet.values()`
+
+  - `mySet.forEach(callback(value[, value[, set]])[, thisArg])`
+
+- Pattern
+
+  ```javascript
+  let mySet = new Set();
+  mySet.add(0);
+  mySet.add(1);
+  mySet.add(5).add("some text"); // chainable
+
+  for (value of mySet) {
+    console.log(value);
+  }
+
+  for (value of mySet.values()) {
+    console.log(value);
+  }
+
+  for ([key, value] of mySet.entries()) {
+    console.log(key + " = " + value);
+  }
+  ```
+
 #### Built-in Object: Promise
+
+- Introduction
+
+  - A Promise is an object representing the eventual completion or failure of an asynchronous operation.
+  - Promises mainly to solve Callback Hell (heavy nested callback code) and Pyramid of doom Problem.
+  - Promises helps to group your asynchronous in a efficient way.
+  - Promises States:
+    - pending: Initial Case where promise instantiated.
+      - A pending promise can either be fulfilled with a value, or rejected with a reason (error).
+    - fulfilled: Success Case which means promise resolved.
+    - rejected: Failure Case which means promise rejected.
+
+- Promise constructor and new operator
+
+  - `let promise1 = new Promise(executor);`
+    - executor is a callback function passed with the arguments resolve and reject.
+    - The executor function is executed immediately by the Promise implementation, passing resolve and reject functions (the executor is called before the Promise constructor even returns the created object).
+    - The resolve and reject functions, when called, resolve or reject the promise, respectively.
+    - The executor normally initiates some asynchronous work, and then, once that completes, either calls the resolve function to resolve the promise or else rejects it if an error occurred.
+    - If an error is thrown in the executor function, the promise is rejected.
+    - The return value of the executor is ignored.
+    - the asynchronous method returns a promise to supply the value at some point in the future.
+
+- Methods
+
+  - `promise = Promise.all(iterable); //aggregating the results of multiple promises.`
+  - `promise = Promise.race(iterable); //racing for the first results of multiple promises.`
+
+  - `promise = Promise.reject(reason);`
+  - `promise = Promise.resolve(value);`
+
+  - `promise = myPromise.then( (value) => { fulfillment_statements }, (reason) => { rejection_statements });`
+  - `promise = myPromise.then(onFulfilled[, onRejected]);`
+
+    - promise handler
+
+  - `promise = myPromise.catch( reason => { rejection_statements; });`
+  - `promise = myPromise.catch(onRejected)`
+
+    - error handle for rejected.
+
+  - `promise = myPromise.finally( () => { final_settled_statements; } );`
+  - `promise = myPromise.finally(onFinally)`
+
+    - finnally settle for rejected or fullfilled.
+
+- Pattern
+
+  ```javascript
+  //hello Promise
+  let helloPromise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(" Promise Success!"), 250);
+  });
+
+  helloPromise.then(successMessage => console.log("Hello " + successMessage));
+
+  //Async function
+  function myAsyncFunction(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url);
+      xhr.onload = () => resolve(xhr.responseText);
+      xhr.onerror = () => reject(xhr.statusText);
+      xhr.send();
+    });
+  }
+  ```
 
 #### Built-in Object: Error
 
@@ -1218,7 +1387,7 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ---
 
-### function and Function warpper object
+### Functions
 
 - arguments object is a local variable available within all non-arrow functions
 
@@ -1232,11 +1401,11 @@ alert("Hello World!");
 
 ---
 
-### Class
+### Classes
 
 ---
 
-### Expression
+### Expressiones
 
 #### Conditional Expression
 
@@ -1257,7 +1426,7 @@ alert("Hello World!");
 
 ---
 
-### Statement
+### Statements
 
 #### Declare Variables
 
@@ -1282,7 +1451,7 @@ alert("Hello World!");
 
 - `const funName = (...parameters) => { ...codes }`
 
-### Mudule
+### Mudules
 
 - module: import, exports
 
