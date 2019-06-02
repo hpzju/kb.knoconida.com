@@ -1363,17 +1363,111 @@ var newArray = arr.flat(depth);//default depth = 1
 
 #### Built-in Object: Error
 
-#### Built-in Object: Generator
+- Introduction
 
-#### Built-in Object: GeneratorFunction
+  - `EvalError`
+    - an instance representing an error that occurs regarding the global function `eval()`
+  - `InternalError`
+    - internal error in the JavaScript engine is thrown. E.g. "too much recursion"
+  - `RangeError`
+    - a numeric variable or parameter is outside of its valid range
+  - `ReferenceError`
+    - de-referencing an invalid reference
+  - `SyntaxError`
+    - syntax error that occurs while parsing code in `eval()`
+  - `TypeError`
+    - variable or parameter is not of a valid type
+  - `URIError`
+    - `encodeURI()` or `decodeURI()` are passed invalid parameters.
 
-#### Built-in Object: Reflex
+- Error constructor and new operator
 
-#### Built-in Object: Proxy
+  - `error = new Error([message[, fileName[, lineNumber]]])`
+  - `const x = Error('I was created using a function call!');`
+  - `const y = new Error('I was constructed via the "new" keyword!');`
+
+- Properties
+
+  - `err.message`
+  - `err.name`
+
+- Pattern
+
+  ```javascript
+  //hello Error
+  try {
+    foo.bar();
+  } catch (e) {
+    if (e instanceof EvalError) {
+      console.log(e.name + ": " + e.message);
+    } else if (e instanceof RangeError) {
+      console.log(e.name + ": " + e.message);
+    }
+    // ... etc
+  }
+
+  //customize Error
+  class CustomError extends Error {
+    constructor(foo = "bar", ...args) {
+      super(...args);
+
+      // Maintains proper stack trace for where our error was thrown (only available on V8)
+      if (Error.captureStackTrace) {
+        Error.captureStackTrace(this, CustomError);
+      }
+
+      this.name = "CustomError";
+      // Custom debugging information
+      this.foo = foo;
+      this.date = new Date();
+    }
+  }
+
+  try {
+    throw new CustomError("baz", "bazMessage");
+  } catch (e) {
+    console.log(e.name); //CustomError
+    console.log(e.foo); //baz
+    console.log(e.message); //bazMessage
+    console.log(e.stack); //stacktrace
+  }
+  ```
 
 #### Built-in Object: WebAssembly
 
+- TODO
+
 #### Built-in Object: Misc
+
+- GeneratorFunction
+
+  - `generatorFunctor = new GeneratorFunction ([arg1[, arg2[, ...argN]],] functionBody)`
+
+- Generator
+
+  - The Generator object is returned by a generator function and it conforms to both the iterable protocol and the iterator protocol.
+
+  ```javascript
+  function* idMaker() {
+    var index = 0;
+    while (true) yield index++;
+  }
+
+  var gen = idMaker(); // "Generator { }"
+
+  console.log(gen.next().value); // 0
+  console.log(gen.next().value); // 1
+  console.log(gen.next().value); // 2
+  ```
+
+- Proxy
+
+  - `var p = new Proxy(target, handler);`
+
+- Reflex
+
+  - built-in object that provides methods for interceptable JavaScript operations.
+  - no constructor.
 
 - ArrayBuffer
 
@@ -1385,11 +1479,84 @@ var newArray = arr.flat(depth);//default depth = 1
 
 - Intl
 
+  - Intl object is the namespace for the ECMAScript Internationalization API.
+  - no constructor
+
 ---
 
 ### Functions
 
-- arguments object is a local variable available within all non-arrow functions
+#### Function Type
+
+- Introduction
+
+  - `EvalError`
+    - an instance representing an error that occurs regarding the global function `eval()`
+  - `InternalError`
+    - internal error in the JavaScript engine is thrown. E.g. "too much recursion"
+  - `RangeError`
+    - a numeric variable or parameter is outside of its valid range
+  - `ReferenceError`
+    - de-referencing an invalid reference
+  - `SyntaxError`
+    - syntax error that occurs while parsing code in `eval()`
+  - `TypeError`
+    - variable or parameter is not of a valid type
+  - `URIError`
+    - `encodeURI()` or `decodeURI()` are passed invalid parameters.
+
+- Error constructor and new operator
+
+  - `error = new Error([message[, fileName[, lineNumber]]])`
+  - `const x = Error('I was created using a function call!');`
+  - `const y = new Error('I was constructed via the "new" keyword!');`
+
+- Properties
+
+  - `err.message`
+  - `err.name`
+
+- Pattern
+
+  ```javascript
+  //hello Error
+  try {
+    foo.bar();
+  } catch (e) {
+    if (e instanceof EvalError) {
+      console.log(e.name + ": " + e.message);
+    } else if (e instanceof RangeError) {
+      console.log(e.name + ": " + e.message);
+    }
+    // ... etc
+  }
+
+  //customize Error
+  class CustomError extends Error {
+    constructor(foo = "bar", ...args) {
+      super(...args);
+
+      // Maintains proper stack trace for where our error was thrown (only available on V8)
+      if (Error.captureStackTrace) {
+        Error.captureStackTrace(this, CustomError);
+      }
+
+      this.name = "CustomError";
+      // Custom debugging information
+      this.foo = foo;
+      this.date = new Date();
+    }
+  }
+
+  try {
+    throw new CustomError("baz", "bazMessage");
+  } catch (e) {
+    console.log(e.name); //CustomError
+    console.log(e.foo); //baz
+    console.log(e.message); //bazMessage
+    console.log(e.stack); //stacktrace
+  }
+  ```
 
 #### Built-in Functions
 
