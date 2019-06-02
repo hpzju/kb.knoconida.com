@@ -243,7 +243,7 @@ sidebar_label: JavaScript
   typeof Math.sin === "function";
   ```
 
-#### string type and String Wrapper Object
+#### string/String Wrapper Object
 
 - string literal
 
@@ -281,7 +281,7 @@ sidebar_label: JavaScript
   - `String.fromCharCode(189, 43, 190, 61)`
   - `String.fromCodePoint(9731, 9733, 9842, 0x2F804)`
 
-- String manipulation methods
+- Methods
 
   - `character = str.charAt(index)`
   - `newStr = str.toLowerCase()`
@@ -335,7 +335,7 @@ sidebar_label: JavaScript
   - `encodeURI(uriString), encodeURIComponent(uriString)`
   - `decodeURI(encodedURI), decodeURIComponent(encodedURI)`
 
-#### number and Number Wrapper Object
+#### number/Number Wrapper Object
 
 - number literal
 
@@ -374,7 +374,7 @@ sidebar_label: JavaScript
     - `Number.isInteger(5.0000000000000001); // true`
   - `bool = Number​.isSafe​Integer( val )`
 
-- Number manipulation methods
+- Methods
 
   - `str = num.toExponential([fractionDigits])`
   - `str = num.toFixed([fractionDigits])`
@@ -392,20 +392,20 @@ sidebar_label: JavaScript
   - `isFinite()`
   - `isNaN`
 
-#### bitint and BigInt Wrapper Object
+#### bitint/BigInt Wrapper Object
 
 - bitint literal
 
   - `let bn = 223n`
 
-#### boolean and Boolean Wrapper Object
+#### boolean/Boolean Wrapper Object
 
 - boolean literal
 
   - `let b = true`
   - `let b = false`
 
-- Truthy object
+- Truthy objects
 
   - `[], {}, new Function()`
 
@@ -414,7 +414,7 @@ sidebar_label: JavaScript
 
 #### Symbol Wrapper Object
 
-- symbol literal
+- Symbol constructor
 
   - `let sym = Symbol([description string])`
   - `let sym = Symbol()`
