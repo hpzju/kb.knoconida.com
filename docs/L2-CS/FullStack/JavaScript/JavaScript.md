@@ -90,7 +90,7 @@ sidebar_label: JavaScript
   - `let, static`
   - `enum, implements, package, protected, interface, private, public`
 
-- Namespace Scope:
+- Namespace Scoping: Lexical Scope:
 
   - Global Scope
     - `'use strict';` at begining to put JS in strict mode.
@@ -100,14 +100,26 @@ sidebar_label: JavaScript
   - Function Scope
     - `'use strict';` at start of function body to put function statements in strict mode
     - variables declared inside a function
+  - Local Scope
+    - current execution context scope
   - Hoisting
-    - no matter where functions/variables are declared, they are moved to the top of their scope regardless of weather they were globally scoped or locally.
+    - no matter where functions/variables are declared, during code parse time, they are registered to coresponding scope bucktes for refference.
   - Name Shadowing
-    - local scope varaible shadows upper scope chain name
+    - inner scope varaible shadows outer scope chain name
   - Scope Chain
     - used to resolve variables,from inner to outer.
   - Closures
     - A closure can also access the variables of its outer function even after the function has returned. This allows the returned function to maintain access to all the resources of the outer function.
+  - Module
+    - `export { name, draw };`
+    - `import { name, draw } from '/modules/square.js';`
+    - `export { function1 as newFunctionName }`
+    - `import { newFunctionName as function1 } from '/modules/square.js';`
+    - `export default randomSquare;`
+    - `import {default as randomSquare} from '/modules/square.js';`
+    - `export const name = 'square';`
+    - `import name from '/modules/square.js';`
+    - `import * as Module from '/modules/module.js';`
   - Ref: [Understanding Scope in JavaScript](https://scotch.io/tutorials/understanding-scope-in-javascript)
 
 - let, const, var
@@ -129,7 +141,12 @@ sidebar_label: JavaScript
 
 - Variable Lifecycle
 
-  - TDZ: temporary dead zone
+  - undeclared, doesn't exist.
+  - undefined, exists, but no value.
+
+    - uninitialized
+
+    - TDZ: temporary dead zone
 
   - Phases
 
@@ -180,10 +197,26 @@ sidebar_label: JavaScript
 ### Primitive Types
 
 - Primitive Types
-  - string, number, bigint, boolean, null, undefined, symbol
+  - string, number, bigint, boolean, null, undefined, symbol, object
 - Primitive wrapper objects
-  - String, Number,Boolean, BigInt, Symbol
+  - String, Number, BigIn, Boolean, Symbol, Object
+- Variable VS Value
+  - in JS, varaible has no type, value has type.
+- Coercion, aka type conversion
+  - string hint, `toString()`.
+  - number hint, `valueOf()`
+  - toPrimitive()
+    - toString()
+    - toNumber()
+      - `[] == false; //true`
+      - `!![]; //true`
+    - toBoolean()
+  - Boxing
+    - primitive to Object implicite conversion
 - typeof operator
+
+  - retrun string
+  - `"string", "number", "bigint", "boolean", "null", "undefined", "symbol", "object", "function"`
 
   ```javascript
   // Numbers
@@ -346,7 +379,9 @@ sidebar_label: JavaScript
   - int: `let i = 5`
   - float: `let f = 5.0`
   - negative: `let n = -4`
+    - `-0`
   - NaN: `NaN`
+    - `NaN` has no equal value to it, `NaN === NaN; //return false`.
   - Infinity: `Infinity`
 
 - Properties:
@@ -411,10 +446,10 @@ sidebar_label: JavaScript
 
 - Truthy objects
 
-  - `[], {}, new Function()`
+  - `[], {}, new Function()...`
 
-- Falsey values
-  - `null, undefined, '', "", 0, NaN, [][0], {}.props`
+- Falsy values
+  - `null, undefined, '', "", 0, -0, NaN`
 
 #### Symbol Wrapper Object
 
@@ -696,6 +731,10 @@ sidebar_label: JavaScript
   - `bool = prototypeObj.isPrototypeOf(object)`
 
   - `bool = Object.is(value1, value2);`
+
+    - more strict equality check then `===`
+    - `Object.is(-0, 0); //return false`
+    - `-0 === 0 ; //return true`
 
   - `bool = Object.isExtensible()`
 
@@ -1594,7 +1633,7 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ---
 
-### Classes
+### Prototype, Classes
 
 ---
 
@@ -1699,9 +1738,20 @@ if (a === "other value") {
 - for-of
 
   ```javascript
-  let iterable = Array(100).keys();
+  let arrLike = Array(100).keys();
 
-  for (let value of iterable) {
+  for (let value of arrLike) {
+    value += 1;
+    console.log(value);
+  }
+  ```
+
+- for-in
+
+  ```javascript
+  let objLike = { a: 1, b: 2, c: 3 };
+
+  for (let value in objLike) {
     value += 1;
     console.log(value);
   }
