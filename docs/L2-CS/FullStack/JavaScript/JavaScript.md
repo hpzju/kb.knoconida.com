@@ -110,6 +110,8 @@ sidebar_label: JavaScript
     - used to resolve variables,from inner to outer.
   - Closures
     - A closure can also access the variables of its outer function even after the function has returned. This allows the returned function to maintain access to all the resources of the outer function.
+    - Memery efficiency
+    - Encapsulatio Pattern
   - Module
     - `export { name, draw };`
     - `import { name, draw } from '/modules/square.js';`
@@ -141,6 +143,7 @@ sidebar_label: JavaScript
 
 - Variable Lifecycle
 
+  - Global excution context
   - undeclared, doesn't exist.
   - undefined, exists, but no value.
 
@@ -1408,6 +1411,25 @@ var newArray = arr.flat(depth);//default depth = 1
       xhr.send();
     });
   }
+
+  // Promise, async, await
+  async function sequence() {
+    await Promise.all([promise1(), promise2()]);
+    return "done!";
+  }
+
+  const makeRequest = () =>
+    getJSON().then(data => {
+      console.log(data);
+      return "done";
+    });
+
+  const makeRequest = async () => {
+    console.log(await getJSON());
+    return "done";
+  };
+
+  makeRequest();
   ```
 
 #### Built-in Object: Error
@@ -1542,7 +1564,7 @@ var newArray = arr.flat(depth);//default depth = 1
 - function scope, variables can not access outside function body.
 - nested function closure, inner function can use the arguments and variables of the outer function, even outer function returned.
 
-#### Function Definition
+#### Function Type
 
 - function declaration
 - function expression
@@ -1623,7 +1645,19 @@ var newArray = arr.flat(depth);//default depth = 1
 - Pattern
 
   ```javascript
-  //
+  //closure
+  const closureDemo = () => {
+    let l1 = "Layer 1";
+    return () => {
+      let l2 = "Layer2";
+      return () => {
+        let l3 = "Layer3";
+        return `Returnning from : ${l3} -> ${l2} -> ${l1}.`;
+      }
+    }
+  }
+
+  closureDemo();
   ```
 
 #### Built-in Functions
@@ -1779,41 +1813,17 @@ if (a === "other value") {
 
 ---
 
-### Promise, Async, Await, and Sync
+## Web API, AJAX and JSON
 
-```javascript
-async function sequence() {
-  await Promise.all([promise1(), promise2()]);
-  return "done!";
-}
+### [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
-const makeRequest = () =>
-  getJSON().then(data => {
-    console.log(data);
-    return "done";
-  });
-
-const makeRequest = async () => {
-  console.log(await getJSON());
-  return "done";
-};
-
-makeRequest();
-```
-
----
-
----
-
-## [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
-
-### DOM Tree
+#### DOM Tree
 
 - DOM tree: ![Alt](/img/JS-DOM-Tree.png "DOM Tree")
 
 ---
 
-### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
+#### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
 
 - properties
 
@@ -1825,7 +1835,7 @@ makeRequest();
 
 ---
 
-### [window](https://developer.mozilla.org/en-US/docs/Web/API/window)
+#### [window](https://developer.mozilla.org/en-US/docs/Web/API/window)
 
 - properties
 
@@ -1840,12 +1850,6 @@ makeRequest();
   var message = prompt("Input your message: ");
   console.log("message");
   ```
-
----
-
----
-
-## AJAX and JSON
 
 ---
 
