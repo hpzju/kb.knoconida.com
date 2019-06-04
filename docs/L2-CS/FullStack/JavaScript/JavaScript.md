@@ -1642,23 +1642,61 @@ var newArray = arr.flat(depth);//default depth = 1
 
 #### Function Usage
 
+- Functional Programming
+
+  - FP princiles
+
+    - be pure
+    - explicite return statement
+    - no shared state
+    - immutable state
+    - composable
+    - atomic task
+
+  - Pure function
+
+    - no side effects
+    - same input results in same output
+
+  - Indempotent
+
+    - nested calls result in same output
+
+  - Imperative vs Declerative
+
+    - what-to-do vs how-to-do-it
+
+  - Immutability
+
+    - not change state, or clone it, change it, then return it.
+
+  - HOF, Higher Order Function and closure
+
+    - a function take another function as argument.
+
 - Pattern
 
   ```javascript
-  //closure
-  const closureDemo = () => {
-    let l1 = "Layer 1";
-    return () => {
-      let l2 = "Layer2";
-      return () => {
-        let l3 = "Layer3";
-        return `Returnning from : ${l3} -> ${l2} -> ${l1}.`;
-      }
-    }
-  }
-
-  closureDemo();
+  //pure function
+  //  1. no side effects.
+  //  2. fixed input produces fixed output.
   ```
+
+//closure
+const closureDemo = () => {
+let l1 = "Layer 1";
+return () => {
+let l2 = "Layer2";
+return () => {
+let l3 = "Layer3";
+return `Returnning from : ${l3} -> ${l2} -> ${l1}.`;
+};
+};
+};
+
+closureDemo();
+
+````
 
 #### Built-in Functions
 
@@ -1733,13 +1771,13 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ```javascript
 if (a === "other value") {
-  do_something;
+do_something;
 } else if (a === "another value") {
-  do_something;
+do_something;
 } else {
-  do_something;
+do_something;
 }
-```
+````
 
 - switch-case-break-default
 - switch-case-break
