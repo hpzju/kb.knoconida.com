@@ -1674,6 +1674,24 @@ var newArray = arr.flat(depth);//default depth = 1
 
     - a function take another function as argument.
 
+  - Curry
+
+    - refactor multi args function into a pattern, each functions takes one argument at a time.
+
+  - Partical Application
+
+    - refactor multi args function into tow a pattern, one function takes one argument, the other takes rest of args.
+
+  - Memoization
+
+    - cache consistance calculation result for future function call.
+
+  - Compose and Pipe
+
+    - link multiple functions together to process data.
+    - compose links from left to right
+    - pipe links from right to left
+
 - Pattern
 
   ```javascript
