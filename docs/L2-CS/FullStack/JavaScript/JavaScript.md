@@ -113,15 +113,19 @@ sidebar_label: JavaScript
     - Memery efficiency
     - Encapsulatio Pattern
   - Module
-    - `export { name, draw };`
-    - `import { name, draw } from '/modules/square.js';`
-    - `export { function1 as newFunctionName }`
-    - `import { newFunctionName as function1 } from '/modules/square.js';`
-    - `export default randomSquare;`
-    - `import {default as randomSquare} from '/modules/square.js';`
-    - `export const name = 'square';`
     - `import name from '/modules/square.js';`
+    - `import { name, draw } from '/modules/square.js';`
+    - `import {default as randomSquare} from '/modules/square.js';`
+    - `import { newFunctionName as function1 } from '/modules/square.js';`
     - `import * as Module from '/modules/module.js';`
+    - `export default function () {};`
+    - `export default function name() {};`
+    - `export default expression;`
+    - `export function name() {}`
+    - `export name; // where name is const`
+    - `export { name, draw };`
+    - `export { function1 as newFunctionName }`
+
   - Ref: [Understanding Scope in JavaScript](https://scotch.io/tutorials/understanding-scope-in-javascript)
 
 - let, const, var
@@ -1695,26 +1699,24 @@ var newArray = arr.flat(depth);//default depth = 1
 - Pattern
 
   ```javascript
-  //pure function
-  //  1. no side effects.
-  //  2. fixed input produces fixed output.
+  //Singleton with IIFE
+
+  //Module with IIFE
+
+  //closure
+  const closureDemo = () => {
+    let l1 = "Layer 1";
+    return () => {
+      let l2 = "Layer2";
+      return () => {
+        let l3 = "Layer3";
+        return `Returnning from : ${l3} -> ${l2} -> ${l1}.`;
+      };
+    };
+  };
+
+  closureDemo();
   ```
-
-//closure
-const closureDemo = () => {
-let l1 = "Layer 1";
-return () => {
-let l2 = "Layer2";
-return () => {
-let l3 = "Layer3";
-return `Returnning from : ${l3} -> ${l2} -> ${l1}.`;
-};
-};
-};
-
-closureDemo();
-
-````
 
 #### Built-in Functions
 
@@ -1735,7 +1737,7 @@ closureDemo();
 - `===`
 - undefined variables return false
 - `>, >=, <, <=, !=`
-- ternary expression
+- ternary conditional expression
 
 #### Logical Expression
 
@@ -1745,6 +1747,8 @@ closureDemo();
 #### String Concatenation
 
 - `"String " + myVal + " Another String."`
+
+#### Function expression
 
 ---
 
@@ -1781,7 +1785,7 @@ closureDemo();
 
 ### Flow Control
 
-#### Conditional Statement
+#### Condition Statement
 
 - if
 - if-else
@@ -1789,13 +1793,13 @@ closureDemo();
 
 ```javascript
 if (a === "other value") {
-do_something;
+  do_something;
 } else if (a === "another value") {
-do_something;
+  do_something;
 } else {
-do_something;
+  do_something;
 }
-````
+```
 
 - switch-case-break-default
 - switch-case-break
@@ -1830,7 +1834,8 @@ do_something;
   ```javascript
   let arrLike = Array(100).keys();
 
-  for (let value of arrLike) {
+  //iterating
+  for (value of arrLike) {
     value += 1;
     console.log(value);
   }
@@ -1841,7 +1846,8 @@ do_something;
   ```javascript
   let objLike = { a: 1, b: 2, c: 3 };
 
-  for (let value in objLike) {
+  //enumerating
+  for (value in objLike) {
     value += 1;
     console.log(value);
   }

@@ -6,28 +6,64 @@ sidebar_label: Computation
 
 ## Overview
 
-### Online Resources
-
-- [e](https://www.mongodb.com)
-- [1](https://docs.mongodb.com/)
+### Introduction
 
 ---
 
-## Application
+---
 
-### Features
-
-### Applicable Scenarios
+## Computing Theory
 
 ---
 
-## Architecture
+---
 
-### Building Blocks
+## Data Structure Practice
 
-### Structures
+### Data Organization
 
-### Domain Tech
+### Data Operation
+
+- CRUD model
+  - create
+  - read
+  - update
+  - delete
+- others model
+  - Access/Retrieval
+  - Insert
+  - Delete
+  - Searching
+  - Traversal
+  - Sorting
+
+---
+
+### Data Structure Type: Array
+
+- Static Array
+- Dynamic Array
+
+#### Complexity
+
+- time
+
+- space
+
+#### APIs
+
+- access/indexing
+- pop()
+- push(Item)
+- shift()
+- unshit(Item)
+- splice(Index, Counter, Items)
+
+---
+
+### Data Structure Type: Hash Table
+
+---
 
 ---
 
@@ -38,3 +74,13 @@ sidebar_label: Computation
 ### Management
 
 ### Security
+
+---
+
+---
+
+## Misc
+
+### Online Resources
+
+- [e](https://www.mongodb.com)
