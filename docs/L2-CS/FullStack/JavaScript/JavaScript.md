@@ -113,6 +113,7 @@ sidebar_label: JavaScript
     - Memery efficiency
     - Encapsulatio Pattern
   - Module
+
     - `import name from '/modules/square.js';`
     - `import { name, draw } from '/modules/square.js';`
     - `import {default as randomSquare} from '/modules/square.js';`
@@ -670,6 +671,18 @@ sidebar_label: JavaScript
 ---
 
 ### Objects
+
+#### Object Introduction
+
+- Properties
+  - data properties
+    - value
+    - enumerable
+    - writable
+    - configurable
+  - access properties
+    - getter
+    - setter
 
 #### Object Type
 
@@ -1919,6 +1932,26 @@ if (a === "other value") {
 
 ## Design Patterns
 
+### Function as Module
+
+- Singleton
+
+  ```javascript
+  //encapsulate statements in a IIFE
+  const Singleton = (function () {
+    let privateVar = ...;
+    function privateFunc() {};
+
+    return {
+      property1: 'property',
+      method1(...args) {},
+      method2(...args) {}
+    }
+  }());
+  ```
+
+### Function as Class
+
 ---
 
 ---
@@ -1964,9 +1997,7 @@ if (a === "other value") {
   ...
   ```
 
----
-
-### Script Loading
+#### Script Loading
 
 - scripts reffering DOM elements should be loaded after HTML elements parsed by browser.
   - internal scripting:
@@ -1990,6 +2021,28 @@ if (a === "other value") {
     ```
 
 ---
+
+### Good Parts and Bad Pars of JS
+
+#### Bad Parts
+
+```javascript
+// return object, left curley braces result in silent runtime error.
+return;
+{
+  name: value;
+}
+
+// with object, execution unpredictable
+with (obj) {
+  foo = bar;
+}
+
+// ==, implicity type coercion
+0 == ""; //ture
+0 == "0"; //ture
+"" == "0"; //ture
+```
 
 ---
 
