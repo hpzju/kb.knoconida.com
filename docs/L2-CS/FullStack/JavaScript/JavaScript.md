@@ -1159,7 +1159,11 @@ var newArray = arr.flat(depth);//default depth = 1
   - `regExpObj.source`
   - `regExpObj.flages`
   - `regExpObj.global; //'g' flag`
+    - if set, find all matches.
+    - if not set, find the first match.
   - `regExpObj.ignoreCase; //'i' flag`
+    - if set, ignore case-sensitivity
+    - if not set, case sensitive for matching
   - `regExpObj.multiline; //'m' flag`
     - if set, `^` and `$` match the start and end of the whole string.
     - if not set, `^` and `$` match the start and end of each line.
@@ -1183,7 +1187,7 @@ var newArray = arr.flat(depth);//default depth = 1
   re = /abc/; //matching "abc"
 
   // Escaping
-  // special chars:  \ / [ ] { } ( ) ? + * | . ^ $
+  // special chars: \ / [ ] { } ( ) ? + . * | = ! :  ^ $
   re = /ab\*c/; //matching "ab*c"
   re = new RegExp("a\\*bc"); //matching "ab*c", escaping twice
   re = /\/example\/[a-z]+/; //matching "/example/(LOWERCASESTRING)"
@@ -1192,6 +1196,8 @@ var newArray = arr.flat(depth);//default depth = 1
   // .        a single character, exclude newlines if 's' flag is not set.
   // \0       a null char
   // \t       a tab char
+  // \v       a vertical tab
+  // \r       a carriage return
   // \n       a newline char
   // \uXXXX   a unicode char
 
