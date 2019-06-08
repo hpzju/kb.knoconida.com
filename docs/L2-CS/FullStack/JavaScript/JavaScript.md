@@ -1202,7 +1202,7 @@ var newArray = arr.flat(depth);//default depth = 1
   // \uXXXX   a unicode char
 
   // Char Classes
-  // \s       a whitespace, such as tab, space, newline, unicode spaces..
+  // \s       a whitespace, like [\t\r\n]
   // \S       a non-whitespace character
   // \d       a digit, like [0-9]
   // \D       a non-digit, like [^0-9]
@@ -1210,13 +1210,13 @@ var newArray = arr.flat(depth);//default depth = 1
   // \W       a non-world character, like [^a-zA-Z0-9_]
 
   // Bracket and Ranges
-  // [...]    Any one character between the brackets.
+  // [...]    Any one character between the brackets, Brackets escapes special chars implicitly, but exclude '-, ^, \, ], '.
   // [^...]   Any one character not between the brackets.
   // [0-9]    one digit char
   // [a-z]    one lowercase char
   // [A-Z]    one uppercase char
   // [a-Z]    one char case-insensitive
-  // [^]      matches any non-empty char
+  // [^ ]      matches any non-empty char
   let re = /[^]/g;
   re.exec("!@\t\b\ndf\0");
 
@@ -1237,14 +1237,27 @@ var newArray = arr.flat(depth);//default depth = 1
   // (p){N}
   // (p){L, U}
   // (p){L, }
+
   // named group
   const re = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 
+  //Positive lookahead, Negative lookahead
+  const re = /foo(?=bar)/
+  const re = /foo(?!bar)/
+
+  //Positive lookbehind, Negative lookbehind
+  const re = /(?<=foo)bar/
+  const re = /(?<!not )foo/
+
   // Boundaries
-  // p$       end with p
-  // ^p       begin with p
+  // p$       lines end with p
+  // ^p       lines begin with p
   // \b       a word boundary
   // \B       not a word boundary
+
+  //Greedniess and Laziness
+  let re = /<p>.*<\/p>/g;
+  let re = /<p>.*?<\/p>/g;
 
   //regexObj.exec(str) returns matchedArrLike
   var re = /quick\s(brown).+?(jumps)/gi;
