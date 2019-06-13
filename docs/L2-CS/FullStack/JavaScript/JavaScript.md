@@ -1760,7 +1760,7 @@ var newArray = arr.flat(depth);//default depth = 1
 ### OOP with Prototyping, Classes
 
 - prototyping
-  
+
 - class syntax suger
 
   ```javascript
@@ -1803,7 +1803,7 @@ var newArray = arr.flat(depth);//default depth = 1
     }
   }
   ```
-  
+
 ---
 
 ### Expressiones
@@ -2105,6 +2105,103 @@ if (a === "other value") {
 
   //EventTarget
   elem.addEventListener("TYPE", HANDLER);
+  ```
+
+---
+
+### Ajax
+
+- AJAX: Asynchronous JavaScript And XML
+- `XMLHttpRequest` object to communicate with servers
+  - [XHR Ref](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+- supports JSON, XML, HTML, and text files
+
+- practices
+
+  ```javascript
+  //readyState:
+  // 0: request not initialized
+  // 1: server connection established
+  // 2: request received
+  // 3: processing request
+  // 4: request finished and response is ready
+
+  //status
+  // HTTP Message: https://www.w3schools.com/tags/ref_httpmessages.asp
+
+  //local txt
+  function loadTxt() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send();
+  }
+
+  //local JSON
+  function loadJSON() {
+    // Create the object
+    const xhr = new XMLHttpRequest();
+
+    // Open the connection
+    xhr.open("GET", "employees.json", true);
+
+    // Execute the function
+    xhr.onload = function() {
+      if (this.status === 200) {
+        // Get the response as an Object
+        const employees = JSON.parse(this.responseText);
+
+        let output = "";
+        employees.forEach(function(employee) {
+          output += `<ul>
+                          <li>ID: ${employee.id}</li>
+                          <li>Name: ${employee.name}</li>
+                          <li>Company: ${employee.company}</li>
+                          <li>Job: ${employee.job}</li>
+                        </ul>`;
+        });
+
+        document.getElementById("employees").innerHTML = output;
+      }
+    };
+
+    // Send the request
+    xhr.send();
+  }
+
+  //RESTful API
+  function loadPosts() {
+    // Create the object
+    const xhr = new XMLHttpRequest();
+
+    // Open the connection
+    xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+
+    // Execute the function
+    xhr.onload = function() {
+      if (this.status === 200) {
+        const response = JSON.parse(this.responseText);
+
+        // print the contents
+        let output = "";
+
+        response.forEach(function(post) {
+          output += `
+                          <h3>${post.title}</h3>
+                          <p>${post.body}</p>
+                      `;
+        });
+        document.querySelector("#result").innerHTML = output;
+      }
+    };
+
+    // Send the request
+    xhr.send();
+  }
   ```
 
 ---
