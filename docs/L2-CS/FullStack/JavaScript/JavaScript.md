@@ -1757,8 +1757,43 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ---
 
-### Prototype, Classes
+### OOP with Prototyping, Classes
 
+- prototyping
+  
+- class syntax suger
+
+  ```javascript
+  class MyObject {
+    //constructor
+    constructor(...props){
+      this.prop1 = props[0];
+      ...;
+    }
+
+    //methods
+    mothod1(...args){
+      function_body_statements;
+    }
+
+    //static methods
+    static staticMethod(...args){
+      static_function_body_statements;
+    }
+  }
+
+  //instanciation
+  let myobj = new MyObject(...props);
+
+  class MyExtendsObject extends MyObject {
+    constructor(newprops, ...props) {
+      super(...props);
+      this.newprop1 = newprops[0];
+      ...;
+    }
+  }
+  ```
+  
 ---
 
 ### Expressiones
@@ -1915,6 +1950,15 @@ if (a === "other value") {
 
 - DOM tree: ![Alt](/img/JS-DOM-Tree.png "DOM Tree")
 
+- DOM Interfaces
+  - Window
+  - Document
+    - HTMLDocument
+      - HTMLElement
+        - Element
+          - Node
+            - EventTarget
+
 ---
 
 #### [window](https://developer.mozilla.org/en-US/docs/Web/API/window)
@@ -1947,7 +1991,7 @@ if (a === "other value") {
 
 #### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
 
-- properties
+- properties and methods
 
   ```javascript
   //document texts
@@ -1961,19 +2005,39 @@ if (a === "other value") {
   document.characterSet;
   document.contentType;
 
-  //document Nodes/Elems
+  //document Nodes/Elems Collectors
   document.all;
   document.links;
   document.forms;
-  ```
+  document.images;
+  document.scrips;
 
-- methods
+  //document Elem Selectors
+  elem = document.getElementByID("ID");
+  elem = document.querySelector("ELEM_TAG");
+  elem = document.querySelector("#ID");
+  elem = document.querySelector(".CLASS");
+  elem = document.querySelector(".CLASS ELEM_TAG");
+
+  //document multi elems selectors
+  elems = document.getElementsbyClassName("CLASS");
+  elems = document.getElementsbyTagName("ELEM_TAG");
+  elems = document.querySelectorAll(SELECTOR);
+
+  //traversing DOM
+  //manipulate DOM
+  elem = document.createElement("TAG");
+  ```
 
 ---
 
-#### [node and element](https://developer.mozilla.org/en-US/docs/Web/API/Element)
+#### [elements](https://developer.mozilla.org/en-US/docs/Web/API/Element)
 
-- properties
+- events refer:
+
+  - [MDN events ref](https://developer.mozilla.org/en-US/docs/Web/Events)
+
+- properties and methods
 
   ```javascript
   //Node Context
@@ -1985,9 +2049,53 @@ if (a === "other value") {
   elem.action;
   elem.classList;
   elem.className;
+  elem.style;
+
+  //Attributes
+  elem.getAttribute("ATTRI");
+  elem.setAttribute("ATTRI", VALUE);
+  elem.hasAttribute("ATTRI");
+  elem.removeAttribute("ATTRI");
+
+  //traversing
+  elem.nodeType;
+  elem.parentNode;
+  elem.parentElement;
+  elem.previousSibling;
+  elem.previousElementSibling;
+  elem.nextElementSibling;
+  elem.childNodes;
+  elem.children;
+  elem.firstElementChild;
+  elem.lastChild;
+  elem.lastElementChild;
+
+  //manipulating
+  elem.appendChild(NODE);
+  elem.replaceChild(newNode, oldNode);
+  elem.remove();
+  elem.removeChild(childNode);
   ```
 
-- methods
+---
+
+#### [event, eventListener, eventTarget](https://developer.mozilla.org/en-US/docs/Web/API/Event)
+
+- properteis and methods
+
+  ```javascript
+  //EventListener
+  EventListener.handleEvent();
+
+  //Event
+  Event.type;
+  e.target;
+  e.preventDefault();
+  e.stopPropagation();
+
+  //EventTarget
+  elem.addEventListener("TYPE", HANDLER);
+  ```
 
 ---
 
