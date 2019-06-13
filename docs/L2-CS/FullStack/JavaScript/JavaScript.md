@@ -1791,6 +1791,16 @@ var newArray = arr.flat(depth);//default depth = 1
       this.newprop1 = newprops[0];
       ...;
     }
+
+    //methods
+    newMethod1(...args){
+      function_body_statements;
+    }
+
+    //static methods
+    static newStaticMethod(...args){
+      static_function_body_statements;
+    }
   }
   ```
   
