@@ -1242,12 +1242,12 @@ var newArray = arr.flat(depth);//default depth = 1
   const re = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 
   //Positive lookahead, Negative lookahead
-  const re = /foo(?=bar)/
-  const re = /foo(?!bar)/
+  const re = /foo(?=bar)/;
+  const re = /foo(?!bar)/;
 
   //Positive lookbehind, Negative lookbehind
-  const re = /(?<=foo)bar/
-  const re = /(?<!not )foo/
+  const re = /(?<=foo)bar/;
+  const re = /(?<!not )foo/;
 
   // Boundaries
   // p$       lines end with p
@@ -1917,33 +1917,77 @@ if (a === "other value") {
 
 ---
 
-#### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
-
-- properties
-
-  ```javascript
-  document.body.innerHTML;
-  ```
-
-- methods
-
----
-
 #### [window](https://developer.mozilla.org/en-US/docs/Web/API/window)
 
 - properties
 
   ```javascript
-  windows.console;
+  window.console;
+  window.document;
+  window.outHeight;
+  window.outWidth;
+  window.innerHeight;
+  window.innerWidth;
+  window.location;
   ```
 
 - methods
 
   ```javascript
   alert("message");
+  var confirmation = confirm("Confirm?");
   var message = prompt("Input your message: ");
   console.log("message");
+
+  //close window
+  close();
   ```
+
+---
+
+#### [document](https://developer.mozilla.org/en-US/docs/Web/API/document)
+
+- properties
+
+  ```javascript
+  //document texts
+  document;
+  document.head;
+  document.body;
+
+  //document infos
+  document.domain;
+  document.URL;
+  document.characterSet;
+  document.contentType;
+
+  //document Nodes/Elems
+  document.all;
+  document.links;
+  document.forms;
+  ```
+
+- methods
+
+---
+
+#### [node and element](https://developer.mozilla.org/en-US/docs/Web/API/Element)
+
+- properties
+
+  ```javascript
+  //Node Context
+  elem = document.forms[0];
+
+  //Elem properties
+  elem.id;
+  elem.method;
+  elem.action;
+  elem.classList;
+  elem.className;
+  ```
+
+- methods
 
 ---
 
@@ -2083,6 +2127,19 @@ with (obj) {
 - [Mozilla Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [W3School JavaScript Tutorial](https://www.w3schools.com/js/)
 - [JavaScript Resources](https://www.javascript.com/resources)
+
+---
+
+### DevOps
+
+- VS code extensions
+  - Beautify
+  - Prettier
+  - Bracket Pair Colorizer 2
+  - HTML Snippets
+  - JavaScript (ES6) code snippets
+  - Live Server
+  - ESLint
 
 ---
 
