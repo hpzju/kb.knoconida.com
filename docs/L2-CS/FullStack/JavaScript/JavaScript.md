@@ -92,7 +92,34 @@ sidebar_label: JavaScript
   - `let, static`
   - `enum, implements, package, protected, interface, private, public`
 
-- Namespace Scoping: Lexical Scope:
+- Excution Context
+
+  - Global Excution Context
+  - Current Excution Context
+  - Excution Context Object
+    - variable object, VO
+    - scope chain, SC
+    - `this` context
+  - excution phases:
+    - creation phase
+      - init VO
+        - arguments creation for current EC
+        - function declaration scanning, function objects init pointer to coresponding function declaration.
+        - variable declaration scanning, variable objects init value to `undefined`
+      - init SC
+        - function creates new Scope
+        - current scope VO appends to scope chain
+        - lexical scoping
+          - variable searching in VO from inner to outer scope chain.
+      - init `this`
+        - assigned only when function is called.
+        - regular function `this` points to global EC
+        - arrow function `this` points to outer EC
+        - method function `this` points to the Object binds this method.
+    - excution phase
+      - evaluation variables
+
+- Namespacing and scoping:
 
   - Global Scope
     - `'use strict';` at begining to put JS in strict mode.
@@ -105,7 +132,7 @@ sidebar_label: JavaScript
   - Local Scope
     - current execution context scope
   - Hoisting
-    - no matter where functions/variables are declared, during code parse time, they are registered to coresponding scope bucktes for refference.
+    - no matter where functions/variables are declared, during code parse time, they are registered to coresponding scope buckets(variable object) for refference.
   - Name Shadowing
     - inner scope varaible shadows outer scope chain name
   - Scope Chain
@@ -1759,9 +1786,30 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ---
 
-### OOP with Prototyping, Classes
+### OOP Prototyping and Class
 
 - prototyping
+  - `prototype` property
+    - `__proto__` in instance
+  - prototype chain
+
+  ```javascript
+  //prototypig
+  const Person = function(name, age, job){
+    this.name = name;
+    this.age = age ;
+    this.job = job;
+  }
+
+  //inheritance
+  Person.prototype.getProfile = function() {
+    return `${this.name} is ${this.age} old, and works as ${this.job}`;
+  };
+
+  let perter = new Person("peter", 30, "accountant");
+
+  console.log(perter.getProfile())
+  ```
 
 - class syntax suger
 
@@ -1810,51 +1858,57 @@ var newArray = arr.flat(depth);//default depth = 1
 
 ### Expressiones
 
-#### Conditional Expression
+- Conditional Expression
 
-- `==`
-- `===`
-- undefined variables return false
-- `>, >=, <, <=, !=`
-- ternary conditional expression
+  - `==`
+  - `===`
+  - undefined variables return false
+  - `>, >=, <, <=, !=`
+  - ternary conditional expression
 
-#### Logical Expression
+- Logical Expression
 
-- `&&, ||, !`
-- xor pattern: `(x && !y || !x && y)`
+  - `&&, ||, !`
+  - xor pattern: `(x && !y || !x && y)`
 
-#### String Concatenation
+- String Concatenation
 
-- `"String " + myVal + " Another String."`
+  - `"String " + myVal + " Another String."`
 
-#### Function expression
+- Function expression
+
+  - function expression is a lhv:
+
+    ```javascript
+      function(...args){
+        function_statements;
+      }
+    ```
 
 ---
 
 ### Statements
 
-#### Declare Variables
+- Declare Variables
 
-- const
-- var
-- let
+  - const
+  - var
+  - let
 
-#### Assignment
+- Assignment
 
-- `=`
+  - `=`
 
-#### Comment
+- Comment
 
-- line comment
-- `// LINE`
-- block comment
-- `/* BLOCK */`
+  - line comment
+  - `// LINE`
+  - block comment
+  - `/* BLOCK */`
 
----
+- Function Statement
 
-#### Function Statement
-
-- `const funName = (...parameters) => { ...codes }`
+  - `const funName = (...parameters) => { ...codes }`
 
 ### Mudules
 
@@ -1880,6 +1934,8 @@ if (a === "other value") {
 }
 ```
 
+#### Branch Statement
+
 - switch-case-break-default
 - switch-case-break
 - switch-case
@@ -1899,6 +1955,11 @@ if (a === "other value") {
   ```
 
 #### Loop Statement
+
+- control keywords
+
+  - `break`
+  - `continue`
 
 - for
 
@@ -2215,39 +2276,39 @@ if (a === "other value") {
 - Interfaces: `Body, Headers, Response, Request`
 
 - practices
-  
+
   ```javascript
   //fetch api
   fetch(url)
-    .then(function(response){
-          return response.json();
+    .then(function(response) {
+      return response.json();
     })
-    .then(function(names){
-      let html = '<h2>Generated Names</h2>';
+    .then(function(names) {
+      let html = "<h2>Generated Names</h2>";
       html += '<ul class="list">';
       names.forEach(function(name) {
-          html += `
+        html += `
                 <li>${name.name}</li>
           `;
       });
-      html += '</ul>';
+      html += "</ul>";
 
-      document.querySelector('#result').innerHTML = html;
+      document.querySelector("#result").innerHTML = html;
     })
-    .catch(function(error){
-          console.log(error);
-    })
+    .catch(function(error) {
+      console.log(error);
+    });
 
-    //async fetch
-    async function getPosts( url ) {
-      const response = await fetch(url);
+  //async fetch
+  async function getPosts(url) {
+    const response = await fetch(url);
 
-      const data = await response.json();
+    const data = await response.json();
 
-      return data;
-    }
+    return data;
+  }
 
-    getPosts("URL").then(dataHandler);
+  getPosts("URL").then(dataHandler);
   ```
 
 ---
