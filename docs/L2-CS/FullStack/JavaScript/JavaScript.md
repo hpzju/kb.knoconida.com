@@ -11,7 +11,9 @@ sidebar_label: JavaScript
 - lightweight interpreted scripting language
 - dynamic type language
 - prototype-based OOP
+- functional programming
 - Web Oriented, client-side prone
+- server-side nodejs
 
 ---
 
@@ -2235,6 +2237,17 @@ if (a === "other value") {
     .catch(function(error){
           console.log(error);
     })
+
+    //async fetch
+    async function getPosts( url ) {
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      return data;
+    }
+
+    getPosts("URL").then(dataHandler);
   ```
 
 ---
