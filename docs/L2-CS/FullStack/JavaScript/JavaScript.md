@@ -2206,6 +2206,39 @@ if (a === "other value") {
 
 ---
 
+### Fetch API
+
+- provides an interface for fetching resources (including across the network).
+- Async API with Promise-based.
+- Interfaces: `Body, Headers, Response, Request`
+
+- practices
+  
+  ```javascript
+  //fetch api
+  fetch(url)
+    .then(function(response){
+          return response.json();
+    })
+    .then(function(names){
+      let html = '<h2>Generated Names</h2>';
+      html += '<ul class="list">';
+      names.forEach(function(name) {
+          html += `
+                <li>${name.name}</li>
+          `;
+      });
+      html += '</ul>';
+
+      document.querySelector('#result').innerHTML = html;
+    })
+    .catch(function(error){
+          console.log(error);
+    })
+  ```
+
+---
+
 ---
 
 ## Design Patterns
