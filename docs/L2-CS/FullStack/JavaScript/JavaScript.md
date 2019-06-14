@@ -1789,27 +1789,50 @@ var newArray = arr.flat(depth);//default depth = 1
 ### OOP Prototyping and Class
 
 - prototyping
+
   - `prototype` property
     - `__proto__` in instance
   - prototype chain
+  - `prototype`
 
-  ```javascript
-  //prototypig
-  const Person = function(name, age, job){
-    this.name = name;
-    this.age = age ;
-    this.job = job;
-  }
+    ```javascript
+    //constructor function
+    const Person = function(name, age, job) {
+      this.name = name;
+      this.age = age;
+      this.job = job;
+    };
 
-  //inheritance
-  Person.prototype.getProfile = function() {
-    return `${this.name} is ${this.age} old, and works as ${this.job}`;
-  };
+    //prototyping
+    Person.prototype.getProfile = function() {
+      return `${this.name} is ${this.age} old, and works as ${this.job}`;
+    };
 
-  let perter = new Person("peter", 30, "accountant");
+    //instantiation
+    let peter = new Person("peter", 30, "accountant");
 
-  console.log(perter.getProfile())
-  ```
+    console.log(peter.getProfile());
+    ```
+
+  - `Object.create()`
+
+    ```javascript
+    //prototypig
+    const personProto = {
+      getProfile() {
+        return `${this.name} is ${this.age} old, and works as ${this.job}`;
+      }
+    };
+
+    //inheritance and instantiation
+    let peter = Object.create(personProto, {
+      name: { value: "peter" },
+      age: { value: 30 },
+      job: { value: "accountant" }
+    });
+
+    console.log(perter.getProfile());
+    ```
 
 - class syntax suger
 
@@ -2154,6 +2177,8 @@ if (a === "other value") {
 
 #### [event, eventListener, eventTarget](https://developer.mozilla.org/en-US/docs/Web/API/Event)
 
+- event bubbling
+  - events will pass from target element up to DOM tree root.
 - properteis and methods
 
   ```javascript
@@ -2333,6 +2358,46 @@ if (a === "other value") {
       method2(...args) {}
     }
   }());
+  ```
+
+- Module Encapsulation
+
+  ```javascript
+  //encapsulate statements in a IIFE
+  const Walker = () => {
+    let deviation = 0;
+    let stepList = [];
+
+    function walking(step, direction = 1) {
+      deviation += step * direction;
+      stepList.push(step * direction);
+    }
+
+    function getDeviation() {
+      return deviation;
+    }
+
+    function getSteps() {
+      return stepList.length;
+    }
+
+    return {
+      right: function(n) {
+        walking(n);
+        return getDeviation();
+      },
+      left: function(n) {
+        walking(n, -1);
+        return getDeviation();
+      },
+      steps: function() {
+        return getSteps();
+      }
+    };
+  };
+
+  const walker1 = Walker();
+  const walker2 = Walker();
   ```
 
 ### Function as Class
