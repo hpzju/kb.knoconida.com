@@ -1,6 +1,6 @@
 ---
 id: Howto-SetupNodeDevOpsStackwithWebpack
-title: Howto setup Nodejs devops stack with Webpack
+title: Howto Setup Nodejs DevOps Stack with Webpack
 sidebar_label: Nodejs DevOps Stack with Webpack
 ---
 

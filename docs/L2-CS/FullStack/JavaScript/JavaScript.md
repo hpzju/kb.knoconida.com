@@ -1937,6 +1937,19 @@ var newArray = arr.flat(depth);//default depth = 1
 
 - module: import, exports
 
+```javascript
+//export
+export default "string literal";
+export const func1 = () => {func1_body;};
+export const func2 = () => {func2_body;};
+
+//import
+import string from "./MODULE_PATH";
+import * as NameSpace from "./MODULE_PATH";
+import {func1, func2} from "./MODULE_PATH";
+import {func1 as func, func2} from "./MODULE_PATH";
+```
+
 ---
 
 ### Flow Control
