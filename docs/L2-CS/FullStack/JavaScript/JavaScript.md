@@ -2178,7 +2178,16 @@ if (a === "other value") {
 #### [event, eventListener, eventTarget](https://developer.mozilla.org/en-US/docs/Web/API/Event)
 
 - event bubbling
+
   - events will pass from target element up to DOM tree root.
+
+- event delegation
+
+  - set event handler in parent element instead of target element
+  - scenarios:
+    - too many target elements to handle
+    - target element does not yet exist when DOM loaded.
+
 - properteis and methods
 
   ```javascript
@@ -2294,47 +2303,66 @@ if (a === "other value") {
 
 ---
 
-### Fetch API
+### Web APIs
 
-- provides an interface for fetching resources (including across the network).
-- Async API with Promise-based.
-- Interfaces: `Body, Headers, Response, Request`
+#### WindowOrWorkerGlobalScope
 
-- practices
+- `setTimeOut()`
+- `clearTimeOut()`
+- `setInterval()`
+- `clearInterval()`
 
   ```javascript
-  //fetch api
-  fetch(url)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(names) {
-      let html = "<h2>Generated Names</h2>";
-      html += '<ul class="list">';
-      names.forEach(function(name) {
-        html += `
-                <li>${name.name}</li>
-          `;
-      });
-      html += "</ul>";
+  timeoutID = scope.setTimeout(function[, delay, param1, param2, ...]);
+  timeoutID = scope.setTimeout(function[, delay]);
+  scope.clearTimeout(timeoutID);
 
-      document.querySelector("#result").innerHTML = html;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-
-  //async fetch
-  async function getPosts(url) {
-    const response = await fetch(url);
-
-    const data = await response.json();
-
-    return data;
-  }
-
-  getPosts("URL").then(dataHandler);
+  intervalID = scope.setInterval(func, delay[, param1, param2, ...]);
+  scope.clearInterval(intervalID)
   ```
+
+- `fetch()`
+
+  - provides an interface for fetching resources (including across the network).
+  - Async API with Promise-based.
+  - Interfaces: `Body, Headers, Response, Request`
+  - `fetchResponsePromise = fetch(resource, init);`
+
+  - practices
+
+    ```javascript
+    //fetch api
+    fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(names) {
+        let html = "<h2>Generated Names</h2>";
+        html += '<ul class="list">';
+        names.forEach(function(name) {
+          html += `
+                  <li>${name.name}</li>
+            `;
+        });
+        html += "</ul>";
+
+        document.querySelector("#result").innerHTML = html;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    //async fetch
+    async function getPosts(url) {
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      return data;
+    }
+
+    getPosts("URL").then(dataHandler);
+    ```
 
 ---
 
