@@ -205,14 +205,14 @@ $$\big\{$$
 $$\Big\{$$
 $$\bigg\{$$
 $$\Bigg\{$$
-$$\big \langle$$
-$$\Big \langle$$
-$$\bigg \langle$$
-$$\Bigg \langle$$
-$$\big \rangle$$
-$$\Big \rangle$$
-$$\bigg \rangle$$
-$$\Bigg \rangle$$
+$$ \big \langle $$
+$$ \Big \langle $$
+$$ \bigg \langle $$
+$$ \Bigg \langle $$
+$$ \big \rangle $$
+$$ \Big \rangle $$
+$$ \bigg \rangle $$
+$$ \Bigg \rangle $$
 
 #### Integrals
 

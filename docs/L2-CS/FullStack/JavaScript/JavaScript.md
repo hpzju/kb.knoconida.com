@@ -1940,14 +1940,18 @@ var newArray = arr.flat(depth);//default depth = 1
 ```javascript
 //export
 export default "string literal";
-export const func1 = () => {func1_body;};
-export const func2 = () => {func2_body;};
+export const func1 = () => {
+  func1_body;
+};
+export const func2 = () => {
+  func2_body;
+};
 
 //import
 import string from "./MODULE_PATH";
 import * as NameSpace from "./MODULE_PATH";
-import {func1, func2} from "./MODULE_PATH";
-import {func1 as func, func2} from "./MODULE_PATH";
+import { func1, func2 } from "./MODULE_PATH";
+import { func1 as func, func2 } from "./MODULE_PATH";
 ```
 
 ---
@@ -2317,6 +2321,22 @@ if (a === "other value") {
 ---
 
 ### Web APIs
+
+#### Performance
+
+- `performance.now()`
+- `performance.toJSON();`
+
+  ```javascript
+  let js;
+  js = window.performance.toJSON();
+  console.log("json = " + JSON.stringify(js));
+
+  let t0 = performance.now();
+  doSomething();
+  var t1 = performance.now();
+  console.log("Call to doSomething took " + (t1 - t0)/1000 + " seconds.");
+  ```
 
 #### WindowOrWorkerGlobalScope
 

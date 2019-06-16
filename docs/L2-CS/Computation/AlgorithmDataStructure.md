@@ -16,8 +16,16 @@ sidebar_label: Algorithm and Data Structure
 ### Computing Complexity
 
 - Time Complexity
+  - Big-O Notation
+    - constants don't matter
+    - smaller terms don't matter
+    - arithmetic operations are constant
+    - assignment is constant
+    - accessing element in indexable object is constant
 - Space Complexity
-- Big-O Notation
+  - Auxiliary Space Complexity
+    - inputs space don't count
+    - primitives are considered as constant space
 
 ---
 
