@@ -11,7 +11,9 @@
   },
   "L2-CS": {
     "Overview": ["L2-CS/L2-CS"],
-    "Computer Science": ["L2-CS/Computation/Computation"],
+    "Computer Science": ["L2-CS/Computation/Computation",
+      "L2-CS/Computation/AlgorithmDataStructure"
+    ],
     "Data Science": ["L2-CS/DataScience/DataScience"],
     "FullStack": [{
         "type": "subcategory",

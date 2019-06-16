@@ -153,6 +153,16 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 ---
 
+## LaTex Math Equation
+
+This is inline formula: $\sum_{i=1}^{\infty} \frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$, end of line.
+
+This is Block Formula:
+$$\sum_{i=1}^{\infty} \frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$$
+end of block.
+
+---
+
 [1]: http://google.com/ "Google"
 [2]: http://youtube.com/ "Youtube"
 [3]: /img/Markdown-logo.png "Markdown-logo.png"
