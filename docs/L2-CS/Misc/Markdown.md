@@ -153,13 +153,109 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 
 ---
 
+---
+
 ## LaTex Math Equation
+
+### Inline and Block
 
 This is inline formula: $\sum_{i=1}^{\infty} \frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$, end of line.
 
 This is Block Formula:
 $$\sum_{i=1}^{\infty} \frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$$
 end of block.
+
+### Spacing
+
+- `\quad` space equal to the current font size (= 18 mu)
+- `\,` space equal to 3/18 of \quad (= 3 mu)
+- `\:`, space equal to 4/18 of \quad (= 4 mu)
+- `\;`, space equal to 5/18 of \quad (= 5 mu)
+- `\!`, space equal to -3/18 of \quad (= -3 mu)
+- `\ (space after backslash!)`, space equal to equivalent of space in normal text
+- `\qquad`, space equal to twice of \quad (= 36 mu)
+
+$$A \quad B$$
+$$A \, B$$
+$$A \; B$$
+$$A \! B$$
+$$A \ B$$
+$$A \qquad B$$
+$$A  B$$
+
+### Subscript and Superscript
+
+$$BLOCK_{subscript}^{superscript}$$
+
+$$BLOCK_{subscript_{nestedsubscript}}^{superscript^{nestedsuperscript}}$$
+
+### Special Symbols
+
+#### Brackets and Parentheses
+
+$$\big($$
+$$\Big($$
+$$\bigg($$
+$$\Bigg($$
+$$\big]$$
+$$\Big]$$
+$$\bigg]$$
+$$\Bigg]$$
+$$\big\{$$
+$$\Big\{$$
+$$\bigg\{$$
+$$\Bigg\{$$
+$$\big \langle$$
+$$\Big \langle$$
+$$\bigg \langle$$
+$$\Bigg \langle$$
+$$\big \rangle$$
+$$\Big \rangle$$
+$$\bigg \rangle$$
+$$\Bigg \rangle$$
+
+#### Integrals
+
+$$\int_{i=1}^n f(x) dx$$
+$$\iint_V \mu(u,v) \,du\,dv$$
+$$\iiint_V \mu(u,v,w) \,du\,dv\,dw$$
+
+$$\oint_V f(s) \,ds$$
+$$\oiint_V f(s,t) \,ds\,dt$$
+
+#### Sum, Product, Limit
+
+$$\sum_{n=1}^{\infty} 2^{-n} = 1$$
+
+$$\prod_{i=a}^{b} f(i)$$
+
+$$\lim_{x\to\infty} f(x)$$
+
+$$\int\limits_{a}^{b} x^2 dx$$
+
+#### Fractions and Binomials
+
+$$f(x)=\frac{P(x)}{Q(x)}$$
+
+$$\frac{1+\frac{a}{b}}{1+\frac{1}{1+\frac{1}{a}}}$$
+
+$$a_0+\cfrac{1}{a_1+\cfrac{1}{a_2+\cfrac{1}{a_3+\cdots}}}$$
+
+$$\binom{n}{k} = \frac{n!}{k!(n-k)!}$$
+
+#### Sets
+
+$$\cup_{i=1}^n A_{i}$$
+$$\cap_{i=1}^n A_{i}$$
+$${3x^2 \in R \subset Q}$$
+
+### Greek Letters
+
+[List of Greek letters and math symbols](https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols)
+
+### Mathematical operators
+
+---
 
 ---
 
