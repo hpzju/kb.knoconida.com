@@ -25,6 +25,7 @@ No Introduction
 
 - `<span>, <b>, <i>, <em>, <strong>, <small>, <mark>, <del>, <ins>, <sub>, <sup>`
 - `<a>`
+- `&copy;,`
 
 #### Block Elements
 
@@ -33,6 +34,11 @@ No Introduction
 - `<pre>, <code>`
 - `<button>`
   - **display: inline-block**
+- `<ol>, <ul>, <li>, <dl>, <dt>, <dd>`
+- `<table>, <tr>, <th>, <td>`
+- `<form>, <input>, <label>, <select>, <option>, <textarea>, <button>`
+- `<heaer>, <nav>, <section>, <article>, <footer>`
+- `<iframe>`
 
 #### Multimedia Elements
 
@@ -168,9 +174,18 @@ No Introduction
     - `div + p`
   - ~ : all ul are preceded by p
     - `p ~ ul`
-- Psudo Element Selectors
+- Psudo Class/Element Selectors
   - :hover
     - `#button1:hover`
+  - :first-child
+  - :last-child
+  - :nth-child(n)
+  - ::first-letter
+  - ::last-letter
+  - ::first-line
+  - ::selction
+  - ::after
+  - ::before
 - [see more](https://www.w3schools.com/cssref/css_selectors.asp)
 
 #### Rules

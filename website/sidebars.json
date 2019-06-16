@@ -11,10 +11,11 @@
   },
   "L2-CS": {
     "Overview": ["L2-CS/L2-CS"],
-    "Computer Science": ["L2-CS/Computation/Computation"],
+    "Computer Science": ["L2-CS/Computation/Computation",
+      "L2-CS/Computation/AlgorithmDataStructure"
+    ],
     "Data Science": ["L2-CS/DataScience/DataScience"],
-    "FullStack": [
-      {
+    "FullStack": [{
         "type": "subcategory",
         "label": "Front End",
         "ids": [
@@ -47,7 +48,8 @@
     "Misc": ["L2-CS/Misc/JSON", "L2-CS/Misc/Markdown"],
     "Fast Howto": [
       "L2-CS/FastHowto/Howto-SSLCertificate",
-      "L2-CS/FastHowto/Howto-AWSCLI4Lightsail"
+      "L2-CS/FastHowto/Howto-AWSCLI4Lightsail",
+      "L2-CS/FastHowto/Howto-SetupNodeDevOpsStackwithWebpack"
     ]
   },
   "L2-Math": {
