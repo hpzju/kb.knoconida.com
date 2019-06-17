@@ -109,6 +109,11 @@ sidebar_label: Algorithm and Data Structure
 
 ### Sort Algorithms
 
+- Indicator
+  - stableness
+  - in-place
+  - performance
+
 #### Bubble Sort
 
 - for each pass, compare each adjacent elements pair, swap if the pair out of order
@@ -229,19 +234,76 @@ sidebar_label: Algorithm and Data Structure
 
 #### Quick Sort
 
-- Prerequisite
-  - g
+- Introduction
+
+  - atomic array with 0 or 1 element is sorted by nature
+  - Divide
+    - poviting the selected element into it's right sorted position by means of:
+      - the left side of elements are < (Ascending order) selected element
+      - the right side of elements are > (Ascending order) selected element
+    - sorting the left side elements
+    - sorting the right side elements
+  - Conquor
+    - return array
+
 - PseudoCode
 
+  - quickSort: (an data set A, order indecator: ASC, DES, start position, end position )
+
+    - if: start < end
+      - set: pivot = pivoting(A, order, start, end)
+      - quickSort(A, order, start, pivot -1 )
+      - quickSort(A, order, pivot + 1, end )
+    - return arr
+
+  - pivoting: (an data set A, order indecator: ASC, DES, start position, end position)
+    - init: pivot = start, pivotElem = A[pivot]
+    - for: (i = start + 1; i <= end; i++)
+      - if: (Ascending && A[i] < pivotElem ) || (!Ascending && A[i] > pivotElem)
+        - pivot++;
+        - swap(A[pivot], A[i])
+      - else:
+        - continue;
+    - swap(A[pivot], A[start])
+    - return pivot
+
 - Complexity
+  - pivoting
+    - O(n)
+  - quickSort
+    - O(nlog(n))
+      $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$
+      $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}] + k*n+ \sum_{n=1}^{k} 1, where \: k = {1, 2, \cdots, upto(n) }$$
+    - best case:
+      - O(nlog(n))
+    - worst case:
+      - O(n^2)
 
 #### Radix Sort
 
-- Prerequisite
-  - g
+- Introduction
+
+  - radix sort is non-comparative integer sorting algorithm
+  - most significant digit (MSD) implementation
+    - number sorting
+  - least significant digit (LSD) implementation
+    - lexicographically string sorting
+
 - PseudoCode
 
+  - radixSort:(an data set A )
+  - init: round = getMaxDigits(A)
+  - for: let i = 1; i <= round; i++
+    - init bucket with bucket[digit] = [], digit from 0 ot 9;
+    - traverse A, put each elem into getDigitAt(elem,i)' bucket array.
+    - update A with bucket[0...9] in order concatenation.
+  - return A
+
 - Complexity
+  - set: k = getMaxDigits(A):
+    - O(n k)
+  - due to computer data storage and access model, radix sort is slower than quickSort or mergeSort
+  - radix sort requires more storage and memory operatioin.
 
 ---
 
