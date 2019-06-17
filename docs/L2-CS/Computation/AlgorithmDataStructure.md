@@ -1,5 +1,5 @@
 ---
-id: Algorithm and Data Structure
+id: AlgorithmDataStructure
 title: Algorithm and Data Structure
 sidebar_label: Algorithm and Data Structure
 ---
