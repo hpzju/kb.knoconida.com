@@ -484,11 +484,37 @@ sidebar_label: Algorithm and Data Structure
   }
   ```
 
+#### Priority Queue
+
+- Introduction
+
+  - each node assciate with a priority
+  - higher priority get dequeue quicker
+  - binary heap implementation is a better choice.
+
+- APIs
+
+  ```javascript
+  class PriorityQueue extends MaxBinaryHeap {
+    constructor() {}
+
+    deQueue() {}
+    enQueue(val) {}
+  }
+  ```
+
 ---
 
 ### Hash Table
 
 - Introduction
+
+  - Hash function map key into a fixed value
+    - fast
+    - deterministic
+  - Hash collision
+    - seperate chaining
+    - linear probing
 
 - APIs
 
@@ -559,11 +585,11 @@ sidebar_label: Algorithm and Data Structure
       set rightChild(node) {
         this.rChild = node;
       }
-    }  
+    }
     ```
 
   - BST
-  
+
     ```javascript
     class BST {
       constructor() {
@@ -692,9 +718,22 @@ sidebar_label: Algorithm and Data Structure
     }
     ```
 
-#### Heap
+##### Balanced BST
+
+- AVL tree
+- Red-Black tree
+
+#### Binary Heap
 
 - Introduction
+
+  - a kind of binary tree
+  - MaxBinaryHeap:
+    - parent nodes values are always greater than children
+  - MinBinaryHeap:
+    - parent nodes values are always less than children
+  - as compack as possible, left children filled first.
+  - Priority Queue application
 
 - APIs
 
@@ -703,6 +742,24 @@ sidebar_label: Algorithm and Data Structure
 ### Graphs
 
 - Introduction
+
+  - Vertex
+  - Edge
+  - Cycle/Acycle
+  - Weighted/Unweighted
+  - Directed/Undirected
+  - types
+    - DG
+    - UDG
+    - WG
+    - UWG
+    - DAG
+  
+- Terms
+  - Adjacency Matrix
+    - dense edges
+  - Adjacency List
+    - sparse edges
 
 - APIs
 
