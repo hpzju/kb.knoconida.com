@@ -303,9 +303,177 @@ sidebar_label: Algorithm and Data Structure
   - set: k = getMaxDigits(A):
     - O(n k)
   - due to computer data storage and access model, radix sort is slower than quickSort or mergeSort
-  - radix sort requires more storage and memory operatioin.
+  - radix sort requires more storage and memory operatioin, which is very time consuming.
 
 ---
+
+---
+
+---
+
+## Data Structure
+
+### Array
+
+- Introduction
+
+  - contains length properties
+  - each elements are indexable directly.
+  - pros
+    - const indexing
+  - cons
+    - deletion and insertion are expensive.
+
+- APIs
+
+### Sinle Linked List
+
+- Introduction
+
+  - contains head, tail, length properties
+  - each node have a pointer, points to the next node or null, if it's tail.
+  - pros
+    - const head, tail insertion
+    - const head, tail deletion
+  - cons
+    - indexing requires traverse the whole list.
+
+- APIs
+
+  - Node
+
+    ```javascript
+    class Node {
+      constructor(val) {}
+      get value() {}
+      set value(val) {}
+      get next() {}
+      set next(node) {}
+      push(val) {}
+    }
+    ```
+
+  - SingleLinkedList
+
+    ```javascript
+    class SingleLinkedList {
+      constructor() {}
+      push(value) {}
+      pop() {}
+      unshift(value) {}
+      shift() {}
+      get(index) {}
+      set(index, val) {}
+      insert(index, val) {}
+      remove(index) {}
+      reverse() {}
+      traverse(mapper = e => e) {}
+
+      //helping methods
+      travelTo(index) {}
+      indexChecking(index) {}
+    }
+    ```
+
+---
+
+### Double Linked List
+
+- Introduction
+
+  - contains head, tail, length properties
+  - each node have two pointers, points to the next node and previous node.
+  - pros
+    - const head, tail insertion
+    - const head, tail deletion
+  - cons
+    - indexing requires traverse the whole list.
+
+- APIs
+
+  - Node
+
+    ```javascript
+    class Node {
+      constructor(val) {}
+
+      get value() {}
+      set value(val) {}
+      get next() {}
+      set next(node) {}
+      get prev() {}
+      set prev(node) {}
+    }
+    ```
+
+  - DoubleLinkedList
+
+  ```javascript
+  class DoubleLinkedList {
+    constructor() {}
+    push(value) {}
+    pop() {}
+    unshift(value) {}
+    shift() {}
+    get(index) {}
+    set(index, val) {}
+    insert(index, val) {}
+    remove(index) {}
+    traverse(mapper = e => e, reverse = false) {}
+
+    //helping methods
+    travelTo(index) {}
+    indexChecking(index) {}
+  }
+  ```
+
+---
+
+### Stack
+
+- Introduction
+
+- APIs
+
+---
+
+### Queue
+
+- Introduction
+
+- APIs
+
+---
+
+### BST
+
+- Introduction
+
+- APIs
+
+---
+
+### Heap
+
+- Introduction
+
+- APIs
+
+---
+
+### Hash Table
+
+- Introduction
+
+- APIs
+
+---
+
+### Graphs
+
+- Introduction
+
+- APIs
 
 ---
 
