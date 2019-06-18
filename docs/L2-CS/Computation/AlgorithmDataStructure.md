@@ -562,7 +562,7 @@ sidebar_label: Algorithm and Data Structure
     }  
     ```
 
-  - BTS
+  - BST
   
     ```javascript
     class BST {
@@ -617,6 +617,63 @@ sidebar_label: Algorithm and Data Structure
           walker = walker.value > value ? walker.leftChild : walker.rightChild;
         }
         return false;
+      }
+
+      BFS() {
+        let bucket = Array.from({ length: this.depth - 1 }, () => []);
+        bucket[0].push(this.rootNode);
+        for (let i = 1; i < this.depth; i++) {
+          bucket[i] = bucket[i - 1].reduce((accum, node) => {
+            if (node.leftChild) {
+              accum.push(node.leftChild);
+            }
+            if (node.rightChild) {
+              accum.push(node.rightChild);
+            }
+            return accum;
+          }, []);
+        }
+
+        let arr = [].concat(...bucket);
+        return arr.map(node => node.value);
+      }
+      preOrderDFS() {
+        let arr = [];
+        function traverse(node) {
+          if (node) {
+            arr.push(node.value);
+            traverse(node.leftChild);
+            traverse(node.rightChild);
+          }
+        }
+        traverse(this.rootNode);
+        return arr;
+      }
+
+      inOrderDFS() {
+        let arr = [];
+        function traverse(node) {
+          if (node) {
+            traverse(node.leftChild);
+            arr.push(node.value);
+            traverse(node.rightChild);
+          }
+        }
+        traverse(this.rootNode);
+        return arr;
+      }
+
+      postOrderDFS() {
+        let arr = [];
+        function traverse(node) {
+          if (node) {
+            traverse(node.leftChild);
+            traverse(node.rightChild);
+            arr.push(node.value);
+          }
+        }
+        traverse(this.rootNode);
+        return arr;
       }
 
       //helper method
