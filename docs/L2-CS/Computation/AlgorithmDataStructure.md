@@ -344,7 +344,10 @@ sidebar_label: Algorithm and Data Structure
 
     ```javascript
     class Node {
-      constructor(val) {}
+      constructor(val) {
+        this.data;
+        this.rLink;
+      }
       get value() {}
       set value(val) {}
       get next() {}
@@ -357,7 +360,11 @@ sidebar_label: Algorithm and Data Structure
 
     ```javascript
     class SingleLinkedList {
-      constructor() {}
+      constructor() {
+        this.head;
+        this.tail;
+        this.length;
+      }
       push(value) {}
       pop() {}
       unshift(value) {}
@@ -395,7 +402,11 @@ sidebar_label: Algorithm and Data Structure
 
     ```javascript
     class Node {
-      constructor(val) {}
+      constructor(val) {
+        this.data;
+        this.lLink;
+        this.rLink;
+      }
 
       get value() {}
       set value(val) {}
@@ -410,7 +421,11 @@ sidebar_label: Algorithm and Data Structure
 
   ```javascript
   class DoubleLinkedList {
-    constructor() {}
+    constructor() {
+      this.head;
+      this.tail;
+      this.length;
+    }
     push(value) {}
     pop() {}
     unshift(value) {}
@@ -433,7 +448,20 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
+  - LIFO, FILO data structure
+
 - APIs
+
+  ```javascript
+  class Stack {
+    constructor() {
+      this.singleLinkedList;
+    }
+
+    pop() {}
+    push(val) {}
+  }
+  ```
 
 ---
 
@@ -441,27 +469,173 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-- APIs
-
----
-
-### BST
-
-- Introduction
+  - LILO, FIFO data structure
 
 - APIs
 
----
+  ```javascript
+  class Queue {
+    constructor() {
+      this.singleLinkedList;
+    }
 
-### Heap
-
-- Introduction
-
-- APIs
+    deQueue() {}
+    enQueue(val) {}
+  }
+  ```
 
 ---
 
 ### Hash Table
+
+- Introduction
+
+- APIs
+
+---
+
+### Trees
+
+- Introduction
+
+  - a root-leafs relationship data structure.
+
+- Terms
+
+  - single root
+  - child
+  - parent
+  - siblings
+  - leaf
+  - Edge
+  - Path
+
+- APIs
+
+#### Binary Tree
+
+- Introduction
+  - each node has most 2 children
+- APIs
+
+##### Binary Search Tree
+
+- Introduction
+
+  - a binary tree
+  - any node, left subtree's values are less than node value, right subtree's values are greater than node value
+
+- APIs
+
+  - Node
+
+    ```javascript
+    class Node {
+      constructor(val) {
+        this.data = val;
+        this.lChild = null;
+        this.rChild = null;
+      }
+
+      get value() {
+        return this.data;
+      }
+
+      set value(val) {
+        this.data = val;
+      }
+
+      get leftChild() {
+        return this.lChild;
+      }
+
+      set leftChild(node) {
+        this.lChild = node;
+      }
+      get rightChild() {
+        return this.rChild;
+      }
+
+      set rightChild(node) {
+        this.rChild = node;
+      }
+    }  
+    ```
+
+  - BTS
+  
+    ```javascript
+    class BST {
+      constructor() {
+        this.rootNode = null;
+        this.size = 0;
+        this.depth = 0;
+      }
+      insert(value) {
+        let newNode = new Node(value);
+        if (!this.rootNode) {
+          this.rootNode = newNode;
+          this.depth = 1;
+          this.size++;
+          return this;
+        }
+
+        let direction = 0;
+        let depth = 1;
+        let sentinel = this.rootNode;
+        let walker;
+
+        do {
+          walker = sentinel;
+          if (value < walker.value) {
+            direction = -1;
+            sentinel = walker.leftChild;
+          } else {
+            direction = 1;
+            sentinel = walker.rightChild;
+          }
+          depth++;
+        } while (sentinel);
+
+        if (direction < 0) {
+          walker.leftChild = newNode;
+        } else {
+          walker.rightChild = newNode;
+        }
+
+        this.size++;
+        this.depth = this.depth > depth ? this.depth : depth;
+        return this;
+      }
+
+      find(value) {
+        let walker = this.rootNode;
+        while (walker) {
+          if (value === walker.value) {
+            return true;
+          }
+          walker = walker.value > value ? walker.leftChild : walker.rightChild;
+        }
+        return false;
+      }
+
+      //helper method
+      print() {
+        console.log(`size: ${this.size}, depth: ${this.depth}`);
+        this.printConsole(this.rootNode);
+      }
+      printConsole(node, depth = 1) {
+        if (node) {
+          this.printConsole(node.leftChild, depth + 1);
+          console.log("    ".repeat(depth - 1), node.value);
+          this.printConsole(node.rightChild, depth + 1);
+        }
+        return;
+      }
+    }
+    ```
+
+#### Heap
 
 - Introduction
 
