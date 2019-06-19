@@ -305,7 +305,27 @@ sidebar_label: Algorithm and Data Structure
   - due to computer data storage and access model, radix sort is slower than quickSort or mergeSort
   - radix sort requires more storage and memory operatioin, which is very time consuming.
 
----
+#### Heap Sort
+
+- Introduction
+
+  - heap sort relies on heap data structure
+  - in-place sort
+  - unstable
+
+- PseudoCode
+
+  - heapSort:(an heap data structure A )
+  - init: lastIndex = A.size
+  - while: lastIndex > 0
+    - swap: A[lastIndex], A[0]
+    - lastIndex--
+    - A.size--
+    - A.sinkDown(0)
+  - return A
+
+- Complexity
+  - O(nlog(n))
 
 ---
 
@@ -464,6 +484,7 @@ sidebar_label: Algorithm and Data Structure
 - Introduction
 
   - LIFO, FILO data structure
+  - recursion functions can be rewrite with stack into an iterative function
 
 - APIs
 
@@ -476,6 +497,8 @@ sidebar_label: Algorithm and Data Structure
     pop() {}
     peek() {}
     push(val) {}
+    getSize() {}
+    isEmpty() {}
   }
   ```
 
@@ -497,6 +520,9 @@ sidebar_label: Algorithm and Data Structure
 
     deQueue() {}
     enQueue(val) {}
+    peek() {}
+    getSize() {}
+    isEmpty() {}
   }
   ```
 
@@ -516,6 +542,9 @@ sidebar_label: Algorithm and Data Structure
 
     deQueue() {}
     enQueue(val) {}
+    peek() {}
+    getSize() {}
+    isEmpty() {}
   }
   ```
 
@@ -525,14 +554,28 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-  - Hash function map key into a fixed value
-    - fast
-    - deterministic
-  - Hash collision
-    - seperate chaining
-    - linear probing
+  - key-value data structure
+    - load factor: N/M
+  - key space
+    - size N
+  - value bucket
+    - size M
+  - hash function
+    - Hash function maps key into a fixed value, which can indexing bucket
+      - fast
+      - deterministic
+      - uniform distribution keys
+    - Hash collision
+      - seperate chaining
+      - linear probing
+      - quadratic probing
+      - rehashing
 
 - APIs
+
+#### Map
+
+#### Dictionary
 
 ---
 
@@ -549,8 +592,9 @@ sidebar_label: Algorithm and Data Structure
   - parent
   - siblings
   - leaf
-  - Edge
-  - Path
+  - ddge
+  - path
+  - height
 
 - APIs
 
@@ -559,6 +603,8 @@ sidebar_label: Algorithm and Data Structure
 - Introduction
   - each node has most 2 children
 - APIs
+
+##### Binary Heap: [Check Heap Section](#Binary-Heap)
 
 ##### Binary Search Tree
 
@@ -579,28 +625,12 @@ sidebar_label: Algorithm and Data Structure
         this.rChild = null;
       }
 
-      get value() {
-        return this.data;
-      }
-
-      set value(val) {
-        this.data = val;
-      }
-
-      get leftChild() {
-        return this.lChild;
-      }
-
-      set leftChild(node) {
-        this.lChild = node;
-      }
-      get rightChild() {
-        return this.rChild;
-      }
-
-      set rightChild(node) {
-        this.rChild = node;
-      }
+      get value() {}
+      set value(val) {}
+      get leftChild() {}
+      set leftChild(node) {}
+      get rightChild() {}
+      set rightChild(node) {}
     }
     ```
 
@@ -613,111 +643,16 @@ sidebar_label: Algorithm and Data Structure
         this.size = 0;
         this.depth = 0;
       }
-      insert(value) {
-        let newNode = new Node(value);
-        if (!this.rootNode) {
-          this.rootNode = newNode;
-          this.depth = 1;
-          this.size++;
-          return this;
-        }
+      insert(value) {}
+      remove(value) {}
+      find(value) {}
+      getMinValue() {}
+      getMaxValue() {}
 
-        let direction = 0;
-        let depth = 1;
-        let sentinel = this.rootNode;
-        let walker;
-
-        do {
-          walker = sentinel;
-          if (value < walker.value) {
-            direction = -1;
-            sentinel = walker.leftChild;
-          } else {
-            direction = 1;
-            sentinel = walker.rightChild;
-          }
-          depth++;
-        } while (sentinel);
-
-        if (direction < 0) {
-          walker.leftChild = newNode;
-        } else {
-          walker.rightChild = newNode;
-        }
-
-        this.size++;
-        this.depth = this.depth > depth ? this.depth : depth;
-        return this;
-      }
-
-      find(value) {
-        let walker = this.rootNode;
-        while (walker) {
-          if (value === walker.value) {
-            return true;
-          }
-          walker = walker.value > value ? walker.leftChild : walker.rightChild;
-        }
-        return false;
-      }
-
-      BFS() {
-        let bucket = Array.from({ length: this.depth - 1 }, () => []);
-        bucket[0].push(this.rootNode);
-        for (let i = 1; i < this.depth; i++) {
-          bucket[i] = bucket[i - 1].reduce((accum, node) => {
-            if (node.leftChild) {
-              accum.push(node.leftChild);
-            }
-            if (node.rightChild) {
-              accum.push(node.rightChild);
-            }
-            return accum;
-          }, []);
-        }
-
-        let arr = [].concat(...bucket);
-        return arr.map(node => node.value);
-      }
-      preOrderDFS() {
-        let arr = [];
-        function traverse(node) {
-          if (node) {
-            arr.push(node.value);
-            traverse(node.leftChild);
-            traverse(node.rightChild);
-          }
-        }
-        traverse(this.rootNode);
-        return arr;
-      }
-
-      inOrderDFS() {
-        let arr = [];
-        function traverse(node) {
-          if (node) {
-            traverse(node.leftChild);
-            arr.push(node.value);
-            traverse(node.rightChild);
-          }
-        }
-        traverse(this.rootNode);
-        return arr;
-      }
-
-      postOrderDFS() {
-        let arr = [];
-        function traverse(node) {
-          if (node) {
-            traverse(node.leftChild);
-            traverse(node.rightChild);
-            arr.push(node.value);
-          }
-        }
-        traverse(this.rootNode);
-        return arr;
-      }
-
+      traverseBFS() {}
+      traversePreOrderDFS() {}
+      traverseInOrderDFS() {}
+      traversePostOrderDFS() {}
       //helper method
       print() {
         console.log(`size: ${this.size}, depth: ${this.depth}`);
@@ -734,10 +669,182 @@ sidebar_label: Algorithm and Data Structure
     }
     ```
 
-##### Balanced BST
+##### Balanced BST: AVL Tree
 
-- AVL tree
-- Red-Black tree
+- Introduction
+
+  - AVL tree
+    - a BST, auto balanced
+    - for any node, the height difference of two children is at most 1.
+    - leaf's height 0
+    - null child's height -1
+    - unbalance situation:
+      - left-left heavy
+        - node rotate to right as right child: rotate2Right(node)
+      - left-right heavy
+        - node's left child rotate to rotate2left(node.leftChild)
+        - transform into left-left heavy, go with rotate2Right(node)
+      - right-right heavy
+        - node rotate to left as left child: rotate2left(node)
+      - right-left heavy
+        - node's right child rotate to rotate2Right(node.rightChild)
+        - transform into right-right heavy, go with rotate2left(node)
+    - rotation:
+      - node rotate2Right
+        - node's left child becomes root
+        - new root takes node as it's right child
+        - node takes new root's right child as it's left child
+      - node rotate2Left
+        - node's right child becomes root
+        - new root takes node as it's left child
+        - node takes new root's left child as it's right child
+
+- APIs
+
+  - Node
+
+    ```javascript
+    class Node {
+      constructor(val) {
+        this.data = val;
+        this.height = 0;
+        this.lChild = null;
+        this.rChild = null;
+      }
+
+      get value() {}
+      set value(val) {}
+      get leftChild() {}
+      set leftChild(node) {}
+      get rightChild() {}
+      set rightChild(node) {}
+    }
+    ```
+
+  - AVLTree
+
+    ```javascript
+    class AVLTree {
+      constructor() {
+        this.rootNode = null;
+        this.size = 0;
+      }
+      insert(value) {}
+      remove(value) {}
+      find(value) {}
+      getMinValue() {}
+      getMaxValue() {}
+
+      traverseBFS() {}
+      traversePreOrderDFS() {}
+      traverseInOrderDFS() {}
+      traversePostOrderDFS() {}
+
+      //helper method
+      rebalance(node) {}
+      checkBalance(node) {}
+
+      removeNode(node) {}
+      calcHeight(node) {}
+
+      rotate2Left(node) {}
+      rotate2Right(node) {}
+    }
+    ```
+
+##### Balanced BST: Red-Black Tree
+
+- Introduction
+
+  - Red-Black tree
+
+    - a BST, each node either black or red
+    - black node:
+      - all leaves and null nodes are black
+      - root is black
+    - red node:
+      - a node has two black children, null nodes are black.
+      - There are no child-parent adjacency red nodes
+    - implications
+      - every red node has black parent
+      - for a given node, every path from the node to node's descendant leaves, has same number of black nodes.
+      - new node is red by default
+      - the longest path to the leaf is at most twice as long as the shortest.
+    - Red-Black near balance:
+
+      - root to leaf path, the number of black nodes, BH(root).
+        $$BH(root) >= \frac{h}{2}$$
+        $$n >= 2^{BH(root)}-1$$
+        $$h <= 2 log_{2}^{n+1}$$
+
+    - insert situation:
+
+      - recolor
+
+    - rotation:
+      - node rotate2Right
+        - node's left child becomes root
+        - new root takes node as it's right child
+        - node takes new root's right child as it's left child
+      - node rotate2Left
+        - node's right child becomes root
+        - new root takes node as it's left child
+        - node takes new root's left child as it's right child
+
+- APIs
+
+  - Node
+
+    ```javascript
+    class Node {
+      constructor(val) {
+        this.data = val;
+        this.height = 0;
+        this.lChild = null;
+        this.rChild = null;
+      }
+
+      get value() {}
+      set value(val) {}
+      get leftChild() {}
+      set leftChild(node) {}
+      get rightChild() {}
+      set rightChild(node) {}
+    }
+    ```
+
+  - RedBlackTree
+
+    ```javascript
+    class RedBlackTree {
+      constructor() {
+        this.rootNode = null;
+        this.size = 0;
+      }
+
+      insert(value) {}
+      remove(value) {}
+      find(value) {}
+      getMinValue() {}
+      getMaxValue() {}
+
+      traverseBFS() {}
+      traversePreOrderDFS() {}
+      traverseInOrderDFS() {}
+      traversePostOrderDFS() {}
+
+      //helper method
+      rebalance(node) {}
+      checkBalance(node) {}
+
+      calcHeight(node) {}
+
+      rotate2Left(node) {}
+      rotate2Right(node) {}
+    }
+    ```
+
+### Heap
 
 #### Binary Heap
 
@@ -748,12 +855,38 @@ sidebar_label: Algorithm and Data Structure
     - parent nodes values are always greater than children
   - MinBinaryHeap:
     - parent nodes values are always less than children
-  - as compack as possible, left children filled first.
+  - its complete, as compack as possible, left children filled first.
+    - parent index: i
+    - left Child index: 2i+1
+    - right Child index: 2i+2
   - Priority Queue application
 
 - APIs
 
+  - BinaryHeap
+
+    ```javascript
+    class MaxBinaryHeap {
+      constructor() {
+        this.nodesList = [];
+        this.size = 0;
+      }
+
+      insert(value) {}
+      extractMax() {}
+
+      //helper method
+      bubbleUp(index) {}
+      sinkDown(index) {}
+      checkSink(index) {}
+    }
+    ```
+
 ---
+
+#### Binomial Heap
+
+#### Fibonacci Heap
 
 ### Graphs
 
