@@ -331,6 +331,69 @@ sidebar_label: Algorithm and Data Structure
 
 ---
 
+### Graph Algorithms
+
+#### Shortest Path First
+
+#### Spanning Tree
+
+#### Graph Traverse
+
+- Breadth First Search
+
+  - PseudoCode
+
+    - traverseBFS: (start vertex V)
+
+      - init: visitedVertices = [], data = []
+      - visitQueue.enQueue(V),visitedVertices.push(V)
+      - while: visitQueue is not empty:
+
+        - visitor = visitQueue.deQueue()
+        - data.push(visitor.data)
+        - for: child in visitor Adjacency
+          - if: child not in visitedVertices
+            - visitedVertices.push(child)
+            - visitQueue.enQueue(child)
+
+      - return arr;
+
+  - Complexity
+    - O(|V|+|E|)
+
+- Depth First Search
+
+  - PseudoCode
+
+    - traverseDFS: (start vertex V)
+
+      - init: visitedVertices = [], data = []
+      - visitedVertices.push(V)
+      - visitStack.push(V)
+      - while: visitStack is not empty:
+
+        - visitor = visitStack.pop()
+        - data.push(visitor.data)
+        - for: child in visitor Adjacency
+          - if: child not in visitedVertices
+            - visitedVertices.push(child)
+            - visitStack.push(child)
+
+      - return arr;
+
+    - traverseDFS: (start vertex V, visitedVertices = [], data = [])
+
+      - visitedVertices.push(V)
+      - data.push(V.data)
+      - for: child in V Adjacency
+        - if: child not in visitedVertices
+          - traverseDFS(vhild, visitedVertices, data)
+
+  - Complexity
+    - O(|V|+|E|)
+
+#### Maxflow
+
 ## Data Structure
 
 ### Array
@@ -554,8 +617,10 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
+  - Application: Map, Dictionary, Association
   - key-value data structure
     - load factor: N/M
+    - dynamic resizing
   - key space
     - size N
   - value bucket
@@ -573,9 +638,31 @@ sidebar_label: Algorithm and Data Structure
 
 - APIs
 
-#### Map
+  - HashTable
 
-#### Dictionary
+    ```javascript
+    class HashTable {
+      constructor() {
+        this.size = 0;
+        this.keys = [];
+        this.values = [];
+      }
+
+      get(key) {}
+      set(key, value) {}
+
+      delete(key) {}
+      clear() {}
+
+      keys() {}
+      values() {}
+      entries() {}
+      forEach() {}
+
+      //helper method
+      hashFunction(key) {}
+    }
+    ```
 
 ---
 
@@ -595,8 +682,6 @@ sidebar_label: Algorithm and Data Structure
   - ddge
   - path
   - height
-
-- APIs
 
 #### Binary Tree
 
@@ -844,6 +929,65 @@ sidebar_label: Algorithm and Data Structure
     }
     ```
 
+#### Trie
+
+- Introduction
+
+  - an information reTrieval data structure
+  - Every node of Trie consists of multiple children
+
+- APIs
+
+##### Ternary Search Tree
+
+- Introduction
+
+  - Every node of 3 children: leftChild, middleChild, rightChild
+  - better data retrival performance than hash table.
+
+- APIs
+
+  - Node
+
+    ```javascript
+    class Node {
+      constructor(char){
+        this.char = char
+        this.data = {}
+        this.lChild = null;
+        this.mChild = null;
+        this.rChild = null;
+      }
+      get leftChild() {}
+      set leftChild() {}
+      get middleChild() {}
+      set middleChild() {}
+      get rightChild() {}
+      set rightChild() {}
+      get keyChar() {}
+      set keyChar() {}
+      get value() {}
+      set value() {}
+    }
+    ```
+
+  - TST
+
+    ```javascript
+    class TST {
+      constructor() {
+        this.rootNode = null;
+      }
+
+      set(key, value) {}
+      get(key) {}
+
+      //helper method
+      setItem(node, key, value, keyCharIndex) {}
+      getItem(node, key, value, keyCharIndex) {}
+    }
+    ```
+
 ### Heap
 
 #### Binary Heap
@@ -892,24 +1036,20 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-  - Vertex
-  - Edge
-  - Cycle/Acycle
-  - Weighted/Unweighted
-  - Directed/Undirected
+  - G(V, E) models pairwise relationship.
+    - Vertex
+    - Edge
+  - properties
+    - Cycle/Acycle
+    - Weighted/Unweighted
+    - Directed/Undirected
   - types
-    - DG
-    - UDG
-    - WG
-    - UWG
-    - DAG
-
-- Terms
-
-  - Adjacency Matrix
-    - dense edges
-  - Adjacency List
-    - sparse edges
+    - `[A|C][W|UW][D|UD]G`
+  - representation
+    - Adjacency Matrix
+      - dense edges
+    - Adjacency List
+      - sparse edges
 
 - APIs
 
