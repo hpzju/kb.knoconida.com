@@ -341,6 +341,8 @@ sidebar_label: Algorithm and Data Structure
 
 - Breadth First Search
 
+  - Application:
+
   - PseudoCode
 
     - traverseBFS: (start vertex V)
@@ -360,8 +362,15 @@ sidebar_label: Algorithm and Data Structure
 
   - Complexity
     - O(|V|+|E|)
+    - Space Complexity
+      - O(|V|), Queue length should larger than tree root of V's leaves (breadth)
 
 - Depth First Search
+
+  - Application
+
+    - Detecting Cycles
+    - Maze routing
 
   - PseudoCode
 
@@ -387,10 +396,12 @@ sidebar_label: Algorithm and Data Structure
       - data.push(V.data)
       - for: child in V Adjacency
         - if: child not in visitedVertices
-          - traverseDFS(vhild, visitedVertices, data)
+          - traverseDFS(child, visitedVertices, data)
 
   - Complexity
     - O(|V|+|E|)
+    - Space Complexity
+      - O(log(|V|)), Stack length should larger than tree root of V's height(depth)
 
 #### Maxflow
 
