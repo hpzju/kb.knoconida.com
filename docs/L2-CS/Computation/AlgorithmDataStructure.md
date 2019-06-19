@@ -319,12 +319,27 @@ sidebar_label: Algorithm and Data Structure
 
   - contains length properties
   - each elements are indexable directly.
+  - same elements type
   - pros
-    - const indexing
+    - const indexing, O(1)
   - cons
-    - deletion and insertion are expensive.
+    - deletion and insertion are expensive, O(n)
 
 - APIs
+
+  ```javascript
+  class Array {
+    constructor() {
+      this.container = [];
+      this.size = 0;
+    }
+
+    push(val) {}
+    pop(){}
+    insert(val, index)
+    remove(index)
+  }
+  ```
 
 ### Sinle Linked List
 
@@ -459,6 +474,7 @@ sidebar_label: Algorithm and Data Structure
     }
 
     pop() {}
+    peek() {}
     push(val) {}
   }
   ```
@@ -754,8 +770,9 @@ sidebar_label: Algorithm and Data Structure
     - WG
     - UWG
     - DAG
-  
+
 - Terms
+
   - Adjacency Matrix
     - dense edges
   - Adjacency List

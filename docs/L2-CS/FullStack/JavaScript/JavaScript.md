@@ -1933,7 +1933,7 @@ var newArray = arr.flat(depth);//default depth = 1
 
   - `const funName = (...parameters) => { ...codes }`
 
-### Mudules
+### Modules
 
 - module: import, exports
 
