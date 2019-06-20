@@ -16,16 +16,26 @@ sidebar_label: Algorithm and Data Structure
 ### Computing Complexity
 
 - Time Complexity
+
   - Big-O Notation
+    - asymptotic behavior
     - constants don't matter
     - smaller terms don't matter
     - arithmetic operations are constant
     - assignment is constant
     - accessing element in indexable object is constant
+
 - Space Complexity
+
   - Auxiliary Space Complexity
     - inputs space don't count
     - primitives are considered as constant space
+
+- Boundary:
+
+  - Upper Bound: worst case
+  - Lower Bound: best case
+  - Average
 
 ### Algorithm Design Principles
 
@@ -76,6 +86,22 @@ sidebar_label: Algorithm and Data Structure
 
 ## Algorithms
 
+### Random Generator Algorithm
+
+- Introduction
+
+  - Categories
+    - PRNG: pseudorandom number generator
+    - CRNG: Cryptographic random number generator
+    - TRNG: true random number generator
+
+- LCG_RNG
+
+  - linear congruential generator
+
+  - PseudoCode:
+    $$ X_{n+1} = (A*X_{n} + B)\  \% \  M$$
+
 ### Search Algorithms
 
 - Linear Search
@@ -116,7 +142,7 @@ sidebar_label: Algorithm and Data Structure
 
 #### Bubble Sort
 
-- for each pass, compare each adjacent elements pair, swap if the pair out of order
+- for each pass, compare each adjacent elements pair, swap if the pair out of order, repeate until no swap, or n pass finished.
 - PseudoCode
 
   - bubbleSort: (an data set A, order indecator: ASC, DES )
@@ -139,7 +165,8 @@ sidebar_label: Algorithm and Data Structure
 
 #### Selection Sort
 
-- for each pass, the min/max element found and swap to the right position.
+- data set A divided into sorted subarray, and unsorted subarray.
+- each pass, select the min/max element found in the unsorted subarray, and swap to the end of sorted subarray.
 - PseudoCode
 
   - selectionSort: (an data set A, order indecator: ASC, DES )
@@ -162,6 +189,7 @@ sidebar_label: Algorithm and Data Structure
 
 #### Insersion Sort
 
+- data set A divided into sorted subarray, and unsorted subarray.
 - for each pass, the pivot element was inserted into the rigth postion of the sorted part of array.
 - PseudoCode
 
@@ -224,13 +252,15 @@ sidebar_label: Algorithm and Data Structure
     - return arr
 
 - Complexity
+
   - mergeHelper
     - O(m+n)
   - mergeSort
     - O(nlog(n))
-      $$T[n] = 2 T[\frac{n}{2}] + n + 1$$
-      $$T[n] = 2^{k} T[\frac{n}{2^{k}}] + 2^{k} \frac{n}{2^{k}}+ \cdots + n + \sum_{n=1}^{k} 1, where \: k = {1,\cdots, log_{2}(n) }$$
-      $$T[n] = O(nlog(n))$$
+
+> $$T[n] = 2 T[\frac{n}{2}] + n + 1$$
+> $$T[n] = 2^{k} T[\frac{n}{2^{k}}] + 2^{k} \frac{n}{2^{k}}+ \cdots + n + \sum_{n=1}^{k} 1, where \: k = {1,\cdots, log_{2}(n) }$$
+> $$T[n] = O(nlog(n))$$
 
 #### Quick Sort
 
@@ -271,13 +301,13 @@ sidebar_label: Algorithm and Data Structure
   - pivoting
     - O(n)
   - quickSort
-    - O(nlog(n))
-      $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$
-      $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}] + k*n+ \sum_{n=1}^{k} 1, where \: k = {1, 2, \cdots, upto(n) }$$
     - best case:
       - O(nlog(n))
     - worst case:
       - O(n^2)
+
+> $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$
+> $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}] + k*n+ \sum_{n=1}^{k} 1, where \: k = {1, 2, \cdots, upto(n) }$$
 
 #### Radix Sort
 
@@ -336,10 +366,10 @@ sidebar_label: Algorithm and Data Structure
 #### Shortest Path First
 
 - Introduction
-  $$P = \big\{ \: Path(v_{1}, v_{2}) \: | \: v_{1}, \  v_{2} \in G(V, E)\big\}$$
-  $$ Weighted(\ p_{shortest} \ ) = Min\ (\big\{\ Weighted(\ p_{i} \ ), \: | \: p_{i} \in P \:\big\} \ ) $$
 
-  - multiple pathes may exist.
+> $$P = \big\\{ \: Path(v_{1}, v_{2}) \: | \: v_{1}, \  v_{2} \in G(V, E)\big\\}$$ > $$ Weighted(\ p_{shortest} \ ) = Min\ (\big\\{\ Weighted(\ p_{i} \ ), \: | \: p_{i} \in P \:\big\\} \ ) $$
+
+- multiple pathes may exist.
 
 ##### Dijstra Algorithm
 
@@ -391,20 +421,25 @@ sidebar_label: Algorithm and Data Structure
 #### Spanning Tree
 
 - Introduction
-  $$ST = \big\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\}$$
 
-  - Applications:
-    - Optimize path.
+> $$ST = \big\\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\\}$$
+
+- Applications:
+  - Optimize path.
+  - Graph Cycle detection
+  - K-mean Clustering.
 
 ##### Minimun Spanning Tree
 
 - Introduction
-  $$ST = \big\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\}$$
-  $$ Weighted(\ MST \ ) = Min\ ( \big\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\} \ ) $$
+
+> $$ST = \big\\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\\}$$ > $$ Weighted(\ MST \ ) = Min\ ( \big\\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\\} \ ) $$
 
 - PseudoCode
 
   - KruskalMST: (weighted Graph G(V,E))
+
+    - `sorting E by weight, get min weighted edge, check it's in MST or not, until it's empty`
 
     - define: DisjointSet S, E's Priority Queue Q with weight priority, MST = []
     - init:
@@ -420,6 +455,8 @@ sidebar_label: Algorithm and Data Structure
 
   - PrimsMST: (weighted Graph G(V,E), any starter vertex V0)
 
+    - `starting by random vertex, walking alone adjacency edges, buildup visited edges, sorted by weight, put the min edge in MST, repeate walking with new vertex;`
+
     - define: E's Priority Queue Q with weight priority, MST = [], unVisitedList = [V]
     - init:
       - put V0's Edges in Q
@@ -430,7 +467,7 @@ sidebar_label: Algorithm and Data Structure
       - u, v = minE.vertices
       - unVisitedList.remove(v)
       - MST.push(minE)
-      - for: e in v's edge
+      - for: e in v's edges
         - if: e.vertices has unvisited vertex
           - Q.push(e)
 
