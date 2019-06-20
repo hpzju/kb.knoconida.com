@@ -13,6 +13,8 @@ sidebar_label: Algorithm and Data Structure
 - Algorithm should include these contexts, because algorithms' invention and implementation rely on these context.
 - Algorithm narration usually don't include implicit contexts, for simplicity and consistancy reason.
 
+---
+
 ### Computing Complexity
 
 - Time Complexity
@@ -37,6 +39,8 @@ sidebar_label: Algorithm and Data Structure
   - Lower Bound: best case
   - Average
 
+---
+
 ### Algorithm Design Principles
 
 - Divide and Conquer
@@ -55,6 +59,8 @@ sidebar_label: Algorithm and Data Structure
         ...
     }
     ```
+
+---
 
 ### Algorithm Patterns
 
@@ -86,7 +92,9 @@ sidebar_label: Algorithm and Data Structure
 
 ## Algorithms
 
-### Random Generator Algorithm
+### Numeric Algorithms
+
+#### Random Generator Algorithm
 
 - Introduction
 
@@ -97,10 +105,28 @@ sidebar_label: Algorithm and Data Structure
 
 - LCG_RNG
 
-  - linear congruential generator
+  - Linear Congruential Generator
+    - GCD(B, M) = 1
+    - any prime factors p of M,p < M, GCD(p, A-1) = p
+    - if M % 4 =0, so does A-1
 
-  - PseudoCode:
-    $$ X_{n+1} = (A*X_{n} + B)\  \% \  M$$
+> $$ X_{n+1} = (A*X_{n} + B)\  \% \  M$$
+
+- MCG_RNG
+
+  - Multiplicative Congruential Generator
+    - B is 0
+
+---
+
+#### Number Theory
+
+- GCD
+  - EuclidGCD
+    - GCD(A, B) = GCD(B, A % B)
+    - O(log(n)), n is input digital length
+- LCM
+  - LCM(A, B) = A\*B/GCD(A,B)
 
 ### Search Algorithms
 
@@ -130,6 +156,34 @@ sidebar_label: Algorithm and Data Structure
       - return target === A[pivot] ? pivot : -1
   - Complexity
     - O(log(n))
+
+-Interpolation Search
+
+- Prerequisite
+
+  - data set A must sorted.
+
+- PseudoCode
+  - interpolationSearch: (sorted data set A; target value)
+    - init:
+      - left = A's start index;
+      - right = A's end index;
+      - ratio = (target - A[left]) / (A[right] - A[left]);
+      - length = right - left
+      - pivot = Math.round(ratio \* length) + left;
+    - while: pivot >= left && pivot <= right
+      - if: target < A[pivot]
+        - [left, right] = [left, pivot-1]
+      - else if: target > A[pivot]
+        - [left, right] = [pivot + 1, right]
+      - else: target == A[pivot]
+        - return pivot
+      - length = right - left
+      - ratio = (target - A[left]) / (A[right] - A[left])
+      - pivot = Math.round(ratio \* length) + left;
+    - return -1
+- Complexity
+  - O(log(n))
 
 ---
 
@@ -258,8 +312,8 @@ sidebar_label: Algorithm and Data Structure
   - mergeSort
     - O(nlog(n))
 
-> $$T[n] = 2 T[\frac{n}{2}] + n + 1$$
-> $$T[n] = 2^{k} T[\frac{n}{2^{k}}] + 2^{k} \frac{n}{2^{k}}+ \cdots + n + \sum_{n=1}^{k} 1, where \: k = {1,\cdots, log_{2}(n) }$$
+> $$T[n] = 2 T[\frac{n}{2}] + n + 1$$  
+> $$T[n] = 2^{k} T[\frac{n}{2^{k}}] + 2^{k} \frac{n}{2^{k}}+ \cdots + n + \sum_{n=1}^{k} 1, where \: k = {1,\cdots, log_{2}(n) } $$  
 > $$T[n] = O(nlog(n))$$
 
 #### Quick Sort
@@ -306,8 +360,8 @@ sidebar_label: Algorithm and Data Structure
     - worst case:
       - O(n^2)
 
-> $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$
-> $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}] + k*n+ \sum_{n=1}^{k} 1, where \: k = {1, 2, \cdots, upto(n) }$$
+> $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$  
+> $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}] + k*n+ \sum_{n=1}^{k} 1, where \: k = {1, 2, \cdots, n }$$
 
 #### Radix Sort
 
@@ -335,6 +389,8 @@ sidebar_label: Algorithm and Data Structure
   - due to computer data storage and access model, radix sort is slower than quickSort or mergeSort
   - radix sort requires more storage and memory operatioin, which is very time consuming.
 
+---
+
 #### Heap Sort
 
 - Introduction
@@ -359,6 +415,32 @@ sidebar_label: Algorithm and Data Structure
 
 ---
 
+#### Counting Sort
+
+- Introduction
+
+  - counting sort applies for numbers only
+  - non comparative sorting algorithm
+  - unstable
+  - very fast, especially for small numbers, heavy duplication scenario.
+
+- PseudoCode
+
+  - CountingSort:(an Array of unsorted numbers A )
+  - init: min = min(A), max = max(A); array M, M.size = max(A) - min(A)+1, M = [...0]
+  - for: a of A
+    - M[a-min]++
+  - indexA = 0
+  - for: indexM = 0 to M.size
+    - A[indexA to indexA + M[indexM] - 1 ] = min + indexM
+    - indexA += indexA + M[indexM]
+  - return A
+
+- Complexity
+  - O(M + N)
+  - if M << N
+    - O(N)
+
 ---
 
 ### Graph Algorithms
@@ -367,7 +449,8 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-> $$P = \big\\{ \: Path(v_{1}, v_{2}) \: | \: v_{1}, \  v_{2} \in G(V, E)\big\\}$$ > $$ Weighted(\ p_{shortest} \ ) = Min\ (\big\\{\ Weighted(\ p_{i} \ ), \: | \: p_{i} \in P \:\big\\} \ ) $$
+> $$P = \big\\{ \: Path(v_{1}, v_{2}) \: | \: v_{1}, \  v_{2} \in G(V, E)\big\\}$$  
+> $$ Weighted(\ p_{shortest} \ ) = Min\ (\big\\{\ Weighted(\ p_{i} \ ), \: | \: p_{i} \in P \:\big\\} \ ) $$
 
 - multiple pathes may exist.
 
@@ -433,7 +516,8 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-> $$ST = \big\\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\\}$$ > $$ Weighted(\ MST \ ) = Min\ ( \big\\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\\} \ ) $$
+> $$ST = \big\\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\\}$$  
+> $$ Weighted(\ MST \ ) = Min\ ( \big\\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\\} \ ) $$
 
 - PseudoCode
 
@@ -579,7 +663,33 @@ sidebar_label: Algorithm and Data Structure
   }
   ```
 
-### Sinle Linked List
+---
+
+#### Matrix
+
+- Introduction
+
+  - 2D Array
+
+- Sparse Array
+  - linked list implementation
+    - each array element is a quaternion link node
+    - a quaternion linked list represent sparse array
+    - a row header linked list is maintained to start with row
+    - a column header linked list is maintained to start with column
+
+#### TriangularArray
+
+- Introduction
+  - a symmetry matrix
+  - store the matrix in a TriangularArray, save n^2 - n(n+1)/2 = n(n-1)/2 space
+  - SymmetrixMatrix[i, j] = TrianglearArray(max(i,j)(max(i,j)+1)/2+min(i,j))
+- Applicatioin
+  - UDG adjacency matrix
+
+### Linked List
+
+#### Sinle Linked List
 
 - Introduction
 
@@ -637,7 +747,7 @@ sidebar_label: Algorithm and Data Structure
 
 ---
 
-### Double Linked List
+#### Double Linked List
 
 - Introduction
 
@@ -702,7 +812,14 @@ sidebar_label: Algorithm and Data Structure
 - Introduction
 
   - LIFO, FILO data structure
+  - single linked list with header sentinal implementation.
   - recursion functions can be rewrite with stack into an iterative function
+
+- Variation
+
+  - Double Stack: popLeft, popRight, pushLeft, pushRight, move2Left, move2Right
+  - Application
+    - divide elements for 2 groups
 
 - APIs
 
@@ -727,6 +844,19 @@ sidebar_label: Algorithm and Data Structure
 - Introduction
 
   - LILO, FIFO data structure
+  - doubleLinkedList implementation
+
+- Variation
+
+  - Circular Queue
+    - tracking header pointer and tail pointer
+    - enQueue, deQueue operations just move header and tail around.
+    - array implementation
+    - fixed Queue length.
+  - Double-Ended Queue
+    - tracking left pointer and right pointer
+    - enQLeft, deQLeft, enQRight, deQRight, peekLeft, peekRight
+    - double linked list implementation
 
 - APIs
 
@@ -790,6 +920,9 @@ sidebar_label: Algorithm and Data Structure
       - linear probing
       - quadratic probing
       - rehashing
+  - Complexity
+    - CRUD operations: O(1)
+    - resize: O(n)
 
 - APIs
 
