@@ -335,73 +335,180 @@ sidebar_label: Algorithm and Data Structure
 
 #### Shortest Path First
 
+- Introduction
+  $$P = \big\{ \: Path(v_{1}, v_{2}) \: | \: v_{1}, \  v_{2} \in G(V, E)\big\}$$
+  $$ Weighted(\ p_{shortest} \ ) = Min\ (\big\{\ Weighted(\ p_{i} \ ), \: | \: p_{i} \in P \:\big\} \ ) $$
+
+  - multiple pathes may exist.
+
+##### Dijstra Algorithm
+
+- Introduction
+  - can hanle positive weight function only.
+  - construct a shortest path tree, all nodes can get shortest path from one to another using the tree
+- Psuedo Code
+
+  - DijstraSP: (graph G, start vertex V0)
+
+    - init: Heap = new MinBinaryHeap with Node(vertex, distances to V0), Predecessor = {}, Distance = {}
+    - for: v in G
+      - Distance[v] = 0
+      - Predecessor[v] = null
+    - Heap.insert(Node(V0, 0)), Distance[V0] = 0
+
+    - while: Heap is not empty
+
+      - minNode = Heap.extractMin()
+      - for: vertex in minNode.vertex's neighbor
+        - newDistance = minNode.distance2V0 + Distance(minNode, vertex)
+        - if: newDistance < Distance[vertex]
+          - Predecessor[vertex] = minNode
+          - Distance[vertex] = newDistance
+          - Heap.update(Node(vertex, newDistance))
+
+    - return Distance, Predecessor
+
+- Complexity
+  - O(|V|log(|V|)+|E|)
+
+##### Bellman-Ford Algorithm
+
+- Introduction:
+
+  - can hanle negtive weight function also.
+  - negative cycle
+    - A-B-C-A, 1,-10,5; each cycle, weight decrese 4.
+
+- PseudoCode
+
+  - BellmanFordSP: (graph G, start vertex V0)
+
+- Complexity
+  - O(|V| \* |E|)
+
+##### Floyd-Warshall Algorithm
+
 #### Spanning Tree
+
+- Introduction
+  $$ST = \big\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\}$$
+
+  - Applications:
+    - Optimize path.
+
+##### Minimun Spanning Tree
+
+- Introduction
+  $$ST = \big\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\}$$
+  $$ Weighted(\ MST \ ) = Min\ ( \big\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\} \ ) $$
+
+- PseudoCode
+
+  - KruskalMST: (weighted Graph G(V,E))
+
+    - define: DisjointSet S, E's Priority Queue Q with weight priority, MST = []
+    - init:
+      - for v in V, put v in S;
+      - for e in E, put e in Q
+    - while: Q is not empty
+      - minE = Q.pop()
+      - u, v = minE.vertices
+      - if: S.find(u) != S.find(v)
+        - MST.push(minE)
+        - S.merge(u, v)
+    - return MST
+
+  - PrimsMST: (weighted Graph G(V,E), any starter vertex V0)
+
+    - define: E's Priority Queue Q with weight priority, MST = [], unVisitedList = [V]
+    - init:
+      - put V0's Edges in Q
+      - visitedList.push(V0)
+    - while: unVisitedList is not empty
+
+      - minE = Q.pop()
+      - u, v = minE.vertices
+      - unVisitedList.remove(v)
+      - MST.push(minE)
+      - for: e in v's edge
+        - if: e.vertices has unvisited vertex
+          - Q.push(e)
+
+    - return MST
+
+- Complexity
+  - KruskalMST
+    - O(|E|log(|E|) + |E|log(|V|)),
+    - max( O(|E|log(|E|)), O(|E|log(|V|)) )
+  - PrimsMST
+    - min(O(|E|log(|E|)), O(|E|log(|V|)))
+    - when Edges are dense, PrimsMST is much faster than KrushalMST.
 
 #### Graph Traverse
 
-- Breadth First Search
+##### Breadth First Search
 
-  - Application:
+- Application:
 
-  - PseudoCode
+- PseudoCode
 
-    - traverseBFS: (start vertex V)
+  - traverseBFS: (start vertex V)
 
-      - init: visitedVertices = [], data = []
-      - visitQueue.enQueue(V),visitedVertices.push(V)
-      - while: visitQueue is not empty:
+    - init: visitedVertices = [], data = []
+    - visitQueue.enQueue(V),visitedVertices.push(V)
+    - while: visitQueue is not empty:
 
-        - visitor = visitQueue.deQueue()
-        - data.push(visitor.data)
-        - for: child in visitor Adjacency
-          - if: child not in visitedVertices
-            - visitedVertices.push(child)
-            - visitQueue.enQueue(child)
-
-      - return arr;
-
-  - Complexity
-    - O(|V|+|E|)
-    - Space Complexity
-      - O(|V|), Queue length should larger than tree root of V's leaves (breadth)
-
-- Depth First Search
-
-  - Application
-
-    - Detecting Cycles
-    - Maze routing
-
-  - PseudoCode
-
-    - traverseDFS: (start vertex V)
-
-      - init: visitedVertices = [], data = []
-      - visitedVertices.push(V)
-      - visitStack.push(V)
-      - while: visitStack is not empty:
-
-        - visitor = visitStack.pop()
-        - data.push(visitor.data)
-        - for: child in visitor Adjacency
-          - if: child not in visitedVertices
-            - visitedVertices.push(child)
-            - visitStack.push(child)
-
-      - return arr;
-
-    - traverseDFS: (start vertex V, visitedVertices = [], data = [])
-
-      - visitedVertices.push(V)
-      - data.push(V.data)
-      - for: child in V Adjacency
+      - visitor = visitQueue.deQueue()
+      - data.push(visitor.data)
+      - for: child in visitor Adjacency
         - if: child not in visitedVertices
-          - traverseDFS(child, visitedVertices, data)
+          - visitedVertices.push(child)
+          - visitQueue.enQueue(child)
 
-  - Complexity
-    - O(|V|+|E|)
-    - Space Complexity
-      - O(log(|V|)), Stack length should larger than tree root of V's height(depth)
+    - return arr;
+
+- Complexity
+  - O(|V|+|E|)
+  - Space Complexity
+    - O(|V|), Queue length should larger than tree root of V's leaves (breadth)
+
+##### Depth First Search
+
+- Application
+
+  - Detecting Cycles
+  - Maze routing
+
+- PseudoCode
+
+  - traverseDFS: (start vertex V)
+
+    - init: visitedVertices = [], data = []
+    - visitedVertices.push(V)
+    - visitStack.push(V)
+    - while: visitStack is not empty:
+
+      - visitor = visitStack.pop()
+      - data.push(visitor.data)
+      - for: child in visitor Adjacency
+        - if: child not in visitedVertices
+          - visitedVertices.push(child)
+          - visitStack.push(child)
+
+    - return arr;
+
+  - traverseDFS: (start vertex V, visitedVertices = [], data = [])
+
+    - visitedVertices.push(V)
+    - data.push(V.data)
+    - for: child in V Adjacency
+      - if: child not in visitedVertices
+        - traverseDFS(child, visitedVertices, data)
+
+- Complexity
+  - O(|V|+|E|)
+  - Space Complexity
+    - O(log(|V|)), Stack length should larger than tree root of V's height(depth)
 
 #### Maxflow
 
@@ -1037,11 +1144,44 @@ sidebar_label: Algorithm and Data Structure
     }
     ```
 
----
-
 #### Binomial Heap
 
 #### Fibonacci Heap
+
+---
+
+### Set
+
+#### Disjoint Sets
+
+- Introduction
+
+  - Union-Find data structure
+  - a tree-like data structure
+
+- APIs
+
+  ```javascript
+  class Set {
+    constructor() {
+      this.data = new Tree();
+      this.size = 0;
+    }
+
+    union(set) {}
+    find() {}
+
+    //helper method
+    rank() {}
+    pathCompression() {}
+  }
+  ```
+
+- Complexity:
+
+#### Joint Sets
+
+---
 
 ### Graphs
 
