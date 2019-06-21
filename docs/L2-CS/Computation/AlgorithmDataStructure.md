@@ -106,11 +106,12 @@ sidebar_label: Algorithm and Data Structure
 - LCG_RNG
 
   - Linear Congruential Generator
+
     - GCD(B, M) = 1
     - any prime factors p of M,p < M, GCD(p, A-1) = p
     - if M % 4 =0, so does A-1
 
-> $$ X_{n+1} = (A*X_{n} + B)\  \% \  M$$
+    > $$ X_{n+1} = (A*X_{n} + B)\  \% \  M$$
 
 - MCG_RNG
 
@@ -217,6 +218,8 @@ sidebar_label: Algorithm and Data Structure
   - O(n^2)
   - best case: O(n)
 
+---
+
 #### Selection Sort
 
 - data set A divided into sorted subarray, and unsorted subarray.
@@ -241,6 +244,8 @@ sidebar_label: Algorithm and Data Structure
   - O(n^2)
   - best case: O(n^2)
 
+---
+
 #### Insersion Sort
 
 - data set A divided into sorted subarray, and unsorted subarray.
@@ -263,6 +268,8 @@ sidebar_label: Algorithm and Data Structure
 - Complexity
   - O(n^2)
   - best case: O(n)
+
+---
 
 #### Merge Sort
 
@@ -312,9 +319,12 @@ sidebar_label: Algorithm and Data Structure
   - mergeSort
     - O(nlog(n))
 
-> $$T[n] = 2 T[\frac{n}{2}] + n + 1$$  
-> $$T[n] = 2^{k} T[\frac{n}{2^{k}}] + 2^{k} \frac{n}{2^{k}}+ \cdots + n + \sum_{n=1}^{k} 1, where \: k = {1,\cdots, log_{2}(n) } $$  
-> $$T[n] = O(nlog(n))$$
+  > $$T[n] = 2 T[\frac{n}{2}] + n + 1$$  
+  > $$T[n] = 2^{k} T[\frac{n}{2^{k}}] + 2^{k} \frac{n}{2^{k}}+ $$  
+  > $$\quad \cdots + n + \sum_{n=1}^{k} 1, \: k = {1,\cdots, log_{2}(n) } $$  
+  > $$T[n] = O(nlog(n))$$
+
+---
 
 #### Quick Sort
 
@@ -352,6 +362,7 @@ sidebar_label: Algorithm and Data Structure
     - return pivot
 
 - Complexity
+
   - pivoting
     - O(n)
   - quickSort
@@ -360,8 +371,11 @@ sidebar_label: Algorithm and Data Structure
     - worst case:
       - O(n^2)
 
-> $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$  
-> $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}] + k*n+ \sum_{n=1}^{k} 1, where \: k = {1, 2, \cdots, n }$$
+  > $$T[n] = T[n_{1}] + T[n_{2}] + n + 1$$  
+  > $$T[n] = T[n_{1\cdots 1_{k}}]+ \cdots + T[n_{2\cdots 2_{k}}].. $$  
+  > $$\quad + kn+ \sum_{n=1}^{k} 1, \: k = {1, 2, \cdots, n }$$
+
+---
 
 #### Radix Sort
 
@@ -449,8 +463,8 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-> $$P = \big\\{ \: Path(v_{1}, v_{2}) \: | \: v_{1}, \  v_{2} \in G(V, E)\big\\}$$  
-> $$ Weighted(\ p_{shortest} \ ) = Min\ (\big\\{\ Weighted(\ p_{i} \ ), \: | \: p_{i} \in P \:\big\\} \ ) $$
+  > $$P = \big\\{ Path(v_1, v_2) \  | \  \forall v_1, \  v_1 \in G(V, E) \big\\} $$  
+  > $$ Weighted(p_{shortest}) = Min( \big\\{ Weighted(p_i), \  | \  p_i \in P \big\\} ) $$
 
 - multiple pathes may exist.
 
@@ -505,7 +519,8 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-> $$ST = \big\\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\\}$$
+  > $$ST = \big\\{ \hat{G}(V,\hat{E}) \  | \  \forall \  v_1, v_2 \in V, $$  
+  > $$\quad \exists \ P(v_1, v_2). \ \hat{E} \subset E \big\\}$$
 
 - Applications:
   - Optimize path.
@@ -516,8 +531,7 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-> $$ST = \big\\{ \  \hat{G}(V,\hat{E}) \  | \  \forall \  p_{1}, p_{2} \in V, \ \exists \ Path(p_{1}, p_{2}) \ \subset \ \hat{E}; \  \hat{G} \subset G(V, E) \big\\}$$  
-> $$ Weighted(\ MST \ ) = Min\ ( \big\\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\\} \ ) $$
+  > $$ Weighted(\ MST \ ) = Min\ ( \big\\{ \  Weighted(\ st \ ), \  | \  st \in ST \ \big\\} \ ) $$
 
 - PseudoCode
 
@@ -595,6 +609,10 @@ sidebar_label: Algorithm and Data Structure
 
 ##### Depth First Search
 
+- Orders
+  - inOrder
+  - preOrder
+  - postOrder
 - Application
 
   - Detecting Cycles
@@ -918,8 +936,9 @@ sidebar_label: Algorithm and Data Structure
     - Hash collision
       - seperate chaining
       - linear probing
+        - cause primary clustering
       - quadratic probing
-      - rehashing
+      - double hashing
   - Complexity
     - CRUD operations: O(1)
     - resize: O(n)
@@ -966,15 +985,71 @@ sidebar_label: Algorithm and Data Structure
   - child
   - parent
   - siblings
+  - ancestor
+    - lowest common ancestor
+  - decendant
+  - subtree
   - leaf
-  - ddge
+  - internal node
   - path
+  - level
+    - a node's distance to root
   - height
+    - a node' longest distance to it's leaf
+  - tree height
+    - root's height
+  - node degree
+    - a node's number of children
+  - tree degree
+    - the largest node degree
+
+- Variations
+
+  - Binary Tree
+    - a tree with maxinume degree of 2.
+    - `degree(Node) <= 2`
+  - Ordered Tree
+    - children are ordered with rules.
+  - Full Tree
+    - each node, with full children or no children
+    - `degree(Node) = 0 || Tree Degree`
+  - Complete Tree
+    - almost every internal node is full, except one posible node with height 1.
+    - if none-full internal height-1 node exist, the children of the node are push to left with no empty slot.
+    - a tree with all level fulled except the last level, if the last level is not full, all leafs are pushed to left without empty slot.
+  - Perfect Tree
+    - a complete tree with second to last level nodes are full.
+    - `any internal node, degree(iNode) = Tree Degree`
+
+- Mathematics
+  - E: Edges, N: Nodes, L: Leafs, I: Internal Nodes D: Tree Degree, H: Tree Height
+  - |E| = |N|-1
+  - Perfect Tree
+    - |N| =(D^(H+1)-1)/(D-1)
+    - |I| = (D^H-1)/D-1
+    - |L| = D^H = |N|-|I|
+
+---
 
 #### Binary Tree
 
 - Introduction
   - each node has most 2 children
+  - `degree(Node) <= 2`
+  - DFS
+    - inOrder
+      - visit node
+      - visit left child
+      - visit right child
+    - preOrder
+      - visit left child
+      - visit node
+      - visit right child
+    - postOrder
+      - visit left child
+      - visit right child
+      - visit node
+  - BFS
 - APIs
 
 ##### Binary Heap: [Check Heap Section](#Binary-Heap)
@@ -984,7 +1059,7 @@ sidebar_label: Algorithm and Data Structure
 - Introduction
 
   - a binary tree
-  - any node, left subtree's values are less than node value, right subtree's values are greater than node value
+  - any node, Value(left decendant) < Value(node) < Value(right decendant)
 
 - APIs
 
@@ -1276,6 +1351,12 @@ sidebar_label: Algorithm and Data Structure
     }
     ```
 
+---
+
+#### B-Tree
+
+---
+
 ### Heap
 
 #### Binary Heap
@@ -1371,6 +1452,50 @@ sidebar_label: Algorithm and Data Structure
       - dense edges
     - Adjacency List
       - sparse edges
+
+- Terms
+
+  - Graph/Network
+  - Vertex/Vertices/Node/Nodes
+    - Adjacent
+    - Neighbor
+    - Degree
+      - in-degree
+      - out-degree
+  - Edge/Link
+    - Adjacency
+  - Path
+
+    > $$G(V,E),\ P(U,F) \  \subset \  G, $$  
+    > $$ U = \big\\{u_0,u_1, ... u_k \big\\}, F = \big\\{ f_1,f_2, ... f_k \big\\} $$  
+    > $$ f_i = E(u_{i-1},u_i), for i = 1,...,k$$
+
+  - Cycle/Loop
+
+    > $$G(V,E), \ \forall \  v \in V, \  if \  \exists \ P(v,v),$$  
+    > $$\ G \ has \ loop/cycle.$$
+
+  - Reachable
+
+    > $$G(V,E), \ \forall \  v_1,\ v_2 \  \in V, \  if \  \exists \ P(v_1,\ v_2), $$ > $$then \ v_2 \ is \ reachable \ to \ v_1.$$
+
+  - Connected
+
+    - Strongly Connected
+
+      > $$DG(V,E), \ \forall \  v_1,\ v_2 \  \in V, $$  
+      > $$if \ \exists \ P(v_1,\ v_2), \ and \ P(v_2, \ v_1).$$  
+      > $$then \ DG \ is \ strongly \ connected.$$
+
+    - Weakly Connected
+
+      > $$DG(V,E), \ \forall \  v_1,\ v_2 \  \in V, $$  
+      > $$if \ \exists \ P(v_1,\ v_2) \ or \ P(v_2, \ v_1).$$  
+      > $$then \ DG \ is \ weakly \ connected.$$
+
+- Mathematics
+
+- Variations
 
 - APIs
 
