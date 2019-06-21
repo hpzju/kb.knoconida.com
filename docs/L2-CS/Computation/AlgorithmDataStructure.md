@@ -20,12 +20,21 @@ sidebar_label: Algorithm and Data Structure
 - Time Complexity
 
   - Big-O Notation
+
     - asymptotic behavior
     - constants don't matter
     - smaller terms don't matter
     - arithmetic operations are constant
     - assignment is constant
     - accessing element in indexable object is constant
+
+  - Big-Theta Notation
+
+    - asymptotic behavior
+    - Big-Theta is reflexive
+
+      > $$ f(n) \in \Theta(g(n)) \iff \ C_1 g(n) \leq f(n) \leq C_2 g(n) $$  
+      > $$ f(n) \in \Theta(g(n)) \iff g(n) \in \Theta(f(n)) $$
 
 - Space Complexity
 
@@ -463,8 +472,8 @@ sidebar_label: Algorithm and Data Structure
 
 - Introduction
 
-  > $$P = \big\\{ Path(v_1, v_2) \  | \  \forall v_1, \  v_1 \in G(V, E) \big\\} $$  
-  > $$ Weighted(p_{shortest}) = Min( \big\\{ Weighted(p_i), \  | \  p_i \in P \big\\} ) $$
+  > $$P = \big\\{ Path(v_0, v_1) \  | \ [e_0(v_0), e_1...e_k(v_1)], e_i \ne e_j, \  e_i \in E,  \big\\} $$  
+  > $$ Weighted(p_{shortest}) = Min( \big\\{ Weighted(p_i), \  | \  p_i \in P(v_0, v_1) \big\\} ) $$
 
 - multiple pathes may exist.
 
@@ -520,7 +529,7 @@ sidebar_label: Algorithm and Data Structure
 - Introduction
 
   > $$ST = \big\\{ \hat{G}(V,\hat{E}) \  | \  \forall \  v_1, v_2 \in V, $$  
-  > $$\quad \exists \ P(v_1, v_2). \ \hat{E} \subset E \big\\}$$
+  > $$\quad \exists \ P(v_1, v_2) \ and \ |P| = 1. \ \hat{E} \subset E \big\\}$$
 
 - Applications:
   - Optimize path.
@@ -551,7 +560,7 @@ sidebar_label: Algorithm and Data Structure
         - S.merge(u, v)
     - return MST
 
-  - PrimsMST: (weighted Graph G(V,E), any starter vertex V0)
+  - PrimMST: (weighted Graph G(V,E), any starter vertex V0)
 
     - `starting by random vertex, walking alone adjacency edges, buildup visited edges, sorted by weight, put the min edge in MST, repeate walking with new vertex;`
 
@@ -575,7 +584,7 @@ sidebar_label: Algorithm and Data Structure
   - KruskalMST
     - O(|E|log(|E|) + |E|log(|V|)),
     - max( O(|E|log(|E|)), O(|E|log(|V|)) )
-  - PrimsMST
+  - PrimMST
     - min(O(|E|log(|E|)), O(|E|log(|V|)))
     - when Edges are dense, PrimsMST is much faster than KrushalMST.
 
@@ -1477,7 +1486,8 @@ sidebar_label: Algorithm and Data Structure
 
   - Reachable
 
-    > $$G(V,E), \ \forall \  v_1,\ v_2 \  \in V, \  if \  \exists \ P(v_1,\ v_2), $$ > $$then \ v_2 \ is \ reachable \ to \ v_1.$$
+    > $$G(V,E), \ \forall \  v_1,\ v_2 \  \in V, \  if \  \exists \ P(v_1,\ v_2), $$  
+    > $$then \ v_2 \ is \ reachable \ to \ v_1.$$
 
   - Connected
 
@@ -1494,6 +1504,14 @@ sidebar_label: Algorithm and Data Structure
       > $$then \ DG \ is \ weakly \ connected.$$
 
 - Mathematics
+
+  - Euler Path
+    - a path passes all edges once.
+    - exits v1, v2, D(v1), D(v2) % 2 = 1, other v, D(v) % 2 =0
+  - Eular Circuit/Tour
+    - a eular path ends with the same start point
+    - any v, D(v) % 2 = 0
+  - Chains, Rings, Trees, Grids, HyperCubes
 
 - Variations
 
