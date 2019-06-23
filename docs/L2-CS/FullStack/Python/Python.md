@@ -6,42 +6,107 @@ sidebar_label: Python
 
 ## Overview
 
-### Learning Resources
-
-- [Python Website](https://www.python.org/)
-- [link to Anaconda](/docs/L2-CS/Python/Anaconda)
-
----
-
-## Application
-
 ### Features
 
 ### Applicable Scenarios
 
 ---
 
-## Architecture
+---
 
-### Building Blocks
+## Python Language Basic
 
-### Structures
+<!-- ### Building Blocks -->
 
-#### Expression
+### Variables and Scope
 
-#### Statement
+### Types
 
-#### Operator
+- Reference
 
-#### Context Control
+  - refer by reference
+  - refer by value
 
-#### Flow Control
+- Mutability
 
-### Design Patterns
+  - mutable
+  - imutable
 
-### Builtin Libs
+---
 
-### External Libs
+#### List
+
+- Introduction
+
+  - dynamic array implementation
+  - mutable type
+  - refer elements by reference
+
+- Practices
+
+  ```python
+    # get size by bytes
+    import sys
+    sys.getsizeof(arr)
+  ```
+
+---
+
+#### String
+
+- Introduction
+
+  - str
+
+- Practices
+
+  ```python
+    # get size by bytes
+    str.replace(" ","")
+    str.lower()
+  ```
+
+---
+
+### Operators
+
+### FP and Functions
+
+#### Function Programming
+
+- Practices
+
+  ```python
+  # get size by bytes
+  map.(func, list)
+  zip.(list1, list2)
+  ```
+
+### OOP and Classes
+
+### Expressions
+
+### Statements
+
+### Flow Control
+
+---
+
+---
+
+## Builtin Moudles
+
+### ctypes
+
+- [documentation](https://docs.python.org/3/library/ctypes.html)
+
+---
+
+---
+
+## Design Patterns
+
+---
 
 ---
 
@@ -54,3 +119,11 @@ sidebar_label: Python
 ### Security
 
 ---
+
+---
+
+## Misc
+
+### Learning Resources
+
+- [Python Website](https://www.python.org/)

@@ -662,6 +662,17 @@ sidebar_label: Algorithm and Data Structure
 
 ## Data Structure
 
+### Introduce Data Structure
+
+- to store, retrive, and manipulate data in an efficient way.
+- some algorithm's complexity relies on underline data structure.
+- ADT: Abstract Data Type
+  - Stack, Queue, Priority Queue, Hashmap
+- Data Structure
+  - Array, Heap, Linked List
+
+---
+
 ### Array
 
 - Introduction
@@ -673,6 +684,12 @@ sidebar_label: Algorithm and Data Structure
     - const indexing, O(1)
   - cons
     - deletion and insertion are expensive, O(n)
+
+- Variations
+
+  - Dynamic Array
+  - Sparse Array
+  - Matrix
 
 - APIs
 
