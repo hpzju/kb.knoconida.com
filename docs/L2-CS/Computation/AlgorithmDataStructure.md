@@ -1496,6 +1496,10 @@ sidebar_label: Algorithm and Data Structure
     > $$ U = \big\\{u_0,u_1, ... u_k \big\\}, F = \big\\{ f_1,f_2, ... f_k \big\\} $$  
     > $$ f_i = E(u_{i-1},u_i), for i = 1,...,k$$
 
+    - Shortest Path
+
+      > $$ST = \big\\{ P(u, v) \ | \  Min(Weighted(P(u, v))) \big\\} $$
+
   - Cycle/Loop
 
     > $$G(V,E), \ \forall \  v \in V, \  if \  \exists \ P(v,v),$$  
@@ -1519,6 +1523,14 @@ sidebar_label: Algorithm and Data Structure
       > $$DG(V,E), \ \forall \  v_1,\ v_2 \  \in V, $$  
       > $$if \ \exists \ P(v_1,\ v_2) \ or \ P(v_2, \ v_1).$$  
       > $$then \ DG \ is \ weakly \ connected.$$
+
+  - Spanning Tree
+
+    > $$ST = \big\\{ \hat{G}(V,\hat{E}) \   \subset G(V,E) \big\\} $$
+
+    - Minimum Spanning Tree
+
+      > $$MST = \big\\{ \hat{G}(V,\hat{E}) \   Min(Weighted(\hat{G}(V,\hat{E}))) \big\\} $$
 
 - Mathematics
 
