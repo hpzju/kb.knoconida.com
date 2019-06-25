@@ -1,5 +1,5 @@
 ---
-id: Python4DataScience
+id: Python4DS
 title: Python Data Science DevOps.
 sidebar_label: Data Science with Python
 ---
