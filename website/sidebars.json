@@ -20,7 +20,6 @@
         "label": "Front End",
         "ids": [
           "L2-CS/FullStack/FrontEnd/HTML5CSS",
-          "L2-CS/FullStack/FrontEnd/Bootstrap",
           "L2-CS/FullStack/FrontEnd/React",
           "L2-CS/FullStack/FrontEnd/Vue"
         ]
