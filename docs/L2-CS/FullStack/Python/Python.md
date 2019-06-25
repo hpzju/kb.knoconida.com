@@ -171,6 +171,26 @@ sidebar_label: Python
 
 ### FP and Functions
 
+#### Functions
+
+- function declarition
+- arguments
+  - default args
+- lambda function
+
+- practices
+
+  ```python
+  # function declarition
+  def funcname(*args, **kwargs):
+    func_body
+
+  #lambda function
+  lambda comma_express_argslist: function_body_expression
+  named = lambda comma_express_argslist: function_body_expression
+
+  ```
+
 #### Built-in Functions
 
 - Type and type conversion
@@ -215,6 +235,20 @@ sidebar_label: Python
   ```
 
 ### OOP and Classes
+
+#### Built-in Classess
+
+#### File
+
+##### Exception
+
+- Error Tyeps
+  - ValueError
+  - ZeroDivisionError
+  - IOError
+  - AssertionError
+
+---
 
 ### Expressions
 
@@ -261,16 +295,51 @@ sidebar_label: Python
 
 #### Loop
 
-- for
+- for-in
 - while
 - break
 - continue
 
 ```python
-  # if
-  if condition_expression :
-    true_blocks
+  # for-in
+  for i in  range(100) :
+    loop_with_indexing_block
 
+  for char in  str :
+    loop_with_char_block
+
+  for iter in  iterable :
+    loop_with_iter_block
+
+  while condition_expression :
+    loop_block
+    update_condition
+    or_if_break_condition
+```
+
+---
+
+#### Exception Handling
+
+- try-except
+- try-raise-except
+
+```python
+  # try-except
+  try :
+    try_block_with
+    nomal_process_logic
+  except Exception as e:
+    exception_handle_block
+
+  # try-raise-except
+  try :
+    try_block_with
+    nomal_process_logic
+    throw_if_error
+    raise Exception(msg)
+  except Exception as e:
+    exception_handle_block
 ```
 
 ---
@@ -314,3 +383,4 @@ sidebar_label: Python
 ### Learning Resources
 
 - [Python Website](https://www.python.org/)
+- [Python Docs](https://docs.python.org/3.7/)
