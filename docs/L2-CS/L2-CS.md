@@ -7,17 +7,18 @@ sidebar_label: CS&SE
 ## Computer Science
 
 - [Computation](Computation/Computation)
+- [Algorithm and Data Structure](Computation/AlgorithmDataStructure)
 
 ## Data Science
 
 - [DataScience](DataScience/DataScience)
+- [Data Science DevOps with Python](DataScience/Python4DS)
 
 ## FullStack
 
 ### Front End
 
 - [HTML5 and CSS](FullStack/FrontEnd/HTML5CSS)
-- [Bootstrap](FullStack/FrontEnd/Bootstrap)
 - [Vue](FullStack/FrontEnd/Vue)
 - [React](FullStack/FrontEnd/React)
 
@@ -38,6 +39,7 @@ sidebar_label: CS&SE
 ## DevOps
 
 - [Docker](DevOps/Docker)
+- [Ubuntu](DevOps/Ubuntu)
 
 ## Miscellaneous
 
