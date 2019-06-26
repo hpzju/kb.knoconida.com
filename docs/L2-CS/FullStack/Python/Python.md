@@ -57,7 +57,7 @@ sidebar_label: Python
 - type() function
 
   - return Type Object
-  - `int, float, str, list, set, dict, NoneType, function`
+  - `int, float, str, list, set, dict, NoneType, function, generator`
 
 - type conversion
 
@@ -445,12 +445,39 @@ sidebar_label: Python
 
 #### Function Programming
 
+- Functors
+
+  - Decorator
+    - wrap a function into decorator, simplify interface design and lower the exposure surface.
+  - Generator
+    - generate an iterable like object
+  - Iterator
+    - traverse a collection with simple iterator protocal.
+
 - Practices
 
   ```python
+  import reduce from functools
+  import * from itertools
+
   # functors
-  map.(func, iterable)
-  zip.(list1, iterable)
+  map(func, iterable)
+  filter(func, iterable)
+  reduce(func, iterable, initializer)
+  zip(iterable1, iterable2)
+
+  #iterator
+  iterator = chain(iterable1, iterable2)
+  iterator = count(start, step)
+  iterator = cycle(iterable)
+  iterator = ifilter(func, iterable)
+  iterator = imap(func, iterable)
+  iterator = islice(iterable, start, stop, step)
+  iterable = izip(iterable1, iterable2, ...iterables)
+
+  # generator comprehension
+  gen = (i**4 for i in range(100))
+  next(gen)
   ```
 
 ### OOP and Classes
@@ -520,6 +547,7 @@ sidebar_label: Python
   - AttributeError
   - AssertionError
   - UnboundLocalError
+  - StopIteration
 
 ---
 
