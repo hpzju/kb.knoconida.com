@@ -1270,6 +1270,7 @@ var newArray = arr.flat(depth);//default depth = 1
   // named group
   const re = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 
+  //Assertion
   //Positive lookahead, Negative lookahead
   const re = /foo(?=bar)/;
   const re = /foo(?!bar)/;
@@ -2335,7 +2336,7 @@ if (a === "other value") {
   let t0 = performance.now();
   doSomething();
   var t1 = performance.now();
-  console.log("Call to doSomething took " + (t1 - t0)/1000 + " seconds.");
+  console.log("Call to doSomething took " + (t1 - t0) / 1000 + " seconds.");
   ```
 
 #### WindowOrWorkerGlobalScope

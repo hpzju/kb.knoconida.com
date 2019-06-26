@@ -3,6 +3,7 @@ version: "3"
 services:
   kb:
     build: .
+    restart: always
     ports:
       - 9901:3000
       - 35729:35729

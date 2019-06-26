@@ -13,6 +13,9 @@ sidebar_label: Ubuntu
   - `sudo apt upgrade -y`
   - `sudo do-release-upgrade -d`
   - `sudo apt autoremove -y`
+  - `sudo apt install PACKAGE`
+  - `sudo dpkg --configure -a`
+  - `sudo apt install --reinstall BROKEN_PACKAGE`
 - Config Files
   - `/etc/apt/sources.list`
 
