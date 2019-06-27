@@ -493,20 +493,64 @@ sidebar_label: Python
 
 #### Classes
 
-- Class/Object declaration
-- Constructor
-- Attributes
-  - get attributes of class
-    - `dir(Obj)`
-- Methods
+- Class and Object
+
+  - Class/Object Type declaration
+  - Constructor
+  - Attributes
+    - attributes loopup
+      - instance -> class -> parents classes
+    - get attributes of class
+      - `dir(Obj)`
+  - Methods
+    - instance method
+    - class method
+      - `@classmethod` decorator
+      - with implicity `cls` argument
+      - can update class/object status
+    - static method
+      - `@staticmethod` decorator
+      - can not update class/object status
+      - pure utility function
+    - setter/getter/deleter
+      - `@property`
+  - Object/Instance
+  - Operator Override
+    - `+ : __add__()`
+    - `print(obj) : __repr__()`
+    - `in : __contains__()`
+    - `== : __eq__()`
+    - `[index] : __getitem__(index)`
+    - `[start:end]: __getslice__(start, end)`
+    - `len(obj) : __len__()`
+
 - OOP
 
   - Inheritance
     - Inheritance Chain
+      - linearization of C
+    - Multiple Inheritance
+      - Method Resolution Order
+        - `L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)`
+        - `L[object] = object`
+        - took the first non-tailed class append to C's linearization list
+    - inheritance principles
+      - inherit
+      - override/overload
+      - extend
+      - provide
+        - implement abstract method defined by parents class
   - Encapsulation
   - Polymophism
     - Method Overwriten
   - Isolation
+  - Abstract Base classes
+    - abc module
+      - decorators
+        - `@abc.abstractclassmethod`
+        - `@abc.abstractstaticmethod`
+        - `@abc.abstractproperty`
+        - `@abc.abstractmethod`
 
 - practices
 
@@ -515,6 +559,14 @@ sidebar_label: Python
   class Shape(object):
     def __init__(self):
       pass
+
+    @classmethod
+    def BuildShape(cls, name):
+      return cls(name)
+
+    @staticmethod
+    def PI():
+      return math.pi
 
     def calcArea(self):
       pass
@@ -536,6 +588,15 @@ sidebar_label: Python
   # Instantiation
   c = Circle()
 
+  #ABC
+  from abc import ABC, ABCMeta
+
+  class MyABC(ABC):
+      pass
+
+  class MyABC(metaclass=ABCMeta):
+    pass
+
   ```
 
 ---
@@ -544,14 +605,24 @@ sidebar_label: Python
 
 ##### Exception
 
-- Error Tyeps
+- Exception Hierarchy
 
+  - Customer Exception
+    - `raise MyException` statement will invoke constructor, then `MyException.__str__()`
+  - BaseException -> Exception
+  - [Ref](https://docs.python.org/3/library/exceptions.html)
+
+- Exception
   - SyntaxError
   - NameError
   - ValueError
   - TypeError
-  - ZeroDivisionError
+  - ArithmeticError
+    - ZeroDivisionError
+    - OverflowError
+    - FloatPointError
   - IndexError
+  - KeyError
   - IOError
   - OSError
   - AttributeError
@@ -564,42 +635,43 @@ sidebar_label: Python
 ### Expressions
 
 - yield
-  - yield
-  - yield from
+- yield
+- yield from
 
 ### Statements
 
 - Comments
 
-  - shebang
-    - `#!/usr/bin/env python3`
-    - `# -*- coding: utf_8 -*-`
-  - inline comment
-    - `# inline comment`
-  - block comment
-    - `''' block comment '''`
-    - `""" block comment """`
+- shebang
+  - `#!/usr/bin/env python3`
+  - `# -*- coding: utf_8 -*-`
+- inline comment
+  - `# inline comment`
+- block comment
+
+  - `''' block comment '''`
+  - `""" block comment """`
 
 - Importing/Exporting
 
-  - `import MODULE`
+- `import MODULE`
 
 - Pass statement
 
-  - `class MyEmptyClass:`
-  - `pass`
+- `class MyEmptyClass:`
+- `pass`
 
 - Global variable reference statement
 
-  - `global variable_list`
+- `global variable_list`
 
 - docstring statement
 
-  - docstring is a string literal that occurs as the first statement in a module, function, class, or method definition.
-  - docstring becomes the `__doc__` special attribute of that object
+- docstring is a string literal that occurs as the first statement in a module, function, class, or method definition.
+- docstring becomes the `__doc__` special attribute of that object
 
 - decorator statement
-  - `@decorator`
+- `@decorator`
 
 ### Flow Control
 
@@ -610,28 +682,61 @@ sidebar_label: Python
 - if-elif-else
 
 ```python
-  # if
-  if condition_expression :
-    true_blocks
+# if
+if condition_expression :
+  true_blocks
 
-  # if-else
-  if condition_expression :
-    true_blocks
-  else :
-    false_blocks
+# if-else
+if condition_expression :
+  true_blocks
+else :
+  false_blocks
 
-  # if-elif-else
-  if condition_expression1 :
-    condition1_true_blocks
-  elif condition_expression2:
-    condition1_false
-    condition2_true_blocks
-  else :
-    all_above_condition_expression
-    false_block
+# if-elif-else
+if condition_expression1 :
+  condition1_true_blocks
+elif condition_expression2:
+  condition1_false
+  condition2_true_blocks
+else :
+  all_above_condition_expression
+  false_block
 ```
 
-#### Branching
+#### Blocking
+
+- with-as
+
+```python
+  # file open and close
+  with open("file.txt", "+") as fh:
+    for line in fh:
+      print(line)
+  print("done")
+
+  # class __enter__(), __exit__()
+  class MyClass():
+    def __init__(self):
+      pass
+
+    def __enter__(self):
+      print("enter 'with' block.")
+      print("do some init work.")
+
+    def __exit__(self, type, value, traceback):
+      print("exit 'with' block.")
+      print("do some cleanup work.")
+
+    def showinfo()
+      print("hello MyClass.")
+
+  with MyClass() as myclass:
+    myclass.showinfo()
+  print("done")
+
+```
+
+---
 
 #### Loop
 
@@ -969,10 +1074,48 @@ sidebar_label: Python
     - `@asyncio.coroutine`
   - io
 
-- Python
+- Data
+
+  - pickle
+    - `pickle.dump(data, filehandler)`
+    - `data = pickle.load(filehandler)`
+      - load meaning full object, the class of object must defined before load().
+  - json
+    - `json.dump(data, filehandler, indent=2, sepeators=(',', ':'))`
+    - `data = json.load(filehandler)`
+      - load meaning full object, the class of object must defined before load().
+  - yaml
+    - `pip install pyyaml`
+    - `yaml.dump(data, filehander)`
+    - `data = yaml.load(filehandler)`
+      - load meaning full object, the class of object must defined before load().
+
+- Python Language Services
 
   - keyword
     - `keyword.kwlist`
+  - pdb
+    - `pdb.set_trace()`
+      - `n for next, s for step in`
+  - logging
+    - `logging.basicConfig(level=logging.INFO)`
+    - `logging.debug(DEBUG_MSG)`
+    - `logging.info(INFO_MSG)`
+    - `logging.warning(WARNING_MSG)`
+    - [Ref](https://docs.python.org/3/library/logging.html)
+  - timeit
+    - `timeit.timeit(STATEMENT, SETUP_CODE, number=REPEAT_TIMES)`
+  - pytest
+    - `pip install pytest`
+    - testing script
+      - `touch test_MYSCRIPT.py`
+      - editing test cases for `MYSCRIPT`
+    - testing cases
+      - `import MYSCRIPT`
+      - `def test_MYSCRITP_FUNC1():`
+      - `assert assert_statements`
+    - run test
+      - in CLI, run `py.test`
 
 - Exception
 
@@ -992,6 +1135,10 @@ sidebar_label: Python
   - itertools
   - functools
   - operator
+
+- OOP
+
+  - abc
 
 ---
 
