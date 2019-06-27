@@ -33,12 +33,15 @@ sidebar_label: Python
 
 ### Variables and Namespace
 
-- variables
+- variables identifier
+  - `/[a-zA-Z_]+[\\w]\*/`
 - namespace
   - global
   - local
     - global variable reference statement
       - `global variable_list`
+  - list namespace variables
+    - `dir(NAME_SPACE)`
 - keywords
   - `import keyword; print(keyword.kwlist)`
 
@@ -57,7 +60,7 @@ sidebar_label: Python
 - type() function
 
   - return Type Object
-  - `int, float, str, list, set, dict, NoneType, function, generator`
+  - `int, float, str, list, set, dict, NoneType, type, function, generator`
 
 - type conversion
 
@@ -111,7 +114,7 @@ sidebar_label: Python
   - immutable type
   - refer by value
   - categories
-    - `int, float, long, complex`
+    - `int, float, complex`
   - arithmetic operators
     - `+, -, *, /, //, %, **`
   - comparison operators
@@ -386,10 +389,16 @@ sidebar_label: Python
 
 #### Functions
 
+- function decorator
 - function declarition
 - function docstring
   - `func.__doc__`
+- function anotation
+  - `func.__anotations__`
 - arguments
+  - `args`
+  - `*args`
+  - `**kwargs`
   - default args
   - keyword args
 - lambda function
@@ -484,10 +493,11 @@ sidebar_label: Python
 
 #### Classes
 
-- Object declarition
+- Class/Object declaration
 - Constructor
 - Attributes
-  - default args
+  - get attributes of class
+    - `dir(Obj)`
 - Methods
 - OOP
 
@@ -553,6 +563,10 @@ sidebar_label: Python
 
 ### Expressions
 
+- yield
+  - yield
+  - yield from
+
 ### Statements
 
 - Comments
@@ -583,6 +597,9 @@ sidebar_label: Python
 
   - docstring is a string literal that occurs as the first statement in a module, function, class, or method definition.
   - docstring becomes the `__doc__` special attribute of that object
+
+- decorator statement
+  - `@decorator`
 
 ### Flow Control
 
@@ -694,27 +711,85 @@ sidebar_label: Python
 
 ### Importing/Exporting
 
-- import module from path: `.; PYTHONPATH`
+- import module from path: `. ; PYTHONPATH`
 - import statment excution module codes only once
 - import statements
   - `import MODULE`
+  - `import MODULE as NEW_MODUEL_NAME`
   - `from MODULE import NAMES`
+  - `from MODULE import NAME as NEW_NAME`
   - `from MODULE import *`
 - exclude codes for import excution
   - `if __name__ == "__main__":`
   - `excluded_module_block`
-- `dir(MODULE)`
+- show module namespace
+  - `dir(MODULE)`
+- program entry point
+  - `__name__ == "__main__"`
 
-### sys
+---
+
+### Math
+
+- Moduels
+
+  - numbers
+  - decimal
+    - accounting applications
+  - fractions
+    - rational number arithmetic
+  - math
+    - real/rational/integer number arithmetic
+  - cmath
+    - complex number arithmetic
+  - random
+  - statistics
 
 - Practices
 
   ```python
-  import sys
-  sys.argv
+  import numbers
+  """
+    numbers module defines numeric abstract base classes.
+    numbers.Complex, numbers.Real, numbers.Rational, numbers.Integral
+    all abstract classes can't be instantiated.
+  """
+
+  from decimal import *
+  """
+    decimal module provides precisely rounded float numbers.
+    and arithmetic operations carries the precision.
+  """
+  # Context Object
+  getcontext()
+  setcontext()
+
+  # Decimal Object
+  d = Decimal(value="0", context=None)
+
+  from fractions import Fraction
+  """
+    fractions module provides rational number arithmetic.
+  """
+  # Fraction Object
+  r = Fraction(16, -10)
+  r.numerator
+  r.denominator
+
+  import math
+  math.ceil()
+  math.floor()
+  math.pi
+  math.e
+  math.nan
+  math.inf
+
   ```
 
-### math
+- Ref
+  - [General Decimal Arithmetic Specification](http://speleotrove.com/decimal/decarith.html)
+
+---
 
 ### re
 
@@ -874,15 +949,61 @@ sidebar_label: Python
 
 ---
 
-### ctypes
+### Misc
 
-- [documentation](https://docs.python.org/3/library/ctypes.html)
+- Host
+
+  - OS
+  - FS
+  - Concurent Computing
+    - concurrent
+    - threading
+    - subprocess
+    - multiprocessing
+    - contextlib
+      - `@contextlib.contextmanager`
+
+- IOs
+
+  - asyncio
+    - `@asyncio.coroutine`
+  - io
+
+- Python
+
+  - keyword
+    - `keyword.kwlist`
+
+- Exception
+
+- Testing
+
+- CLI
+
+  - argparse
+  - cmd
+
+- Documentation
+
+  - doctest
+
+- FP
+
+  - itertools
+  - functools
+  - operator
 
 ---
 
 ---
 
 ## Design Patterns
+
+### Metaprogramming
+
+---
+
+### Metaclass
 
 ---
 
@@ -896,9 +1017,17 @@ sidebar_label: Python
 
 - `import os; clear = lambda: os.system('clear'); clear();`
 
-### Management
+### Package and Package Management
 
-### Security
+- namespace packages
+
+  - using `__init__.py` in package root directory
+  - export minimal interface in `__init__.py` to reduce exposure surface
+  - using `__main__.py` as programme entry point
+
+### Testing
+
+- Doctest
 
 ---
 
