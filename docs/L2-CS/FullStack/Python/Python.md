@@ -206,6 +206,7 @@ sidebar_label: Python
   ```python
     # list literal
     li = [1, 2, 4, "lsit"]
+    li = []
 
     # list comprehension
     li = [x**2 for x in range(10)]
@@ -213,29 +214,43 @@ sidebar_label: Python
 
     # list constructor explicit/implicit
     li = list(range(1,10,2))
+    li = list("string char list")
 
     # methods
     li.insert(index, item)
     li.append(item)
-    del li[index]
     li.pop(index)
     li.remove(value)
-
-    li.index(value)
     li.count(value)
+    li.index(value)
+    li.sort()
+    li.reverse()
+    li.extend(iterable)
+    li.clear()
 
+    # __getitem__()
+    # __setitem__()
+    # __slice__()
+    #__del__()
+    li[index]
+    li[-1]
     li[start:end:step]
     li[start:]
     li[:end]
-
-    li.sort()
-    li.reverse()
-    li.extend(li2)
+    li[start::step]
+    del li[index]
+    del li[start:end:step]
 
     # external functions/operators
     newLi = li + li2
     newLi = li * 2
     newLi = sorted(li)
+    for item in li:
+      do_staff_with_item
+
+    # destruction/unpacking
+    a, b, c = [1, 3, 4]
+    a, *rest = [1, 3, 4]
 
   ```
 
@@ -252,16 +267,26 @@ sidebar_label: Python
 
   ```python
     # tuple literal
-    t = (1, 2, 4, "lsit")
+    t = (1, 2, 4, "lsit", )
+    t = (3, )
+    t = ()
 
     # tuple constructor explicit/implicit
     t = tuple(range(1,10,2))
+    t = tuple([1,4,9,"er"])
+    t = tuple("string char tuple")
 
-    # methods
-    #indexing/slicing
+    # tuple methods
+    t.index(value)
+
+    # __getitem__()
+    # __slice__()
     t[index]
-    t[start:end:step]
     t[-1]
+    t[start:end:step]
+    t[start:]
+    t[:end]
+    t[start::step]
 
     # element operation
     elem in t
@@ -269,6 +294,13 @@ sidebar_label: Python
     # external functions/operators
     newT = t * 2
     newT = t1 + t2
+    for item in t:
+      do_staff_with_item
+
+    # destruction/unpacking
+    a, b, c = (1, 3, 4)
+    a, *rest = (1, 3, 4)
+
   ```
 
 ---
@@ -277,20 +309,23 @@ sidebar_label: Python
 
 - Introduction
 
-- mutable type
+- immutable type
 - Disjoint set data structure
+- no order
 
 - Practices
 
   ```python
     # set literal
-    s = set([1, 2, 4, "lsit"])
+    s = {1,2,3,4,"set",}
 
     # set comprehension
     s = {x**2 for x in range(10)}
     s = {x**2 if x > 5 else x**4 for x in range(10)}
 
     # set constructor explicit/implicit
+    s = set()
+    s = set([1, 2, 4, "lsit"])
     s = set(range(1,10,2))
 
     # methods
@@ -298,11 +333,16 @@ sidebar_label: Python
     elem = s1.pop()
     s1.remove(elem)
 
+    # set operation
     s1.clear()
-
+    newS = s1.union(s2)
+    newS = s1 & s2
     newS = s1.intersection(s2)
     newS = s1.difference(s2)
-    newS = s1.union(s2)
+    newS = s1 - s2
+    newS = s1.symmetric_difference(s2)
+    newS = s1 ^ s2
+    newS = s1.union(s2) - s1.intersection(s2)
 
     elem in s1
 
@@ -315,27 +355,49 @@ sidebar_label: Python
 
 - Introduction
 
-  - mutable type
-  - key-value data structure
+- mutable type
+- RuntimeError if change dict object during iteration
+- key-value data structure
+  - key must be immutable type
+- custome key missing behavior
+  - `__missing__()`
+  - memoization
+    - transform a dict subclass into a function
+- dictionary comprehension
 
 - Practices
 
-  ```python
-    # dict literal
-    d = {'key' : 3, "lsit": [1,2,3]}
+```python
+  # dict literal
+  d = {'key' : 3, "lsit": [1,2,3]}
 
-    # dictionary comprehension
-    d = {x: x**2 for x in range(10)}
-    d = {x: x**2 if x > 5 else x**4 for x in range(10)}
+  # dictionary comprehension
+  d = {x: x**2 for x in range(10)}
+  d = {x: x**2 if x > 5 else x**4 for x in range(10)}
 
-    # dict constructor explicit/implicit
-    d = dict()
+  # dict constructor explicit/implicit
+  d = dict()
+  d = dict(key1 = value1, key2 = "value2") # key1 will be "key1" string key
+  d = dict([("key1", 1),("key2", 2),(3, "three")])
 
-    # methods
-    d.keys()
-    d.values()
-    d.items()
-  ```
+  # dict build method
+  d = dict.fromkeys(key_iterable, value_iterable)
+
+  # dict manipulation methods
+  d.update(d1)
+  d = d1.copy() # shallow copy, key copied, but value referenced.
+  d.clear()
+
+  # key value manipulation methods
+  keysObj = d.keys()
+  valueObj = d.values()
+  keyvalueObj = d.items()
+  keyvalue_tuple = d.popitem()
+  value = d.get(key, default_value)
+  value = d.setdefault(key, default_value)
+
+  value = d.pop(key, default_value)
+```
 
 ---
 
@@ -345,7 +407,7 @@ sidebar_label: Python
 
   - `(group)`
 
-- Indexing/Accessing Operator
+- `__getitem__` Indexing/Accessing Operator
 
   - `sequence[index]`
   - `collect[member]`
@@ -489,6 +551,23 @@ sidebar_label: Python
   next(gen)
   ```
 
+- FP principles
+
+  - memoization
+
+    ```python
+    # dict subclass functionization
+    class memoiFunc(dict):
+      def __init__(func):
+        self.__caller = func
+
+      def __missing__(self, key):
+        return self.__caller(key)
+
+    d = memoiFunc(print)
+    d[1,2,3,4]
+    ```
+
 ### OOP and Classes
 
 #### Classes
@@ -522,6 +601,7 @@ sidebar_label: Python
     - `== : __eq__()`
     - `[index] : __getitem__(index)`
     - `[start:end]: __getslice__(start, end)`
+    - `(args): __call__(args)`
     - `len(obj) : __len__()`
 
 - OOP
@@ -1056,7 +1136,7 @@ else :
 
 ### Misc
 
-- Host
+- Host/OS/System
 
   - OS
   - FS
@@ -1067,6 +1147,9 @@ else :
     - multiprocessing
     - contextlib
       - `@contextlib.contextmanager`
+  - CLI
+    - argparse
+    - cmd
 
 - IOs
 
@@ -1117,14 +1200,25 @@ else :
     - run test
       - in CLI, run `py.test`
 
-- Exception
+- Algorithms and Data Structure
 
-- Testing
+  - bisect
 
-- CLI
+    - `index = bisect.bisect_left(arr, searchvalue, start, end)`
+    - `index = bisect.bisect_right(arr, searchvalue, start, end)`
+    - `bisect.insort_left(arr, insertvalue, start, end)`
+    - `bisect.insort_right(arr, insertvalue, start, end)`
 
-  - argparse
-  - cmd
+  - collections
+
+    - `ChainMap`
+    - `namedtuple`
+    - `Deque`
+
+  - heapq
+    - `heapify(list)`
+    - `heappush(list, value)`
+    - `value = heappop()`
 
 - Documentation
 
