@@ -45,28 +45,41 @@ sidebar_label: Python
 
 <!-- ### Building Blocks -->
 
-### Variables and Namespace
+### Variables, Namespace and Scope
 
-- variables identifier
-  - `/[a-zA-Z_]+[\\w]\*/`
-- namespace
-  - global
-  - local
+- Variables Identifier
+
+  - `/[a-zA-Z_][a-zA-Z0-9_]*/`
+  - keywords
+    - `import keyword; print(keyword.kwlist)`
+
+- Namespace
+
+  - a collection of names, maintains identifier and it's value mapping relation.
+  - list namespace variables
+    - `dir(NAME_SPACE)`
+  - namespace created within:
+    - built-in namespace
+    - moudle global namespace
+    - function local namespace
+    - class local namespace
+    - instance local namespace
+
+- Scope
+
+  - an execution context, determins which namespaces and identifiers are available in current context.
+  - global scope
+  - local scope
     - `UnboundLocalError`
       - within local scope, try to assign value to a name in global namespace
     - global variable reference statement
       - `global variable_list`
-  - nonlocal
+  - nonlocal scope
     - innner funnction
-  - list namespace variables
-    - `dir(NAME_SPACE)`
-  - namespace created within:
-    - function
-    - class
-    - instance
-    - module
-- keywords
-  - `import keyword; print(keyword.kwlist)`
+  - list current scope names
+    - `dir()`
+
+---
 
 ### Types
 
@@ -464,30 +477,42 @@ sidebar_label: Python
 
   - `(group)`
 
-- `__getitem__` Indexing/Accessing Operator
+- Indexing/Accessing Operator
 
+  - `__getitem__(), __setitem__(), and __delitem__()`
   - `sequence[index]`
   - `collect[member]`
 
-- string/list concatenation and repeatition operator
+- Slice Operator
 
-  - `s + l2`
+  - `__getslice__(), __setslice__() and __delslice__()`
+  - `sequence[start:end:step]`
+
+- String/List Concatenation Operator
+
+  - `__concat__()`
+  - `s + s2`
+
+- String/List Repeatition Operator
+
+  - `__mul__()`
   - `s * 3`
 
-- del operator
+- del Operator
 
   - `del arr[i]`
 
-- in operator
+- in, not in Membership Operator
 
-  - `elem in Collection`
+  - `elem in COLLECTION`
+  - `elem not in COLLECTION`
 
 - Bitwise Operators
 
   - `&, |, ^, ~`
   - `<<, >>`
 
-- Tenary Operators
+- Tenary Operator
 
   - `true_expression if condition_express else false_expression`
 
@@ -501,16 +526,21 @@ sidebar_label: Python
   - `==, !=`
   - `>, >=, <, <=`
 
-- Identity Operators
+- is, is not Identity Operator
 
   - `is`
   - `is not`
+
+- Assignment Operator
+
+  - `=`
+  - `+=, -=, *=, /=, //=, %=, **=`
 
 - Condition/Logical Operators
 
   - `not, and, or`
 
-- Argument Destructure Operators
+- Arguments Spread Operators
 
   - `func(*args)`
   - `func(**kwargs)`
@@ -676,6 +706,8 @@ sidebar_label: Python
   - Class/Object Type declaration
   - Constructor
   - Attributes
+    - Class Attributes
+    - Instance Attributes
     - attributes loopup
       - instance -> class -> parents classes
     - get attributes of class
@@ -692,6 +724,7 @@ sidebar_label: Python
       - pure utility function
     - setter/getter/deleter
       - `@property`
+  - Slots
   - Object/Instance
   - Operator Override
     - `+ : __add__()`
@@ -703,6 +736,8 @@ sidebar_label: Python
     - `[start:end]: __getslice__(start, end)`
     - `(args): __call__(args)`
     - `len(obj) : __len__()`
+
+- Metaclasses
 
 - OOP
 
@@ -720,17 +755,17 @@ sidebar_label: Python
       - extend
       - provide
         - implement abstract method defined by parents class
+    - Abstract Base classes
+      - abc module
+        - decorators
+          - `@abc.abstractclassmethod`
+          - `@abc.abstractstaticmethod`
+          - `@abc.abstractproperty`
+          - `@abc.abstractmethod`
   - Encapsulation
   - Polymophism
     - Method Overwriten
   - Isolation
-  - Abstract Base classes
-    - abc module
-      - decorators
-        - `@abc.abstractclassmethod`
-        - `@abc.abstractstaticmethod`
-        - `@abc.abstractproperty`
-        - `@abc.abstractmethod`
 
 - Python Object Model
 
@@ -776,6 +811,12 @@ sidebar_label: Python
 - Practices
 
   ```python
+  #Object Declaration
+  class MyObject(PARENT1, PARENT2, PATENT3, ...):
+    """MyObject Class Docstring"""
+    def __init__(self, arg, *args, **kwargs):
+      constructor_body_block
+
   # Object declarition
   class Shape(object):
     def __init__(self):
@@ -904,9 +945,11 @@ sidebar_label: Python
   - `a = 1, b = 2`
   - `a, b, c = 1, 2, 3`
   - `a, b, c = 1, 2, 3`
-  - list, tuple destructing
+  - list, tuple destructuring
     - `a, b = [1, 3]`
   - `+=, -=...`
+
+- condition expression
 
 - generator expression
 
@@ -921,36 +964,60 @@ sidebar_label: Python
 
 - Comments
 
-- shebang
-  - `#!/usr/bin/env python3`
-  - `# -*- coding: utf_8 -*-`
-- inline comment
-  - `# inline comment`
-- block comment
+  - shebang
+    - `#!/usr/bin/env python3`
+    - `# -*- coding: utf_8 -*-`
+  - inline comment
+    - `# inline comment`
+  - block comment
 
-  - `''' block comment '''`
-  - `""" block comment """`
+    - `''' block comment '''`
+    - `""" block comment """`
 
 - Importing/Exporting
 
-- `import MODULE`
-
-- Pass statement
-
-- `class MyEmptyClass:`
-- `pass`
+  - `import MODULE`
 
 - Global variable reference statement
 
-- `global variable_list`
+  - `global variable_list`
 
-- docstring statement
+- Docstring statement
 
-- docstring is a string literal that occurs as the first statement in a module, function, class, or method definition.
-- docstring becomes the `__doc__` special attribute of that object
+  - docstring is a string literal that occurs as the first statement in a module, function, class, or method definition.
+  - docstring becomes the `__doc__` special attribute of that object
 
-- decorator statement
-- `@decorator`
+- Decorator statement
+
+  - `@decorator`
+
+- Pass Statement
+
+  - `pass`
+
+- Function Statements
+
+  - function declaration
+  - lambda function
+
+- Class Statements
+
+  - class declaration
+
+- Flow Control Statements
+
+  - condition statements
+    - if-elif-else
+  - context blocking statement
+    - with-as
+  - loop statements
+    - for-in-else
+    - while-else
+    - break
+    - continue
+  - exception statements
+    - try-except-else-finally
+    - raise
 
 ### Flow Control
 
