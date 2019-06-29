@@ -83,6 +83,8 @@ sidebar_label: Python
 
 ### Types
 
+#### Types Introduction
+
 - Reference
 
   - refer by reference
@@ -96,24 +98,19 @@ sidebar_label: Python
 - type() function
 
   - return Type Object
-  - `int, float, str, list, set, dict, NoneType, type, function, generator`
+    - `NoneType`
+    - `bool`
+    - `int, float, complex, decimal.Decimal, fractions.Fraction`
+    - `str, bytes, bytearray`
+    - `list, tuple`
+    - `set, frozenset`
+    - `dict`
+    - `function, generator`
+    - `type`
+    - `__main__.MyObject`
 
 - type conversion
-
-  - `int()`
-  - `float()`
-  - `str()`
-  - `bool()`
-  - `list()`
-  - `tuple()`
-  - `set()`
-
-- Categories
-
-  - `int`
-  - `float`
-  - `bool`
-  - `str`
+  - explicit type constructor conversion
 
 ---
 
@@ -127,9 +124,8 @@ sidebar_label: Python
 
   - immutable type
   - refer elements by value
-  - type conversion: `bool(var)`
   - Falsey values
-    - `0, 0.0, 0L, 0j, None, "", [], (), {}`
+    - `0, 0.0, 0j, None, "", [], (), {}`
   - logical operators
     - `not, and, or`
 
@@ -139,11 +135,14 @@ sidebar_label: Python
     # boolean literal
     b = True
     b = False
+
+    # boolean explicit/implicit constructor
+    b = bool(value)
   ```
 
 ---
 
-#### Number
+#### Numbers
 
 - Introduction
 
@@ -166,7 +165,7 @@ sidebar_label: Python
 
 ---
 
-#### String
+#### Strings
 
 - Introduction
 
@@ -471,85 +470,7 @@ sidebar_label: Python
 
 ---
 
-### Operators
-
-- Grouping Operators
-
-  - `(group)`
-
-- Indexing/Accessing Operator
-
-  - `__getitem__(), __setitem__(), and __delitem__()`
-  - `sequence[index]`
-  - `collect[member]`
-
-- Slice Operator
-
-  - `__getslice__(), __setslice__() and __delslice__()`
-  - `sequence[start:end:step]`
-
-- String/List Concatenation Operator
-
-  - `__concat__()`
-  - `s + s2`
-
-- String/List Repeatition Operator
-
-  - `__mul__()`
-  - `s * 3`
-
-- del Operator
-
-  - `del arr[i]`
-
-- in, not in Membership Operator
-
-  - `elem in COLLECTION`
-  - `elem not in COLLECTION`
-
-- Bitwise Operators
-
-  - `&, |, ^, ~`
-  - `<<, >>`
-
-- Tenary Operator
-
-  - `true_expression if condition_express else false_expression`
-
-- Arithmetic Operators
-
-  - `+, -`
-  - `*, /, //, %, **`
-
-- Comparison Operators
-
-  - `==, !=`
-  - `>, >=, <, <=`
-
-- is, is not Identity Operator
-
-  - `is`
-  - `is not`
-
-- Assignment Operator
-
-  - `=`
-  - `+=, -=, *=, /=, //=, %=, **=`
-
-- Condition/Logical Operators
-
-  - `not, and, or`
-
-- Arguments Spread Operators
-
-  - `func(*args)`
-  - `func(**kwargs)`
-
-- Comma Operator
-
-  - `a, b, c`
-
-### FP and Functions
+### Function and FP
 
 #### Functions
 
@@ -697,7 +618,7 @@ sidebar_label: Python
     d[1,2,3,4]
     ```
 
-### OOP and Classes
+### Class and OOP
 
 #### Classes
 
@@ -933,6 +854,86 @@ sidebar_label: Python
   print("done")
 
   ```
+
+---
+
+### Operators
+
+- Grouping Operators
+
+  - `(group)`
+
+- Indexing/Accessing Operator
+
+  - `__getitem__(), __setitem__(), and __delitem__()`
+  - `sequence[index]`
+  - `collect[member]`
+
+- Slice Operator
+
+  - `__getslice__(), __setslice__() and __delslice__()`
+  - `sequence[start:end:step]`
+
+- String/List Concatenation Operator
+
+  - `__concat__()`
+  - `s + s2`
+
+- String/List Repeatition Operator
+
+  - `__mul__()`
+  - `s * 3`
+
+- del Operator
+
+  - `del arr[i]`
+
+- in, not in Membership Operator
+
+  - `elem in COLLECTION`
+  - `elem not in COLLECTION`
+
+- Bitwise Operators
+
+  - `&, |, ^, ~`
+  - `<<, >>`
+
+- Tenary Operator
+
+  - `true_expression if condition_express else false_expression`
+
+- Arithmetic Operators
+
+  - `+, -`
+  - `*, /, //, %, **`
+
+- Comparison Operators
+
+  - `==, !=`
+  - `>, >=, <, <=`
+
+- is, is not Identity Operator
+
+  - `is`
+  - `is not`
+
+- Assignment Operator
+
+  - `=`
+  - `+=, -=, *=, /=, //=, %=, **=`
+
+- Condition/Logical Operators
+
+  - `not, and, or`
+
+- Arguments Spread Operators
+
+  - `func(*args)`
+  - `func(**kwargs)`
+
+- Comma Operator
+
+  - `a, b, c`
 
 ---
 
