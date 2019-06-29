@@ -8,6 +8,7 @@ sidebar_label: Python
 
 - Bytecode compiled interpreted language
   - `.py` to `.pyc`
+- Dynamic Typing
 - OOP
 - FP
 
@@ -15,6 +16,8 @@ sidebar_label: Python
 
 - Open source
 - Platform independent
+- Modular
+- Flexible
 
 ### Applicable Scenarios
 
@@ -22,6 +25,17 @@ sidebar_label: Python
 - Game Dev
 - Data Science
 - Sys DevOps
+
+### Python Interpreter Implementation
+
+- Python
+  - PyPy
+- C
+  - CPython, the default interpreter
+- Java
+  - Jython
+- .NET
+  - IronPython
 
 ---
 
@@ -38,10 +52,19 @@ sidebar_label: Python
 - namespace
   - global
   - local
+    - `UnboundLocalError`
+      - within local scope, try to assign value to a name in global namespace
     - global variable reference statement
       - `global variable_list`
+  - nonlocal
+    - innner funnction
   - list namespace variables
     - `dir(NAME_SPACE)`
+  - namespace created within:
+    - function
+    - class
+    - instance
+    - module
 - keywords
   - `import keyword; print(keyword.kwlist)`
 
@@ -148,6 +171,8 @@ sidebar_label: Python
     s = """ string literal with
     (no indentation)multiple lines"""
     s = r"C:\number\nums"
+    s = "C:\\number\\nums"
+    s = b"bytes string"
 
     # formatting
     "{0} placeholder {1}".format(var1, var2)
@@ -172,13 +197,16 @@ sidebar_label: Python
     s = "repeate"*2
 
     # string manipulation
-    str.find(substr)
+    index = str.find(substr)
     str.startwith(substr, start, end)
     str.endwith(substr, start, end)
 
     str.strip(charColl)
     str.lstrip(charColl)
     str.rstrip(charColl)
+    str.center(width)
+    str.ljust()
+    str.rjust90
 
     str.replace(" ","")
     str.split(splitCharCol)
@@ -186,6 +214,10 @@ sidebar_label: Python
 
     str.lower()
     str.upper()
+    str.title()
+    str.swapcase()
+
+    str.isalpha()
 
     char in str
     str.index(char)
@@ -210,23 +242,20 @@ sidebar_label: Python
 
     # list comprehension
     li = [x**2 for x in range(10)]
+    li = [x**2 for x in range(10) if x%2 == 0]
     li = [x**2 if x > 5 else x**4 for x in range(10)]
 
     # list constructor explicit/implicit
     li = list(range(1,10,2))
     li = list("string char list")
 
-    # methods
-    li.insert(index, item)
-    li.append(item)
+    # element manipulation methods
+    li.insert(index, value)
+    li.append(value)
     li.pop(index)
     li.remove(value)
     li.count(value)
     li.index(value)
-    li.sort()
-    li.reverse()
-    li.extend(iterable)
-    li.clear()
 
     # __getitem__()
     # __setitem__()
@@ -240,6 +269,12 @@ sidebar_label: Python
     li[start::step]
     del li[index]
     del li[start:end:step]
+
+    # list manipulation method
+    li.sort()
+    li.reverse()
+    li.extend(iterable)
+    li.clear()
 
     # external functions/operators
     newLi = li + li2
@@ -305,13 +340,14 @@ sidebar_label: Python
 
 ---
 
-#### Set
+#### Set/FrozenSet
 
 - Introduction
 
-- immutable type
-- Disjoint set data structure
-- no order
+  - set is mutable type
+  - frozenset is immutable type
+  - Disjoint set data structure
+  - no order
 
 - Practices
 
@@ -336,8 +372,9 @@ sidebar_label: Python
     # set operation
     s1.clear()
     newS = s1.union(s2)
-    newS = s1 & s2
+    newS = s1 | s2
     newS = s1.intersection(s2)
+    newS = s1 & s2
     newS = s1.difference(s2)
     newS = s1 - s2
     newS = s1.symmetric_difference(s2)
@@ -345,8 +382,16 @@ sidebar_label: Python
     newS = s1.union(s2) - s1.intersection(s2)
 
     elem in s1
+    elem not in s1
 
     # external functions/operators
+    len(s)
+    max(s)
+    min(s)
+
+    for elem in S:
+      do_stuff
+
   ```
 
 ---
@@ -355,15 +400,15 @@ sidebar_label: Python
 
 - Introduction
 
-- mutable type
-- RuntimeError if change dict object during iteration
-- key-value data structure
-  - key must be immutable type
-- custome key missing behavior
-  - `__missing__()`
-  - memoization
-    - transform a dict subclass into a function
-- dictionary comprehension
+  - mutable type
+  - RuntimeError if change dict object during iteration
+  - key-value data structure
+    - key must be immutable type
+  - custome key missing behavior
+    - `__missing__()`
+    - memoization
+      - transform a dict subclass into a function
+  - dictionary comprehension
 
 - Practices
 
@@ -388,15 +433,27 @@ sidebar_label: Python
   d = d1.copy() # shallow copy, key copied, but value referenced.
   d.clear()
 
-  # key value manipulation methods
+  # key-value manipulation methods
   keysObj = d.keys()
   valueObj = d.values()
   keyvalueObj = d.items()
   keyvalue_tuple = d.popitem()
+  value = d[key]
   value = d.get(key, default_value)
   value = d.setdefault(key, default_value)
-
   value = d.pop(key, default_value)
+
+  # external functions/operators
+  len(d)
+
+  if key in d:
+    do_stuff
+
+  for key in d:
+    do_stuff
+
+  for k,v in d.items:
+    do_stuff
 ```
 
 ---
@@ -412,6 +469,11 @@ sidebar_label: Python
   - `sequence[index]`
   - `collect[member]`
 
+- string/list concatenation and repeatition operator
+
+  - `s + l2`
+  - `s * 3`
+
 - del operator
 
   - `del arr[i]`
@@ -422,7 +484,7 @@ sidebar_label: Python
 
 - Bitwise Operators
 
-  - `&, |, ^,`
+  - `&, |, ^, ~`
   - `<<, >>`
 
 - Tenary Operators
@@ -439,9 +501,19 @@ sidebar_label: Python
   - `==, !=`
   - `>, >=, <, <=`
 
+- Identity Operators
+
+  - `is`
+  - `is not`
+
 - Condition/Logical Operators
 
   - `not, and, or`
+
+- Argument Destructure Operators
+
+  - `func(*args)`
+  - `func(**kwargs)`
 
 - Comma Operator
 
@@ -451,21 +523,30 @@ sidebar_label: Python
 
 #### Functions
 
-- function decorator
-- function declarition
-- function docstring
-  - `func.__doc__`
-- function anotation
-  - `func.__anotations__`
-- arguments
-  - `args`
-  - `*args`
-  - `**kwargs`
-  - default args
-  - keyword args
-- lambda function
+- Introduction
 
-- practices
+  - function decorator
+  - function declaration
+    - function docstring
+      - `func.__doc__`
+    - function anotation
+      - `func.__anotations__`
+    - arguments
+      - `args`
+      - `args = default_value`
+      - `*args`
+      - `**kwargs`
+      - default args
+      - keyword args
+      - argurments destructing
+        - `func(*sequences)`
+        - `func(**dicts)`
+    - return value
+      - return `None` by default
+  - inner function
+  - lambda function
+
+- Practices
 
   ```python
   # function declarition
@@ -520,10 +601,28 @@ sidebar_label: Python
 
   - Decorator
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
+    - `@decorator`
   - Generator
     - generate an iterable like object
+    - `(expr for iter in interable)`
   - Iterator
     - traverse a collection with simple iterator protocal.
+    - `iter.next()`
+  - Filter
+    - `filter()`
+  - Mapper
+    - `map()`
+  - Reducer
+    - `functools.reduce()`
+  - Invoker/Caller/Applier
+    - `apply()`
+
+- FP Patterns
+
+  - lambda
+  - closure
+  - recursion
+  - curryinng
 
 - Practices
 
@@ -599,6 +698,7 @@ sidebar_label: Python
     - `print(obj) : __repr__()`
     - `in : __contains__()`
     - `== : __eq__()`
+    - `!= : __ne__()`
     - `[index] : __getitem__(index)`
     - `[start:end]: __getslice__(start, end)`
     - `(args): __call__(args)`
@@ -632,7 +732,48 @@ sidebar_label: Python
         - `@abc.abstractproperty`
         - `@abc.abstractmethod`
 
-- practices
+- Python Object Model
+
+  - Object in Python
+    - Identity
+    - Type
+    - Value
+  - Memory Reference Model
+    - object assigned by reference
+    - reference count reduce to 0, then object will be destroied by GC.
+    - reference count increment
+      - create new object and assigned
+      - assigned to other identifier
+      - passed to a function as argument
+      - referenced by container object as an element.
+    - reference count decrement
+      - local reference out of scope
+      - `del` operator explicitly destroy alias
+      - alias reassigned to different object
+      - object removed from container by container's operation
+      - container was destroied
+    - pass by reference
+      - assignment is alias, no copy
+        - `objx = objy # objx is objy; objx == objy`
+      - shallow copy increase reference count for elements
+        - `objx = shallow_copy(objy) # objx is not objy; objx == objy`
+      - deep copy create new object for each level of objects
+        - `objx = deep_copy(objy) # objx is not objy; objx == objy`
+  - Categories
+    - stroage model
+      - literal object
+        - numbers, str
+      - container object
+        - list, tuple, dict, set
+    - update model
+      - mutable
+      - immutable
+    - access model
+      - direct access
+      - sequence
+      - hashing
+
+- Practices
 
   ```python
   # Object declarition
@@ -712,11 +853,69 @@ sidebar_label: Python
 
 ---
 
+##### File IO
+
+- Introduction
+
+  - file is a contiguous sequence of bytes
+  - standard files
+    - stdin
+      - `input()`
+      - `sys.stdin`
+    - stdout
+      - `print()`
+      - `sys.stdout()`
+    - stderr
+      - `sys.stderr`
+  - file/IO objects
+    - `fo = open("path/to/file", "MODE")`
+    - check built-in [io module](#io)
+
+- Practices
+
+  ```python
+  # get file/io object
+  fo = open("./data/test.txt", "r+w")
+  fo.read()
+  fo.readline()
+  fo.readlines()
+  fo.write(string)
+  fo.writelines(string_list)
+  fo.seek()
+  fo.tell()
+  fo.flush()
+  fo.close()
+
+  with open("file.txt", "+") as fo:
+    for line in fo:
+      print(line, end="")
+  print("done")
+
+  ```
+
+---
+
 ### Expressions
 
-- yield
-- yield
-- yield from
+- assignment expression
+
+  - `a = 1`
+  - `a = b = 1`
+  - `a = 1, b = 2`
+  - `a, b, c = 1, 2, 3`
+  - `a, b, c = 1, 2, 3`
+  - list, tuple destructing
+    - `a, b = [1, 3]`
+  - `+=, -=...`
+
+- generator expression
+
+  - `(expr for iter in interable)`
+
+- yield expression
+  - yield
+  - yield
+  - yield from
 
 ### Statements
 
@@ -783,7 +982,7 @@ else :
   false_block
 ```
 
-#### Blocking
+#### Context Blocking
 
 - with-as
 
@@ -892,7 +1091,7 @@ else :
 
 ---
 
-## Builtin Moudles
+## Builtin Moudles and Packages
 
 ### Importing/Exporting
 
@@ -911,6 +1110,16 @@ else :
   - `dir(MODULE)`
 - program entry point
   - `__name__ == "__main__"`
+
+---
+
+### Package
+
+- namespace packages
+
+  - using `__init__.py` in package root directory
+  - export minimal interface in `__init__.py` to reduce exposure surface
+  - using `__main__.py` as programme entry point
 
 ---
 
@@ -973,6 +1182,89 @@ else :
 
 - Ref
   - [General Decimal Arithmetic Specification](http://speleotrove.com/decimal/decarith.html)
+
+---
+
+### Data Processing and Persistance
+
+- pickle
+  - `pickle.dump(data, filehandler)`
+  - `data = pickle.load(filehandler)`
+    - load meaning full object, the class of object must defined before load().
+- json
+  - `json.dump(data, filehandler, indent=2, sepeators=(',', ':'))`
+  - `data = json.load(filehandler)`
+    - load meaning full object, the class of object must defined before load().
+- yaml
+  - `pip install pyyaml`
+  - `yaml.dump(data, filehander)`
+  - `data = yaml.load(filehandler)`
+    - load meaning full object, the class of object must defined before load().
+
+---
+
+### Python Language Services
+
+- keyword
+  - `keyword.kwlist`
+- pdb
+  - `pdb.set_trace()`
+    - `n for next, s for step in`
+- logging
+  - `logging.basicConfig(level=logging.INFO)`
+  - `logging.debug(DEBUG_MSG)`
+  - `logging.info(INFO_MSG)`
+  - `logging.warning(WARNING_MSG)`
+  - [Ref](https://docs.python.org/3/library/logging.html)
+- timeit
+  - `timeit.timeit(STATEMENT, SETUP_CODE, number=REPEAT_TIMES)`
+- pytest
+  - `pip install pytest`
+  - testing script
+    - `touch test_MYSCRIPT.py`
+    - editing test cases for `MYSCRIPT`
+  - testing cases
+    - `import MYSCRIPT`
+    - `def test_MYSCRITP_FUNC1():`
+    - `assert assert_statements`
+  - run test
+    - in CLI, run `py.test`
+
+---
+
+### FP
+
+- itertools
+- functools
+- operator
+
+---
+
+### OOP
+
+- abc
+
+---
+
+### Algorithms and Data Structure
+
+- bisect
+
+  - `index = bisect.bisect_left(arr, searchvalue, start, end)`
+  - `index = bisect.bisect_right(arr, searchvalue, start, end)`
+  - `bisect.insort_left(arr, insertvalue, start, end)`
+  - `bisect.insort_right(arr, insertvalue, start, end)`
+
+- collections
+
+  - `ChainMap`
+  - `namedtuple`
+  - `Deque`
+
+- heapq
+  - `heapify(list)`
+  - `heappush(list, value)`
+  - `value = heappop()`
 
 ---
 
@@ -1134,7 +1426,7 @@ else :
 
 ---
 
-### Misc
+### Misc Modules
 
 - Host/OS/System
 
@@ -1155,84 +1447,10 @@ else :
 
   - asyncio
     - `@asyncio.coroutine`
-  - io
-
-- Data
-
-  - pickle
-    - `pickle.dump(data, filehandler)`
-    - `data = pickle.load(filehandler)`
-      - load meaning full object, the class of object must defined before load().
-  - json
-    - `json.dump(data, filehandler, indent=2, sepeators=(',', ':'))`
-    - `data = json.load(filehandler)`
-      - load meaning full object, the class of object must defined before load().
-  - yaml
-    - `pip install pyyaml`
-    - `yaml.dump(data, filehander)`
-    - `data = yaml.load(filehandler)`
-      - load meaning full object, the class of object must defined before load().
-
-- Python Language Services
-
-  - keyword
-    - `keyword.kwlist`
-  - pdb
-    - `pdb.set_trace()`
-      - `n for next, s for step in`
-  - logging
-    - `logging.basicConfig(level=logging.INFO)`
-    - `logging.debug(DEBUG_MSG)`
-    - `logging.info(INFO_MSG)`
-    - `logging.warning(WARNING_MSG)`
-    - [Ref](https://docs.python.org/3/library/logging.html)
-  - timeit
-    - `timeit.timeit(STATEMENT, SETUP_CODE, number=REPEAT_TIMES)`
-  - pytest
-    - `pip install pytest`
-    - testing script
-      - `touch test_MYSCRIPT.py`
-      - editing test cases for `MYSCRIPT`
-    - testing cases
-      - `import MYSCRIPT`
-      - `def test_MYSCRITP_FUNC1():`
-      - `assert assert_statements`
-    - run test
-      - in CLI, run `py.test`
-
-- Algorithms and Data Structure
-
-  - bisect
-
-    - `index = bisect.bisect_left(arr, searchvalue, start, end)`
-    - `index = bisect.bisect_right(arr, searchvalue, start, end)`
-    - `bisect.insort_left(arr, insertvalue, start, end)`
-    - `bisect.insort_right(arr, insertvalue, start, end)`
-
-  - collections
-
-    - `ChainMap`
-    - `namedtuple`
-    - `Deque`
-
-  - heapq
-    - `heapify(list)`
-    - `heappush(list, value)`
-    - `value = heappop()`
 
 - Documentation
 
   - doctest
-
-- FP
-
-  - itertools
-  - functools
-  - operator
-
-- OOP
-
-  - abc
 
 ---
 
@@ -1257,14 +1475,6 @@ else :
 #### Set clear() CMD for CLI
 
 - `import os; clear = lambda: os.system('clear'); clear();`
-
-### Package and Package Management
-
-- namespace packages
-
-  - using `__init__.py` in package root directory
-  - export minimal interface in `__init__.py` to reduce exposure surface
-  - using `__main__.py` as programme entry point
 
 ### Testing
 
