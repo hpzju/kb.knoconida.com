@@ -117,6 +117,7 @@ sidebar_label: Python
 #### None
 
 - `None`
+- `type(None)` returns `NoneType`
 
 #### Boolean
 
@@ -124,6 +125,7 @@ sidebar_label: Python
 
   - immutable type
   - refer elements by value
+    - reference by counter implicitly
   - Falsey values
     - `0, 0.0, 0j, None, "", [], (), {}`
   - logical operators
@@ -132,11 +134,11 @@ sidebar_label: Python
 - Practices
 
   ```python
-    # boolean literal
+    """ boolean literal """
     b = True
     b = False
 
-    # boolean explicit/implicit constructor
+    """ boolean explicit/implicit constructor """
     b = bool(value)
   ```
 
@@ -148,29 +150,95 @@ sidebar_label: Python
 
   - immutable type
   - refer by value
+    - very small interger reference by counter
   - categories
-    - `int, float, complex`
+    - `int, float, complex, fractions.Fraction, decimal.Decima`
   - arithmetic operators
     - `+, -, *, /, //, %, **`
   - comparison operators
     - `>, >=, <, <=, ==, !=`
+  - functions
+    - `math, cmath module functions`
 
 - Practices
 
   ```python
-    # boolean literal
-    b = True
-    b = False
+    """int"""
+    # int literal
+    i = 1
+
+    # int explicit/implicit constructor constructor
+    i = int(val)
+
+    """float"""
+    # float literal
+    f = 1.0
+
+    # float explicit/implicit constructor constructor
+    f = float(val)
+
+    """complex"""
+    # complex literal
+    c = 1+0J
+    c = 5J
+
+    # complex explicit/implicit constructor constructor
+    c = complex(val)
+    c = complex('1+2J') # no space required
+    c = complex(re, im)
+
+    """Fraction"""
+    import * from fractions
+    # Fraction literal
+
+    # Fraction explicit/implicit constructor constructor
+    """
+      class fractions.Fraction(numerator=0, denominator=1)
+      class fractions.Fraction(other_fraction)
+      class fractions.Fraction(float)
+      class fractions.Fraction(decimal)
+      class fractions.Fraction(string)
+    """
+
+    r = Fraction()
+    r = Fraction(16, 3)
+    r = Fraction(2.25)
+    r = Fraction(Decimal('1.1'))
+    r = Fraction('3/7')
+
+    # Fraction Class methods/properties
+    r.numerator
+    r.denominator
+
+    """Decima"""
+    import * from decimal
+    getcontext().prec = 12
+
+    # Decima literal
+
+    # Decima explicit/implicit constructor constructor
+    """
+      class decimal.Decimal(value="0", context=None)
+      value can be an integer, string, tuple, float, or another Decimal object
+      tuple: a sign (0 for positive or 1 for negative), a tuple of digits, and an integer exponent
+    """
+    d = Decima(3)
+    d = Decima('3.14')
+    d = Decima(3.14)
+    d = Decima((0, (3, 1, 4), -2))
+    d = Decima(Decimal('3.14'))
+
   ```
 
 ---
 
-#### Strings
+#### Text Sequence Strings
 
 - Introduction
 
+  - unicode string type: `str`
   - immutable
-  - char array data structure
+  - nicode code points array data structure
 
 - Practices
 
@@ -183,9 +251,19 @@ sidebar_label: Python
     s = """ string literal with
     (no indentation)multiple lines"""
     s = r"C:\number\nums"
-    s = "C:\\number\\nums"
-    s = b"bytes string"
+    s = "C:\\number\\nums
 
+    # string explicit/implicit constructor
+    """
+      class str(object='')
+      class str(object=b'', encoding='utf-8', errors='strict')
+      return object.__str__(), if no __str__() method, then str() falls back to returning repr(object)
+      if encoding specified, object must be a bytes object.
+    """
+    s = str(s1)
+    s = str(b"bytes literal", encoding='utf-8')
+
+    # string Class methods/properties
     # formatting
     "{0} placeholder {1}".format(var1, var2)
     "{name} is {age} years old".format(age = 10, name = "Jane")
@@ -197,43 +275,106 @@ sidebar_label: Python
     "{:>{len}x} hex align right with width {len}".format(32, len=10)
 
     # indexing/slicing
-    len(s)
-    s[index]
-    s[start:end:step]
-    s[:end]
-    s[start:]
-    s[-1]
-
-    # string manipulation
-    s = "s1" + " " + "s2"
-    s = "repeate"*2
+    newS = s[index]
+    newS = s[-1]
+    newS = s[start:end:step]
+    newS = s[:end]
+    newS = s[start:]
 
     # string manipulation
     index = str.find(substr)
-    str.startwith(substr, start, end)
-    str.endwith(substr, start, end)
+    bool = str.startwith(substr, start, end)
+    bool = str.endwith(substr, start, end)
 
-    str.strip(charColl)
-    str.lstrip(charColl)
-    str.rstrip(charColl)
-    str.center(width)
-    str.ljust()
-    str.rjust90
+    newS = str.strip(charColl)
+    newS = str.lstrip(charColl)
+    newS = str.rstrip(charColl)
+    newS = str.center(width)
+    newS = str.ljust()
+    newS = str.rjust()
 
-    str.replace(" ","")
-    str.split(splitCharCol)
-    str.join(jointChar)
+    newS = str.replace(" ","")
+    newS = str.split(splitCharCol)
+    newS = str.join(jointChar)
 
     str.lower()
     str.upper()
     str.title()
     str.swapcase()
 
+    # char manipulation
     str.isalpha()
-
-    char in str
     str.index(char)
     str.count(char)
+
+    # external str manipulation function/operator
+    len(s)
+    s = "s1" + " " + "s2"
+    s = "repeate"*2
+    char in s
+    for char in s:
+  ```
+
+---
+
+#### Binary Sequence bytes and bytearray
+
+- Introduction
+
+  - ascii string type: `bytes, bytearray`
+    - value range: [0, 255]
+  - immutable
+    - `bytes`
+  - mutable
+    - `bytearray`
+  - ascii code points array data structure
+
+- Practices
+
+  ```python
+    # bytes literal
+    s = b"bytes literal"
+    s = b'bytes literal'
+    s = b''' bytes literal with
+            (indented)multiple lines'''
+    s = b""" bytes literal with
+    (no indentation)multiple lines"""
+    s = rb"C:\number\nums"
+    s = b"C:\\number\\nums
+
+    # bytes explicit/implicit constructor
+    """
+      class bytes([source[, encoding[, errors]]]
+      A zero-filled bytes object of a specified length: bytes(10)
+      From an iterable of integers: bytes(range(20))
+      Copying existing binary data via the buffer protocol: bytes(obj)
+    """
+    b = bytes(10)
+    b = bytes(range(20))
+    b = bytes(obj)
+
+    # bytearray explicit/implicit constructor
+    """
+      class bytearray([source[, encoding[, errors]]]
+      A zero-filled bytes object of a specified length: bytes(10)
+      From an iterable of integers: bytes(range(20))
+      Copying existing binary data via the buffer protocol: bytes(obj)
+    """
+    ba = bytearray()
+    ba = bytearray(10)
+    ba = bytearray(range(20))
+    ba = bytearray(obj)
+
+    # bytes and bytearray Class methods/properties
+    # similar to str object
+    # https://docs.python.org/3/library/stdtypes.html#bytes
+
+    # external str manipulation function/operator
+    len(b)
+    b = b"s1" + b" " + b"s2"
+    b = b"repeate"*2
+    char in b
+    for char in b:
   ```
 
 ---
@@ -512,40 +653,6 @@ sidebar_label: Python
 
   ```
 
-#### Built-in Functions
-
-- Type and type conversion
-  - `bool(v)`
-  - `int(sn, base=10), bin(i), oct(i), hex(i), float(sn), complex(n1, n2)`
-  - `chr(code), ord(char), ascii(s), bytearray(), bytes(), str()`
-  - `list(iter), tuple(iter), dict(iter), enumerate(iter), set(iter), frozenset(iter)`
-  - `type()`
-- Object
-  - `isinstance(), issubclass(),`
-  - `repr(o), hash(o), id(o), callable(o),`
-  - `@classmethod, @staticmethod, super(), object()`
-  - `delattr(), hasattr(), getattr(), setattr(), property()`
-- Math Calc
-  - `abs(x), round(), floor(), ceil()`
-  - `max(), min(), divmod(n1, n2), power(x, y)`
-  - `len(x)`
-- I/O
-  - `format(), input(), print()`
-  - `open(file)`
-- Functors
-  - `all(iter), any(iter)`
-  - `range(start, end, step), slice(start, end, step)`
-  - `max(iter), min(iter),sorted(iter), sum(iter), zip(*iters)`
-  - `iter(), next(), reversed(iter)`
-  - `map(f, iter)`
-  - `filter(f, iter)`
-- System and Modules
-  - `dir(), vars(), locals(), globals() __import__()`
-  - `complie(), memoryview()`
-  - `exec()`
-  - `eval()`
-- [Refs](https://docs.python.org/3/library/functions.html)
-
 #### Function Programming
 
 - Functors
@@ -617,6 +724,44 @@ sidebar_label: Python
     d = memoiFunc(print)
     d[1,2,3,4]
     ```
+
+---
+
+#### Built-in Functions
+
+- Type and type conversion
+  - `bool(v)`
+  - `int(sn, base=10), bin(i), oct(i), hex(i), float(sn), complex(n1, n2)`
+  - `chr(code), ord(char), ascii(s), bytearray(), bytes(), str()`
+  - `list(iter), tuple(iter), dict(iter), enumerate(iter), set(iter), frozenset(iter)`
+  - `type()`
+- Object
+  - `isinstance(), issubclass(),`
+  - `repr(o), hash(o), id(o), callable(o),`
+  - `@classmethod, @staticmethod, super(), object()`
+  - `delattr(), hasattr(), getattr(), setattr(), property()`
+- Math Calc
+  - `abs(x), round(), floor(), ceil()`
+  - `max(), min(), divmod(n1, n2), power(x, y)`
+  - `len(x)`
+- I/O
+  - `format(), input(), print()`
+  - `open(file)`
+- Functors
+  - `all(iter), any(iter)`
+  - `range(start, end, step), slice(start, end, step)`
+  - `max(iter), min(iter),sorted(iter), sum(iter), zip(*iters)`
+  - `iter(), next(), reversed(iter)`
+  - `map(f, iter)`
+  - `filter(f, iter)`
+- System and Modules
+  - `dir(), vars(), locals(), globals() __import__()`
+  - `complie(), memoryview()`
+  - `exec()`
+  - `eval()`
+- [Refs](https://docs.python.org/3/library/functions.html)
+
+---
 
 ### Class and OOP
 
