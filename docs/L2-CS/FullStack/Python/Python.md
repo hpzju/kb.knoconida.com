@@ -981,6 +981,7 @@ sidebar_label: Python
 - Introduction
 
   - file is a contiguous sequence of bytes
+    - EOL
   - standard files
     - stdin
       - `input()`
@@ -990,7 +991,7 @@ sidebar_label: Python
       - `sys.stdout()`
     - stderr
       - `sys.stderr`
-  - file/IO objects
+  - text/binary IO objects
     - `fo = open("path/to/file", "MODE")`
     - check built-in [io module](#io)
 
@@ -999,13 +1000,24 @@ sidebar_label: Python
   ```python
   # get file/io object
   fo = open("./data/test.txt", "r+w")
-  fo.read()
+
+  #file object methods/properties
+  fo.name
+  fo.mode
+  fo.closed
+  fo.encoding
+  fo.newlines
+
+  fo.fileno()
+  fo.read(size)
   fo.readline()
   fo.readlines()
   fo.write(string)
   fo.writelines(string_list)
-  fo.seek()
+  fo.seek(offset, start)
+  fo.next()
   fo.tell()
+  fo.truncate(size)
   fo.flush()
   fo.close()
 
@@ -1013,6 +1025,11 @@ sidebar_label: Python
     for line in fo:
       print(line, end="")
   print("done")
+
+  # external module/functions
+  import os
+  os.rename(oldfilename, newfilename)
+  os.remove(filename)
 
   ```
 
