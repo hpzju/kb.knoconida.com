@@ -72,19 +72,23 @@ sidebar_label: Python
     - moudle global namespace
     - function local namespace
     - class local namespace
+      - `Class.__dict__`
     - instance local namespace
 
 - Scope
 
   - an execution context, determins which namespaces and identifiers are available in current context.
   - global scope
+    - `globals()`
   - local scope
+    - `locals()`
     - `UnboundLocalError`
       - within local scope, try to assign value to a name in global namespace
     - global variable reference statement
       - `global variable_list`
   - nonlocal scope
     - innner funnction
+      - `nonlocal variable_list`
   - list current scope names
     - `dir()`
 
@@ -811,7 +815,12 @@ sidebar_label: Python
 - Class and Object
 
   - Class/Object Type declaration
+  - Class Docstrings
   - Constructor
+    - `__new__(cls, args, *args, **kwargs)`
+    - `__init__(self, args, *args, **kwargs)`
+  - Destroctor
+    - `__del__(self)`
   - Attributes
     - Class Attributes
     - Instance Attributes
@@ -1186,6 +1195,10 @@ sidebar_label: Python
 - Global variable reference statement
 
   - `global variable_list`
+
+- nonlocal variable reference statement
+
+  - `nonlocal variable_list`
 
 - Docstring statement
 
@@ -1772,6 +1785,20 @@ else :
   timeObj = tiem.localtime()
   slapsed = time.time()
 
+  ```
+
+- pytz
+
+  - `pip intsll pytz`
+
+  ```python
+  improt pytz
+
+  #get time
+  country = 'Europe/Moscow'
+  tzdisplay = pytz.timezone(country)
+  local_time = datetime.datetime.now(tz = tzdisplay)
+  utc+time = datetime.datetime.utcnow(tz = tzdisplay)
   ```
 
 - timeit
