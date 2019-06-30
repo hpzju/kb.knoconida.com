@@ -37,6 +37,10 @@ sidebar_label: Python
 - .NET
   - IronPython
 
+### Data Model
+
+### Execution Model
+
 ---
 
 ---
@@ -52,6 +56,11 @@ sidebar_label: Python
   - `/[a-zA-Z_][a-zA-Z0-9_]*/`
   - keywords
     - `import keyword; print(keyword.kwlist)`
+
+- Variable Declaration
+
+  - Python has no varaible decalaration
+  - Variables were created when new identifier was assigned
 
 - Namespace
 
@@ -109,7 +118,7 @@ sidebar_label: Python
     - `type`
     - `__main__.MyObject`
 
-- type conversion
+- type conversion/coersion
   - explicit type constructor conversion
 
 ---
@@ -265,6 +274,7 @@ sidebar_label: Python
 
     # string Class methods/properties
     # formatting
+    """formatting pattern: /:[<|>][/d]*[b|o|x]/"""
     "{0} placeholder {1}".format(var1, var2)
     "{name} is {age} years old".format(age = 10, name = "Jane")
     "position tag: {0} and {1}, named tag: {name}".format(2, 5, name = "Jane")
@@ -392,6 +402,7 @@ sidebar_label: Python
 
   - mutable type
   - array data structure
+  - `==` compares contents of lists
 
 - Practices
 
@@ -443,6 +454,7 @@ sidebar_label: Python
     item in li
     max(li)
     min(li)
+    sorted(li)
     for item in li:
       do_staff_with_item
 
@@ -501,12 +513,13 @@ sidebar_label: Python
     # destruction/unpacking
     a, b, c = (1, 3, 4)
     a, *rest = (1, 3, 4)
+    a, b = b, a
 
   ```
 
 ---
 
-#### Set/FrozenSet
+#### Set/Frozenset
 
 - Introduction
 
@@ -535,7 +548,7 @@ sidebar_label: Python
     s.update(iterable)
     elem = s.pop()
     s.discard(elem)
-    s.remove(elem)
+    s.remove(elem) # KeyError if elem doesn't exist.
 
     # set operation
     s.clear()
@@ -549,8 +562,10 @@ sidebar_label: Python
     newS = s1 ^ s2
     newS = s1.union(s2) - s1.intersection(s2)
 
-    elem in s1
-    elem not in s1
+    bool = elem in s1
+    bool = elem not in s1
+    bool = s.issubset(s1)
+    bool = s.issuperset(s1)
 
     # external functions/operators
     len(s)
@@ -561,6 +576,9 @@ sidebar_label: Python
     for elem in S:
       do_stuff
 
+    # frozenset
+    fs = frozenset(s)
+
   ```
 
 ---
@@ -570,6 +588,7 @@ sidebar_label: Python
 - Introduction
 
   - mutable type
+  - orderless
   - RuntimeError if change dict object during iteration
   - key-value data structure
     - key must be immutable type
@@ -678,10 +697,16 @@ sidebar_label: Python
     - `@decorator`
   - Generator
     - generate an iterable like object
-    - `(expr for iter in interable)`
+      - `(expr for iter in interable)`
+    - ranger
+      - a number generator
+      - `range(start, stop, step)`
   - Iterator
     - traverse a collection with simple iterator protocal.
-    - `iter.next()`
+    - two categories of iterator objects
+      - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
+      - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
+        - `iter.next()`
   - Filter
     - `filter()`
   - Mapper
@@ -761,7 +786,7 @@ sidebar_label: Python
   - `max(), min(), divmod(n1, n2), power(x, y)`
   - `len(x)`
 - I/O
-  - `format(), input(), print()`
+  - `format(), input(), print(data, sep=' ', end='\n')`
   - `open(file)`
 - Functors
   - `all(iter), any(iter)`
@@ -968,6 +993,7 @@ sidebar_label: Python
   - IndexError
   - KeyError
   - IOError
+    - FileNotFoundError
   - OSError
   - AttributeError
   - AssertionError
@@ -1010,8 +1036,8 @@ sidebar_label: Python
 
   fo.fileno()
   fo.read(size)
-  fo.readline()
-  fo.readlines()
+  linetext = fo.readline()
+  filetext = fo.readlines()
   fo.write(string)
   fo.writelines(string_list)
   fo.seek(offset, start)
@@ -1436,18 +1462,29 @@ else :
 ### Data Processing and Persistance
 
 - pickle
+
   - `pickle.dump(data, filehandler)`
   - `data = pickle.load(filehandler)`
     - load meaning full object, the class of object must defined before load().
+
 - json
+
   - `json.dump(data, filehandler, indent=2, sepeators=(',', ':'))`
   - `data = json.load(filehandler)`
     - load meaning full object, the class of object must defined before load().
+
 - yaml
+
   - `pip install pyyaml`
   - `yaml.dump(data, filehander)`
   - `data = yaml.load(filehandler)`
     - load meaning full object, the class of object must defined before load().
+
+- shelve
+
+  - `with shelve.open('path/to/file') as db:`
+  - `do_stuff_with_db_like_a_dict_type`
+  - `db.close()`
 
 ---
 
@@ -1464,8 +1501,6 @@ else :
   - `logging.info(INFO_MSG)`
   - `logging.warning(WARNING_MSG)`
   - [Ref](https://docs.python.org/3/library/logging.html)
-- timeit
-  - `timeit.timeit(STATEMENT, SETUP_CODE, number=REPEAT_TIMES)`
 - pytest
   - `pip install pytest`
   - testing script
@@ -1516,7 +1551,23 @@ else :
 
 ---
 
-### re
+### Web
+
+- webbrowser
+
+  ```python
+    import webbrowser as wb
+    url = 'http://docs.python.org/'
+    wb.open(url)
+    wb.open_new(url)
+    wb.open_new_tab(url)
+  ```
+
+---
+
+### IO Texting and Streaming
+
+#### re
 
 - Introduction
 
@@ -1625,7 +1676,7 @@ else :
 
 ---
 
-### io
+#### io
 
 - Introduction
 
@@ -1674,27 +1725,92 @@ else :
 
 ---
 
+### OS and System Services
+
+#### Date and Time
+
+- time
+
+  ```python
+  improt time
+
+  #get time
+  timeObj = time.gmtime(0)
+  timeObj = tiem.localtime()
+  slapsed = time.time()
+
+  time
+  monotonic
+  perf_counter
+  process_time
+
+  time.strftime()
+
+  ```
+
+- datetime
+
+  ```python
+  improt datetime
+
+  #get time
+  datetime.datetime.today()
+  datetime.datetime.now()
+  datetime.datetime.utcnow()
+  datetime.tzinfo
+  datetime.timezone
+
+  ```
+
+- calendar
+
+  ```python
+  improt time
+
+  #get time
+  timeObj = time.gmtime(0)
+  timeObj = tiem.localtime()
+  slapsed = time.time()
+
+  ```
+
+- timeit
+
+  ```python
+  improt timeit
+  """
+  timeit.timeit(stmt='pass', setup='pass', timer=<default timer>, number=1000000, globals=None)
+  timeit.repeat(stmt='pass', setup='pass', timer=<default timer>, repeat=5, number=1000000, globals=None)
+  """
+  timeit.timeit('"-".join(str(n) for n in range(100))', number=10000)
+  timeit.timeit('char in text', setup='text = "sample string"; char = "g"')
+  timeit.timeit(lambda: "-".join(map(str, range(100))), number=10000)
+
+  """
+  timeit.Timer(stmt='pass', setup='pass', timer=<timer function>, globals=None)
+  """
+  timer = timeit.Timer('char in text', setup='text = "sample string"; char = "g"')
+  elapsed = tiemr.timeit(number=1000000)
+  repeat = timer.repeat(repeat=5, number=1000000)
+  ```
+
+#### Concurent Computing
+
+- concurrent
+- threading
+- subprocess
+- multiprocessing
+- contextlib
+  - `@contextlib.contextmanager`
+
+#### Cli
+
+- argparse
+- cmd
+
+---
+
 ### Misc Modules
-
-- Host/OS/System
-
-  - OS
-  - FS
-  - Concurent Computing
-    - concurrent
-    - threading
-    - subprocess
-    - multiprocessing
-    - contextlib
-      - `@contextlib.contextmanager`
-  - CLI
-    - argparse
-    - cmd
-
-- IOs
-
-  - asyncio
-    - `@asyncio.coroutine`
 
 - Documentation
 
