@@ -232,7 +232,7 @@ sidebar_label: Python
 
 ---
 
-#### Text Sequence Strings
+#### Text Sequence string
 
 - Introduction
 
@@ -282,7 +282,7 @@ sidebar_label: Python
     newS = s[start:]
 
     # string manipulation
-    index = str.find(substr)
+    index = str.find(substr, startPos)
     bool = str.startwith(substr, start, end)
     bool = str.endwith(substr, start, end)
 
@@ -293,19 +293,26 @@ sidebar_label: Python
     newS = str.ljust()
     newS = str.rjust()
 
-    newS = str.replace(" ","")
+    newS = str.replace(targetsubstr,replacersubstr)
     newS = str.split(splitCharCol)
-    newS = str.join(jointChar)
+    newS = strlist.join(jointChar)
 
-    str.lower()
-    str.upper()
-    str.title()
-    str.swapcase()
+    newS = str.capitalize()
+    newS = str.lower()
+    newS = str.upper()
+    newS = str.title()
+    newS = str.swapcase()
 
     # char manipulation
-    str.isalpha()
-    str.index(char)
-    str.count(char)
+    bool = str.isalpha()
+    bool = str.isalnum()
+    bool = str.isdigit()
+    bool = str.islower()
+    bool = str.isnumeric()
+    bool = str.istitle()
+    bool = str.isspace()
+    str.index(substr)
+    number = str.count(substr)
 
     # external str manipulation function/operator
     len(s)
@@ -405,7 +412,7 @@ sidebar_label: Python
     # element manipulation methods
     li.insert(index, value)
     li.append(value)
-    li.pop(index)
+    li.pop()
     li.remove(value)
     li.count(value)
     li.index(value)
@@ -433,10 +440,13 @@ sidebar_label: Python
     newLi = li + li2
     newLi = li * 2
     newLi = sorted(li)
+    item in li
+    max(li)
+    min(li)
     for item in li:
       do_staff_with_item
 
-    # destruction/unpacking
+    # destructuring/unpacking
     a, b, c = [1, 3, 4]
     a, *rest = [1, 3, 4]
 
@@ -482,6 +492,9 @@ sidebar_label: Python
     # external functions/operators
     newT = t * 2
     newT = t1 + t2
+    item in t
+    max(t)
+    min(t)
     for item in t:
       do_staff_with_item
 
@@ -517,13 +530,15 @@ sidebar_label: Python
     s = set([1, 2, 4, "lsit"])
     s = set(range(1,10,2))
 
-    # methods
-    s1.add(elem)
-    elem = s1.pop()
-    s1.remove(elem)
+    # set class methods/properties
+    s.add(elem)
+    s.update(iterable)
+    elem = s.pop()
+    s.discard(elem)
+    s.remove(elem)
 
     # set operation
-    s1.clear()
+    s.clear()
     newS = s1.union(s2)
     newS = s1 | s2
     newS = s1.intersection(s2)
@@ -541,7 +556,8 @@ sidebar_label: Python
     len(s)
     max(s)
     min(s)
-
+    sum(s)
+    sorted(s)
     for elem in S:
       do_stuff
 
@@ -1350,6 +1366,8 @@ else :
   - cmath
     - complex number arithmetic
   - random
+    - `random.choice(indexable)`
+    - `random.randrange(start, stop, step)`
   - statistics
 
 - Practices
