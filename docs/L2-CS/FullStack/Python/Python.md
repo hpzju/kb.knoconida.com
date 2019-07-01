@@ -68,6 +68,8 @@ sidebar_label: Python
 
   - Python has no varaible decalaration
   - Variables were created when new identifier was assigned
+  - `id()` identifies variables
+  - `A is B` tests two varaibles' equality of identity.
 
 - Namespace
 
@@ -85,17 +87,20 @@ sidebar_label: Python
 - Scope
 
   - an execution context, determins which namespaces and identifiers are available in current context.
+  - LEGB rule
+    - names find by local -> enclosing -> Global -> Built-in order.
+  - built-in scope
   - global scope
     - `globals()`
+  - nonlocal/enclosing scope
+    - innner funnction
+      - `nonlocal variable_list`
   - local scope
     - `locals()`
     - `UnboundLocalError`
       - within local scope, try to assign value to a name in global namespace
     - global variable reference statement
       - `global variable_list`
-  - nonlocal scope
-    - innner funnction
-      - `nonlocal variable_list`
   - list current scope names
     - `dir()`
 
@@ -108,7 +113,6 @@ sidebar_label: Python
 - Reference
 
   - refer by reference
-  - refer by value
 
 - Mutability
 
@@ -125,17 +129,22 @@ sidebar_label: Python
     - `list, tuple`
     - `set, frozenset`
     - `dict`
-    - `function, generator`
+    - `function, generator, range`
     - `type`
     - `__main__.MyObject`
+    - `module`
 
 - type conversion/coercion
 
   - explicit type constructor conversion
+  - no implicit type coercion, except boolean expression
 
 - type hint
 
   - `def addnum(a: int, b: int) -> int:`
+
+- duck type
+  - type was determined at runtime.
 
 ---
 
@@ -321,6 +330,7 @@ sidebar_label: Python
 
     newS = str.replace(targetsubstr,replacersubstr)
     newS = str.split(splitCharCol)
+    strTuple = str.partition(partstr)
     newS = strlist.join(jointChar)
 
     newS = str.capitalize()
@@ -339,6 +349,9 @@ sidebar_label: Python
     bool = str.isspace()
     str.index(substr)
     number = str.count(substr)
+
+    # transform to bytes
+    b = str.encode("utf-8")
 
     # external str manipulation function/operator
     len(s)
@@ -401,6 +414,9 @@ sidebar_label: Python
     # bytes and bytearray Class methods/properties
     # similar to str object
     # https://docs.python.org/3/library/stdtypes.html#bytes
+
+    # transform to str
+    str = b.decode("utf-8")
 
     # external str manipulation function/operator
     len(b)
@@ -526,7 +542,7 @@ sidebar_label: Python
     for item in t:
       do_staff_with_item
 
-    # destruction/unpacking
+    # destructuring/unpacking
     a, b, c = (1, 3, 4)
     a, *rest = (1, 3, 4)
     a, b = b, a
@@ -675,13 +691,18 @@ sidebar_label: Python
       - `func.__doc__`
     - function anotation
       - `func.__anotations__`
+    - function name
+      - `func.__name__`
     - arguments
       - `args`
       - `args = default_value`
       - `*args`
       - `**kwargs`
-      - args
+      - default args
         - args with default value
+        - default arg evaluate only once when `def` func first run
+        - when use mutable default value, cautious about each function call
+        - use immutable default value is recommanded.
       - keyword args
       - argurments destructing
         - `func(*sequences)`
@@ -1449,11 +1470,7 @@ else :
   importlib.reload(MYMODULE)
   ```
 
----
-
-### Package
-
-- namespace packages
+- packages namespace
 
   - using `__init__.py` in package root directory
   - export minimal interface in `__init__.py` to reduce exposure surface
@@ -1627,6 +1644,18 @@ else :
     wb.open(url)
     wb.open_new(url)
     wb.open_new_tab(url)
+  ```
+
+- webbrowser
+
+  ```python
+    import urllib
+    url = 'http://docs.python.org/'
+
+    # urllib.request
+    requestObj = urllib.request.urlopen(url)
+    namedtuple = urllib.parse.urlparse(url)
+    rp = urllib.robotparser.RobotFileParser(url)
   ```
 
 ---
@@ -1920,6 +1949,34 @@ else :
 
 ## Design Patterns
 
+### Collection Class
+
+- Python Collection Classes
+
+  - list, range, tuple, set, str, bytes, bytearray, dictionary
+
+- Protocol for Collection
+
+  ```python
+  # container
+  elem in | not in Coll
+
+  # sized
+  len(Coll)
+
+  # iterable
+  for elem in iter(Coll)
+
+  # sequence
+  elem = Coll[index]
+  index = Coll.index(elem)
+  Coll.count(elem)
+  Coll.reverse()
+
+  #mutable/immutable
+
+  ```
+
 ### Metaprogramming
 
 ---
@@ -1934,9 +1991,33 @@ else :
 
 ### Install and Initialize
 
-#### Set clear() CMD for CLI
+- install python
 
-- `import os; clear = lambda: os.system('clear'); clear();`
+  - install python package
+  - config python path if necessary
+  - setup virtualenv
+
+- install anaconda
+
+### virtualenv Install and Setup
+
+- `pip install virtualenv`
+- `cd MYENV_ROOT`
+- `virtualenv MYENV`
+  - `virtualenv --python=python3.7.5 MYENV`
+- `source MYENV_ROOT/MYENV/bin/activate`
+- `which python`
+- `deactivate`
+
+### pyinstaller Executable Package Tool
+
+- `pip install pyinstaller`
+- `pyinstaller main.py`
+- `pyinstaller --onfile main.py`
+
+### inno Setup Install Wizard Tool
+
+- GUI
 
 ### Testing
 
