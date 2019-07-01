@@ -11,6 +11,12 @@ sidebar_label: Python
 - Dynamic Typing
 - OOP
 - FP
+- PEP20
+  - beautiful is better than ugly
+  - explicit is better than implicit
+  - simple is better than complex
+  - complex is better than complicated
+  - readability counts
 
 ### Features
 
@@ -25,6 +31,7 @@ sidebar_label: Python
 - Game Dev
 - Data Science
 - Sys DevOps
+  - Linux SysAdmin
 
 ### Python Interpreter Implementation
 
@@ -122,8 +129,13 @@ sidebar_label: Python
     - `type`
     - `__main__.MyObject`
 
-- type conversion/coersion
+- type conversion/coercion
+
   - explicit type constructor conversion
+
+- type hint
+
+  - `def addnum(a: int, b: int) -> int:`
 
 ---
 
@@ -631,6 +643,7 @@ sidebar_label: Python
   keyvalueObj = d.items()
   keyvalue_tuple = d.popitem()
   value = d[key]
+  del d[key]
   value = d.get(key, default_value)
   value = d.setdefault(key, default_value)
   value = d.pop(key, default_value)
@@ -667,14 +680,15 @@ sidebar_label: Python
       - `args = default_value`
       - `*args`
       - `**kwargs`
-      - default args
+      - args
+        - args with default value
       - keyword args
       - argurments destructing
         - `func(*sequences)`
         - `func(**dicts)`
     - return value
       - return `None` by default
-  - inner function
+  - nested function and closure
   - lambda function
 
 - Practices
@@ -705,6 +719,11 @@ sidebar_label: Python
     - ranger
       - a number generator
       - `range(start, stop, step)`
+    - custome generator object interfaces
+      - `generator.__next__()`
+      - `generator.send(value)`
+      - `generator.throw(*EXCEPTION)`
+      - `generator.close()`
   - Iterator
     - traverse a collection with simple iterator protocal.
     - two categories of iterator objects
@@ -723,9 +742,17 @@ sidebar_label: Python
 - FP Patterns
 
   - lambda
+
+    ```python
+    # lambda anounymous function
+    lambda arglist: func_body_expression
+    namedlambda = lambda arglist: func_body_expression
+    ```
+
   - closure
   - recursion
   - curryinng
+  - higher order function
 
 - Practices
 
@@ -748,7 +775,12 @@ sidebar_label: Python
   iterator = islice(iterable, start, stop, step)
   iterable = izip(iterable1, iterable2, ...iterables)
 
-  # generator comprehension
+  # Generator wrapper function
+  def gernerator_wrapper(sequence)
+    for item in sequence:
+      yield item
+
+  # Generator comprehension
   gen = (i**4 for i in range(100))
   next(gen)
   ```
@@ -816,6 +848,7 @@ sidebar_label: Python
 
   - Class/Object Type declaration
   - Class Docstrings
+    - `cls.__doc__`
   - Constructor
     - `__new__(cls, args, *args, **kwargs)`
     - `__init__(self, args, *args, **kwargs)`
@@ -829,6 +862,8 @@ sidebar_label: Python
     - get attributes of class
       - `dir(Obj)`
   - Methods
+    - method docstrings
+      - `cls.method.__doc__`
     - instance method
     - class method
       - `@classmethod` decorator
@@ -838,13 +873,19 @@ sidebar_label: Python
       - `@staticmethod` decorator
       - can not update class/object status
       - pure utility function
-    - setter/getter/deleter
+    - getter/setter/deleter/docstring
+      - `myprop = property(fget=None, fset=None, fdel=None, doc=None)`
       - `@property`
+      - `@myprop.setter`
+      - `@myprop.deleter`
+      - accessing using getter/setter
+        - `print(obj.myporp)`
+        - `obj.myprop = VALUE`
   - Slots
   - Object/Instance
   - Operator Override
     - `+ : __add__()`
-    - `print(obj) : __repr__()`
+    - `print(obj) : __repr__(), __str__()`
     - `in : __contains__()`
     - `== : __eq__()`
     - `!= : __ne__()`
@@ -882,6 +923,7 @@ sidebar_label: Python
   - Polymophism
     - Method Overwriten
   - Isolation
+  - Composition
 
 - Python Object Model
 
@@ -1380,21 +1422,32 @@ else :
 
 ### Importing/Exporting
 
-- import module from path: `. ; PYTHONPATH`
-- import statment excution module codes only once
-- import statements
-  - `import MODULE`
-  - `import MODULE as NEW_MODUEL_NAME`
-  - `from MODULE import NAMES`
-  - `from MODULE import NAME as NEW_NAME`
-  - `from MODULE import *`
-- exclude codes for import excution
-  - `if __name__ == "__main__":`
-  - `excluded_module_block`
-- show module namespace
-  - `dir(MODULE)`
-- program entry point
-  - `__name__ == "__main__"`
+- import/export
+
+  - import module from path: `. ; PYTHONPATH`
+  - import statment excution module codes only once
+  - import statements
+    - `import MODULE`
+    - `import MODULE as NEW_MODUEL_NAME`
+    - `from MODULE import NAMES`
+    - `from MODULE import NAME as NEW_NAME`
+    - `from MODULE import *`
+  - exclude codes for import excution
+    - `if __name__ == "__main__":`
+    - `excluded_module_block`
+  - show module namespace
+    - `dir(MODULE)`
+  - program entry point
+    - `__name__ == "__main__"`
+
+- importlib
+
+  - import statement is syntactic sugar of `importlib.__import__()` function
+
+  ```python
+  import importlib
+  importlib.reload(MYMODULE)
+  ```
 
 ---
 
@@ -1834,6 +1887,24 @@ else :
 
 - argparse
 - cmd
+
+---
+
+#### File System
+
+- os
+
+  ```python
+  """
+  os.walk(top, topdown=True, onerror=None, followlinks=False)
+  """
+  import os
+
+  os.getcwd()
+  os.listdir()
+  bool = os.access("path/to/file/dir", os.F_OK|os.R_OK|os.W_OK|os.X_OK)
+  dirpath, dirnames, filenames = os.walk(".")
+  ```
 
 ---
 
