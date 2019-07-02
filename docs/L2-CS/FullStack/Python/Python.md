@@ -89,18 +89,21 @@ sidebar_label: Python
   - an execution context, determins which namespaces and identifiers are available in current context.
   - LEGB rule
     - names find by local -> enclosing -> Global -> Built-in order.
-  - built-in scope
-  - global scope
-    - `globals()`
-  - nonlocal/enclosing scope
-    - innner funnction
-      - `nonlocal variable_list`
+    - not applicable for name's new binding.
   - local scope
     - `locals()`
     - `UnboundLocalError`
       - within local scope, try to assign value to a name in global namespace
     - global variable reference statement
       - `global variable_list`
+  - nonlocal/enclosing scope
+    - innner funnction access outer variables
+      - `nonlocal variable_list`
+      - `global variable_list`
+  - global scope
+    - `globals()`
+  - built-in scope
+    - `__builtins__`
   - list current scope names
     - `dir()`
 
@@ -732,10 +735,33 @@ sidebar_label: Python
 - Functors
 
   - Decorator
+
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
-    - `@decorator`
+
+    ```python
+    # decorator def
+    def mydecorator(func):
+      def mywrapper(*args, **kwargs)
+        value = func(*args, **kwargs)
+        manipulate_value_accroding_design_purpose
+        return something_unified_format
+      return mywarpper
+
+    # decorator syntac
+    @mydecorator
+    def myfunc(*args, **kwargs):
+      func_body_statements
+      return value
+    ```
+
+  - Iterator
+    - traverse a collection with simple iterator protocal.
+    - two categories of iterator objects
+      - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
+      - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
+        - `iter.next()`
   - Generator
-    - generate an iterable like object
+    - generate an iterable object
       - `(expr for iter in interable)`
     - ranger
       - a number generator
@@ -745,12 +771,9 @@ sidebar_label: Python
       - `generator.send(value)`
       - `generator.throw(*EXCEPTION)`
       - `generator.close()`
-  - Iterator
-    - traverse a collection with simple iterator protocal.
-    - two categories of iterator objects
-      - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
-      - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
-        - `iter.next()`
+    - generator FP
+      - `yield statement`
+      - generator is lazy binding.
   - Filter
     - `filter()`
   - Mapper
@@ -771,9 +794,12 @@ sidebar_label: Python
     ```
 
   - closure
+    - `func.__closure__`
   - recursion
   - curryinng
   - higher order function
+    - return a function
+    - function factory
 
 - Practices
 
@@ -787,7 +813,11 @@ sidebar_label: Python
   reduce(func, iterable, initializer)
   zip(iterable1, iterable2)
 
-  #iterator
+  # iterator protocol
+  iterator = iter(itrerableObj)
+  value = next(iterator)
+
+  #iterator tools
   iterator = chain(iterable1, iterable2)
   iterator = count(start, step)
   iterator = cycle(iterable)
@@ -904,7 +934,7 @@ sidebar_label: Python
         - `obj.myprop = VALUE`
   - Slots
   - Object/Instance
-  - Operator Override
+  - Operator Override and dunders
     - `+ : __add__()`
     - `print(obj) : __repr__(), __str__()`
     - `in : __contains__()`
@@ -914,6 +944,7 @@ sidebar_label: Python
     - `[start:end]: __getslice__(start, end)`
     - `(args): __call__(args)`
     - `len(obj) : __len__()`
+    - `obj(args...) : __call__(args...)`
 
 - Metaclasses
 
@@ -1232,6 +1263,8 @@ sidebar_label: Python
 
   - `(expr for iter in interable)`
 
+- lambda expression
+
 - yield expression
   - yield
   - yield
@@ -1448,6 +1481,7 @@ else :
   - import module from path: `. ; PYTHONPATH`
   - import statment excution module codes only once
   - import statements
+    - `import .MODULE`
     - `import MODULE`
     - `import MODULE as NEW_MODUEL_NAME`
     - `from MODULE import NAMES`
@@ -1470,11 +1504,40 @@ else :
   importlib.reload(MYMODULE)
   ```
 
-- packages namespace
+- packages
 
+  - package find path:
+    - `sys.path`, this value init with `PYTHONPATH` env variable
   - using `__init__.py` in package root directory
   - export minimal interface in `__init__.py` to reduce exposure surface
-  - using `__main__.py` as programme entry point
+  - excutable directory
+    - has `__main__.py` as programe entry point
+  - namespace package
+    - a logical package, modules are spreaded in different directories.
+    - no `__init__.py` entry.
+  - special dunders
+
+    ```python
+    """ Package dir structure
+    entry_path_in_sys.path
+        |--Package root
+            |--__init__.py
+            |--funtional_module.py
+            |--Sub package root
+                |--__init__.py
+                |--sub_funtional_module.py
+    """
+
+    dir(PACKAGE)
+    # package name
+    PACKAGE.__name__
+    # package __init__.py
+    PACKAGE.__file__
+    # package path
+    PACKAGE.__path__
+    # package namespace exposed by import *
+    PACKAGE.__all__
+    ```
 
 ---
 
@@ -1935,6 +1998,9 @@ else :
   dirpath, dirnames, filenames = os.walk(".")
   ```
 
+- gzip
+- bz2
+
 ---
 
 ### Misc Modules
@@ -1949,7 +2015,7 @@ else :
 
 ## Design Patterns
 
-### Collection Class
+### Collection Class Pattern
 
 - Python Collection Classes
 
@@ -1976,6 +2042,18 @@ else :
   #mutable/immutable
 
   ```
+
+---
+
+### Singleton
+
+- Module as singleton
+
+  ```python
+
+  ```
+
+---
 
 ### Metaprogramming
 
