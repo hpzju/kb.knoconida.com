@@ -2271,7 +2271,7 @@ else :
 
 ## Best Practice
 
-### Install and Initialize
+### Install and Initialize python
 
 - install python
 
@@ -2280,6 +2280,73 @@ else :
   - setup virtualenv
 
 - install anaconda
+
+### pip Package Manager
+
+- pip list
+
+  - `pip list`
+  - `pip list --outdated`
+  - `pip show SomePackage`
+  - `pip search "keyword"`
+
+- pip intall
+
+  - `python -m pip install -U pip`
+  - `pip install -U pip`
+  - `pip install SomePackage`
+  - `pip install SomePackage==1.0.4`
+  - `pip install 'SomePackage>=1.0.4'`
+  - `pip install --upgrade SomePackage`
+
+- pip requirements.txt
+
+  - `pip install -r requirements.txt`
+  - `pip freeze > requirements.txt`
+    - `pkg3>=1.0,<=2.0`
+    - `ProjectB<1.3`
+
+- pip unintall
+  - `pip uninstall SomePackage`
+
+### Anaconda Package Manager
+
+- conda info
+
+  - `conda --version`
+  - `conda info`
+
+- virtual env
+
+  - `conda info --envs`
+  - `onda create -n MYENV`
+  - `conda create -n MYENV --clone OLDENV`
+  - `conda create -n MYENV python=3.6.0`
+  - `conda activate MYENV`
+  - `conda deactivate MYENV`
+  - `conda remove -n MYENV --all`
+  - `conda env export --name MYENV > myenv.yml`
+  - `conda env create --file myenv.yml`
+  - `conda list --explicit > pkgs.txt`
+  - `conda create --name NEWENV --file pkgs.txt`
+
+- conda update
+
+  - `conda update conda`
+  - `conda update -n base conda`
+  - `conda update anaconda`
+  - `conda update --all`
+  - `conda update PACKAGE`
+
+- package management
+
+  - `conda list`
+  - `conda search PACKAGE`
+  - `conda install PACKAGE`
+  - `conda install PACKAGE=M.N.P`
+  - `conda install "PACKAGE>1.11"`
+  - `conda install "PACKAGE=1.11.1|1.11.3"`
+  - `conda install "PACKAGE>=1.8,<2"`
 
 ### virtualenv Install and Setup
 
