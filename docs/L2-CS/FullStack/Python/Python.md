@@ -358,6 +358,9 @@ sidebar_label: Python
 
     # external str manipulation function/operator
     len(s)
+    asciistr = ascii(s)
+    codepoint =  ord(char)
+    char = chr(codepoint)
     s = "s1" + " " + "s2"
     s = "repeate"*2
     char in s
@@ -737,10 +740,15 @@ sidebar_label: Python
   - Decorator
 
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
+    - use self-defined wrap function will change original function's name and docstring
+      - use decorator `functools.wraps` will solve
 
     ```python
-    # decorator def
+    import functools
+
+    # function decorator
     def mydecorator(func):
+      @functools.wraps(func)
       def mywrapper(*args, **kwargs)
         value = func(*args, **kwargs)
         manipulate_value_accroding_design_purpose
@@ -752,28 +760,109 @@ sidebar_label: Python
     def myfunc(*args, **kwargs):
       func_body_statements
       return value
+
+    # Class decorator
+    class MyClassDecorator(func):
+      def __init__(self, func)
+        self._f = func
+        self._states = []
+
+      def __call__(self, *args, **kwargs)
+        value = self._f(*args, **kwargs)
+        manipulate_value_accroding_design_purpose
+        update_states_if_neccessary
+        return something_unified_format
+
+    # decorator syntac
+    @MyClassDecorator
+    def myfunc(*args, **kwargs):
+      func_body_statements
+      return value
+
+    # Instance decorator
+    class MyObjDecorator():
+      def __call__(self, func, *args, **kwargs)
+        @functools.wraps(func)
+        def mywrapper(*args, **kwargs)
+          value = func(*args, **kwargs)
+          manipulate_value_accroding_design_purpose
+          return something_unified_format
+        return mywarpper
+
+    # decorator syntac
+    myobjdecorator = MyObjDecorator()
+    @myobjdecorator
+    def myfunc(*args, **kwargs):
+      func_body_statements
+      return value
+
+    # multiple decorator syntac
+    """order matters"""
+    @decorator1
+    @decorator2
+    @decorator2
+    def myfunc(*args, **kwargs):
+      func_body_statements
+      return value
     ```
 
   - Iterator
+
     - traverse a collection with simple iterator protocal.
     - two categories of iterator objects
       - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
       - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
-        - `iter.next()`
+
+    ```python
+    # iterator protocol
+    iteratorObj.__next__()
+        raise StopIteration()
+    value = next(iterator)
+
+    # iterable protocol
+    itrerableObj.__iter__()
+    itrerableObj.__getitem__(index)
+        raise IndexError()
+
+    # iterable functor
+    iterator = iter(func, sentinal)
+
+    # iterable statements
+    for item in iterator:
+      do_stuff_with_item
+
+    timestamps = iter(datetime.datatiem.now(), None)
+
+    ```
+
   - Generator
+
     - generate an iterable object
-      - `(expr for iter in interable)`
     - ranger
       - a number generator
       - `range(start, stop, step)`
-    - custome generator object interfaces
-      - `generator.__next__()`
-      - `generator.send(value)`
-      - `generator.throw(*EXCEPTION)`
-      - `generator.close()`
     - generator FP
       - `yield statement`
       - generator is lazy binding.
+
+    ```python
+    # Generator wrapper function
+    def gernerator_wrapper(sequence)
+      for item in sequence:
+        yield item
+
+    # Generator comprehension
+    gen = (i**4 for i in range(100))
+    next(gen)
+
+    # generator protocal
+    generator.__next__()
+    generator.send(value)
+    generator.throw(*EXCEPTION)
+    generator.close()
+
+    ```
+
   - Filter
     - `filter()`
   - Mapper
@@ -808,14 +897,11 @@ sidebar_label: Python
   import * from itertools
 
   # functors
-  map(func, iterable)
-  filter(func, iterable)
-  reduce(func, iterable, initializer)
+  # lazy evaluation
+  mapIter = map(func, *iterable)
+  filerIter = filter(func, iterable)
+  accum = functools.reduce(func, iterable, initializer)
   zip(iterable1, iterable2)
-
-  # iterator protocol
-  iterator = iter(itrerableObj)
-  value = next(iterator)
 
   #iterator tools
   iterator = chain(iterable1, iterable2)
@@ -826,14 +912,6 @@ sidebar_label: Python
   iterator = islice(iterable, start, stop, step)
   iterable = izip(iterable1, iterable2, ...iterables)
 
-  # Generator wrapper function
-  def gernerator_wrapper(sequence)
-    for item in sequence:
-      yield item
-
-  # Generator comprehension
-  gen = (i**4 for i in range(100))
-  next(gen)
   ```
 
 - FP principles
@@ -864,7 +942,7 @@ sidebar_label: Python
   - `list(iter), tuple(iter), dict(iter), enumerate(iter), set(iter), frozenset(iter)`
   - `type()`
 - Object
-  - `isinstance(), issubclass(),`
+  - `isinstance(obj, Class), issubclass(SubClass, BaseClass),`
   - `repr(o), hash(o), id(o), callable(o),`
   - `@classmethod, @staticmethod, super(), object()`
   - `delattr(), hasattr(), getattr(), setattr(), property()`
@@ -901,8 +979,8 @@ sidebar_label: Python
   - Class Docstrings
     - `cls.__doc__`
   - Constructor
-    - `__new__(cls, args, *args, **kwargs)`
-    - `__init__(self, args, *args, **kwargs)`
+    - `__new__(cls, *args, **kwargs)`
+    - `__init__(self, *args, **kwargs)`
   - Destroctor
     - `__del__(self)`
   - Attributes
@@ -920,6 +998,7 @@ sidebar_label: Python
       - `@classmethod` decorator
       - with implicity `cls` argument
       - can update class/object status
+      - can be used as a constructor with different init values
     - static method
       - `@staticmethod` decorator
       - can not update class/object status
@@ -935,22 +1014,69 @@ sidebar_label: Python
   - Slots
   - Object/Instance
   - Operator Override and dunders
-    - `+ : __add__()`
-    - `print(obj) : __repr__(), __str__()`
-    - `in : __contains__()`
-    - `== : __eq__()`
-    - `!= : __ne__()`
-    - `[index] : __getitem__(index)`
-    - `[start:end]: __getslice__(start, end)`
-    - `(args): __call__(args)`
-    - `len(obj) : __len__()`
-    - `obj(args...) : __call__(args...)`
+
+    - `__add__()`
+    - `__mul__()`
+
+      - `+` operator override
+      - `*` operator override
+
+    - `__repr__()`
+
+      - provides unambiguous string representation of object
+      - more detail information about object
+      - `repr(obj)` interface
+
+    - `__str__()`
+
+      - stringify object
+      - human-readable information
+      - print call str if it's presence
+      - `str(obj)` interface
+
+    - `__format__()`
+
+      - `"{}".format(obj)` interface
+      - `"{!s}".format(obj)` force str() interface call
+      - `"{!r}".format(obj)` force repr() interface call
+
+    - `__contains__()`
+
+      - `in` operator override
+
+    - `__eq__()`
+    - `__ne__()`
+
+      - `==` operator override
+      - `!=` operator override
+
+    - `__getitem__(index)`
+    - `__getslice__(start, end, step)`
+
+      - `obj[index]` operator override
+      - `obj[start:end:step]` operator override
+
+    - `__call__(*args, **kwargs)`
+
+      - `obj(*args, **kwargs)` callable operator override
+
+    - `__len__()`
+
+      - `len(obj)` interface
+
+    - `__bases__`
+    - `__mro__`
+
+      - tuple of base classes
+
+      - method resolution order list, same as `obj.mro()`
 
 - Metaclasses
 
 - OOP
 
   - Inheritance
+    - parents' constructor must called explicitly using `super().__init__()`
     - Inheritance Chain
       - linearization of C
     - Multiple Inheritance
@@ -958,6 +1084,13 @@ sidebar_label: Python
         - `L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)`
         - `L[object] = object`
         - took the first non-tailed class append to C's linearization list
+    - `super(base, argv = subclass/instance) proxy`
+      - find the MRO og subclass/instance, locate base class in MRO
+      - return the first class after base class has target method
+      - class-bound super() proxy
+        - super(BaseClass, SubClass)
+      - instance-bound super() proxy
+        - super(BaseClass, subInstance)
     - inheritance principles
       - inherit
       - override/overload
@@ -1074,6 +1207,54 @@ sidebar_label: Python
 ---
 
 #### Built-in Classess
+
+##### Custome Context Manager
+
+- Context Manager
+
+  - implement cm protocol
+  - do init and cleanup jobs implicitly, no matter what happend in the block.
+  - in `with statement`, CM object must return by expression.
+  - `ALIAS` is bound to `CM.__enter__()` return value, not expression
+
+- Practice
+
+  ```python
+  # user case
+  with expression as ALIAS:
+    implicitcall(CM.__enter__())
+    CM_BLOCK
+    implicitcall(CM.__exit__(exception_type, exception_value, exception_traceback))
+
+  # CM class
+  Class myCM():
+    def __enter__(self):
+      pass
+    def __exit__(self, exception_type, exception_value, exception_traceback)
+      pass
+
+  # contextlib
+  import contextlib
+  @contextlib.contextmanager
+  def myCM():
+    # enter_blcok
+    try:
+      yield ALIAS_value
+      # normal_exit_block
+    except Exception as e:
+      # except_exit_block
+
+  # nested CM
+  with myCM1() as cm1, myCM2() as cm2:
+    do_stuff_block
+
+  with myCM1() as cm1:
+    with myCM2() as cm2:
+      do_stuff_block
+
+  ```
+
+---
 
 ##### Exception
 
@@ -1308,6 +1489,10 @@ sidebar_label: Python
 - Pass Statement
 
   - `pass`
+
+- assert Statement
+
+  - `assert condition, MSG`
 
 - Function Statements
 
@@ -1638,6 +1823,7 @@ else :
 
 - keyword
   - `keyword.kwlist`
+- reprlib
 - pdb
   - `pdb.set_trace()`
     - `n for next, s for step in`
@@ -1897,12 +2083,17 @@ else :
   timeObj = tiem.localtime()
   slapsed = time.time()
 
+  t.hour
+  t.minute
+  t.second
+  t.microsecond
+  t.isoformat()
+  t.strftime(FORMATER)
+
   time
   monotonic
   perf_counter
   process_time
-
-  time.strftime()
 
   ```
 
@@ -1911,12 +2102,20 @@ else :
   ```python
   improt datetime
 
-  #get time
-  datetime.datetime.today()
-  datetime.datetime.now()
-  datetime.datetime.utcnow()
+  #get datetime
+  d = datetime.date.today()
+  d = datetime.date.now()
+  d = datetime.date.utcnow()
+  d.year
+  d.month
+  d.day
+  d.weekday()
+  d.isoweekday()
+  d.isoformat()
+  d.strftime(FORMATER)
   datetime.tzinfo
   datetime.timezone
+  dt = datatime.datatime.combine(dt,t)
 
   ```
 
@@ -1935,12 +2134,15 @@ else :
 - pytz
 
   - `pip intsll pytz`
+  - Olson timezones database
 
   ```python
-  improt pytz
+  import pytz
+  from pytz import timezone
+  from datetime import datetime, timedelta
 
   #get time
-  country = 'Europe/Moscow'
+  china = 'Asia/Shanghai'
   tzdisplay = pytz.timezone(country)
   local_time = datetime.datetime.now(tz = tzdisplay)
   utc+time = datetime.datetime.utcnow(tz = tzdisplay)
@@ -2038,6 +2240,8 @@ else :
   index = Coll.index(elem)
   Coll.count(elem)
   Coll.reverse()
+
+  # set
 
   #mutable/immutable
 
