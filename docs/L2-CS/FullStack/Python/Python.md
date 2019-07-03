@@ -594,10 +594,12 @@ sidebar_label: Python
     s = set()
     s = set([1, 2, 4, "lsit"])
     s = set(range(1,10,2))
+    s = s1.copy()
 
     # set class methods/properties
     s.add(elem)
     s.update(iterable)
+    s.clear()
     elem = s.pop()
     s.discard(elem)
     s.remove(elem) # KeyError if elem doesn't exist.
@@ -717,18 +719,16 @@ sidebar_label: Python
       - `func.__anotations__`
     - function name
       - `func.__name__`
-    - arguments
+    - arguments and orders
       - `args`
-      - `args = default_value`
       - `*args`
-      - `**kwargs`
-      - default args
+      - `args = default_value`
         - args with default value
         - default arg evaluate only once when `def` func first run
         - when use mutable default value, cautious about each function call
         - use immutable default value is recommanded.
-      - keyword args
-      - argurments destructing
+      - `**kwargs`
+      - argurments destructuring/unpacking
         - `func(*sequences)`
         - `func(**dicts)`
     - return value
@@ -740,7 +740,7 @@ sidebar_label: Python
 
   ```python
   # function declarition
-  def funcname(arg, *args, **kwargs):
+  def funcname(arg, *args, defarg = defvalue, **kwargs):
     """function description docstring """
     func_body
     return expression
@@ -919,7 +919,12 @@ sidebar_label: Python
   mapIter = map(func, *iterable)
   filerIter = filter(func, iterable)
   accum = functools.reduce(func, iterable, initializer)
-  zip(iterable1, iterable2)
+  zip(*iterable1)
+  bool = all(iterable)
+  bool = any(iterable)
+  sorted(iterable, key = sorter, reverse=False)
+  max(iterable)
+  min(iterable)
 
   #iterator tools
   iterator = chain(iterable1, iterable2)
@@ -1432,7 +1437,7 @@ sidebar_label: Python
 
   - `not, and, or`
 
-- Arguments Spread Operators
+- tuple/dict destructuring/unpacking Operators
 
   - `func(*args)`
   - `func(**kwargs)`
@@ -1516,6 +1521,8 @@ sidebar_label: Python
 
   - function declaration
   - lambda function
+
+- return Statement
 
 - Class Statements
 
