@@ -916,15 +916,17 @@ sidebar_label: Python
 
   # functors
   # lazy evaluation
-  mapIter = map(func, *iterable)
-  filerIter = filter(func, iterable)
+  iterator = map(func, *iterable)
+  iterator = filter(func, iterable)
   accum = functools.reduce(func, iterable, initializer)
-  zip(*iterable1)
+  iterator = zip(*iterable1)
   bool = all(iterable)
   bool = any(iterable)
-  sorted(iterable, key = sorter, reverse=False)
-  max(iterable)
-  min(iterable)
+  iterator = sorted(iterable, key = sorter, reverse=False)
+  iterator = reversed(iterable)
+  max(iterable, key = sorter)
+  min(iterable, key = sorter)
+  len(iterable_sequence)
 
   #iterator tools
   iterator = chain(iterable1, iterable2)
@@ -1689,13 +1691,13 @@ else :
 - import/export
 
   - import module from path: `. ; PYTHONPATH`
+    - config `sys.path`
   - import statment excution module codes only once
   - import statements
-    - `import .MODULE`
     - `import MODULE`
-    - `import MODULE as NEW_MODUEL_NAME`
+    - `import MODULE as ALIAS`
     - `from MODULE import NAMES`
-    - `from MODULE import NAME as NEW_NAME`
+    - `from MODULE import NAME as ALIAS`
     - `from MODULE import *`
   - exclude codes for import excution
     - `if __name__ == "__main__":`
@@ -1712,6 +1714,25 @@ else :
   ```python
   import importlib
   importlib.reload(MYMODULE)
+
+  #custom modules
+  """
+  root
+    |--module1.py
+    |--module2.py
+    |--module3.py
+    |--main.py
+  
+  main module can import module1, module2, and module3 using import statements.
+  modules can also import with each other.
+  """
+
+  #external modules
+  """
+  pip install PACKAGE
+  python will take care of PATH and module finding problem.
+  external modules can be imported just like built-in modules.
+  """
   ```
 
 - packages
@@ -1766,6 +1787,7 @@ else :
     - complex number arithmetic
   - random
     - `random.choice(indexable)`
+    - `random.shuffle(iterable)`
     - `random.randrange(start, stop, step)`
     - `random.randint(lower, upper)`
   - statistics
@@ -1852,7 +1874,7 @@ else :
 - reprlib
 - pdb
   - `pdb.set_trace()`
-    - `n for next, s for step in`
+    - `l for list, n for next, s for step in`
 - logging
   - `logging.basicConfig(level=logging.INFO)`
   - `logging.debug(DEBUG_MSG)`
