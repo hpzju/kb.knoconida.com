@@ -312,6 +312,18 @@ sidebar_label: Python
     "{:>{len}o} binary align right with width {len}".format(32, len=10)
     "{:>{len}x} hex align right with width {len}".format(32, len=10)
 
+    # f-str __str__()
+    f"Hello, {name}. You are {age}."
+    f"{name.lower()} is funny."
+    f"The comedian is {comedian['name']}, aged {comedian['age']}."
+    message = f"""
+    Hi {name}.
+    You are a {profession}.
+    You were in {affiliation}.
+    """
+    # f-str __repr__()
+    f"{new_comedian!r}"
+
     # indexing/slicing
     newS = s[index]
     newS = s[-1]
@@ -453,6 +465,7 @@ sidebar_label: Python
     li = [x**2 for x in range(10)]
     li = [x**2 for x in range(10) if x%2 == 0]
     li = [x**2 if x > 5 else x**4 for x in range(10)]
+    li = [(i, j) for i in range(10) for j in range(i)]
 
     # list constructor explicit/implicit
     li = list(range(1,10,2))
@@ -461,7 +474,7 @@ sidebar_label: Python
     # element manipulation methods
     li.insert(index, value)
     li.append(value)
-    li.pop()
+    li.pop(index)
     li.remove(value)
     li.count(value)
     li.index(value)
@@ -526,6 +539,7 @@ sidebar_label: Python
 
     # tuple methods
     t.index(value)
+    t.count(value)
 
     # __getitem__()
     # __slice__()
@@ -653,6 +667,7 @@ sidebar_label: Python
 
   # dict build method
   d = dict.fromkeys(key_iterable, value_iterable)
+  d = d1.copy()
 
   # dict manipulation methods
   d.update(d1)
@@ -679,7 +694,10 @@ sidebar_label: Python
   for key in d:
     do_stuff
 
-  for k,v in d.items:
+  for value in d.values():
+    do_stuff
+
+  for k,v in d.items():
     do_stuff
 ```
 
@@ -1742,6 +1760,7 @@ else :
   - random
     - `random.choice(indexable)`
     - `random.randrange(start, stop, step)`
+    - `random.randint(lower, upper)`
   - statistics
 
 - Practices
