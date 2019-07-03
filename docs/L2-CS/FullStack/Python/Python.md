@@ -1722,7 +1722,7 @@ else :
     |--module2.py
     |--module3.py
     |--main.py
-  
+
   main module can import module1, module2, and module3 using import statements.
   modules can also import with each other.
   """
