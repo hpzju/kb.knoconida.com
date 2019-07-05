@@ -579,6 +579,7 @@ sidebar_label: Python
   - frozenset is immutable type
   - Disjoint set data structure
   - no order
+  - no duplication
 
 - Practices
 
@@ -1110,6 +1111,38 @@ sidebar_label: Python
 
       - method resolution order list, same as `obj.mro()`
 
+- Abstract Class
+
+  - can't instantiated
+  - subclasses must implement/provide abastract method to instantiation.
+
+  ```python
+  from abc import ABC, abstractmethod
+
+  class Shape(ABC):
+    @abstractmethod
+    def area(self):
+      pass
+
+    @abstractmethod
+    def perimeter(self):
+      pass
+
+  class Triangle(Shape):
+    def __init(self, a, b, c):
+      self.a = a
+      self.b = b
+      self.c = c
+
+    def area(self):
+      p = self.perimeter()/2
+      return math.sqrt(p(p-a)(p-b)(p-c))
+
+    def perimeter(self):
+      return self.a + self.b + self.c
+
+  ```
+
 - Metaclasses
 
 - OOP
@@ -1561,7 +1594,7 @@ sidebar_label: Python
 
 ### Flow Control
 
-#### Condition
+#### Condition Branching
 
 - if
 - if-else
@@ -1624,7 +1657,7 @@ else :
 
 ---
 
-#### Loop
+#### Looping
 
 - for-in
 - for-in-else
