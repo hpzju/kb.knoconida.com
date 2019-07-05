@@ -773,7 +773,7 @@ sidebar_label: Python
         return something_unified_format
       return mywarpper
 
-    # decorator syntac
+    # decorator syntax
     @mydecorator
     def myfunc(*args, **kwargs):
       func_body_statements
@@ -837,13 +837,14 @@ sidebar_label: Python
         raise StopIteration()
     value = next(iterator)
 
-    # iterable protocol
+    # iterable object protocol
     itrerableObj.__iter__()
+    iteratorObj.__next__()
     itrerableObj.__getitem__(index)
         raise IndexError()
 
-    # iterable functor
-    iterator = iter(func, sentinal)
+    # iterable functor protocol
+    iterator = iter(functor, sentinal)
 
     # iterable statements
     for item in iterator:
@@ -1010,11 +1011,23 @@ sidebar_label: Python
     - `__del__(self)`
   - Attributes
     - Class Attributes
+      - not defined in every instance
+      - only init once when class was created
     - Instance Attributes
     - attributes loopup
       - instance -> class -> parents classes
     - get attributes of class
       - `dir(Obj)`
+    - dunder and name mangling
+      - `ClassName.name`
+        - for public use.
+      - `ClassName._name`
+        - symanticly, for internal use, but syntaxly, can be access directly.
+      - `ClassName.__name`
+        - name mangled into `_ClassName__name`, so can not be access directly.
+        - sub classes can have the same name after mangled.
+      - `ClassName.__name__`
+        - python special purpose names.
   - Methods
     - method docstrings
       - `cls.method.__doc__`
@@ -1076,6 +1089,7 @@ sidebar_label: Python
       - `!=` operator override
 
     - `__getitem__(index)`
+    - `__setitem__(key, value)`
     - `__getslice__(start, end, step)`
 
       - `obj[index]` operator override
@@ -1865,6 +1879,8 @@ else :
   - `do_stuff_with_db_like_a_dict_type`
   - `db.close()`
 
+- csv
+
 ---
 
 ### Python Language Services
@@ -2032,6 +2048,8 @@ else :
     (:P<name>)        named group
     (?P=name)         reference a named group
     (?#...)           comments, ingored
+    \g<N>             group N reference
+    \g<name>          named group reference
 
   Assertion Positive/Negative lookahead/lookbehind
     (?=...)           positive lookahead
@@ -2041,7 +2059,7 @@ else :
     (?<=...)          postive lookbehind
         '(?<=abc)def'       matches 'def' only if it's preceded by 'abc'
     (?<!...)          negative lookbehind
-        '(?<=abc)def'       matches 'def' only if it's not preceded by 'abc'
+        '(?<!abc)def'       matches 'def' only if it's not preceded by 'abc'
     (?(id/name)yes-pattern|no-pattern)
         given id or name exists, try yes-pattern, if not, try no-pattern
 
@@ -2418,7 +2436,113 @@ else :
 
 ### Testing
 
-- Doctest
+- doctest
+
+  - start run
+
+    - `python -m doctest -v doctestDemo.py`
+    - `python doctestDemo.py -v`
+    - add doctest module
+      - `import docktest; doctest.testmod()`
+      - `python doctestDemo.py`
+
+  - practice
+
+    ```python
+    def doctestDemo(a, b):
+        """
+        >>> doctestDemo(3, 1)
+        7
+
+        >>> doctestDemo(3, 4)
+        7
+
+        >>> doctestDemo("str1", "str2")
+        'str1str2'
+
+        >>> doctestDemo(3, "3")
+        Traceback (most recent call last):
+            ...
+        TypeError: unsupported operand type(s) for +: 'int' and 'str'
+        """
+        return a + b
+
+    if __name__ == "__main__":
+        print(doctestDemo(1, 8))
+    ```
+
+- unittest
+
+  - components
+
+    - `unittest.main()`
+
+  - pattern
+
+    - setup
+    - run test
+    - teardown
+
+  - start run
+
+    - `python unittestDemo.py`
+
+  - practice
+
+    ```python
+    # unittestDemo.py
+    def adder(a, b):
+        return a + b
+    def adder10(a):
+        return adder(a, 10)
+    class Pet(object):
+        __counter = 0
+        def __init__(self, name):
+            Pet.__counter += 1
+            self._name = name
+        @property
+        def name(self):
+            return self._name
+        @name.setter
+        def name(self, value):
+            self._name = value
+        @classmethod
+        def counts(cls):
+            return cls.__counter
+
+    # test_unittestDemo.py
+    import unittest
+    from unittestDemo import adder, adder10, Pet
+
+    class unittestDemoTester(unittest.TestCase):
+        def test_adder(self):
+            """testing adder()"""
+            self.assertEqual(adder(1, 5), 6)
+            self.assertNotEqual(adder(10, 10), 10)
+
+        def test_adder10(self):
+            """testing adder10()"""
+            self.assertEqual(adder10(5), 15)
+            self.assertEqual(adder10(5), adder(5, 10))
+            self.assertNotEqual(adder10(20), 15)
+
+        def test_Pet(self):
+            """testing Pet Class"""
+            cat = Pet("cat")
+            dog = Pet("dog")
+            self.assertEqual(cat.name, "cat")
+            self.assertEqual(dog.name, "dog")
+            dog.name = "DDDDog"
+            self.assertEqual(dog.name, "DDDDog")
+            self.assertEqual(Pet.counts(), 2)
+
+    if __name__ == "__main__":
+        print(f"Run {__file__} : ")
+        unittest.main()
+
+    ```
+
+- pytest
 
 ---
 
