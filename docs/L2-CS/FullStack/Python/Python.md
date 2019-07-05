@@ -275,7 +275,19 @@ sidebar_label: Python
 
   - unicode string type: `str`
   - immutable
-  - nicode code points array data structure
+  - unicode code points array data structure
+  - formatting
+    - f-string formatting
+      - computing value
+      - function call value
+    - float formatting
+      - {[value-ref]:[width].[precision][f-flag]}
+    - alignment formatting
+      - {[value-ref]:[padding][align-flag][width]}
+      - align-flag
+        - `<`: left
+        - `^`: center
+        - `>`: right
 
 - Practices
 
@@ -474,7 +486,7 @@ sidebar_label: Python
     # element manipulation methods
     li.insert(index, value)
     li.append(value)
-    li.pop(index)
+    value = li.pop(index)
     li.remove(value)
     li.count(value)
     li.index(value)
@@ -758,6 +770,7 @@ sidebar_label: Python
 
   - Decorator
 
+    - a type of HOF, high order function
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
     - use self-defined wrap function will change original function's name and docstring
       - use decorator `functools.wraps` will solve
@@ -1014,6 +1027,7 @@ sidebar_label: Python
     - Class Attributes
       - not defined in every instance
       - only init once when class was created
+      - shared by all instances
     - Instance Attributes
     - attributes loopup
       - instance -> class -> parents classes
@@ -1053,6 +1067,11 @@ sidebar_label: Python
   - Slots
   - Object/Instance
   - Operator Override and dunders
+
+    - `__init__()`
+    - `__del__()`
+
+      - constructor and destructor
 
     - `__add__()`
     - `__mul__()`
