@@ -736,7 +736,7 @@ sidebar_label: Python
       - `args`
       - `*args`
       - `args = default_value`
-        - args with default value
+        - args with default value, default value must be immutable
         - default arg evaluate only once when `def` func first run
         - when use mutable default value, cautious about each function call
         - use immutable default value is recommanded.
@@ -2011,7 +2011,7 @@ else :
     wb.open_new_tab(url)
   ```
 
-- webbrowser
+- urllib
 
   ```python
     import urllib
