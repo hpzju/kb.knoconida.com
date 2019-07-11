@@ -46,8 +46,6 @@ sidebar_label: Python
 
 ### Data Model
 
-- Variables
-
 - Types Hierachy
 
   - Numbers
@@ -72,7 +70,18 @@ sidebar_label: Python
     - NotImplemented
     - Ellipsis `...`
 
-- Memory Management
+- Variables and Memory Management
+
+  - variables
+    - variables are memory address space symbolic representation
+    - variables memory space is heap
+    - `id(var)` returns variable's memory space reference.
+  - reference counting
+  - garbage collection
+  - dynamic/static typing
+  - mutable/immutable
+  - shared reference
+  - variable equality
 
 ### Execution Model
 
