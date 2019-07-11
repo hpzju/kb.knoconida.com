@@ -77,11 +77,27 @@ sidebar_label: Python
     - variables memory space is heap
     - `id(var)` returns variable's memory space reference.
   - reference counting
+    - `sys.getrefcount(var)` function arg passing increase counter
+    - `ctypes.c_long.from_address(ADDRESS).value`
+    - circular reference
+      - gc module resolve it python>3.4
   - garbage collection
+    - `import gc`
   - dynamic/static typing
+    - type info is in reference object, not in variable
   - mutable/immutable
+    - object's internal state can be changed or not
+    - immutable object's address id and space cannot be changed.
+    - mutable object's address id cannot be change, but address sapce can be changed.
   - shared reference
+    - more than one variables reference to the same object in memeory
+    - immutable can use shared reference
+    - mutables don't use shared reference
   - variable equality
+    - identity:
+      - `a is b`, point to same object in memory.
+    - data equality
+      - `a == b`, variables' address spaces(or partial of address space) bits/bytes are the same
 
 ### Execution Model
 
