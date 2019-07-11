@@ -1064,12 +1064,12 @@ sidebar_label: Algorithm and Data Structure
   - `degree(Node) <= 2`
   - DFS
     - inOrder
-      - visit node
       - visit left child
+      - visit node
       - visit right child
     - preOrder
-      - visit left child
       - visit node
+      - visit left child
       - visit right child
     - postOrder
       - visit left child

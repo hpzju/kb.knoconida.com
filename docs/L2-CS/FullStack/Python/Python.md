@@ -46,6 +46,34 @@ sidebar_label: Python
 
 ### Data Model
 
+- Variables
+
+- Types Hierachy
+
+  - Numbers
+    - bool, int, float, Complex, Decimal, Fraction
+  - Collections
+    - Sequences
+      - list, tuple
+      - str
+    - Sets
+      - set, frozenset
+    - Mappings/Hash Tables
+      - dict
+  - Callables
+    - function
+      - generator
+      - built-in
+    - class
+      - method
+      - class instance(`__call__()`)
+  - Singletons
+    - None
+    - NotImplemented
+    - Ellipsis `...`
+
+- Memory Management
+
 ### Execution Model
 
 ---
@@ -63,6 +91,16 @@ sidebar_label: Python
   - `/[a-zA-Z_][a-zA-Z0-9_]*/`
   - keywords
     - `import keyword; print(keyword.kwlist)`
+  - naming convension
+    - `_var` interal use
+    - `__var` name mangled
+    - `__var__` python language use
+    - `package` lowercase, short, no underscore
+    - `module` lowercase, short, no underscore
+    - `Classes` camelcase
+    - `my_func` snakecase, underscore to seperate words
+    - `my_var` snakecase
+    - `CONSTANT` uppercase, uderscore to seperate words
 
 - Variable Declaration
 
@@ -247,7 +285,7 @@ sidebar_label: Python
     r.numerator
     r.denominator
 
-    """Decima"""
+    """Decimal"""
     import * from decimal
     getcontext().prec = 12
 
@@ -535,6 +573,8 @@ sidebar_label: Python
 
   - immutable type
   - array data structure
+  - packing and uppacking
+  - named tuples
 
 - Practices
 
@@ -736,7 +776,7 @@ sidebar_label: Python
       - `args`
       - `*args`
       - `args = default_value`
-        - args with default value, default value must be immutable
+        - args with default value, default value should be immutable, or side effect will hold
         - default arg evaluate only once when `def` func first run
         - when use mutable default value, cautious about each function call
         - use immutable default value is recommanded.
@@ -746,8 +786,10 @@ sidebar_label: Python
         - `func(**dicts)`
     - return value
       - return `None` by default
+  - function scope
   - nested function and closure
   - lambda function
+  - introspection
 
 - Practices
 
@@ -774,6 +816,12 @@ sidebar_label: Python
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
     - use self-defined wrap function will change original function's name and docstring
       - use decorator `functools.wraps` will solve
+    - categories
+      - nested decorators
+      - parameterized decorators
+      - stacked decorators
+      - class decorators
+      - decorator classed
 
     ```python
     import functools
@@ -854,6 +902,8 @@ sidebar_label: Python
     # iterable object protocol
     itrerableObj.__iter__()
     iteratorObj.__next__()
+    # or with
+    iterableObj.__len__()
     itrerableObj.__getitem__(index)
         raise IndexError()
 
@@ -894,6 +944,12 @@ sidebar_label: Python
     generator.throw(*EXCEPTION)
     generator.close()
 
+    ```
+
+  - coroutine
+
+    ```python
+    # a type of generator
     ```
 
   - Filter
@@ -1104,9 +1160,13 @@ sidebar_label: Python
 
     - `__eq__()`
     - `__ne__()`
+    - `__le__()`
+    - `__gt__()`
 
       - `==` operator override
       - `!=` operator override
+      - `<` operator override
+      - `>` operator override
 
     - `__getitem__(index)`
     - `__setitem__(key, value)`
@@ -1944,11 +2004,25 @@ else :
   - `pdb.set_trace()`
     - `l for list, n for next, s for step in`
 - logging
-  - `logging.basicConfig(level=logging.INFO)`
-  - `logging.debug(DEBUG_MSG)`
-  - `logging.info(INFO_MSG)`
-  - `logging.warning(WARNING_MSG)`
+
+  ```python
+  import logging
+  logger = logging.getLogger(NAME.SUBLOGGER: str)
+
+  logging.basicConfig(level=logging.INFO,
+                      format='%(asctime)s %(levelname)s:%(message)s',
+                      datefmt='%Y-%m-%d $H:$M:%S',
+                      file='log.txt')
+
+  logger.debug(DEBUG_MSG)
+  logger.info(INFO_MSG)
+  logger.warning(WARNING_MSG)
+  logger.error(MSG)
+  logger.critical(MSG)
+  ```
+
   - [Ref](https://docs.python.org/3/library/logging.html)
+
 - pytest
   - `pip install pytest`
   - testing script
@@ -1981,16 +2055,54 @@ else :
 
 - bisect
 
-  - `index = bisect.bisect_left(arr, searchvalue, start, end)`
-  - `index = bisect.bisect_right(arr, searchvalue, start, end)`
-  - `bisect.insort_left(arr, insertvalue, start, end)`
-  - `bisect.insort_right(arr, insertvalue, start, end)`
+  ```python
+  import bisect
+
+  # binary search tree, left ordered
+  index = bisect.bisect_left(arr, searchvalue, start, end)
+
+  # binary search tree, right ordered
+  index = bisect.bisect_right(arr, searchvalue, start, end)
+
+  # binary search tree, left insert
+  bisect.insort_left(arr, insertvalue, start, end)
+
+  # binary search tree, right ordered
+  bisect.insort_right(arr, insertvalue, start, end)
+
+  ```
 
 - collections
 
-  - `ChainMap`
-  - `namedtuple`
-  - `Deque`
+  ```python
+  from collection import *
+
+  # Counter
+  num = Counter(ITERABLE)
+
+  # defaultdict
+  dd = defaultdict(TYPE_FACTORY)
+  dd.default_factory = None
+
+  # OrderDict
+  od = OrderDict()
+  od.move_to_end(KEY)
+  od.move_to_end(KEY,last = False)
+  od.popitem()
+
+  #namedtuple
+  NT = namedtuple(NAME, ITERABLE_NAME)
+  var = NT(ITERABLE_VALUE)
+  var.NAME
+
+  #deque
+  dq = deque(ITERABLE)
+  dq.append(VALUE)
+  dq.appendleft(VALUE)
+  dq.pop()
+  dq.popleft()
+
+  ```
 
 - heapq
   - `heapify(list)`
