@@ -66,9 +66,27 @@ sidebar_label: Python
       - method
       - class instance(`__call__()`)
   - Singletons
+    - interning
+      - [-5, 256] integer
+    - string interning
+      - variable names
+      - function names
+      - class names
+      - some string literal
+        - similar to identifier, `hello_world`
     - None
+    - True/False
     - NotImplemented
     - Ellipsis `...`
+
+- Object
+
+  - everything in python is an object
+  - First-Class Object
+    - can be used as argument
+    - can be returned from function
+    - can be assigned to variable
+    - can be stored in a data structure
 
 - Variables and Memory Management
 
@@ -98,6 +116,17 @@ sidebar_label: Python
       - `a is b`, point to same object in memory.
     - data equality
       - `a == b`, variables' address spaces(or partial of address space) bits/bytes are the same
+
+- Optimizatioin
+
+  - interning
+  - Peephole
+    - `myfunc.__code__.co_consts`
+    - Constant expression pre calculated.
+      - numeric calculation
+      - short strings
+    - Membership tests: `in, not in`
+      - mutable changed to immutable
 
 ### Execution Model
 
@@ -793,19 +822,25 @@ sidebar_label: Python
   - function declaration
     - function docstring
       - `func.__doc__`
-    - function anotation
+      - a string, at first line of code block.
+    - function anotation/type hint
+      - `def func(arg: <expr>, arg: <expr>,...) -> <expr>:`
       - `func.__anotations__`
     - function name
       - `func.__name__`
-    - arguments and orders
-      - `args`
-      - `*args`
-      - `args = default_value`
+    - parameters and orders
+      - parameter term used in function definition context
+      - argument term used in function calling context
+      - python arguments passed by reference
+      - positional arguments
+      - keyword/named arguments
         - args with default value, default value should be immutable, or side effect will hold
         - default arg evaluate only once when `def` func first run
         - when use mutable default value, cautious about each function call
         - use immutable default value is recommanded.
-      - `**kwargs`
+      - `def func(pos_arg, pos_arg_option = default_val, *args, kwarg_mandate, kwarg = val, **kwargs)`
+        - after \*args, no positional args allowed, only keyword arguments allowed.
+        - after \*\*kwargs, no arguments allowed.
       - argurments destructuring/unpacking
         - `func(*sequences)`
         - `func(**dicts)`
@@ -814,20 +849,36 @@ sidebar_label: Python
   - function scope
   - nested function and closure
   - lambda function
+    - no assignment in lambda expression
+    - no return statement in lambda expression
+    - no annotation in lambda
   - introspection
+    - `dir(func)`
+    - `func.__code__`
+      - co_varnames
+      - co_argcount(exclude *args, **kwargs) 
 
 - Practices
 
   ```python
   # function declarition
-  def funcname(arg, *args, defarg = defvalue, **kwargs):
-    """function description docstring """
+  def funcname(arg: 'annotation for arg', 
+              *args, defarg = defvalue, : int,
+              **kwargs: 'keyword args') -> "return value annotation":
+    """function description docstring with
+    multiple lines"""
     func_body
     return expression
 
   #lambda function
   lambda comma_express_argslist: function_body_expression
   named = lambda comma_express_argslist: function_body_expression
+
+  # introspection
+  import inspect
+  inspect.isfunction(obj)
+  inspect.ismethod(obj)
+  inspect.isroutine(obj)
 
   ```
 
@@ -1205,8 +1256,10 @@ sidebar_label: Python
       - `obj(*args, **kwargs)` callable operator override
 
     - `__len__()`
+    - `__bool__()`
 
       - `len(obj)` interface
+      - `bool(obj)` interface, boolean test call bool interface first, if no exist, call len interface.
 
     - `__bases__`
     - `__mro__`
