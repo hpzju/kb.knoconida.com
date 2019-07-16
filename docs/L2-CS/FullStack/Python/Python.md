@@ -127,6 +127,8 @@ sidebar_label: Python
       - short strings
     - Membership tests: `in, not in`
       - mutable changed to immutable
+  - constant folding
+    - constant expressions are compiled before excution.
 
 ### Execution Model
 
@@ -183,13 +185,16 @@ sidebar_label: Python
     - names find by local -> enclosing -> Global -> Built-in order.
     - not applicable for name's new binding.
   - local scope
+    - varaibles inside a function local scope are not created until function called.
+    - a new scope created every time a function called.
     - `locals()`
     - `UnboundLocalError`
       - within local scope, try to assign value to a name in global namespace
     - global variable reference statement
       - `global variable_list`
   - nonlocal/enclosing scope
-    - innner funnction access outer variables
+    - it will not look global scope
+    - innner funnction access outer local variables scope chain for variable reference
       - `nonlocal variable_list`
       - `global variable_list`
   - global scope
@@ -292,6 +297,13 @@ sidebar_label: Python
 - Practices
 
   ```python
+    import numbers
+    numbers.Number
+    numbers.Integral
+    numbers.Rational
+    numbers.Real
+    numbers.Complex
+
     """int"""
     # int literal
     i = 1
@@ -847,22 +859,32 @@ sidebar_label: Python
     - return value
       - return `None` by default
   - function scope
+    - Built-in
+    - Global
+    - Local
+    - Nonlocal
   - nested function and closure
+    - inner functions can access outer scope chain variables.
+    - `func.__closure__`
   - lambda function
     - no assignment in lambda expression
     - no return statement in lambda expression
     - no annotation in lambda
   - introspection
+    - `import inspect`
     - `dir(func)`
     - `func.__code__`
       - co_varnames
-      - co_argcount(exclude *args, **kwargs) 
+      - co_argcount(exclude \*args, \*\*kwargs)
+      - co_freevars(closure reference val)
+  - operators
+    - `import operator`
 
 - Practices
 
   ```python
   # function declarition
-  def funcname(arg: 'annotation for arg', 
+  def funcname(arg: 'annotation for arg',
               *args, defarg = defvalue, : int,
               **kwargs: 'keyword args') -> "return value annotation":
     """function description docstring with
@@ -879,6 +901,42 @@ sidebar_label: Python
   inspect.isfunction(obj)
   inspect.ismethod(obj)
   inspect.isroutine(obj)
+  code = inspect.getsource(myfunc)
+  comment = inspect.getcomment(myfunc)
+  inspect.signature(myfunc)
+
+  # operator
+  import operator
+  add(a, b)
+  mul(a, b)
+  pow(a, b)
+  mod(a, b)
+  floordiv(a, b)
+  neg(a)
+  lt(a, b)
+  le(a, b)
+  gt(a, b)
+  ge(a, b)
+  eq(a, b)
+  ne(a, b)
+  is_(a, b)
+  is_not(a, b)
+  truth(a)
+  not_(a, b)
+  and_(a, b)
+  or_(a, b)
+  concat(s1, s2)
+  contains(s, val)
+  countOf(s, val)
+  getitem(s, i)
+  setitem(s, i, val)
+  delitem(s, i)
+  f = itemgetter(i, i2, ...)
+  f(s)
+  f = attrgetter(prop, prop2,...)
+  f(obj)
+  f = methodcaller(meth, args_kwargs)
+  f(obj)
 
   ```
 
@@ -889,6 +947,7 @@ sidebar_label: Python
   - Decorator
 
     - a type of HOF, high order function
+    - take a function as argument, return a closure, the closure calls the original function.
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
     - use self-defined wrap function will change original function's name and docstring
       - use decorator `functools.wraps` will solve
@@ -965,6 +1024,7 @@ sidebar_label: Python
   - Iterator
 
     - traverse a collection with simple iterator protocal.
+    - cosumable, once exhausted, it's disposed.
     - two categories of iterator objects
       - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
       - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
@@ -1200,16 +1260,17 @@ sidebar_label: Python
   - Object/Instance
   - Operator Override and dunders
 
+    - `__new__()`
     - `__init__()`
     - `__del__()`
 
-      - constructor and destructor
+      - constructor, initiator and destructor
 
-    - `__add__()`
-    - `__mul__()`
+    - `__add__(), __radd__(), __iadd__()`
+    - `__mul__(), __rmul__(), __imul__()`
 
-      - `+` operator override
-      - `*` operator override
+      - `+, +=` operator override
+      - `*, *=` operator override
 
     - `__repr__()`
 
@@ -1223,6 +1284,9 @@ sidebar_label: Python
       - human-readable information
       - print call str if it's presence
       - `str(obj)` interface
+
+    - `__copy__()`
+    - `__deepcopy_-()`
 
     - `__format__()`
 
@@ -1244,10 +1308,14 @@ sidebar_label: Python
       - `<` operator override
       - `>` operator override
 
+    - `__len__()`
     - `__getitem__(index)`
     - `__setitem__(key, value)`
+    - `__delitem__(key)`
     - `__getslice__(start, end, step)`
+    - `__reversed()__`
 
+      - `len(obj)` interface
       - `obj[index]` operator override
       - `obj[start:end:step]` operator override
 
@@ -1255,10 +1323,8 @@ sidebar_label: Python
 
       - `obj(*args, **kwargs)` callable operator override
 
-    - `__len__()`
     - `__bool__()`
 
-      - `len(obj)` interface
       - `bool(obj)` interface, boolean test call bool interface first, if no exist, call len interface.
 
     - `__bases__`
@@ -1892,8 +1958,45 @@ else :
 
 ### Importing/Exporting
 
-- import/export
+- Module
 
+  - `globals()`
+  - `locals()`
+  - module
+
+  ```python
+  import MODULE
+  import types
+  type(MODULE)
+  types.ModuleType
+  onthefly_module = types.ModuleType('MODULENAME', 'DOCSTRING')
+  dir(onthefly_module)
+  onthefly_module.__dict__
+  onthefly_module.prop = VALUE
+  id(MODULE)
+  globals()
+  locals()
+
+  import sys
+  sys.modules
+  id(sys.modules[MODULE])
+
+  # python execution file location
+  sys.prefix
+
+  # python module path
+  sys.path
+
+  ```
+
+- import/export/reload
+
+  - import module process
+    - check sys.modules for cached module existance, if exist, use reference.
+    - if no cache, creates new types.ModuleType object
+    - locate new module's source file location by sys.path
+    - add new module entry to sys.modules
+    - compile and execute source code.
   - import module from path: `. ; PYTHONPATH`
     - config `sys.path`
   - import statment excution module codes only once
@@ -1917,7 +2020,12 @@ else :
 
   ```python
   import importlib
+  as_alias = importlib.import_module(MYMODULE)
+  my_module = importlib.import_module(MYMODULE)
   importlib.reload(MYMODULE)
+  importlib.util.find_spec(MYMODULE)
+
+  sys.meta_path
 
   #custom modules
   """
@@ -1947,7 +2055,7 @@ else :
   - export minimal interface in `__init__.py` to reduce exposure surface
   - excutable directory
     - has `__main__.py` as programe entry point
-  - namespace package
+  - implicite namespace package
     - a logical package, modules are spreaded in different directories.
     - no `__init__.py` entry.
   - special dunders
