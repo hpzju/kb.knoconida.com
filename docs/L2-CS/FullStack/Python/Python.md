@@ -386,7 +386,7 @@ sidebar_label: Python
       - function call value
     - float formatting
       - {[value-ref]:[width].[precision][f-flag]}
-    - alignment formatting
+    - [alignment formatting](https://www.python.org/dev/peps/pep-3101/#standard-format-specifiers)
       - {[value-ref]:[padding][align-flag][width]}
       - align-flag
         - `<`: left
@@ -1028,23 +1028,31 @@ sidebar_label: Python
     - two categories of iterator objects
       - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
       - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
+    - iterable and iterator
+      - iterable, collection of data with iterable protocol, `iterator = obj.__iter__()`
+      - iterator, traverse over iterable data with iterator protocol, `__iter__(), __next__()`
+      - iterator is iterable, bad practice to combine iterator with iterable into one object
+    - Lazy evaluation
 
     ```python
-    # iterator protocol
-    iteratorObj.__next__()
+    # iterator protocol: for-loop, comprehensions
+    iterator = iterator.__iter__()
+    iterator.__next__()
         raise StopIteration()
     value = next(iterator)
+    selfiter = iter(iterator)
+    # or with if no __iter__()
+    iterator.__len__()
+    iterator.__getitem__(index)
+        raise IndexError()
+    value = next(iterator)
+    iterator = iter(iterator)
 
     # iterable object protocol
-    itrerableObj.__iter__()
-    iteratorObj.__next__()
-    # or with
-    iterableObj.__len__()
-    itrerableObj.__getitem__(index)
-        raise IndexError()
+    iterator = itrerableObj.__iter__()
 
     # iterable functor protocol
-    iterator = iter(functor, sentinal)
+    iterator = iter(functor, sentinel)
 
     # iterable statements
     for item in iterator:
@@ -1082,7 +1090,17 @@ sidebar_label: Python
 
     ```
 
-  - coroutine
+  - Coroutine Generator
+
+    - states: `inspect.getgeneratorstate(gen)`
+      - GEN_CREATED
+        - genobj = genfunc() generator function called
+      - GEN_RUNNING
+        - inside genfunc code running
+      - GEN_SUSPENDED
+        - yield statement returned in genfunc
+      - GEN_CLOSED
+        - genfunc returns implicitly or explicitly
 
     ```python
     # a type of generator
@@ -1308,6 +1326,14 @@ sidebar_label: Python
       - `<` operator override
       - `>` operator override
 
+    - `__hash__()`
+
+      - auto hashable using id(CLASS) if `__eq__()` not defined
+      - not hashable if `CLASS.__hash__ = None`
+      - custome hashable using `__hash__()`
+        - returns an integer
+        - if obja == objb, hash(obja) == hash(objb)
+
     - `__len__()`
     - `__getitem__(index)`
     - `__setitem__(key, value)`
@@ -1327,6 +1353,7 @@ sidebar_label: Python
 
       - `bool(obj)` interface, boolean test call bool interface first, if no exist, call len interface.
 
+    - `__reduce__()`
     - `__bases__`
     - `__mro__`
 
@@ -1511,15 +1538,35 @@ sidebar_label: Python
   - do init and cleanup jobs implicitly, no matter what happend in the block.
   - in `with statement`, CM object must return by expression.
   - `ALIAS` is bound to `CM.__enter__()` return value, not expression
+  - `CM.__exit__()` returns a bool value, True indicates supress exception sillently, Fasle indicates propergate exception.
+  - no new scope created
+  - context manager use case:
+    - start-stop block
+      - start-stop timer
+    - open-close
+      - open-close file
+      - open-close socket
+      - open-close database
+    - lock-release
+    - change-reset
+      - change-reset decimal context
+      - change-reset stdin-stdout context
+    - html-tagging
+    - format-indentation
 
 - Practice
 
   ```python
-  # user case
-  with expression as ALIAS:
-    implicitcall(CM.__enter__())
+  # CM underline
+  with CM() as obj:
     CM_BLOCK
-    implicitcall(CM.__exit__(exception_type, exception_value, exception_traceback))
+
+  # equals to
+  obj = CM().__enter__()
+  try:
+    CM_BLOCK
+  finally:
+    CM().__exit__(exception_type, exception_value, exception_traceback))
 
   # CM class
   Class myCM():
@@ -1528,7 +1575,7 @@ sidebar_label: Python
     def __exit__(self, exception_type, exception_value, exception_traceback)
       pass
 
-  # contextlib
+  # contextlib context manager with generator
   import contextlib
   @contextlib.contextmanager
   def myCM():
@@ -1547,6 +1594,50 @@ sidebar_label: Python
     with myCM2() as cm2:
       do_stuff_block
 
+  # decimal CM
+  with decimal.localcontext() as ctx:
+    ctx.prec = 6
+    DECIMAL_ARITHMETIC
+
+  # timer CM
+  with Timer() as timer:
+    PERFORMANCE_MON
+  print(timer)
+
+  class Timer(object):
+    def __init__(self):
+      self._elapsed = 0
+
+    def __repr__(self):
+      return f"elapsed: {self._elapsed}"
+
+    def __enter__(self):
+      self._start = time.perf_counter()
+      return self
+
+    def __exit__(self, e_type, e_value, e_traceback):
+      self._stop = time.perf_counter()
+      self._elapsed = self._stop - self._start
+      return False
+
+  # IO redirect
+  with OutRedirect('logfile'):
+      PRINT_TO_STDOUT_REDIRECT_TO_FILE_OBJECT
+
+  class OutRediret(object):
+    def __init(self, filename):
+      self._fname = filename
+      self._pre_stdout = sys.stdout
+
+    def __enter__(self):
+      self._fo = open(self._fname, 'a+')
+      sys.stdout = self._fo
+
+    def __exit__(self):
+      sys.stdout = self._pre_stdout
+      self._fo.close()
+      return False
+
   ```
 
 ---
@@ -1555,29 +1646,29 @@ sidebar_label: Python
 
 - Exception Hierarchy
 
-  - Customer Exception
-    - `raise MyException` statement will invoke constructor, then `MyException.__str__()`
-  - BaseException -> Exception
-  - [Ref](https://docs.python.org/3/library/exceptions.html)
+- Customer Exception
+- `raise MyException` statement will invoke constructor, then `MyException.__str__()`
+- BaseException -> Exception
+- [Ref](https://docs.python.org/3/library/exceptions.html)
 
 - Exception
-  - SyntaxError
-  - NameError
-  - ValueError
-  - TypeError
-  - ArithmeticError
-    - ZeroDivisionError
-    - OverflowError
-    - FloatPointError
-  - IndexError
-  - KeyError
-  - IOError
-    - FileNotFoundError
-  - OSError
-  - AttributeError
-  - AssertionError
-  - UnboundLocalError
-  - StopIteration
+- SyntaxError
+- NameError
+- ValueError
+- TypeError
+- ArithmeticError
+- ZeroDivisionError
+- OverflowError
+- FloatPointError
+- IndexError
+- KeyError
+- IOError
+- FileNotFoundError
+- OSError
+- AttributeError
+- AssertionError
+- UnboundLocalError
+- StopIteration
 
 ---
 
@@ -1585,58 +1676,58 @@ sidebar_label: Python
 
 - Introduction
 
-  - file is a contiguous sequence of bytes
-    - EOL
-  - standard files
-    - stdin
-      - `input()`
-      - `sys.stdin`
-    - stdout
-      - `print()`
-      - `sys.stdout()`
-    - stderr
-      - `sys.stderr`
-  - text/binary IO objects
-    - `fo = open("path/to/file", "MODE")`
-    - check built-in [io module](#io)
+- file is a contiguous sequence of bytes
+- EOL
+- standard files
+- stdin
+  - `input()`
+  - `sys.stdin`
+- stdout
+  - `print()`
+  - `sys.stdout()`
+- stderr
+  - `sys.stderr`
+- text/binary IO objects
+- `fo = open("path/to/file", "MODE")`
+- check built-in [io module](#io)
 
 - Practices
 
-  ```python
-  # get file/io object
-  fo = open("./data/test.txt", "r+w")
+```python
+# get file/io object
+fo = open("./data/test.txt", "r+w")
 
-  #file object methods/properties
-  fo.name
-  fo.mode
-  fo.closed
-  fo.encoding
-  fo.newlines
+#file object methods/properties
+fo.name
+fo.mode
+fo.closed
+fo.encoding
+fo.newlines
 
-  fo.fileno()
-  fo.read(size)
-  linetext = fo.readline()
-  filetext = fo.readlines()
-  fo.write(string)
-  fo.writelines(string_list)
-  fo.seek(offset, start)
-  fo.next()
-  fo.tell()
-  fo.truncate(size)
-  fo.flush()
-  fo.close()
+fo.fileno()
+fo.read(size)
+linetext = fo.readline()
+filetext = fo.readlines()
+fo.write(string)
+fo.writelines(string_list)
+fo.seek(offset, start)
+fo.next()
+fo.tell()
+fo.truncate(size)
+fo.flush()
+fo.close()
 
-  with open("file.txt", "+") as fo:
-    for line in fo:
-      print(line, end="")
-  print("done")
+with open("file.txt", "+") as fo:
+for line in fo:
+  print(line, end="")
+print("done")
 
-  # external module/functions
-  import os
-  os.rename(oldfilename, newfilename)
-  os.remove(filename)
+# external module/functions
+import os
+os.rename(oldfilename, newfilename)
+os.remove(filename)
 
-  ```
+```
 
 ---
 
