@@ -6,30 +6,36 @@ sidebar_label: MySQL
 
 ## Overview
 
-### Online Resources
+### Application
 
-- [MySQL Documentation](https://dev.mysql.com/doc/refman/8.0/en/)
+- OLAP
 
----
+- OLTP
 
-## Application
+- CRUD
 
 ### Features
 
+### RDB Theory
+
 - [Normalized Design](https://en.wikipedia.org/wiki/Database_normalization)
+  - Purpose:
+    - minimize redundancy
+    - minimize dependency
   - 1NF:
     - single value for each Field(Column, Attribute)
       - vilation of 1NF: put mobile phone and home phone into phone field
   - 2NF:
     - 1NF compliance
-    - **every non-prime attribute** of the relation is dependent on **the whole of every candidate key**.
+    - `every non-prime attribute` of the relation is dependent on `the whole of every candidate key`
   - 3NF:
     - 2NF compliance
     - no non-prime attribute depends on other non-prime attributes. All the non-prime attributes must depend on the primary key only
-- Schema-based design
-- Row-based store
+- SQL
+  - DDL
+  - DML
 
-### Applicable Scenarios
+---
 
 ---
 
@@ -37,12 +43,84 @@ sidebar_label: MySQL
 
 ### Data Model
 
+- Types
+
+  ```sql
+  VARCHAR;
+  CHAR;
+  TEXT;
+
+  DATE;
+  TIME;
+  YEAR;
+  TIMESTAMP;
+  DATETIME;
+
+  DECIMAL;
+  INTEGER;
+
+  ENUM;
+  SET;
+
+  NULL;
+  ```
+
+- Operators
+
+  ```sql
+  var IS NULL;
+  var IS NOT NULL;
+  ```
+
 #### Building Blocks
 
 - Database/Schema
+
+  ```sql
+  SHOW DATABASES;
+
+  USE mydb;
+  ```
+
 - Table
+
+  ```sql
+  SHOW TABLES;
+
+  SHOW TABLES FROM mydb;
+  ```
+
+- View
+
+  ```sql
+  SHOW DATABASES;
+  ```
+
+- Stored Procedure
+
+  ```sql
+  SHOW DATABASES;
+  ```
+
+- Function
+
+  ```sql
+  SHOW DATABASES;
+  ```
+
 - Row/Record
-- Column/Field
+
+  ```sql
+  SELECT
+  ```
+
+- Column/Field/Attribut
+
+  ```sql
+  SHOW COLUMNS FROM mytable;
+
+  SHOW COLUMNS FROM mydb.mytable;
+  ```
 
 ### System Model
 
@@ -139,19 +217,104 @@ sidebar_label: MySQL
 
 ### Business Continuity
 
+#### Backup and Restore
+
+- Restore Schema
+
+### Mornitoring
+
 ---
 
-## Management
+---
 
 ## Best Practice
 
 ### Install and Config
 
+- Install
+
+  - [Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)
+  - [Ubuntu Linux](https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/)
+
+- Config
+
+  - Initializing the Data Directory
+
+    - default user `root@localhost`
+    - customize user and directories
+      - `mysqld --initialize --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data`
+    - alter users
+
+      ```sql
+      ALTER USER 'root'@'localhost' IDENTIFIED BY 'ROOTPASSWORD';
+      CREATE USER 'root'@'127.0.0.1' IDENTIFIED BY 'ROOTPASSWORD';
+      CREATE USER 'root'@'::1' IDENTIFIED BY 'ROOTPASSWORD';
+      ```
+
+  - Start, Check and Stage Service
+
+    - Ubuntu Linux
+
+      ```bash
+      sudo systemctl start mysql
+      sudo systemctl status mysql
+      sudo systemctl enable mysql
+
+      sudo mysqladmin version
+      sudo mysqladmin variables
+
+      sudo mysqlshow
+      sudo mysqlshow MYDATABASE
+      ```
+
+  - Secure Init Account
+
+    ```sql
+    mysql -u root --skip-password
+
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'NEWROOTPASSWORD';
+    CREATE USER 'root'@'127.0.0.1' IDENTIFIED BY 'ROOTPASSWORD';
+    CREATE USER 'root'@'::1' IDENTIFIED BY 'ROOTPASSWORD';
+    ```
+
+- Upgrade
+
+  - [Documentation](https://dev.mysql.com/doc/refman/8.0/en/upgrading.html)
+
+### MySQL Shell
+
+- login
+
+  - `\c USER@HOST`
+
+  ```bash
+  mysql -h HOST -u USER -p
+  ```
+
+- ssl
+
+  ```sql
+  SHOW GLOBAL VARIABLES LIKE 'tls_version';
+  SHOW GLOBAL VARIABLES LIKE '%ssl%'
+
+  SHOW SESSION STATUS LIKE 'Ssl_version';
+  SHOW SESSION STATUS LIKE 'Ssl_cipher';
+  SHOW SESSION VARIABLES LIKE '%ssl%'
+
+  SET [GLOBAL|SESSION] var_name = expr
+  ```
+
 ### Drivers
 
-#### [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/)
+#### MySQL Connector/Python
 
-- `pip install mysql-connector-python`
+- install
+
+  - `pip install mysql-connector-python`
+
+- documentation
+
+  - [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/connector-python-introduction.html)
 
 - python driver template
 
@@ -160,11 +323,11 @@ sidebar_label: MySQL
   from mysql.connector import Error
 
   config = {
-      'user': 'user',
-      'password': 'password@MYSQL',
-      'host': '127.0.0.1',
-      'database': 'world',
-      'raise_on_warnings': True
+    'user': 'root',
+    'password': 'root@MYSQL',
+    'host': '127.0.0.1',
+    'database': 'world',
+    'raise_on_warnings': True
   }
 
   try:
@@ -184,18 +347,18 @@ sidebar_label: MySQL
 
   finally:
       # closing database connection.
-      if(connection.is_connected()):
+      if connection.is_connected():
           cursor.close()
           connection.close()
           print("MySQL connection is closed")
   ```
 
-### User Admin
-
-### Backup and Restore
-
-#### Restore Schema
-
-### Mornitoring
+---
 
 ---
+
+## Misc
+
+### Online Resources
+
+- [MySQL Documentation](https://dev.mysql.com/doc/refman/8.0/en/)
