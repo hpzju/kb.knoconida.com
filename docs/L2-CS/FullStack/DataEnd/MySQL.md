@@ -149,7 +149,7 @@ sidebar_label: MySQL
 
   UPPER(), LOWER(),
   REVERSE(), REPEAT(), REPLACE(),
-  CONCAT(), CONCAT_WS(),
+  CONCAT(), CONCAT_WS(), SUBSTRING(),
   LEFT(), RIGHT(),
   LENGTH(), CHAR_LENGTH()
 
@@ -175,6 +175,8 @@ sidebar_label: MySQL
   SHOW COLUMNS FROM mytable;
 
   SHOW COLUMNS FROM mydb.mytable;
+
+  DESC mytable;
   ```
 
 ---
@@ -198,12 +200,38 @@ CREATE TABLE people (
   )
   ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
 
+CREATE TABLE IF NOT EXISTS people (
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(50) NOT NULL DEFAULT '',
+  last_name VARCHAR(50) NOT NULL DEFAULT '',
+  mobile_no VARCHAR(20) NOT NULL DEFAULT '',
+  birthday DATE DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY mobile_no (mobile_no)
+  )
+  ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
+
 SHOW CREATE TABLE people;
+
+ create table user (
+   id int not null auto_increment,
+   last_name VARCHAR(50) not null default "",
+   first_name VARCHAR(50) not null default "",
+   middle_name VARCHAR(50) default "",
+   age int not null,
+   current_status VARCHAR(20) not null default 'employed',
+   primary key (id)
+   )
+   engine = innodb default character set utf8mb4;
 ```
 
 #### Read
 
 ```sql
+SELECT * FROM mytable;
+
+SELECT col1, col2, ... FROM mytable;
+
 SELECT [DISTINCT] mytab.mycol as newcol, ...
   FROM mytab,...
   WHERE filter_expr
@@ -248,6 +276,7 @@ DROP DATABASE IF EXISTS mydb;
 DROP TABLE IF EXISTS people;
 
 TRUNCATE TABLE people;
+
 DELETE FROM people;
 
 DELETE FROM people
@@ -288,8 +317,8 @@ DELETE FROM people
 - IN, NOT IN
   - `value IN ( VALUE_SET )`
 - LIKE, NOT LIKE
-  - %: any sequence of chars
-  - \_: any one char
+  - `%`: any sequence of chars
+  - `_`: any one char
   - `str_val like "%PATTERN%"`
   - case sensitive
   - `LOWER(<key>) LIKE LOWER('%<searchpattern>%')`
@@ -302,7 +331,7 @@ DELETE FROM people
 ##### col_order_expresss
 
 - `col ASC/DESC`
-- ASC is default
+  - ASC is default
 
 #### [Join](https://dev.mysql.com/doc/refman/8.0/en/join.html)
 
