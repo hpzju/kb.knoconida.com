@@ -57,19 +57,20 @@ sidebar_label: MySQL
   DATETIME;
 
   DECIMAL;
+  FLOAT;
+  DOUBLE;
   INTEGER;
+    TINYINT
+    SMALLINT
+    MEDIUMINT
+    INT
+    BIGINT
+  BIT
 
   ENUM;
   SET;
 
   NULL;
-  ```
-
-- Operators
-
-  ```sql
-  var IS NULL;
-  var IS NOT NULL;
   ```
 
 #### Building Blocks
@@ -81,6 +82,9 @@ sidebar_label: MySQL
 
   USE mydb;
   ```
+
+  - system dbs
+    - `mysql; sys; information_schema; performance_schema;`
 
 - Table
 
@@ -105,14 +109,45 @@ sidebar_label: MySQL
 - Function
 
   ```sql
-  SHOW DATABASES;
+  COUNT( [DISTINCT] *);
+
+  SELECT SUM(amount) as 'sum', AVG(amount) as 'avg' from mytable;
+
+  SELECT DATABASE(), VERSION(), USER();
+
+  SELECT CURRENT_DATE(), CURRENT_TIME(), NOW(), SYSDATE(),
+     CURRENT_TIMESTAMP(), UTC_TIMESTAMP();
+  SELECT DATADIFF('1923-09-01', '2019-02-10');
+  SELECT FROM_DAYS(2323);
+  SELECT SLEEP(1)
+  YEAR(), DAY(), MONTH(),
+
+  +, -, *, /
+  POW(), SQRT(), PI(),
+  ABS(), CEILING(), FLOOR(),
+  LOG10(), LOG2(), EXP(),
+
+  UPPER(), LOWER(),
+  REVERSE(), REPEAT(), REPLACE(),
+  CONCAT(), CONCAT_WS(),
+  LEFT(), RIGHT(),
+  LENGTH(), CHAR_LENGTH()
+
+  >, >=, <, <=,
+  AND, OR, NOT
+  IS NULL, IS NOT NULL,
+  IN (a, b, c,...)
+  LIKE '%', LIKE '_',
+  BETWEEN a AND b,
+  NOT BETWEEN a AND b,
+
   ```
 
 - Row/Record
 
-  ```sql
-  SELECT
-  ```
+```sql
+SELECT
+```
 
 - Column/Field/Attribut
 
@@ -124,23 +159,81 @@ sidebar_label: MySQL
 
 ### System Model
 
-### Structures
-
 ### CRUD
 
 #### Create
 
-- `CREATE DATABASE mydatabase;`
+```sql
+CREATE DATABASE IF NOT EXISTS mydatabase DEFAULT CHARACTER SET utf8mb4;
+
+CREATE TABLE people (
+  first_name VARCHAR(50) NOT NULL DEFAULT '',
+  last_name VARCHAR(50) NOT NULL DEFAULT '',
+  mobile_no VARCHAR(20) NOT NULL DEFAULT '',
+  birthday DATE DEFAULT NULL,
+  PRIMARY KEY (first_name, last_name),
+  UNIQUE KEY mobile_no (mobile_no)
+  )
+  ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
+
+SHOW CREATE TABLE people;
+```
 
 #### Read
 
+```sql
+SELECT [DISTINCT] mytab.mycol as newcol, ...
+  FROM mytab,...
+  WHERE filter_expr
+```
+
 #### Update
+
+```sql
+ALTER TABLE people ADD COLUMN id INT UNSIGNED DEFAULT NULL;
+
+INSERT INTO  people (first_name, last_name, birthday, mobile_no)
+  VALUES ('Bob', 'Thompson', '1993-01-12', '2323-2321-23'),
+          ('Tim', 'Bell', '1954-01-12', '2323-2311-23');
+
+INSERT INTO  people
+  SET first_name='Jack', last_name='Paul',
+  birthday = '1942-02-21', mobile_no='2323-4533-22';
+
+INSERT INTO  people (first_name, last_name, birthday, mobile_no)
+  VALUES ('Bob', 'Thompson', '1993-01-12', '2323-2321-23'),
+          ('Tim', 'Bell', '1954-01-12', '2323-2311-23')
+  ON DUPLICATE KEY UPDATE mobile_no=VALUES(mobile_no);
+
+INSERT IGNORE INTO  people (first_name, last_name, birthday, mobile_no)
+  VALUES ('Bob', 'Thompson', '1993-01-12', '2323-2321-23'),
+          ('TimR', 'BellR', '1954-01-12', '2323-2311-23-1');
+
+REPLACE INTO  people (first_name, last_name, birthday, mobile_no)
+  VALUES ('Bob', 'Thompson', '1993-01-12', '2323-2321-23'),
+          ('TimR', 'BellR', '1954-01-12', '2323-2311-23-1');
+
+UPDATE people
+  SET birthday='1980-02-42', ...
+  WHERE first_name='Jack' AND last_name='Paul';
+```
 
 #### Delete
 
-- `DROP DATABASE mydatabase;`
+```sql
+DROP DATABASE IF EXISTS mydb;
 
-### SELECT Query
+DROP TABLE IF EXISTS people;
+
+TRUNCATE TABLE people;
+DELETE FROM people;
+
+DELETE FROM people
+  WHERE first_name='Bob';
+
+```
+
+### Query
 
 #### [SELECT](https://dev.mysql.com/doc/refman/8.0/en/select.html)
 
@@ -302,6 +395,16 @@ sidebar_label: MySQL
   SHOW SESSION VARIABLES LIKE '%ssl%'
 
   SET [GLOBAL|SESSION] var_name = expr
+  ```
+
+- dba
+
+  ```sql
+  SHOW WARNINGS;
+
+  SHOW CHARACTER SET;
+
+  SHOW COLLATION LIKE '%utf%'
   ```
 
 ### Drivers
