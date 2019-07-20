@@ -92,7 +92,7 @@ sidebar_label: MySQL
     ENUM;
     ```
 
-#### Building Blocks
+### Building Blocks
 
 - Database/Schema
 
@@ -165,9 +165,9 @@ sidebar_label: MySQL
 
 - Row/Record
 
-```sql
-SELECT
-```
+  ```sql
+  SELECT
+  ```
 
 - Column/Field/Attribut
 
@@ -176,6 +176,8 @@ SELECT
 
   SHOW COLUMNS FROM mydb.mytable;
   ```
+
+---
 
 ### System Model
 
