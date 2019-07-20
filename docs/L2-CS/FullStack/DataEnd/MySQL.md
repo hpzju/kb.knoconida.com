@@ -16,6 +16,8 @@ sidebar_label: MySQL
 
 ### Features
 
+- ISO/IEC 9075 SQL Standard
+
 ### RDB Theory
 
 - [Normalized Design](https://en.wikipedia.org/wiki/Database_normalization)
@@ -45,33 +47,50 @@ sidebar_label: MySQL
 
 - Types
 
-  ```sql
-  VARCHAR;
-  CHAR;
-  TEXT;
+  - Numeric Types
 
-  DATE;
-  TIME;
-  YEAR;
-  TIMESTAMP;
-  DATETIME;
+    ```sql
+    SMALLINT;
+    TINYINT;
+    MEDIUMINT;
+    INT;
+    BIGINT;
+    DECIMAL;
+    FLOAT;
+    DOUBLE;
+    BIT;
+    NUMERIC;
+    ```
 
-  DECIMAL;
-  FLOAT;
-  DOUBLE;
-  INTEGER;
-    TINYINT
-    SMALLINT
-    MEDIUMINT
-    INT
-    BIGINT
-  BIT
+  - Date Types
 
-  ENUM;
-  SET;
+    ```sql
+    DATE;
+    TIME;
+    YEAR;
+    DATETIME;
+    TIMESTAMP;
+    ```
 
-  NULL;
-  ```
+  - String Types
+
+    ```sql
+    CHAR;
+    VARCHAR(len);
+    TINYTEXT;
+    MEDIUMTEXT;
+    TEXT;
+    LONGTEXT;
+
+    BINARY;
+    VARBINARY;
+    TINYBLOB;
+    MEDIUMBLOB
+    BLOB;
+    LONGBLOB
+
+    ENUM;
+    ```
 
 #### Building Blocks
 
@@ -81,6 +100,7 @@ sidebar_label: MySQL
   SHOW DATABASES;
 
   USE mydb;
+  SELECT DATABASE();
   ```
 
   - system dbs
@@ -90,7 +110,7 @@ sidebar_label: MySQL
 
   ```sql
   SHOW TABLES;
-
+  SHOW CREATE TABLE mytable;
   SHOW TABLES FROM mydb;
   ```
 
@@ -405,6 +425,8 @@ DELETE FROM people
   SHOW CHARACTER SET;
 
   SHOW COLLATION LIKE '%utf%'
+
+  SELECT @@hostname;
   ```
 
 ### Drivers
