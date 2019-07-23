@@ -55,7 +55,7 @@ sidebar_label: MySQL
     MEDIUMINT;
     INT;
     BIGINT;
-    DECIMAL;
+    DECIMAL(<width>,<prec>);
     FLOAT;
     DOUBLE;
     BIT;
@@ -75,8 +75,8 @@ sidebar_label: MySQL
   - String Types
 
     ```sql
-    CHAR;
-    VARCHAR(len);
+    CHAR(<0,255>);
+    VARCHAR(<0,255>);
     TINYTEXT;
     MEDIUMTEXT;
     TEXT;
@@ -90,6 +90,7 @@ sidebar_label: MySQL
     LONGBLOB
 
     ENUM;
+    temperature ENUM('COLD','HOT') DEFUALT 'COLD'
     ```
 
 ### Building Blocks
@@ -126,7 +127,7 @@ sidebar_label: MySQL
   SHOW DATABASES;
   ```
 
-- Function
+- Function and Operators
 
   ```sql
   COUNT( [DISTINCT] *);
@@ -135,9 +136,9 @@ sidebar_label: MySQL
 
   SELECT DATABASE(), VERSION(), USER();
 
-  SELECT CURRENT_DATE(), CURRENT_TIME(), NOW(), SYSDATE(),
-     CURRENT_TIMESTAMP(), UTC_TIMESTAMP();
-  SELECT DATADIFF('1923-09-01', '2019-02-10');
+  SELECT CURRENT_DATE(), CURDATE(), CURRENT_TIME(), CURTIME(), NOW(), SYSDATE(),
+  CURRENT_TIMESTAMP(), UTC_TIMESTAMP(), DATE_FORMAT(),
+  SELECT DATADIFF('1923-09-01', '2019-02-10'), DATE_ADD(), DATE_SUB(),
   SELECT FROM_DAYS(2323);
   SELECT SLEEP(1)
   YEAR(), DAY(), MONTH(),
@@ -153,14 +154,18 @@ sidebar_label: MySQL
   LEFT(), RIGHT(),
   LENGTH(), CHAR_LENGTH()
 
-  >, >=, <, <=,
-  AND, OR, NOT
+  >, >=, <, <=, !=, <>, =,
+  &&, ||, !,
+  AND, OR, NOT, XOR,
   IS NULL, IS NOT NULL,
   IN (a, b, c,...)
-  LIKE '%', LIKE '_',
+  LIKE '%', LIKE '_', NOT LIKE,
   BETWEEN a AND b,
   NOT BETWEEN a AND b,
 
+  CAST(). IFNULL(),
+
+  COUNT(),MIN(), MAX(), AVG(), SUM(),
   ```
 
 - Row/Record
@@ -182,6 +187,10 @@ sidebar_label: MySQL
 ---
 
 ### System Model
+
+#### Storage Procedure
+
+#### Trigger
 
 ### CRUD
 
@@ -320,9 +329,12 @@ DELETE FROM people
   - `%`: any sequence of chars
   - `_`: any one char
   - `str_val like "%PATTERN%"`
+  - `%\_%`
   - case sensitive
   - `LOWER(<key>) LIKE LOWER('%<searchpattern>%')`
 - (SELECT_SUBQUERY)
+  - CASE-WHEN-THEN-ELSE
+  - CASE-WHEN-THEN-WHEN-THEN...-ELSE
 
 ##### having_express
 
@@ -339,9 +351,14 @@ DELETE FROM people
   SELECT t1.name, t2.salary
     FROM employee AS t1
     INNER JOIN info AS t2 ON t1.name = t2.name;
+
+  SELECT *
+    FROM customer
+    LEFT OUTER JOIN order
+    ON customer.id = order.customer_id
   ```
 
-- INNER JOIN, FULL OUTER JOIN, LEFT OUT JOIN, RIGHT OUT JOIN
+- INNER JOIN, FULL OUTER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN
   - Diagram of JOINS: ![Alt](/img/MySQL-Join-01.jpg "JOIN diagram")
 - Self-Join
 
