@@ -10,6 +10,12 @@ sidebar_label: MySQL
 
 - OLAP
 
+  - ACID
+    - Atomic
+    - Consistancy
+    - Isolation
+    - Durablility
+
 - OLTP
 
 - CRUD
@@ -35,7 +41,14 @@ sidebar_label: MySQL
     - no non-prime attribute depends on other non-prime attributes. All the non-prime attributes must depend on the primary key only
 - SQL
   - DDL
+    - schema
   - DML
+    - crud
+  - DCL
+    - Role based permission
+  - TCL
+    - transaction
+- DBMS
 
 ---
 
@@ -113,6 +126,10 @@ sidebar_label: MySQL
   SHOW TABLES;
   SHOW CREATE TABLE mytable;
   SHOW TABLES FROM mydb;
+
+  PRIMARY KEY
+  UNIQUE KEY
+  FOREIGN KEY
   ```
 
 - View
@@ -188,9 +205,19 @@ sidebar_label: MySQL
 
 ### System Model
 
-#### Storage Procedure
+- Constrains
 
-#### Trigger
+  ```sql
+  NOT NULL
+  UNIQUE
+  CHECK
+  DEFAULT
+  INDEX
+  ```
+
+- Storage Procedure
+
+- Trigger
 
 ### CRUD
 
@@ -371,6 +398,12 @@ DELETE FROM people
   ```
 
 ### Indexing
+
+- Unique Index
+
+- Cluster Index
+
+- Non Cluster Index
 
 ### Replication
 
