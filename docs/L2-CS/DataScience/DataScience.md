@@ -160,6 +160,8 @@ sidebar_label: DataScience
 
 - Categories:
 
+  ![Alt](/img/DS-Hadoop-ComputingFramwork.png "Computing Framwork")
+
   - General-purpose processing frameworks
   - Abstraction frameworks
   - SQL frameworks
@@ -222,6 +224,7 @@ sidebar_label: DataScience
       - editlog
       - fsimage
   - Architecture
+    ![Alt](/img/DS-Hadoop-Architecture-HDFS.png "HDFS Architecture")
     - Primary-Secondary namenode
     - master-worker model
     - n-copies redundancy: 3 by default
@@ -231,6 +234,7 @@ sidebar_label: DataScience
     - WORM: write once, read many times
 
 - YARN
+
   - scalability, compatibility, resouce utilization, multitanants
   - Building Block
     - Client
@@ -245,6 +249,7 @@ sidebar_label: DataScience
       - App Master
         - get task execution done
   - Architecture
+    ![Alt](/img/DS-Hadoop-Architecture-YARN.png "YARN Architecture")
   - User Case
 
 - Oozie
@@ -267,7 +272,10 @@ sidebar_label: DataScience
     - client
     - table, row, column famility, column, k-v pair
     - Cell
+    - HBase Data Model
+      ![Alt](/img/DS-Hadoop-Architecture-HBase-DataModel.png "HBase DataModel")
   - Architecture
+    ![Alt](/img/DS-Hadoop-Architecture-HBase.png "HBase Architecture")
     - HMaster
     - RegionServer
       - Region
@@ -296,7 +304,10 @@ sidebar_label: DataScience
     - Reduce Tasks
       - K-V pairs
       - shuffle/aggregate/sort/summary and etc.
+    - Data Flow
+      ![Alt](/img/DS-Hadoop-ComputingFramwork-MapReduce-Dataflow.png "MapReduce Data Flow")
   - Architecture
+    ![Alt](/img/DS-Hadoop-ComputingFramwork-MapReduce.png "MapReduce Architecture")
     - Input-Map-Reduce-Output Model
       - Input from HDFS
       - Mapper Class
@@ -334,8 +345,11 @@ sidebar_label: DataScience
     - Partition
     - Bucket
   - Architecture
+    ![Alt](/img/DS-Hadoop-Architecture-Hive.png "Hive Architecture")
     - Hive Data Model
       - Data Types
+    - Hive Dataflow
+      ![Alt](/img/DS-Hadoop-Architecture-Hive-Dataflow.png "Hive Architecture")
   - User Case
     - EDW
 
@@ -387,6 +401,9 @@ sidebar_label: DataScience
 - Sqoop
 
 #### Hadoop Ecosystem
+
+- Intro
+  ![Alt](/img/DS-Hadoop-Ecosystem-1.png "Hadoop Ecosystem")
 
 ---
 
