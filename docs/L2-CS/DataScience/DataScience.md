@@ -113,6 +113,24 @@ sidebar_label: DataScience
       - Customer Insights
       - Cybersecurity
 
+- Data Lifecycle:
+
+  - Business Case Development
+  - Identify Data
+  - Data filtering
+  - Data extracting
+  - Data aggregation
+  - Data analysis
+  - Data visualize
+  - Business Case Validation
+
+- Analytic Categories
+
+  - Descriptive Analytic: what happened
+  - Diagnostic Analytic: why it happened
+  - Predictive Analytic: what will happen
+  - Prescriptive Analytic: what's the solution
+
 - Technologies Categories
 
   - Flow Perspective
@@ -182,12 +200,18 @@ sidebar_label: DataScience
 
 #### Hadoop Architecture
 
+- Intro
+
+  - Data Storage
+  - Cluster Management
+  - Data Processing
+
 - HDFS
 
   - Features
-    - build on commodity hardware
-    - scale-out distributed system for large volume datastore
-    - falt-tolerance
+    - cost-effective: build on commodity hardware
+    - scale-out: distributed system for large volume datastore
+    - falt-tolerance: n-copies
   - Building Blocks
     - Client
     - NameNode
@@ -201,16 +225,25 @@ sidebar_label: DataScience
     - Primary-Secondary namenode
     - master-worker model
     - n-copies redundancy: 3 by default
-    - rack aware HA
+    - rack awareness HA
   - User Case
     - not for large number of small files
     - WORM: write once, read many times
 
 - YARN
-
+  - scalability, compatibility, resouce utilization, multitanants
   - Building Block
+    - Client
     - ResourceManager
+      - negotiate resources required by app master
+      - Scheduler
+      - Application Manager
     - NodeManager
+      - approve resources required by resource manager
+      - Container
+        - resources abstration on ram, cpu, ios
+      - App Master
+        - get task execution done
   - Architecture
   - User Case
 
@@ -228,8 +261,11 @@ sidebar_label: DataScience
 - HBase
 
   - NoSQL, Non-Relational, Distributed column-oriented Database system works on HDFS
+    - Scalable
+    - HA
   - Building Blocks
-    - table, row, column famility, column, k-v pair)
+    - client
+    - table, row, column famility, column, k-v pair
     - Cell
   - Architecture
     - HMaster
@@ -252,6 +288,7 @@ sidebar_label: DataScience
 
 - MapReduce
 
+  - a batch processing framework for large dataset
   - Building Blocks
     - Map Tasks
       - K-V pairs
@@ -281,7 +318,24 @@ sidebar_label: DataScience
 
   - data warehouse infrustructure to process structured data with HQL on top of HDFS.
   - Building Block
+    - Client
+      - Thrift
+      - JDBC
+      - ODBC
+    - Hive Server
+    - Hive GUI
+    - Hive CLI
+    - Hive Driver
+      - Compiler
+      - Optimizer
+      - Executor
+    - Metastore
+    - Table
+    - Partition
+    - Bucket
   - Architecture
+    - Hive Data Model
+      - Data Types
   - User Case
     - EDW
 
@@ -310,6 +364,7 @@ sidebar_label: DataScience
     - structure and unstructure data processing
 
 - Spark
+
   - In-Memory cluster processing framework,
   - Building Block
     - Spark SQL
@@ -328,6 +383,8 @@ sidebar_label: DataScience
         - Transformation
         - Action
   - User Case
+
+- Sqoop
 
 #### Hadoop Ecosystem
 
