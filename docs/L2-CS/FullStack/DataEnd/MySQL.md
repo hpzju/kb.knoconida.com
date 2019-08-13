@@ -508,6 +508,7 @@ DELETE FROM people
   SHOW COLLATION LIKE '%utf%'
 
   SELECT @@hostname;
+  SELECT @@version;
   ```
 
 ### Drivers
