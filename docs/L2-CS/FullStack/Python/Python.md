@@ -951,6 +951,7 @@ sidebar_label: Python
     - wrap a function into decorator, simplify interface design and lower the exposure surface.
     - use self-defined wrap function will change original function's name and docstring
       - use decorator `functools.wraps` will solve
+      - @wraps copies metadata: name, docstring, function attributes.
     - categories
       - nested decorators
       - parameterized decorators
@@ -1395,6 +1396,41 @@ sidebar_label: Python
 
 - Metaclasses
 
+  - like a class decorator, but inheritable, inspect and modify class data.
+  - a generic abstraction layer.
+  - Use a class decorator if the goal is to tweak classes that might be unrelated
+  - Use a metaclass if you're trying to perform actions in combination with inheritance
+
+  ```python
+  from inspect import Parameter, Signatur
+
+  def make_signature(names):
+    return Signature(Parameter(name,Parameter.POSITIONAL_OR_KEYWORD) for name in names)
+
+  class StructMeta(type):
+    def __new__(cls, name, bases, clsdict):
+      clsobj = super().__new__(cls, name,bases, clsdict)
+      sig = make_signature(clsobj._fields)
+      setattr(clsobj, '__signature__', sig)
+      return clsobj
+
+  class Structure(metaclass=StructMeta):
+    _fields = []
+    def __init__(self, *args, **kwargs):
+      bound = self.__signature__.bind(*args, **kwargs)
+      for name, val in bound.arguments.items():
+        setattr(self, name, val)
+
+  class Stock(Structure):
+    _fields = ['name', 'shares', 'price']
+
+  class Point(Structure):
+     _fields = ['x', 'y']
+
+  class Host(Structure):
+    _fields = ['address', 'port']
+  ```
+
 - OOP
 
   - Inheritance
@@ -1523,6 +1559,9 @@ sidebar_label: Python
 
   class MyABC(metaclass=ABCMeta):
     pass
+
+  #Dynamic Class Type
+  NewClass = type('NewClass', (object,), {})
 
   ```
 
@@ -2690,6 +2729,17 @@ else :
 - cmd
 
 ---
+
+#### SysEnv
+
+- os
+
+  ```python
+  import os
+  env_dict = os.environ
+  for key, val in env_dict.items():
+    print(key, val)
+  ```
 
 #### File System
 

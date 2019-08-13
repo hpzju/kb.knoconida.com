@@ -56,8 +56,8 @@
   },
   "L2-Methodology": {
     "Overview": ["L2-Methodology/L2-Methodology"],
-    "Business": ["L2-Methodology/BusinessModel/BusinessModel"],
-    "Management": ["L2-Methodology/PMP/PMP"],
+    "Business": ["L2-Methodology/Business/BusinessModel"],
+    "Management": ["L2-Methodology/Management/PMP", "L2-Methodology/Management/BPMN"],
     "Miscellaneous": [
       "L2-Methodology/Misc/pptDesign",
       {

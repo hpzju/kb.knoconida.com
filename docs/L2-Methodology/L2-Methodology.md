@@ -6,11 +6,13 @@ sidebar_label: Methodology
 
 ## Business
 
-- [BusinessModel](BusinessModel/BusinessModel)
+- [BusinessModel](Business/BusinessModel)
 
 ## Management
 
-- [PMP](PMP/PMP)
+- [PMP](Management/PMP)
+
+- [BPMN](Management/BPMN)
 
 ## Miscellaneous
 
