@@ -11,7 +11,7 @@ sidebar_label: MySQL
 - OLAP
 
   - ACID
-    - Atomic
+    - Atomicity
     - Consistancy
     - Isolation
     - Durablility
@@ -23,6 +23,14 @@ sidebar_label: MySQL
 ### Features
 
 - ISO/IEC 9075 SQL Standard
+- ACID Compliance
+- Functionalities
+  - Stored Procedures
+  - Triggles
+  - Cursors
+  - Updated Views
+  - Query Cache
+  - Subselect
 
 ### RDB Theory
 
@@ -42,13 +50,28 @@ sidebar_label: MySQL
 - SQL
   - DDL
     - schema
+    - primary key: uniqu column/columns
+      - surrogate key: generated primary key, no business value
+    - foreign key
+      - o2o
+      - o2m
+      - m2m
   - DML
     - crud
   - DCL
     - Role based permission
   - TCL
     - transaction
-- DBMS
+- RDBMS
+  - Data Definition
+  - Data Manipulation
+  - Data Retrival
+  - System Administration
+    - User, Role, Previlege
+    - Data Store
+    - System Mon
+    - Backup
+    - Audit
 
 ---
 
@@ -104,7 +127,13 @@ sidebar_label: MySQL
 
     ENUM;
     temperature ENUM('COLD','HOT') DEFUALT 'COLD'
+
+    SET
     ```
+
+  - Spatial
+
+  - JSON
 
 ### Building Blocks
 
@@ -154,23 +183,26 @@ sidebar_label: MySQL
   SELECT DATABASE(), VERSION(), USER();
 
   SELECT CURRENT_DATE(), CURDATE(), CURRENT_TIME(), CURTIME(), NOW(), SYSDATE(),
-  CURRENT_TIMESTAMP(), UTC_TIMESTAMP(), DATE_FORMAT(),
+  CURRENT_TIMESTAMP(), UTC_TIMESTAMP(), DATE_FORMAT(date, formatter),
   SELECT DATADIFF('1923-09-01', '2019-02-10'), DATE_ADD(), DATE_SUB(),
   SELECT FROM_DAYS(2323);
   SELECT SLEEP(1)
   YEAR(), DAY(), MONTH(),
 
-  +, -, *, /
+  -- arithmetic
+  +, -, *, /, DIV, %
   POW(), SQRT(), PI(),
   ABS(), CEILING(), FLOOR(),
   LOG10(), LOG2(), EXP(),
 
+  -- string
   UPPER(), LOWER(),
   REVERSE(), REPEAT(), REPLACE(),
   CONCAT(), CONCAT_WS(), SUBSTRING(),
-  LEFT(), RIGHT(),
+  LEFT(str, len), RIGHT(str, len),
   LENGTH(), CHAR_LENGTH()
 
+  --boolean
   >, >=, <, <=, !=, <>, =,
   &&, ||, !,
   AND, OR, NOT, XOR,
@@ -182,6 +214,7 @@ sidebar_label: MySQL
 
   CAST(). IFNULL(),
 
+  -- aggregation
   COUNT(),MIN(), MAX(), AVG(), SUM(),
   ```
 
