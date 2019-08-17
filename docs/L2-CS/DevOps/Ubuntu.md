@@ -62,6 +62,8 @@ sidebar_label: Ubuntu
 
     - [Ref](https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/)
 
+- ssh-keygen
+  - `ssh-keygen -q -t rsa -b 4096 -f testkeygen -N "";`
 - ssh-agent and ssh-add
   - ssh-agent is a background program that handles passwords for SSH private keys. The ssh-add command prompts the user for a private key password and adds it to the list maintained by ssh-agent. Once you add a password to ssh-agent, you will not be prompted for it when using SSH or scp to connect to hosts with your public key.
   - `eval $(ssh-agent)`

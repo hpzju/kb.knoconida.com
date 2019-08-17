@@ -460,9 +460,10 @@ sidebar_label: Python
     newS = str.rjust()
 
     newS = str.replace(targetsubstr,replacersubstr)
-    newS = str.split(splitCharCol)
+    strarr = str.split(splitCharCol)
+    strarr = str.splitlines()
     strTuple = str.partition(partstr)
-    newS = strlist.join(jointChar)
+    newS = jointChars.join(str_seq)
 
     newS = str.capitalize()
     newS = str.lower()
@@ -492,7 +493,16 @@ sidebar_label: Python
     s = "s1" + " " + "s2"
     s = "repeate"*2
     char in s
+    substr in str
     for char in s:
+    eval(str_code)
+    str(obj)
+    repr(obj)
+
+    import string
+
+    string.ascii_lowercase
+    string.whitespace
   ```
 
 ---
@@ -1744,6 +1754,7 @@ fo.encoding
 fo.newlines
 
 fo.fileno()
+alltext = fo.read()
 fo.read(size)
 linetext = fo.readline()
 filetext = fo.readlines()
@@ -2723,6 +2734,19 @@ else :
 - contextlib
   - `@contextlib.contextmanager`
 
+```python
+import subprocess
+subprocess.call("echo 'hello world!'")
+pipe = subprocess.Popen('python helloshell.py', stdout=subprocess.PIPE)
+pipe.communicate()[0]
+pipe.stdout.read()
+pipe.wait()
+pipe = Popen('python hello-in.py', stdin=PIPE)
+pipe.stdin.write(b'Pokey\n')
+pipe.stdin.close()
+pipe.wait()
+```
+
 #### Cli
 
 - argparse
@@ -2732,13 +2756,18 @@ else :
 
 #### SysEnv
 
-- os
+- os, sys
 
   ```python
-  import os
+  import os, sys
+
+  sys.setdefaultencoding("utf-8")
+
   env_dict = os.environ
   for key, val in env_dict.items():
     print(key, val)
+  os.putenv()
+  os.getenv()
   ```
 
 #### File System
@@ -2755,6 +2784,38 @@ else :
   os.listdir()
   bool = os.access("path/to/file/dir", os.F_OK|os.R_OK|os.W_OK|os.X_OK)
   dirpath, dirnames, filenames = os.walk(".")
+
+  #Shell variables
+  os.environ
+
+  #Running programs
+  os.system('echo "Hello World"')
+  os.popen('echo "hello world!"').read(), os.execv, os.spawnv
+  os.startfile(filename)
+
+  #Spawning processes
+  os.pipe, os.waitpid, os.kill
+
+  #Descriptor files, locks
+  os.open, os.read, os.write
+
+  #File processing
+  os.remove, os.rename, os.mkdir, os.rmdir
+
+  #Administrative tools
+  os.getcwd, os.chdir, os.chmod, os.getpid, os.listdir, os.access
+  os.path.abspath('.')
+
+  #Portability tools
+  os.sep, os.pathsep, os.curdir, os.path.split, os.path.join
+
+  #Pathname tools
+  os.path.exists('path'), os.path.isdir('path'), os.path.getsize('path')
+  os.path.isfile('filename')
+  os.path.split(r'C:\temp\data.txt')
+  os.path.join(r'C:\temp', 'output.txt')
+  os.path.splitext(r'C:\PP4thEd\Examples\PP4E\PyDemos.pyw')
+  os.path.dirname(filepath), os.path.basename(filepath)
   ```
 
 - gzip
