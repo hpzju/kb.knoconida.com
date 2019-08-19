@@ -6,11 +6,6 @@ sidebar_label: xxxx
 
 ## Overview
 
-### Online Resources
-
-- [e](https://www.mongodb.com)
-- [1](https://docs.mongodb.com/)
-
 ---
 
 ## Application

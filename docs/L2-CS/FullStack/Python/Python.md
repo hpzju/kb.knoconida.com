@@ -27,16 +27,31 @@ sidebar_label: Python
 
 ### Applicable Scenarios
 
-- Web Dev
 - Game Dev
 - Data Science
+  - RDMS Interface
+  - Scientific Computation
 - Sys DevOps
-  - Linux SysAdmin
+  - Environment variables
+  - File System
+    - zip, XML, JSON, CVS
+  - Network socket
+  - Process and Ehread
+  - RE
+  - Pipeline
+  - CLI
+- Web DevOps
+  - Web Scraping
+  - Web Page Parsing
+  - Web Devs
+    - Djongo, Flask
+- System Glues
+  - C/C++ integration
 
 ### Python Interpreter Implementation
 
 - Python
-  - PyPy
+  - PyPy, JIT python interpreter implementation
 - C
   - CPython, the default interpreter
 - Java
@@ -2731,6 +2746,17 @@ else :
 - threading
 - subprocess
 - multiprocessing
+
+  ```python
+  import os, sys, subprocess, multiprocessing, threading concurrent
+
+  # no exception, just exit
+  os._exit()
+
+  # exit by exception: SystemExit
+  sys.exit()
+  ```
+
 - contextlib
   - `@contextlib.contextmanager`
 
@@ -2768,11 +2794,17 @@ pipe.wait()
     print(key, val)
   os.putenv()
   os.getenv()
+
+  os.open()
+  os.read()
+  os.write()
+  os.lseek()
   ```
 
 #### File System
 
 - os
+- glob
 
   ```python
   """
@@ -2783,7 +2815,7 @@ pipe.wait()
   os.getcwd()
   os.listdir()
   bool = os.access("path/to/file/dir", os.F_OK|os.R_OK|os.W_OK|os.X_OK)
-  dirpath, dirnames, filenames = os.walk(".")
+  for dirs, subdir, files in os.walk('.'):
 
   #Shell variables
   os.environ
@@ -2797,7 +2829,7 @@ pipe.wait()
   os.pipe, os.waitpid, os.kill
 
   #Descriptor files, locks
-  os.open, os.read, os.write
+  os.open, os.read, os.write, os.lseek, os.stat
 
   #File processing
   os.remove, os.rename, os.mkdir, os.rmdir
@@ -2810,12 +2842,18 @@ pipe.wait()
   os.sep, os.pathsep, os.curdir, os.path.split, os.path.join
 
   #Pathname tools
-  os.path.exists('path'), os.path.isdir('path'), os.path.getsize('path')
+  os.path.exists('path')
+  os.path.isdir('path')
+  os.path.getsize('path')
   os.path.isfile('filename')
   os.path.split(r'C:\temp\data.txt')
   os.path.join(r'C:\temp', 'output.txt')
   os.path.splitext(r'C:\PP4thEd\Examples\PP4E\PyDemos.pyw')
   os.path.dirname(filepath), os.path.basename(filepath)
+  os.path.abspath(os.sep)
+
+  import glob
+  glob.glob('*')
   ```
 
 - gzip
