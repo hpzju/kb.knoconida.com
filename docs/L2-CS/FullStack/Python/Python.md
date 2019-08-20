@@ -64,22 +64,46 @@ sidebar_label: Python
 - Types Hierachy
 
   - Numbers
-    - bool, int, float, Complex, Decimal, Fraction
+    - Intergers: bool, int
+    - float
+    - Complex
+    - Decimal
+    - Fraction
   - Collections
     - Sequences
-      - list, tuple
-      - str
+      - Mutable
+        - list
+        - bytearray
+      - Immutable
+        - string
+        - bytes
+        - tuple
     - Sets
-      - set, frozenset
+      - set
+      - frozenset
     - Mappings/Hash Tables
       - dict
   - Callables
     - function
-      - generator
       - built-in
+      - customized
+    - generator
     - class
       - method
+        - bound
+        - unbound
       - class instance(`__call__()`)
+  - Misc
+    - Module
+    - Instance
+    - File
+    - None
+    - View
+  - Internals
+    - Type
+    - Code
+    - Frame
+    - Traceback
   - Singletons
     - interning
       - [-5, 256] integer
@@ -126,6 +150,8 @@ sidebar_label: Python
     - more than one variables reference to the same object in memeory
     - immutable can use shared reference
     - mutables don't use shared reference
+    - copy and deepcopy
+      - `import copy; copy.copy(obj); copy.deepcopy(obj)`
   - variable equality
     - identity:
       - `a is b`, point to same object in memory.
@@ -146,6 +172,11 @@ sidebar_label: Python
     - constant expressions are compiled before excution.
 
 ### Execution Model
+
+- Source Code
+- Byte code
+- PVM Runtime
+  - eval(), exec() built-in
 
 ---
 
@@ -188,15 +219,16 @@ sidebar_label: Python
   - namespace created within:
     - built-in namespace
     - moudle global namespace
-    - function local namespace
-    - class local namespace
-      - `Class.__dict__`
-    - instance local namespace
+    - block local namespace
+      - function local namespace
+      - class local namespace
+        - `Class.__dict__`
+      - instance local namespace
 
 - Scope
 
   - an execution context, determins which namespaces and identifiers are available in current context.
-  - LEGB rule
+  - Lexical scoping name resolution LEGB rule
     - names find by local -> enclosing -> Global -> Built-in order.
     - not applicable for name's new binding.
   - local scope
@@ -216,8 +248,10 @@ sidebar_label: Python
     - `globals()`
   - built-in scope
     - `__builtins__`
+    - `import builtins; dir(builtins)`
   - list current scope names
     - `dir()`
+    - `import builtins; pylookup = ChainMap(locals(), globals(), vars(builtins))`
 
 ---
 
@@ -228,6 +262,7 @@ sidebar_label: Python
 - Reference
 
   - refer by reference
+  - type lives with object/value, not variable
 
 - Mutability
 
@@ -325,6 +360,8 @@ sidebar_label: Python
 
     # int explicit/implicit constructor constructor
     i = int(val)
+    '0x', '0o', '0b'
+    hex(i), oct(i), bin(i)
 
     """float"""
     # float literal
@@ -388,7 +425,7 @@ sidebar_label: Python
 
 ---
 
-#### Text Sequence string
+#### Strings: unicode text
 
 - Introduction
 
@@ -407,6 +444,7 @@ sidebar_label: Python
         - `<`: left
         - `^`: center
         - `>`: right
+    - [[fill]align][sign][#][0][width][,][.precision][typecode]
 
 - Practices
 
@@ -454,6 +492,8 @@ sidebar_label: Python
     """
     # f-str __repr__()
     f"{new_comedian!r}"
+
+    dir(s)
 
     # indexing/slicing
     newS = s[index]
@@ -522,7 +562,7 @@ sidebar_label: Python
 
 ---
 
-#### Binary Sequence bytes and bytearray
+#### Strings: asciii binary
 
 - Introduction
 
@@ -795,6 +835,9 @@ sidebar_label: Python
     - memoization
       - transform a dict subclass into a function
   - dictionary comprehension
+  - dictionary views
+    - dict.keys(), dict.values(), dict.items()
+    - set-like object
 
 - Practices
 
@@ -891,17 +934,27 @@ sidebar_label: Python
   - nested function and closure
     - inner functions can access outer scope chain variables.
     - `func.__closure__`
+    - later-binding
+      - enclosing variables's values passed to neseted function when it's been invoked.
   - lambda function
     - no assignment in lambda expression
     - no return statement in lambda expression
     - no annotation in lambda
   - introspection
-    - `import inspect`
-    - `dir(func)`
-    - `func.__code__`
-      - co_varnames
-      - co_argcount(exclude \*args, \*\*kwargs)
-      - co_freevars(closure reference val)
+
+    ```python
+    import inspect
+    dir(func)
+    func.__name__
+    func.__code__
+        func.__code__.co_varnames
+        func.__code__.co_argcount
+        func.__code__.freevars
+    func.__closure__
+    func.__annotation__
+    def func(a: 'spam' = 4, b: (1, 10) = 5, c: float = 6) -> int:
+    ```
+
   - operators
     - `import operator`
 
@@ -1054,11 +1107,13 @@ sidebar_label: Python
     - two categories of iterator objects
       - a sequence iterator, works with an arbitrary sequence supporting the `__getitem__()` method.
       - a callable object and a sentinel value, calling the callable for each item in the sequence, and ending the iteration when the sentinel value is returned
-    - iterable and iterator
+    - iterable object, iteration context and iterator
+      - iteration context has next protocal, `val = next(iter_ctx); iter_ctx.__next__()`
       - iterable, collection of data with iterable protocol, `iterator = obj.__iter__()`
       - iterator, traverse over iterable data with iterator protocol, `__iter__(), __next__()`
       - iterator is iterable, bad practice to combine iterator with iterable into one object
     - Lazy evaluation
+    - single/multiple pass iterator
 
     ```python
     # iterator protocol: for-loop, comprehensions
@@ -1091,6 +1146,8 @@ sidebar_label: Python
   - Generator
 
     - generate an iterable object
+      - `iter(gen) is gen`
+      - yield-next pattern
     - ranger
       - a number generator
       - `range(start, stop, step)`
@@ -1103,6 +1160,13 @@ sidebar_label: Python
     def gernerator_wrapper(sequence)
       for item in sequence:
         yield item
+
+    def gen(n):
+      for i in range(n):
+        yield i
+
+    for i in gen(10):
+      do_stuff_with_i
 
     # Generator comprehension
     gen = (i**4 for i in range(100))
@@ -1741,6 +1805,8 @@ sidebar_label: Python
 - Introduction
 
 - file is a contiguous sequence of bytes
+  - text file
+  - binary file
 - EOL
 - standard files
 - stdin
@@ -1752,7 +1818,9 @@ sidebar_label: Python
 - stderr
   - `sys.stderr`
 - text/binary IO objects
-- `fo = open("path/to/file", "MODE")`
+  - `fo = open("path/to/file", "MODE")`
+- pipeline
+  - `pipe = os.popen('ls -al'); pipe.read()`
 - check built-in [io module](#io)
 
 - Practices
@@ -1801,6 +1869,14 @@ os.remove(filename)
 - Grouping Operators
 
   - `(group)`
+
+- Generator send protocal Operator
+
+  - `yeild val`
+
+- Anonymouse function Operator
+
+  - `lambda x: expr_x`
 
 - Indexing/Accessing Operator
 
@@ -1870,6 +1946,28 @@ os.remove(filename)
   - `func(*args)`
   - `func(**kwargs)`
 
+- Callable Operator
+
+  - `val(...)`
+
+- Generator Operator
+
+  - `(gen_expr)`
+
+- Comprehension Operator
+
+  - `[list_expr]`
+  - `{dict_expr}`
+  - `{set_expr}`
+
+- Callable Operator
+
+  - `val(...)`
+
+- f-string Operator
+
+  - `f"{var}"`
+
 - Comma Operator
 
   - `a, b, c`
@@ -1881,13 +1979,15 @@ os.remove(filename)
 - assignment expression
 
   - `a = 1`
-  - `a = b = 1`
+  - multiple-target assignment
+    - `a = b = 1`
   - `a = 1, b = 2`
-  - `a, b, c = 1, 2, 3`
-  - `a, b, c = 1, 2, 3`
-  - list, tuple destructuring
-    - `a, b = [1, 3]`
-  - `+=, -=...`
+  - sequence assignment
+    - `a, b, c = 1, 2, 3`
+  - list, tuple destructuring/sequence unpacking assignment
+    - `a, *b = [1, 2, 3]`
+  - augmentaed assignemnt
+    - `+=, -=...`
 
 - condition expression
 
@@ -1924,7 +2024,7 @@ os.remove(filename)
 
   - `global variable_list`
 
-- nonlocal variable reference statement
+- Nonlocal variable reference statement
 
   - `nonlocal variable_list`
 
@@ -1941,7 +2041,7 @@ os.remove(filename)
 
   - `pass`
 
-- assert Statement
+- Assert Statement
 
   - `assert condition, MSG`
 
@@ -1950,7 +2050,7 @@ os.remove(filename)
   - function declaration
   - lambda function
 
-- return Statement
+- Return Statement
 
 - Class Statements
 
@@ -2123,13 +2223,15 @@ else :
   ```python
   import MODULE
   import types
+  import importlib
   type(MODULE)
   types.ModuleType
   onthefly_module = types.ModuleType('MODULENAME', 'DOCSTRING')
-  dir(onthefly_module)
+  module_namespace = dir(onthefly_module)
   onthefly_module.__dict__
   onthefly_module.prop = VALUE
   id(MODULE)
+  importlib.reload(MODULE)
   globals()
   locals()
 
@@ -2258,6 +2360,7 @@ else :
     - `random.shuffle(iterable)`
     - `random.randrange(start, stop, step)`
     - `random.randint(lower, upper)`
+    - `random.random()`
   - statistics
 
 - Practices
@@ -2281,6 +2384,10 @@ else :
 
   # Decimal Object
   d = Decimal(value="0", context=None)
+
+  with decimal.localcontext() as ctx:
+      ctx.prec = 2
+      do_decimal_arithmetic
 
   from fractions import Fraction
   """
@@ -2366,6 +2473,7 @@ else :
   - [Ref](https://docs.python.org/3/library/logging.html)
 
 - pytest
+
   - `pip install pytest`
   - testing script
     - `touch test_MYSCRIPT.py`
@@ -2376,6 +2484,13 @@ else :
     - `assert assert_statements`
   - run test
     - in CLI, run `py.test`
+
+- pydoc
+- docstrings
+
+  ```python
+  python -m pydoc -b
+  ```
 
 ---
 
@@ -2664,8 +2779,10 @@ else :
 
   time
   monotonic
-  perf_counter
-  process_time
+  #include sleep time
+  time.perf_counter
+  #exclude sleep time
+  time.process_time
 
   ```
 
