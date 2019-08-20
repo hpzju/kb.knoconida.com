@@ -2772,7 +2772,7 @@ else :
 
   t.hour
   t.minute
-  t.second
+  t.second`
   t.microsecond
   t.isoformat()
   t.strftime(FORMATER)
