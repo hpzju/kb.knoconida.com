@@ -8,6 +8,7 @@ sidebar_label: Python
 
 - Bytecode compiled interpreted language
   - `.py` to `.pyc`
+  - `.pyo` optimized bytecode file
 - Dynamic Typing
 - OOP
 - FP
@@ -1020,6 +1021,29 @@ sidebar_label: Python
 
 #### Function Programming
 
+- Introduction
+
+  - Paradigm
+    - Functional Programming vs OOP
+    - Pure Function vs Impure Function
+  - Features
+    - Formal provability
+    - Modularity
+    - Composability
+    - Lazy evaluation
+    - high-order function
+    - no flow-control statements
+    - support OOP encasulation, inheritance, polymophism, abstraction
+  - Terminology
+    - function signature/function prototype
+    - purely functional
+      - no side effect on input
+    - First Order Function
+      - stored as variable
+      - passed as parameter
+      - returned as result
+      - created at runtime
+
 - Functors
 
   - Decorator
@@ -1035,6 +1059,10 @@ sidebar_label: Python
       - parameterized decorators
       - stacked decorators
       - class decorators
+        - metaclass
+      - function decorator
+        - metafunction
+        - delegation design patter
       - decorator classed
 
     ```python
@@ -1313,9 +1341,9 @@ sidebar_label: Python
 
 #### Classes
 
-- Class and Object
+- Class, Instance and Object
 
-  - Class/Object Type declaration
+  - Class Type declaration
   - Class Docstrings
     - `cls.__doc__`
   - Constructor
@@ -1346,6 +1374,12 @@ sidebar_label: Python
   - Methods
     - method docstrings
       - `cls.method.__doc__`
+    - bound method
+      - has `self` bound to instance
+      - `f=instance.boundM; f(*args)`
+    - unbound method
+      - no `self`
+      - `f=cls.unboundM; f(instance, *args)`
     - instance method
     - class method
       - `@classmethod` decorator
@@ -1358,14 +1392,33 @@ sidebar_label: Python
       - pure utility function
     - getter/setter/deleter/docstring
       - `myprop = property(fget=None, fset=None, fdel=None, doc=None)`
-      - `@property`
-      - `@myprop.setter`
-      - `@myprop.deleter`
+      - getter `@property`
+      - setter `@myprop.setter`
+      - deleter `@myprop.deleter`
       - accessing using getter/setter
         - `print(obj.myporp)`
         - `obj.myprop = VALUE`
   - Slots
-  - Object/Instance
+    - `__slots__` a replacement of `__dict__` for RAM optimization
+    - attributed defined in `__slots__()`, not listed in `__dict__`, and it can suppress `__dict__`
+    - explicit define `__slots__` will replace `__dict__`
+    - limit attributes defined, adding `__dict__` to `__slots__` can solve this limitation
+    - inherit a unsloted superclass will break subclass's slot rule, and vice versa.
+      - slots in dict VS dict in slots
+    - slots prevent class level attributes
+  - Instance
+    - `instance.__class__, type(intance`
+  - sumary
+    - 4 attribute accessor tools
+      - `__getattr__, __getattribute__, properties, descriptors`
+    - 4 kinds of methods
+      - `Instance, static, class, metaclass`
+    - 2 attribute storage systems
+      - Dictionaries, slots
+    - 2 superclass dispatch protocols
+      - Direct calls, super + MRO
+    - 4 state retention options
+      - Classes, closures, function attributes, mutables
   - Operator Override and dunders
 
     - `__new__()`
@@ -1376,6 +1429,7 @@ sidebar_label: Python
 
     - `__add__(), __radd__(), __iadd__()`
     - `__mul__(), __rmul__(), __imul__()`
+    - `__sub__()`
 
       - `+, +=` operator override
       - `*, *=` operator override
@@ -1393,6 +1447,14 @@ sidebar_label: Python
       - print call str if it's presence
       - `str(obj)` interface
 
+    - `__enter__()`
+    - `__exit__()`
+
+      - context manager `with obj as obj_enter_return: do_struff`
+
+    - `__iter__()`
+    - `__next__()`
+
     - `__copy__()`
     - `__deepcopy_-()`
 
@@ -1406,15 +1468,38 @@ sidebar_label: Python
 
       - `in` operator override
 
+    - `__getattr__()`
+    - `__setattr__()`
+    - `__delattr__()`
+
+      - missing attributes
+
+    - `__getattribute__()`
+
+      - intercept all attributes
+
+    - `__get__()`
+    - `__set__()`
+    - `__delete__()`
+
+      - getter, setter, deleter
+
     - `__eq__()`
     - `__ne__()`
-    - `__le__()`
+    - `__lt__()`
     - `__gt__()`
+    - `__le__()`
+    - `__ge__()`
+    - `__or__()`
 
       - `==` operator override
       - `!=` operator override
       - `<` operator override
       - `>` operator override
+
+    - `__index__()`
+
+      - integer value for an instance when needed, like, `hex(obj)`
 
     - `__hash__()`
 
@@ -1425,17 +1510,18 @@ sidebar_label: Python
         - if obja == objb, hash(obja) == hash(objb)
 
     - `__len__()`
-    - `__getitem__(index)`
-    - `__setitem__(key, value)`
-    - `__delitem__(key)`
-    - `__getslice__(start, end, step)`
-    - `__reversed()__`
+    - `__getitem__(index|slice)`
+    - `__setitem__(key|slice, value)`
+    - `__delitem__(key|slice)`
+    - `__reversed__()`
 
       - `len(obj)` interface
       - `obj[index]` operator override
       - `obj[start:end:step]` operator override
 
     - `__call__(*args, **kwargs)`
+
+      - invoke `__new__(); __init__()`
 
       - `obj(*args, **kwargs)` callable operator override
 
@@ -1446,6 +1532,9 @@ sidebar_label: Python
     - `__reduce__()`
     - `__bases__`
     - `__mro__`
+    - `__class__`
+    - `__slots__`
+    - `__name__`
 
       - tuple of base classes
 
@@ -1523,27 +1612,34 @@ sidebar_label: Python
 - OOP
 
   - Inheritance
+    - subclass is-a parent class relation
     - parents' constructor must called explicitly using `super().__init__()`
     - Inheritance Chain
       - linearization of C
     - Multiple Inheritance
       - Method Resolution Order
-        - `L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)`
+        - `L[C(B1 ... BN)] = C + merge(L[B1], ... L[BN], [B1, B2, ... BN])`
         - `L[object] = object`
-        - took the first non-tailed class append to C's linearization list
+        - go through all lists, took the first non-tailed head class append to C's linearization list
     - `super(base, argv = subclass/instance) proxy`
       - find the MRO og subclass/instance, locate base class in MRO
       - return the first class after base class has target method
+      - all-or-nothing model
       - class-bound super() proxy
         - super(BaseClass, SubClass)
       - instance-bound super() proxy
         - super(BaseClass, subInstance)
     - inheritance principles
-      - inherit
-      - override/overload
-      - extend
-      - provide
-        - implement abstract method defined by parents class
+      - super
+        - proxy super class methods
+      - inheritor
+        - do nothing
+      - Replacer
+        - overide super class methods
+      - extender
+        - overide and call back super class method combined
+      - provider
+        - implement abstract method defined by super class
     - Abstract Base classes
       - abc module
         - decorators
@@ -1552,10 +1648,16 @@ sidebar_label: Python
           - `@abc.abstractproperty`
           - `@abc.abstractmethod`
   - Encapsulation
+    - no strict public/private attributes/methods in python
+    - conventional `_private, __internal`
+    - dunder name mangling
+      - `__x` mangled to `_clsname__x`
   - Polymophism
     - Method Overwriten
   - Isolation
   - Composition
+    - class has-a component class
+    - delegation/proxy pattern
 
 - Python Object Model
 
@@ -2103,9 +2205,23 @@ else :
 
 #### Context Blocking
 
+- Context Manager Protocol
+
+  - context manager interface `__enter__()`, `__exit__()`
+  - return value from enter will assign to as clause variable
+  - exit interface `__exit__(type, value, traceback)`
+
 - with-as
 
 ```python
+  # nested with-as
+  with CM1() as cm1, CM2() as cm2:
+    do_stuff
+  # equivalence
+  with CM1() as cm1:
+    with CM2() as cm2:
+      do_stuff
+
   # file open and close
   with open("file.txt", "+") as fh:
     for line in fh:
@@ -2120,10 +2236,15 @@ else :
     def __enter__(self):
       print("enter 'with' block.")
       print("do some init work.")
+      return self
 
     def __exit__(self, type, value, traceback):
-      print("exit 'with' block.")
-      print("do some cleanup work.")
+      if type is None:
+        print("exit 'with' block.")
+        print("do some cleanup work.")
+      else:
+        print(f"exception: {type}")
+        return False
 
     def showinfo()
       print("hello MyClass.")
@@ -2180,9 +2301,21 @@ else :
 
 #### Exception/Error Handling
 
-- try-except
-- try-raise-except
-- try-except-else-finally
+- Introduction
+
+  - Error handling
+  - Event notification
+  - Special-case handling
+  - Termination action
+  - Unusual flow control
+    - like a jump by design
+  - exceptions will propergate to next level try-except block if no except matches.
+  - `sys.exec_info()`
+
+- patterns
+  - try-except
+  - try-raise-except
+  - try-except-else-finally
 
 ```python
   # try-except
@@ -2204,6 +2337,27 @@ else :
     no_matched_exception_block
   finally:
     clean_up_block
+
+  # except
+  except Exception:
+  except name:
+  except name as value:
+  except (name1, name2,...):
+  except (name1, name2,...) as value:
+
+  # raise
+  raise E
+  raise E from V
+
+  # assert
+  assert test, data
+  assert False, 'cannot ingored'
+
+  #customized exception
+  class MyException(Exception):
+      def __str__(self):
+          return 'MyException Message:'
+
 ```
 
 ---
@@ -2264,13 +2418,22 @@ else :
     - `from MODULE import NAMES`
     - `from MODULE import NAME as ALIAS`
     - `from MODULE import *`
+  - relative import
+    - apply to from statement only
+    - apply to within package from statement
+    - module must exist in package by relative import
   - exclude codes for import excution
     - `if __name__ == "__main__":`
     - `excluded_module_block`
+    - `_name`
+    - `__all__`
   - show module namespace
     - `dir(MODULE)`
   - program entry point
     - `__name__ == "__main__"`
+  - reload
+    - `import importlib`
+    - reload affect future from statements
 
 - importlib
 
@@ -2284,6 +2447,7 @@ else :
   importlib.util.find_spec(MYMODULE)
 
   sys.meta_path
+  sys.modules
 
   #custom modules
   """
@@ -2316,6 +2480,7 @@ else :
   - implicite namespace package
     - a logical package, modules are spreaded in different directories.
     - no `__init__.py` entry.
+    - `__path__` to search all components
   - special dunders
 
     ```python
@@ -3032,11 +3197,185 @@ pipe.wait()
 
 ---
 
+### Factories
+
+- Function Factory
+
+- Class Factory
+
 ### Metaprogramming
 
----
+- User cases
+  - Decorator
+    - call proxy
+    - interface proxy
+  - Metaclass
+  - Descriptor
 
-### Metaclass
+#### metafunction
+
+- functional decorator decrates callable object
+  - a callable return a callable
+  - class implementation
+  - function implementation
+  - decorator status pattern
+    - global variable
+    - enclosing scope
+    - class with attributes
+    - wrap function attributes
+
+```python
+# class based function decrator by utilize __call__
+class tracer:
+    def __init__(self, func):
+        self.calls = 0
+        self.func  = func
+
+    def __call__(self, *args):
+        self.calls += 1
+        print(f'call {self.calls} to {self.func.__name__}')
+        return self.func(*args)
+
+# function based functioin decrator
+def tracer(func):
+    calls = 0
+    def oncall(*args):
+        nonlocal calls
+        calls += 1
+        print(f'call {calls} to {func.__name__}')
+        return func(*args)
+    return oncall
+
+@tracer
+def spam(a, b, c):
+    return a + b + c
+
+```
+
+- built-in metafunctions
+
+```python
+#built-in function
+@classmethod
+@staticmethod
+@property
+@prop.setter
+@prop.deleter
+```
+
+#### metaclass
+
+- class decorator decrates class object
+
+  - class implementation
+  - function implementation
+
+  ```python
+  # function based class decrator
+  def ProxyClass(cls):
+      class Proxy:
+          def __init__(self, *args):
+              self.wrapped = cls(*args)
+          def __getattr__(self, name):
+              return getattr(self.wrapped, name)
+      return Proxy
+
+  @ProxyClass
+  class C:
+      pass
+
+  X = C()
+  X.attr
+  ```
+
+- class descriptor
+
+```python
+attribut = property(fget, fset, fdel, docstr)
+class Descriptor:
+  "docstring goes here"
+  def __get__(self, instance, owner): pass
+  def __set__(self, instance, value): pass
+  def __delete__(self, instance): pass
+
+class A:
+  attr = Descriptor()
+
+x = A()
+x.attr
+# x.attr  ->  Descriptor.__get__(Subject.attr, x, Subject)
+
+```
+
+- metaclass
+
+  - `class` is instance of type
+  - `type` is class of type()
+  - `type` a is class, `metaclass` is a subclass of `type`
+
+    - `type(object) is type; type(myclass) is type`
+    - `type(<name>, <bases>, <dct>)` creates a new class
+
+      - `<name>` specifies the class name. This becomes the `__name__` attribute of the class.
+      - `<bases>` specifies a tuple of the base classes from which the class inherits. This becomes the `__bases__` attribute of the class.
+      - `<dct>` specifies a namespace dictionary containing definitions for the class body. This becomes the `__dict__` attribute of the class.
+
+      ```python
+      # class statemetns undertable
+      class classname(*bases):
+          def __init__(): pass
+          def att(): pass
+
+      #actual process:
+      class = type(classname, bases, attributedict)
+      type __call__ methods overaded by invoke:
+        type.__new__(type, classname, bases, attributedict)
+        type.__init__(cls, classname, bases, attributedict)
+
+      # class statement with metaclass undertable
+      # class statemetns undertable
+      class classname(*bases, metaclass=Meta):
+          def __init__(): pass
+          def att(): pass
+
+      #actual process:
+      class = Meta(classname, bases, attributedict)
+      Meta __call__ methods overaded by invoke:
+        Meta.__new__(Meta, classname, bases, attributedict)
+        Meta.__init__(cls, classname, bases, attributedict)
+      ```
+
+  - metaclass inheritance
+
+    - Metaclasses inherit from the type class (usually)
+    - Metaclass declarations are inherited by subclasses
+    - Metaclass attributes are not inherited by class instances
+    - Metaclass attributes are acquired by classes
+
+  - User case
+    - Introspection attributes and tools
+    - Operator override methods
+    - Attribution interception methods
+    - Class properties
+    - Class attributes descriptors
+    - Function/Class decorators
+    - Metaclass
+
+```python
+# metaclass based class decrator
+class Meta(type):
+    def __new__(meta, classname, supers, classdict):
+        return type.__new__(meta, classname, supers, classdict)
+
+class C(metaclass=Meta):
+    pass
+
+X = C()
+X.attr
+
+```
+
+---
 
 ---
 
