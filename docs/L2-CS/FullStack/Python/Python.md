@@ -943,6 +943,8 @@ sidebar_label: Python
     - no annotation in lambda
   - introspection
 
+    - `from inspect import Parameter, Signature`
+
     ```python
     import inspect
     dir(func)
@@ -1207,6 +1209,8 @@ sidebar_label: Python
     generator.close()
 
     ```
+
+  - Dispatcher
 
   - Coroutine Generator
 
@@ -1521,8 +1525,6 @@ sidebar_label: Python
 
     - `__call__(*args, **kwargs)`
 
-      - invoke `__new__(); __init__()`
-
       - `obj(*args, **kwargs)` callable operator override
 
     - `__bool__()`
@@ -1620,7 +1622,7 @@ sidebar_label: Python
       - Method Resolution Order
         - `L[C(B1 ... BN)] = C + merge(L[B1], ... L[BN], [B1, B2, ... BN])`
         - `L[object] = object`
-        - go through all lists, took the first non-tailed head class append to C's linearization list
+        - merge: go through all lists, took the first non-tailed head class append to C's linearization list, if can't merge, raise TypeError
     - `super(base, argv = subclass/instance) proxy`
       - find the MRO og subclass/instance, locate base class in MRO
       - return the first class after base class has target method
@@ -3197,6 +3199,84 @@ pipe.wait()
 
 ---
 
+### Synthetication and Monkey Patching
+
+- Function Synthetic
+
+  - dictionary based hacking
+
+    ```python
+    d = {}
+    code = '''\
+    def synthatic_hello():
+      print("hello world")
+    '''
+    exec(code, d)
+    d.keys()
+        dict_keys(['__builtins__', 'synthatic_hello'])
+    d['synthatic_hello']()
+
+    ```
+
+- Class Synthetic
+
+  - class creation process
+
+    ```python
+    class A(B, C):
+      def __call__(): pass
+      def __new__(): pass
+      def __init__(): pass
+
+    # class creation process without metacalss
+    # step 1: isolate class name, bases, metaclass and body code
+    clsname = 'A'
+    bases = (B, C)
+    metaclass = Meta
+    body = 'code after class declaration line'
+
+    # step 2: create clsdict with type and update it with exec
+    clsdict = type.__prepare__(clsname, bases)
+    exec(body, globals(), clsdict)
+
+    # step 3: class created by type
+    A = type(clsname, bases, clsdict)
+
+    ```
+
+  - class based hacking
+
+    ```python
+    class A: pass
+    class B: pass
+
+    def ham(): pass
+    def spam(): pass
+
+    attrd = {'ham': ham, 'spam': spam}
+
+    MySyntheticClass = type('MySyntheticClass', (A, B), attrd)
+    ```
+
+- Module Synthetic
+
+  ```python
+  #syntheticating moduels
+  import sys, types
+  mymodule = types.ModuleType('mysynthetic', 'docstring')
+  class A: pass
+  def ham(): pass
+  mymodule.A = A
+  mymodule.ham = ham
+
+  sys.modules['mysynthetic'] = mymodule
+
+  #import at somewhere
+  import mysynthetic
+  mysynthetic.ham()
+
+  ```
+
 ### Factories
 
 - Function Factory
@@ -3225,6 +3305,11 @@ pipe.wait()
     - wrap function attributes
 
 ```python
+@decrator
+def func(): pass
+
+func = decrator(func)
+
 # class based function decrator by utilize __call__
 class tracer:
     def __init__(self, func):
@@ -3306,6 +3391,30 @@ x.attr
 # x.attr  ->  Descriptor.__get__(Subject.attr, x, Subject)
 
 ```
+
+- class creation process without metaclass
+
+  ```python
+  class A(B, C):
+    def __call__(): pass
+    def __new__(): pass
+    def __init__(): pass
+
+  # class creation process without metacalss
+  # step 1: isolate class name, bases, metaclass and body code
+  clsname = 'A'
+  bases = (B, C)
+  metaclass = Meta
+  body = 'code after class declaration line'
+
+  # step 2: create clsdict with type and update it with exec
+  clsdict = type.__prepare__(clsname, bases)
+  exec(body, globals(), clsdict)
+
+  # step 3: class created by type
+  A = type(clsname, bases, clsdict)
+
+  ```
 
 - metaclass
 
