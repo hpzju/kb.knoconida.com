@@ -3437,7 +3437,7 @@ x.attr
 
       #actual process:
       class = type(classname, bases, attributedict)
-      type __call__ methods overaded by invoke:
+      type.__call__ methods overaded by invoke:
         type.__new__(type, classname, bases, attributedict)
         type.__init__(cls, classname, bases, attributedict)
 
