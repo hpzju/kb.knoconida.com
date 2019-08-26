@@ -422,6 +422,11 @@ sidebar_label: Python
     d = Decima((0, (3, 1, 4), -2))
     d = Decima(Decimal('3.14'))
 
+    from decimal import localcontext
+
+    with localcontext() as ctx:
+      ctx.prec = 6
+      do_decimal_computation
   ```
 
 ---
@@ -439,6 +444,7 @@ sidebar_label: Python
       - function call value
     - float formatting
       - {[value-ref]:[width].[precision][f-flag]}
+      - `[<>^]?width[,]?(.precision)?[ef]?`
     - [alignment formatting](https://www.python.org/dev/peps/pep-3101/#standard-format-specifiers)
       - {[value-ref]:[padding][align-flag][width]}
       - align-flag
@@ -930,8 +936,8 @@ sidebar_label: Python
   - function scope
     - Built-in
     - Global
+    - Enclosing/Nonlocal
     - Local
-    - Nonlocal
   - nested function and closure
     - inner functions can access outer scope chain variables.
     - `func.__closure__`
@@ -965,9 +971,8 @@ sidebar_label: Python
 
   ```python
   # function declarition
-  def funcname(arg: 'annotation for arg',
-              *args, defarg = defvalue, : int,
-              **kwargs: 'keyword args') -> "return value annotation":
+  def funcname(arg: 'annotation for arg', defarg1 = defvalue : int,
+              *args: tuple, kwarg1: 'kw mandatory arg', **kwargs: 'keyword args') -> "return value annotation":
     """function description docstring with
     multiple lines"""
     func_body
@@ -1132,6 +1137,7 @@ sidebar_label: Python
 
   - Iterator
 
+    - iterator protocol requires `__iter__()` to return a special iterator object that implements a `__next__()` method to carry out the actual iteration
     - traverse a collection with simple iterator protocal.
     - cosumable, once exhausted, it's disposed.
     - two categories of iterator objects
@@ -1237,24 +1243,6 @@ sidebar_label: Python
   - Invoker/Caller/Applier
     - `apply()`
 
-- FP Patterns
-
-  - lambda
-
-    ```python
-    # lambda anounymous function
-    lambda arglist: func_body_expression
-    namedlambda = lambda arglist: func_body_expression
-    ```
-
-  - closure
-    - `func.__closure__`
-  - recursion
-  - curryinng
-  - higher order function
-    - return a function
-    - function factory
-
 - Practices
 
   ```python
@@ -1285,23 +1273,6 @@ sidebar_label: Python
   iterable = izip(iterable1, iterable2, ...iterables)
 
   ```
-
-- FP principles
-
-  - memoization
-
-    ```python
-    # dict subclass functionization
-    class memoiFunc(dict):
-      def __init__(func):
-        self.__caller = func
-
-      def __missing__(self, key):
-        return self.__caller(key)
-
-    d = memoiFunc(print)
-    d[1,2,3,4]
-    ```
 
 ---
 
@@ -1445,11 +1416,13 @@ sidebar_label: Python
       - `repr(obj)` interface
 
     - `__str__()`
+    - `__format__()`
 
       - stringify object
       - human-readable information
       - print call str if it's presence
       - `str(obj)` interface
+      - `format(obj` interface
 
     - `__enter__()`
     - `__exit__()`
@@ -1477,6 +1450,7 @@ sidebar_label: Python
     - `__delattr__()`
 
       - missing attributes
+      - properties getter, setter, deleter
 
     - `__getattribute__()`
 
@@ -1486,7 +1460,7 @@ sidebar_label: Python
     - `__set__()`
     - `__delete__()`
 
-      - getter, setter, deleter
+      - descriptor core methods
 
     - `__eq__()`
     - `__ne__()`
@@ -2729,9 +2703,17 @@ else :
   ```
 
 - heapq
-  - `heapify(list)`
-  - `heappush(list, value)`
-  - `value = heappop()`
+
+  ```python
+  heapq.heapify()
+  heapq.heappush()
+  heapq.heapreplace()
+  heapq.nlargest()
+  heapq.heappop()
+  heapq.heappushpop()
+  heapq.merge()
+  heapq.nsmallest()
+  ```
 
 ---
 
@@ -2833,7 +2815,7 @@ else :
   Grouping
     (p)               group sub patterns
     (?:...)           group without reference later
-    (:P<name>)        named group
+    (?P<name>)       named group
     (?P=name)         reference a named group
     (?#...)           comments, ingored
     \g<N>             group N reference
@@ -3157,6 +3139,69 @@ pipe.wait()
 
 ## Design Patterns
 
+### FP Patterns
+
+- lambda function
+
+  ```python
+  # lambda anounymous function
+  lambda arglist: func_body_expression
+  namedlambda = lambda arglist: func_body_expression
+
+  # IEFE
+  (lambda arglist: func_body_expression)(arglist)
+  ```
+
+- recursion
+
+  - Tail Recursion
+    - a recursion function returns a recursive function call or return a value pattern
+
+  ```python
+
+  ```
+
+- closure
+
+  - `func.__closure__`
+
+- curryinng
+
+```python
+def curry(func):
+    print(f"decorating: {func.__qualname__}")
+
+    def wrapper_func(*args, **kwargs):
+        if len(args) + len(kwargs) >= func.__code__.co_argcount:
+            print(f"evaluating: {args}, {kwargs}")
+            return func(*args, **kwargs)
+        print(f"currying: {args}, {kwargs}")
+        return (lambda *args2, **kwargs2:
+                wrapper_func(*(args + args2), **dict(kwargs, **kwargs2)))
+
+    return wrapper_func
+```
+
+- higher order function
+
+  - return a function
+  - function factory
+
+- memoization
+
+  ```python
+  # dict subclass functionization
+  class memoiFunc(dict):
+    def __init__(func):
+      self.__caller = func
+
+    def __missing__(self, key):
+      return self.__caller(key)
+
+  d = memoiFunc(print)
+  d[1,2,3,4]
+  ```
+
 ### Collection Class Pattern
 
 - Python Collection Classes
@@ -3396,9 +3441,9 @@ x.attr
 
   ```python
   class A(B, C):
-    def __call__(): pass
     def __new__(): pass
     def __init__(): pass
+    def __call__(): pass
 
   # class creation process without metacalss
   # step 1: isolate class name, bases, metaclass and body code
@@ -3437,7 +3482,7 @@ x.attr
 
       #actual process:
       class = type(classname, bases, attributedict)
-      type.__call__ methods overaded by invoke:
+      type.__call__
         type.__new__(type, classname, bases, attributedict)
         type.__init__(cls, classname, bases, attributedict)
 
