@@ -3419,23 +3419,26 @@ def spam(a, b, c):
   ```
 
 - class descriptor
+  - a class that implements the three core attribute access operations (get, set, and delete) in the form of `__get__(), __set__(), and __delete__()` special methods.
+  - capture the core instance operations (get, set, delete) at a very low level and completely customize what they do
+  - descriptors is that they can only be defined at the class level, not on a per-instance basis
 
-```python
-attribut = property(fget, fset, fdel, docstr)
-class Descriptor:
-  "docstring goes here"
-  def __get__(self, instance, owner): pass
-  def __set__(self, instance, value): pass
-  def __delete__(self, instance): pass
+  ```python
+  attribut = property(fget, fset, fdel, docstr)
+  class Descriptor:
+    "docstring goes here"
+    def __get__(self, instance, owner): pass
+    def __set__(self, instance, value): pass
+    def __delete__(self, instance): pass
 
-class A:
-  attr = Descriptor()
+  class A:
+    attr = Descriptor()
 
-x = A()
-x.attr
-# x.attr  ->  Descriptor.__get__(Subject.attr, x, Subject)
+  x = A()
+  x.attr
+  # x.attr  ->  Descriptor.__get__(Subject.attr, x, Subject)
 
-```
+  ```
 
 - class creation process without metaclass
 

@@ -27,17 +27,23 @@ sidebar_label: DataScience
 
 ### Categories
 
-- SQL:
-  - RDBMS: MySQL, PostgreSQL, SQLServer, Oracle
-  - Store: Row + Column
-  - Schema on write
-- NoSQL:
-  - DBMS: MongoDB, Cassandra, Redis, Neo4j, HBase
-  - Store:
-    - Document
-    - Key-Value
-    - Graph-based
-  - Schema on read
+- IMQAV model
+  - Ingest
+  - Model
+  - Query
+    - SQL:
+      - RDBMS: MySQL, PostgreSQL, SQLServer, Oracle
+      - Store: Row + Column
+      - Schema on write
+    - NoSQL:
+      - DBMS: MongoDB, Cassandra, Redis, Neo4j, HBase
+      - Store:
+        - Document
+        - Key-Value
+        - Graph-based
+      - Schema on read
+  - Analyze
+  - Visulize
 
 ---
 
