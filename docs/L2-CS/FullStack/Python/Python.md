@@ -1548,43 +1548,6 @@ sidebar_label: Python
 
   ```
 
-- Metaclasses
-
-  - like a class decorator, but inheritable, inspect and modify class data.
-  - a generic abstraction layer.
-  - Use a class decorator if the goal is to tweak classes that might be unrelated
-  - Use a metaclass if you're trying to perform actions in combination with inheritance
-
-  ```python
-  from inspect import Parameter, Signatur
-
-  def make_signature(names):
-    return Signature(Parameter(name,Parameter.POSITIONAL_OR_KEYWORD) for name in names)
-
-  class StructMeta(type):
-    def __new__(cls, name, bases, clsdict):
-      clsobj = super().__new__(cls, name,bases, clsdict)
-      sig = make_signature(clsobj._fields)
-      setattr(clsobj, '__signature__', sig)
-      return clsobj
-
-  class Structure(metaclass=StructMeta):
-    _fields = []
-    def __init__(self, *args, **kwargs):
-      bound = self.__signature__.bind(*args, **kwargs)
-      for name, val in bound.arguments.items():
-        setattr(self, name, val)
-
-  class Stock(Structure):
-    _fields = ['name', 'shares', 'price']
-
-  class Point(Structure):
-     _fields = ['x', 'y']
-
-  class Host(Structure):
-    _fields = ['address', 'port']
-  ```
-
 - OOP
 
   - Inheritance
@@ -3574,37 +3537,65 @@ def spam(a, b, c):
     - Function/Class decorators
     - Metaclass
 
-```python
-# metaclass convention
-class MyMeta(type):
-  def __new__(mcs, clsname, bases, clsdict):
-      # clsname is name of class being defined
-      # bases is tuple of base classes
-      # clsdict is class dictionary
-      do_init_manipulation_stuff()
-      return super().__new__(mcs, clsname, bases, clsdict)
+  ```python
+  # metaclass convention
+  class MyMeta(type):
+    def __new__(mcs, clsname, bases, clsdict):
+        # clsname is name of class being defined
+        # bases is tuple of base classes
+        # clsdict is class dictionary
+        do_init_manipulation_stuff()
+        return super().__new__(mcs, clsname, bases, clsdict)
 
-  # if no __new__, alternatively using __init__
-  def __init__(mcs, clsname, bases, clsdict):
-      super().__init__(clsname, bases, clsdict)
-      # clsname is name of class being defined
-      # bases is tuple of base classes
-      # clsdict is class dictionary
-      do_init_manipulation_stuff()
+    # if no __new__, alternatively using __init__
+    def __init__(mcs, clsname, bases, clsdict):
+        super().__init__(clsname, bases, clsdict)
+        # clsname is name of class being defined
+        # bases is tuple of base classes
+        # clsdict is class dictionary
+        do_init_manipulation_stuff()
 
-class Root(metaclass=MyMeta):
-    pass
+  class Root(metaclass=MyMeta):
+      pass
 
-class A(Root):
-    pass
+  class A(Root):
+      pass
 
-class C(A):
-    pass
+  class C(A):
+      pass
 
-X = C()
-X.attr
+  X = C()
+  X.attr
 
-```
+  from inspect import Parameter, Signatur
+
+  def make_signature(names):
+    return Signature(Parameter(name,Parameter.POSITIONAL_OR_KEYWORD) for name in names)
+
+  class StructMeta(type):
+    def __new__(cls, name, bases, clsdict):
+      clsobj = super().__new__(cls, name,bases, clsdict)
+      sig = make_signature(clsobj._fields)
+      setattr(clsobj, '__signature__', sig)
+      return clsobj
+
+  class Structure(metaclass=StructMeta):
+    _fields = []
+    def __init__(self, *args, **kwargs):
+      bound = self.__signature__.bind(*args, **kwargs)
+      for name, val in bound.arguments.items():
+        setattr(self, name, val)
+
+  class Stock(Structure):
+    _fields = ['name', 'shares', 'price']
+
+  class Point(Structure):
+     _fields = ['x', 'y']
+
+  class Host(Structure):
+    _fields = ['address', 'port']
+
+  ```
 
 ---
 
@@ -3722,7 +3713,15 @@ X.attr
 - Acceptance/Regression Test
 
 - Test-driven Development
+
   - Approval Test
+
+- Test Double
+  - Dummy Object
+  - Mock Object
+  - Fake Object
+  - Test Stub
+  - Test Spy
 
 #### Unit Test
 
@@ -3861,11 +3860,17 @@ X.attr
         - method scope
 
   - pattern
-  
+
   - start run
-    - `pip install pytest`
-    - `python -m pytest`
-    - `python -m pytest --doctest-modules`
+
+    ```bash
+    pip install pytest
+    python -m pytest
+    python -m pytest --doctest-modules
+    pytest dir/
+    pytest test_file.py
+    pytest --fixtures
+    ```
 
   - practice
 
@@ -3882,7 +3887,7 @@ X.attr
       arrangement_for_test)()
       action_on_arrangement()
       assert True!=False
-      with pytest.raise(ExceptionType):
+      with pytest.raises(ExceptionType):
           exception_raising_actions()
 
   ```
@@ -3899,3 +3904,4 @@ X.attr
 - [Python Docs](https://docs.python.org/3.7/)
 - [Python Language Ref](https://docs.python.org/3/reference/index.html)
 - [Python Standard Libs](https://docs.python.org/3/library/index.html)
+- [Python Modules By Example](https://pymotw.com/3/#)
