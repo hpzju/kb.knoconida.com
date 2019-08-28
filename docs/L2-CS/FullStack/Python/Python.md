@@ -2398,6 +2398,8 @@ else :
     - apply to from statement only
     - apply to within package from statement
     - module must exist in package by relative import
+    - `from . import grok`
+    - `from ..B import bar`
   - exclude codes for import excution
     - `if __name__ == "__main__":`
     - `excluded_module_block`
@@ -2456,7 +2458,8 @@ else :
   - implicite namespace package
     - a logical package, modules are spreaded in different directories.
     - no `__init__.py` entry.
-    - `__path__` to search all components
+    - `pkg.__path__` to search all components
+    - sys.path set to includes all directories
   - special dunders
 
     ```python
@@ -3330,6 +3333,13 @@ def curry(func):
 
 ### Metaprogramming
 
+- Intro
+
+  - DRY: Dont's Repeate Yourself
+  - metaprogramming is about creating functions and classes whose main goal is to manipulate code (e.g., modifying, generating, or wrapping existing code)
+  - direct means: decorators, class decorators, and metaclasses
+  - indirect means: signature objects, execution of code with exec(), and inspecting the internals of functions and classes
+
 - User cases
   - Decorator
     - call proxy
@@ -3338,6 +3348,31 @@ def curry(func):
   - Descriptor
 
 #### metafunction
+
+- function's signitures
+
+  ```python
+  from inspect import Signature, Parameter
+
+  def func(a, b=42, *args, d=None, **kwargs): pass
+  sig = inspect.signature(func)
+
+  parms = [
+      Parameter('a', Parameter.POSITIONAL_OR_KEYWORD),
+      Parameter('b', Parameter.POSITIONAL_OR_KEYWORD, default=42),
+      Parameter('args', Parameter.VAR_POSITIONAL),
+      Parameter('d', Parameter.KEYWORD_ONLY, default=None),
+      Parameter('kwargs', Parameter.VAR_KEYWORD)]
+
+  sig2 = Signature(parms)
+  ```
+
+- function's metadata: `@functools.wraps(func)`
+
+  - `func.__qualname__`
+  - `func.__doc__`
+  - `func.__annotations__`
+  - `func.__wrapped__`
 
 - functional decorator decrates callable object
   - a callable return a callable
@@ -3399,6 +3434,7 @@ def spam(a, b, c):
 
   - class implementation
   - function implementation
+  - method decorate need special attention
 
   ```python
   # function based class decrator
@@ -3419,6 +3455,7 @@ def spam(a, b, c):
   ```
 
 - class descriptor
+
   - a class that implements the three core attribute access operations (get, set, and delete) in the form of `__get__(), __set__(), and __delete__()` special methods.
   - capture the core instance operations (get, set, delete) at a very low level and completely customize what they do
   - descriptors is that they can only be defined at the class level, not on a per-instance basis
@@ -3464,10 +3501,29 @@ def spam(a, b, c):
 
   ```
 
+- Gochas
+
+  - metaclass calling process
+
+    - prepare stage
+      - `__prepare__()` method is called first and used to create the class namespace.
+    - creating stage
+      - `__new__()` method is used to instantiate the resulting type object. It is called after the class body has been fully executed.
+      - invoked prior to class creation and is typically used when a metaclass wants to alter the class definition in some way by alter class namespace.
+    - init stage
+      - `__init__()` method is called last and used to perform any additional initialization steps fully executed.
+      - inspect the class dictionary, base classes, and more
+
+  - metaclass with arguments
+    - `class Spam(metaclass=MyMeta, debug=True, synchronize=True)`
+    - in metaclass `__prepare__(), __new__(), and __init__()` must match this signature
+
 - metaclass
 
   - `class` is instance of type
   - `type` is class of type()
+  - `types.new_class(name, bases=(), kwds=None, exec_body=None)`
+    - manipulate class type has metaclass, create new metaclass type object.
   - `type` a is class, `metaclass` is a subclass of `type`
 
     - `type(object) is type; type(myclass) is type`
@@ -3519,20 +3575,36 @@ def spam(a, b, c):
     - Metaclass
 
 ```python
-# metaclass based class decrator
-class Meta(type):
-    def __new__(meta, classname, supers, classdict):
-        return type.__new__(meta, classname, supers, classdict)
+# metaclass convention
+class MyMeta(type):
+  def __new__(mcs, clsname, bases, clsdict):
+      # clsname is name of class being defined
+      # bases is tuple of base classes
+      # clsdict is class dictionary
+      do_init_manipulation_stuff()
+      return super().__new__(mcs, clsname, bases, clsdict)
 
-class C(metaclass=Meta):
+  # if no __new__, alternatively using __init__
+  def __init__(mcs, clsname, bases, clsdict):
+      super().__init__(clsname, bases, clsdict)
+      # clsname is name of class being defined
+      # bases is tuple of base classes
+      # clsdict is class dictionary
+      do_init_manipulation_stuff()
+
+class Root(metaclass=MyMeta):
+    pass
+
+class A(Root):
+    pass
+
+class C(A):
     pass
 
 X = C()
 X.attr
 
 ```
-
----
 
 ---
 
@@ -3639,6 +3711,21 @@ X.attr
 
 ### Testing
 
+#### Terms
+
+- Level of test
+
+  - Unit Test
+  - Integration Test
+  - System Test
+
+- Acceptance/Regression Test
+
+- Test-driven Development
+  - Approval Test
+
+#### Unit Test
+
 - doctest
 
   - start run
@@ -3676,9 +3763,18 @@ X.attr
 
 - unittest
 
-  - components
+  - terms
 
-    - `unittest.main()`
+    - test case
+      - test case name
+      - arrange
+      - act
+      - assert
+    - test suite
+    - test runner
+    - test fixture
+      - setUp
+      - tearDown
 
   - pattern
 
@@ -3688,7 +3784,8 @@ X.attr
 
   - start run
 
-    - `python unittestDemo.py`
+    - `python -m unittest -q test_unittest_demo.py`
+    - `python -m unittest`
 
   - practice
 
@@ -3746,6 +3843,49 @@ X.attr
     ```
 
 - pytest
+
+  - terms:
+
+    - test case
+      - test case name
+      - arrange
+      - act
+      - assert
+    - test suite
+    - test runner
+    - test fixture
+      - scoping setUp/tearDown
+        - module scope
+        - class scope
+        - function scope
+        - method scope
+
+  - pattern
+  
+  - start run
+    - `pip install pytest`
+    - `python -m pytest`
+    - `python -m pytest --doctest-modules`
+
+  - practice
+
+  ```python
+
+  @pytest.fixture
+  def resource():
+      arrange_resources()
+      yield resources
+      cleanup_resources()
+
+  def test_cases_tobe_tested_by_business_module():
+      pytest.skip('skip this test')
+      arrangement_for_test)()
+      action_on_arrangement()
+      assert True!=False
+      with pytest.raise(ExceptionType):
+          exception_raising_actions()
+
+  ```
 
 ---
 
