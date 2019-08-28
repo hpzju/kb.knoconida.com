@@ -1953,6 +1953,7 @@ os.remove(filename)
 
   - `&, |, ^, ~`
   - `<<, >>`
+  - `~x & ((1<<x.big_length)-1)`
 
 - Tenary Operator
 
