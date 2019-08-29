@@ -1449,12 +1449,12 @@ sidebar_label: Python
     - `__setattr__()`
     - `__delattr__()`
 
-      - missing attributes
+      - missing attributes fallback call
       - properties getter, setter, deleter
 
     - `__getattribute__()`
 
-      - intercept all attributes
+      - preemptive attributes access call
 
     - `__get__()`
     - `__set__()`
@@ -3338,7 +3338,8 @@ def curry(func):
   - `func.__annotations__`
   - `func.__wrapped__`
 
-- functional decorator decrates callable object
+- functional decorator
+  - decrates callable object
   - a callable return a callable
   - class implementation
   - function implementation
@@ -3348,51 +3349,270 @@ def curry(func):
     - class with attributes
     - wrap function attributes
 
-```python
-@decrator
-def func(): pass
+  ```python
+  @decrator
+  def func(): pass
 
-func = decrator(func)
+  func = decrator(func)
 
-# class based function decrator by utilize __call__
-class tracer:
-    def __init__(self, func):
-        self.calls = 0
-        self.func  = func
+  # class based function decrator by utilize __call__
+  class tracer:
+      def __init__(self, func):
+          self.calls = 0
+          self.func  = func
 
-    def __call__(self, *args):
-        self.calls += 1
-        print(f'call {self.calls} to {self.func.__name__}')
-        return self.func(*args)
+      def __call__(self, *args):
+          self.calls += 1
+          print(f'call {self.calls} to {self.func.__name__}')
+          return self.func(*args)
 
-# function based functioin decrator
-def tracer(func):
-    calls = 0
-    def oncall(*args):
-        nonlocal calls
-        calls += 1
-        print(f'call {calls} to {func.__name__}')
-        return func(*args)
-    return oncall
+  # function based functioin decrator
+  def tracer(func):
+      calls = 0
+      def oncall(*args):
+          nonlocal calls
+          calls += 1
+          print(f'call {calls} to {func.__name__}')
+          return func(*args)
+      return oncall
 
-@tracer
-def spam(a, b, c):
-    return a + b + c
+  @tracer
+  def spam(a, b, c):
+      return a + b + c
 
-```
+  # decorator with arguments
+  from functools import wraps, partial
+  def debug(func=None, *, prefix=''):
+      if func is None:
+          return partial(debug, prefix=prefix)
+      msg = prefix + func.__qualname__
+      @wraps(func)
+      def wrapper(*args, **kwargs):
+          print(msg)
+          return func(*args, **kwargs)
+      return wrapper
 
-- built-in metafunctions
+  # class decorator
+  def debugmethods(cls):
+      for name, val in vars(cls).items():
+          if callable(val):
+              setattr(cls, name, debug(val))
+      return cls
 
-```python
-#built-in function
-@classmethod
-@staticmethod
-@property
-@prop.setter
-@prop.deleter
-```
+  #vars(cls) returns instane method only
+  # cls.__getattributes__ hacking
+  def debugattr(cls):
+      orig_getattribute = cls.__getattribute__
+      def __getattribute__(self, name):
+          print('Get:', name)
+          return orig_getattribute(self, name)
+      cls.__getattribute__ = __getattribute__
+      return cls
+  ```
+
+- built-in decorators
+
+  ```python
+  #built-in decorators
+  @classmethod
+  @staticmethod
+  @property
+  @prop.setter
+  @prop.deleter
+  ```
 
 #### metaclass
+
+- class deep dive
+
+  - class attributes and methods
+
+    - method
+      - instance method, has `self` refer to instance namespace
+      - class method, has `cls` refer to class namespace
+      - static method, just like plain function
+      - methods are in class's namespace `cls.__dict__`
+    - attributes
+      - class attributes
+      - instance attributes
+
+  - metaclass is about Level of manipulation and redundancy reduction
+  - Level of Manipulation
+
+    - Instance Manipulation
+
+      - creation process
+
+        - `class.__new__(cls, *args, **args)`
+
+          - must return obj.
+          - manipulate class level namespace, like methods, attributes
+          - not inheritable if not called by subclass
+
+        - `class.__init__(self, *args, **args`
+
+          - manipulate instance level namespace or class level namespace's value like attributes init
+          - not inheritable if not called by subclass
+
+      - attributes
+
+        - decorator manipulation
+
+          - getter/setter/deleter
+          - `__getattribute__`
+          - `__getattr__, __setattr__, __delattr__`
+
+        - discriptor manipulation
+
+          - assign attribute to discriptor
+          - `__get__, __set__, __delete__`
+
+      - callable
+
+        - `instance.__call__(slef,*args, **kwargs)`
+        - `class.__call__(cls, *args, **kwargs)`
+        - `metaclass.__call__(*args, **kwargs)`
+
+    - Class Manipulation
+
+      - type hacking
+
+        - `ClassA = type(clsname, bases, clsdict)`
+
+      - metaclass
+
+        - class is an instance of type
+        - inheritable
+        - manipulate class definition, then can passed to instance and subclasses
+        - `class A: pass` is `class A(object, metaclass=type)`
+
+      - class underline
+
+        - metaclass creates namespace dict by `type.__prepare__()`
+          - `clsdict = type.__prepare__(clsname, bases)`
+        - execute class body code to update clsdict
+          - `exec(code, globals(), clsdict)`
+        - metaclass creates class(instanciate class type)
+          - `metaclass.__new__(mcs, clsname, bases, clsdict)`
+          - `metaclass.__init__(clsname, bases, clsdict)`
+          - default `metaclass` is `type`
+        - return class type object for instance object use.
+
+          ```python
+          class A: pass
+
+          # interpreted like this:
+          clsname = 'A'
+          metaclass=type
+          bases = ()
+          kwargs = {} #come from class statement, can be manipulated
+          clsdict = metaclass.__prepare__(clsname, bases, **kwargs)
+          A = metaclass.__new__(mcs, clsname, bases, clsdict, **kwargs)
+          metaclss.__init__(A, clsname, bases, clsdict, **kwargs)
+          ```
+
+      - callable
+        - `class.__call__(cls, *args, **kwargs)`
+        - `metaclass.__call__(*args, **kwargs)`
+
+    - Metaclass `__call__`
+
+      ```python
+      class TracingMeta(type):
+          @classmethod
+          def __prepare__(mcs, clsname, bases, **kwargs):
+              clsdict = super().__prepare__(clsname, bases)
+              return clsdict
+
+          def __new__(mcs, clsname, bases, clsdict, **kwargs):
+              cls = super().__new__(mcs, clsname, bases, clsdict, **kwargs)
+              return cls
+
+          def __init__(cls, clsname, bases, clsdict, **kwargs):
+              super().__init__(name, bases, namespace)
+
+          def metamethod(cls):
+              pass
+
+          def __call__(cls, *args, **kwargs):
+              obj = super().__call__(*args, **kwargs)
+              return obj
+
+      class TracingClass(metaclass=TracingMeta):
+
+          def __new__(cls, *args, **kwargs):
+              obj = super().__new__(cls)
+              return obj
+
+          def __init__(self, *args, **kwargs):
+              pass
+
+          def instmethod(self):
+              pass
+
+          @classmethod
+          def __call__(cls, *args, **kwargs):
+              pass
+
+      class TC2(TracingClass):
+
+          def __init__(self, *args, **kwargs):
+              pass
+
+          def __call__(self, *args, **kwargs):
+              pass
+
+      # Module Load:
+      TrackingClass definition:
+          TracingMeta.__prepare__
+            type.__prepare__
+          return clsdict
+
+          TracingMeta.__new__
+            type.__new__
+          return cls
+
+          TracingMeta.__init__
+            type.__init__
+
+      TC2 definition:
+          TracingMeta.__prepare__
+            type.__prepare__
+          return clsdict
+
+          TracingMeta.__new__
+            type.__new__
+          return cls
+
+          TracingMeta.__init__
+            type.__init__
+
+      def main():
+          a = TracingClass(1, '1', msg="TracingClass")
+            TracingMeta.__call__
+                type.__call__
+                    TracingClass.__new__ with arg
+                    TracingClass.__init__ with arg
+            return TracingClass instance
+
+          b = TC2(2, '2', msg='tc2')
+            TracingMeta.__call__
+                type.__call__
+                    TracingClass.__new__ with arg
+                    TC2.__init__ with arg
+            return TC2 instance
+
+          b(3, msg='TC2 instance called')
+            TC2.__call__
+              TracingClass.__call__
+
+          b.instmethod()
+            b.__dict__, TC2.__dict__, TracingClass.__dict__
+
+          TC2.metamethod()
+            TC2.__dict__. TC2.__class__.__dict__, TracingClass.__dict__
+
+      ```
 
 - class decorator decrates class object
 
@@ -3441,30 +3661,6 @@ def spam(a, b, c):
 
   ```
 
-- class creation process without metaclass
-
-  ```python
-  class A(B, C):
-    def __new__(): pass
-    def __init__(): pass
-    def __call__(): pass
-
-  # class creation process without metacalss
-  # step 1: isolate class name, bases, metaclass and body code
-  clsname = 'A'
-  bases = (B, C)
-  metaclass = Meta
-  body = 'code after class declaration line'
-
-  # step 2: create clsdict with type and update it with exec
-  clsdict = type.__prepare__(clsname, bases)
-  exec(body, globals(), clsdict)
-
-  # step 3: class created by type
-  A = type(clsname, bases, clsdict)
-
-  ```
-
 - Gochas
 
   - metaclass calling process
@@ -3506,8 +3702,8 @@ def spam(a, b, c):
       #actual process:
       class = type(classname, bases, attributedict)
       type.__call__
-        type.__new__(type, classname, bases, attributedict)
-        type.__init__(cls, classname, bases, attributedict)
+        type.__new__(mcs, classname, bases, attributedict)
+        type.__init__(classname, bases, attributedict)
 
       # class statement with metaclass undertable
       # class statemetns undertable
@@ -3518,8 +3714,8 @@ def spam(a, b, c):
       #actual process:
       class = Meta(classname, bases, attributedict)
       Meta __call__ methods overaded by invoke:
-        Meta.__new__(Meta, classname, bases, attributedict)
-        Meta.__init__(cls, classname, bases, attributedict)
+        Meta.__new__(mcs, classname, bases, attributedict)
+        Meta.__init__(mcs, classname, bases, attributedict)
       ```
 
   - metaclass inheritance
@@ -3890,7 +4086,35 @@ def spam(a, b, c):
       assert True!=False
       with pytest.raises(ExceptionType):
           exception_raising_actions()
+  
+  # Monckeypatching
+  monkeypatch.setattr(obj, name, value, raising=True)
+  monkeypatch.delattr(obj, name, raising=True)
+  monkeypatch.setitem(mapping, name, value)
+  monkeypatch.delitem(obj, name, raising=True)
+  monkeypatch.setenv(name, value, prepend=False)
+  monkeypatch.delenv(name, raising=True)
+  monkeypatch.syspath_prepend(path)
+  monkeypatch.chdir(path)
 
+  #tmpdir
+  tmp_path
+  tmpdir.mkdir("sub").join("hello.txt")
+  fn = tmpdir_factory.mktemp("data").join("img.png")
+
+  #skip
+  @pytest.mark.skip(reason="no way of currently testing this")
+  @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6 or higher")
+  pytest.skip('no way of currently testing this')
+
+  #xfail
+  @pytest.mark.xfail
+  pytest.xfail("failing configuration (but should work)")
+
+  @pytest.mark.parametrize("i", range(50))
+  def test_num(i):
+    if i in (17, 25):
+      pytest.fail("bad luck")
   ```
 
 ---
