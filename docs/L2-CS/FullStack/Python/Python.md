@@ -3435,6 +3435,8 @@ def curry(func):
     - attributes
       - class attributes
       - instance attributes
+      - [attributes lookup deep dive](http://www.betterprogramming.com/object-attribute-lookup-in-python.html)
+      - [Graphic Display](https://github.com/mzohaibqc/python-attribute-lookup)
 
   - metaclass is about Level of manipulation and redundancy reduction
   - Level of Manipulation
@@ -3643,6 +3645,10 @@ def curry(func):
   - a class that implements the three core attribute access operations (get, set, and delete) in the form of `__get__(), __set__(), and __delete__()` special methods.
   - capture the core instance operations (get, set, delete) at a very low level and completely customize what they do
   - descriptors is that they can only be defined at the class level, not on a per-instance basis
+  - Data Descripter
+    - `__get__, __set__, __delete__`
+  - Non-Data Descripter
+    - `__get__, __delete__`
 
   ```python
   attribut = property(fget, fset, fdel, docstr)
