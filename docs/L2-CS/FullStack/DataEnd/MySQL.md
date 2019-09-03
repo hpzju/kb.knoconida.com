@@ -56,12 +56,18 @@ sidebar_label: MySQL
       - o2o
       - o2m
       - m2m
+    - `CREATE, ALTER, RENAME, DROP, TRUNCATE`
   - DML
     - crud
+    - `UPDATE, DELETE, INSERT`
+  - DQL
+    - `SELECT, SHOW, HELP`
   - DCL
     - Role based permission
-  - TCL
+    - `GRANT, REVOKE`
+  - DTL/TCL
     - transaction
+    - `START TRANSACTION, SAVEPOINT, COMMIT, ROLLBACK`
 - RDBMS
   - Data Definition
   - Data Manipulation
@@ -155,6 +161,7 @@ sidebar_label: MySQL
   SHOW TABLES;
   SHOW CREATE TABLE mytable;
   SHOW TABLES FROM mydb;
+  DESC mytable;
 
   PRIMARY KEY
   UNIQUE KEY
@@ -224,7 +231,7 @@ sidebar_label: MySQL
   SELECT
   ```
 
-- Column/Field/Attribut
+- Column/Field/Attribute
 
   ```sql
   SHOW COLUMNS FROM mytable;
@@ -513,6 +520,10 @@ DELETE FROM people
 - login
 
   - `\c USER@HOST`
+  - `\source msyql.sql`
+  - `\py`
+  - `\js`
+  - `\sql`
 
   ```bash
   mysql -h HOST -u USER -p

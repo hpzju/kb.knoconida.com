@@ -3298,7 +3298,8 @@ def curry(func):
 ### Metaprogramming
 
 - Intro
-
+  
+  - Code that manipunates code: read, modify, output
   - DRY: Dont's Repeate Yourself
   - metaprogramming is about creating functions and classes whose main goal is to manipulate code (e.g., modifying, generating, or wrapping existing code)
   - direct means: decorators, class decorators, and metaclasses
@@ -3312,6 +3313,17 @@ def curry(func):
   - Descriptor
 
 #### metafunction
+
+- first-class function:
+  - can be assinged to a variable
+  - can be called upon by names
+  - can be passed as argument
+  - can be returned as value
+
+- closure
+  - in function, inner scope can access outer scope's namespace, even the function returned.
+    - outer scopes's names serve inner scope as free variables.
+  - a decorator is a kind of closure
 
 - function's signitures
 
@@ -3440,6 +3452,8 @@ def curry(func):
 
   - metaclass is about Level of manipulation and redundancy reduction
   - Level of Manipulation
+    - `super()`
+      - lookup MRO, find the first match.
 
     - Instance Manipulation
 
@@ -3447,14 +3461,16 @@ def curry(func):
 
         - `class.__new__(cls, *args, **args)`
 
-          - must return obj.
+          - must return obj, static method.
           - manipulate class level namespace, like methods, attributes
           - not inheritable if not called by subclass
+          - if superclass’s `super().__new__` is called, `class.__init__` will also be called
 
-        - `class.__init__(self, *args, **args`
+        - `class.__init__(self, *args, **args)`
 
           - manipulate instance level namespace or class level namespace's value like attributes init
           - not inheritable if not called by subclass
+          - non-static method.
 
       - attributes
 
@@ -3477,9 +3493,10 @@ def curry(func):
 
     - Class Manipulation
 
-      - type hacking
+      - type function hacking
 
         - `ClassA = type(clsname, bases, clsdict)`
+        - creates class type dynamiclly.
 
       - metaclass
 
@@ -3799,6 +3816,50 @@ def curry(func):
     _fields = ['address', 'port']
 
   ```
+
+#### Reflection
+
+- Intro
+  - The abilty of a program to view and modify its own stucture at runtime
+  - structures in Python
+    - code
+    - globals
+    - locals
+    - call stack
+    - runtime??
+
+- Practice
+
+```python
+globals()
+locals()
+exec(code, global_dict, local_dict)
+eval()
+compile()
+inspect:
+  inspect.getsourcelines(obj)
+  inspect.getouterframes(frame)
+sys.settrace(func)
+  frame
+    frame.f_globals
+    frame.f_locals
+    frame.f_code
+      'co_argcount',
+      'co_cellvars',
+      'co_code',
+      'co_consts',
+      'co_filename',
+      'co_firstlineno',
+      'co_flags',
+      'co_freevars',
+      'co_kwonlyargcount',
+      'co_lnotab',
+      'co_name',
+      'co_names',
+      'co_nlocals',
+      'co_stacksize',
+      'co_varnames
+```
 
 ---
 
