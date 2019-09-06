@@ -33,6 +33,8 @@ sidebar_label: Data Science with Python
     - `conda update PACKAGE`
     - `conda install PACKAGE`
     - `conda install PACKAGE=M.N.P`
+    - `conda remove PACKAGE`
+    - `conda build PACKAGE`
 
 ---
 
