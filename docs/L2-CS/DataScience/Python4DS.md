@@ -35,6 +35,11 @@ sidebar_label: Data Science with Python
     - `conda install PACKAGE=M.N.P`
     - `conda remove PACKAGE`
     - `conda build PACKAGE`
+  - config sources
+    - `conda config --show-source`
+    - `conda config --add channels conda-forge`
+    - `conda config --set channel_priority strict`
+    - `conda config --remove channels NOT_WANTED`
 
 ---
 
