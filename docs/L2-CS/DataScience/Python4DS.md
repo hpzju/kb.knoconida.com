@@ -37,9 +37,10 @@ sidebar_label: Data Science with Python
     - `conda build PACKAGE`
   - config sources
     - `conda config --show-source`
+    - `conda config --remove channels NOT_WANTED`
+  - set conda-forge
     - `conda config --add channels conda-forge`
     - `conda config --set channel_priority strict`
-    - `conda config --remove channels NOT_WANTED`
 
 ---
 

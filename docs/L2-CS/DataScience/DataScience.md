@@ -43,6 +43,12 @@ sidebar_label: DataScience
         - Graph-based
       - Schema on read
   - Analyze
+    - Descriptive Analysis
+    - Exploratory Analysis
+    - Predictive Analysis
+    - Mechanistic Analysis
+    - Inferential Analysis
+    - Causal Analysis
   - Visulize
 
 ---
@@ -52,6 +58,29 @@ sidebar_label: DataScience
 ### Cyber-Physical-Social Systems
 
 ## Technologies
+
+### NoSQL
+
+#### Introduction
+
+- Categories
+
+  - Key-Value Store
+  - Document Store
+  - Graph Store
+  - Column Store
+
+- Consistency Models
+
+  - not ACID
+  - BASE
+    - Basic Availability
+    - Soft-state
+    - Eventual consistency
+
+---
+
+---
 
 ## Big Data
 
